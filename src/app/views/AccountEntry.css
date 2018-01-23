@@ -1,0 +1,13 @@
+.AccountEntry {
+  background-color: #2C3E50;
+  color: #fff;
+}
+
+.AccountEntry .form-control {
+  max-width: 600px;
+  display: inline-block;
+}
+
+.AccountEntry span {
+  cursor: pointer;
+}

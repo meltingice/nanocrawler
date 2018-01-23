@@ -18,6 +18,9 @@ export default () => {
         <li className="list-group-item">
           <NavLink exact to="/delegators" activeClassName="active">Delegators</NavLink>
         </li>
+        <li className="list-group-item">
+          <NavLink exact to="/peers" activeClassName="active">Peers</NavLink>
+        </li>
       </ul>
     </div>
   )
