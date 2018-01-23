@@ -1,0 +1,26 @@
+#Navigation {
+  background-color: #2C3E50;
+  color: #fff;
+  max-width: 300px;
+  height: 100%;
+}
+
+#Navigation .LogoWrap {
+  text-align: center;
+}
+
+#Navigation .LogoWrap img {
+  width: 40px;
+}
+
+.NavigationList li {
+  background-color: transparent;
+}
+
+.NavigationList li a {
+  color: #fff;
+}
+
+.NavigationList li a.active {
+  font-weight: bold;
+}
