@@ -22,7 +22,7 @@ export default class App extends Component {
         <div className="row h-100 mr-0">
           <Navigation />
 
-          <div className="col p-0 h-100">
+          <div className="col p-0 h-100 ContentContainer">
             <AccountEntry
               account={this.state.account}
               onChange={account => this.setState({ account })}

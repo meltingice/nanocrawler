@@ -3,7 +3,14 @@ import React from 'react'
 export default class Delegators extends React.Component {
   render() {
     return (
-      <p>Delegators.</p>
+      <div className="p-4">
+        <div className="row">
+          <div className="col">
+            <h1>Delegators</h1>
+
+          </div>
+        </div>
+      </div>
     )
   }
 }
