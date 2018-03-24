@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "bootstrap": "^4.0.0",
-    "http-proxy-middleware": "^0.17.4",
+    "cors": "^2.8.4",
     "lodash": "^4.17.4",
+    "nanode": "^2.2.1",
     "raiblocks": "^0.4.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

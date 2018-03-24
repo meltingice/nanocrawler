@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Navigation from './app/Navigation'
 import Content from './app/Content'
 
-import AccountEntry from './app/views/AccountEntry'
+import AccountWeight from './app/views/AccountWeight'
 
 export default class App extends Component {
   constructor(props) {
@@ -23,10 +23,7 @@ export default class App extends Component {
           <Navigation />
 
           <div className="col p-0 h-100 ContentContainer">
-            <AccountEntry
-              account={this.state.account}
-              onChange={account => this.setState({ account })}
-            />
+            <AccountWeight />
 
             <Content account={this.state.account} />
           </div>
