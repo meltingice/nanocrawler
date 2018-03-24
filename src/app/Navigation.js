@@ -4,12 +4,17 @@ import { NavLink } from 'react-router-dom'
 
 import './Navigation.css'
 import Logo from './images/logo.svg'
+import PriceTicker from './partials/PriceTicker'
 
 export default () => {
   return (
     <div id="Navigation" className="col p-4 h-100">
       <div className="LogoWrap">
         <ReactSVG path={Logo} className="Logo" /> Control Panel
+      </div>
+
+      <div className="mt-3">
+        <PriceTicker />
       </div>
 
       <ul className="NavigationList list-group list-group-flush mt-4">

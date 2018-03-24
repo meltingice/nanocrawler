@@ -1,5 +1,4 @@
 import React from 'react'
-import FontAwesome from 'react-fontawesome'
 import './AccountWeight.css'
 
 export default class AccountWeight extends React.Component {

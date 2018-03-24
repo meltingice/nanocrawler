@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "accounting": "^0.4.1",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "bootstrap": "^4.0.0",
