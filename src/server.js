@@ -13,6 +13,12 @@ app.get('/', (req, res) => {
   res.send("Hello, world!")
 });
 
+app.get('/account', async (req, res) => {
+  res.json({
+    account: config.account
+  })
+});
+
 app.get('/weight', async (req, res) => {
   res.json({
     weight: nano.convert.fromRaw(await nano.accounts.weight(config.account), 'mrai')

@@ -17,6 +17,13 @@ export default class AccountWeight extends React.Component {
     this.setState({ weight: data.weight });
   }
 
+  displayAccount() {
+    const { account } = this.props;
+    if (!this.props.account) return;
+
+    return `${account.substr(0, 9)}...${account.substr(-5)}`
+  }
+
   displayWeight() {
     const { weight } = this.state;
     if (weight === null) return 0;
@@ -27,8 +34,9 @@ export default class AccountWeight extends React.Component {
   render() {
     return (
       <div className="AccountEntry row justify-content-end mr-0">
-        <div className="col-md-6 p-4 text-sm-right">
-          <b>Account weight:</b> {this.displayWeight()}
+        <div className="col p-4 text-sm-right">
+          <p className="mb-0"><b>Account:</b> {this.displayAccount()}</p>
+          <p className="mb-0"><b>Weight:</b> {this.displayWeight()}</p>
         </div>
       </div>
     )

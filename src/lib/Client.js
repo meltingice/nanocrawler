@@ -1,10 +1,10 @@
-import RaiBlocks from 'raiblocks'
+export default class Client {
+  constructor() {
+    this.host = "http://localhost:3001"
+  }
 
-const options = {
-  host: '127.0.0.1',
-  port: 3001
+  async account() {
+    const resp = await fetch(`${this.host}/account`);
+    return (await resp.json()).account;
+  }
 }
-
-const client = new RaiBlocks(options);
-
-export { client as RaiBlocks }

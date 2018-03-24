@@ -1,6 +1,5 @@
 import React from 'react'
 import _ from 'lodash'
-import { RaiBlocks } from '../../lib/Client'
 
 import './Peers.css'
 
@@ -26,8 +25,8 @@ export default class Peers extends React.Component {
   }
 
   async updateStats() {
-    const data = await RaiBlocks.peers();
-    this.setState({ peers: data.peers });
+    // const data = await RaiBlocks.peers();
+    // this.setState({ peers: data.peers });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 5000);
   }

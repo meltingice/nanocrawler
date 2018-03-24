@@ -1,5 +1,5 @@
 import React from 'react'
-import { RaiBlocks } from '../../lib/Client'
+
 
 import LargeStat from '../partials/LargeStat'
 
@@ -25,8 +25,8 @@ export default class Synchronization extends React.Component {
   }
 
   async updateStats() {
-    const blockCount = await RaiBlocks.blockCount();
-    this.setState({ blockCount });
+    // const blockCount = await RaiBlocks.blockCount();
+    // this.setState({ blockCount });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 2000);
   }

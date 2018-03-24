@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 
+import Client from './lib/Client'
 import Navigation from './app/Navigation'
 import Content from './app/Content'
 
@@ -12,8 +13,13 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      account: ""
+      account: null
     };
+  }
+
+  async componentWillMount() {
+    const client = new Client();
+    this.setState({ account: await client.account() });
   }
 
   render() {
@@ -23,7 +29,7 @@ export default class App extends Component {
           <Navigation />
 
           <div className="col p-0 h-100 ContentContainer">
-            <AccountWeight />
+            <AccountWeight account={this.state.account} />
 
             <Content account={this.state.account} />
           </div>
