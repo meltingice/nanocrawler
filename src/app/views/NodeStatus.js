@@ -1,9 +1,8 @@
 import React from 'react'
-
-
+import Client from '../../lib/Client'
 import LargeStat from '../partials/LargeStat'
 
-export default class Synchronization extends React.Component {
+export default class NodeStatus extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,10 +24,10 @@ export default class Synchronization extends React.Component {
   }
 
   async updateStats() {
-    // const blockCount = await RaiBlocks.blockCount();
-    // this.setState({ blockCount });
+    const client = new Client();
+    this.setState({ blockCount: await client.blockCount() })
 
-    this.statTimer = setTimeout(this.updateStats.bind(this), 2000);
+    this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
   render() {
@@ -38,12 +37,19 @@ export default class Synchronization extends React.Component {
       <div className="p-4">
         <div className="row">
           <div className="col">
-            <h1>Synchronization</h1>
+            <h1>Node Status</h1>
 
             <hr />
 
-            <LargeStat value={blockCount.count} text="blocks in ledger" />
-            <LargeStat value={blockCount.unchecked} text="blocks synchronizing" />
+            <div className="row">
+              <div className="col">
+
+              </div>
+              <div className="col">
+                <LargeStat value={blockCount.count} text="blocks in ledger" />
+                <LargeStat value={blockCount.unchecked} text="blocks unchecked" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

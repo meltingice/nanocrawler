@@ -4,7 +4,16 @@ export default class Client {
   }
 
   async account() {
-    const resp = await fetch(`${this.host}/account`);
+    const resp = await this.fetch('account');
     return (await resp.json()).account;
+  }
+
+  async blockCount() {
+    const resp = await this.fetch('block_count');
+    return (await resp.json()).blockCount;
+  }
+
+  fetch(endpoint) {
+    return fetch(`${this.host}/${endpoint}`);
   }
 }

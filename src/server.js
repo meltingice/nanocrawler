@@ -14,9 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/account', async (req, res) => {
-  res.json({
-    account: config.account
-  })
+  res.json({ account: config.account })
 });
 
 app.get('/weight', async (req, res) => {
@@ -24,5 +22,9 @@ app.get('/weight', async (req, res) => {
     weight: nano.convert.fromRaw(await nano.accounts.weight(config.account), 'mrai')
   });
 });
+
+app.get('/block_count', async (req, res) => {
+  res.json({ blockCount: await nano.blocks.count() })
+})
 
 app.listen(3001);
