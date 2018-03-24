@@ -8,7 +8,8 @@ export default class NodeStatus extends React.Component {
 
     this.statTimer = null;
     this.state = {
-      blockCount: {}
+      blockCount: {},
+      version: {}
     }
   }
 
@@ -25,7 +26,10 @@ export default class NodeStatus extends React.Component {
 
   async updateStats() {
     const client = new Client();
-    this.setState({ blockCount: await client.blockCount() })
+    this.setState({
+      blockCount: await client.blockCount(),
+      version: await client.version()
+    })
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
@@ -37,19 +41,19 @@ export default class NodeStatus extends React.Component {
       <div className="p-4">
         <div className="row">
           <div className="col">
-            <h1>Node Status</h1>
+            <div className="row align-items-center">
+              <div className="col">
+                <h1>Node Status</h1>
+              </div>
+              <div className="col col-auto">
+                <h3>Version: {this.state.version.node_vendor}</h3>
+              </div>
+            </div>
 
             <hr />
 
-            <div className="row">
-              <div className="col">
-
-              </div>
-              <div className="col">
-                <LargeStat value={blockCount.count} text="blocks in ledger" />
-                <LargeStat value={blockCount.unchecked} text="blocks unchecked" />
-              </div>
-            </div>
+            <LargeStat value={blockCount.count} text="blocks in ledger" />
+            <LargeStat value={blockCount.unchecked} text="blocks unchecked" />
           </div>
         </div>
       </div>

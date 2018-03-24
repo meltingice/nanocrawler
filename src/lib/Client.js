@@ -13,6 +13,11 @@ export default class Client {
     return (await resp.json()).blockCount;
   }
 
+  async version() {
+    const resp = await this.fetch('version');
+    return (await resp.json());
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }

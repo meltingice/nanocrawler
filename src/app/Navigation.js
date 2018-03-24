@@ -17,10 +17,10 @@ export default () => {
           <NavLink exact to="/" activeClassName="active">Node Status</NavLink>
         </li>
         <li className="list-group-item">
-          <NavLink exact to="/delegators" activeClassName="active">Delegators</NavLink>
+          <NavLink exact to="/account" activeClassName="active">Account</NavLink>
         </li>
         <li className="list-group-item">
-          <NavLink exact to="/peers" activeClassName="active">Peers</NavLink>
+          <NavLink exact to="/delegators" activeClassName="active">Delegators</NavLink>
         </li>
       </ul>
     </div>

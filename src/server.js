@@ -27,4 +27,8 @@ app.get('/block_count', async (req, res) => {
   res.json({ blockCount: await nano.blocks.count() })
 })
 
+app.get('/version', async (req, res) => {
+  res.json(await nano.rpc('version'))
+});
+
 app.listen(3001);

@@ -9,6 +9,6 @@ export default ({ value, text }) => {
   }
 
   return (
-    <h2>{displayValue} {text}</h2>
+    <h3>{displayValue} {text}</h3>
   )
 }
