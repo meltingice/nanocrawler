@@ -11,9 +11,12 @@ export default class NodeStatus extends React.Component {
       blockCount: {},
       version: {}
     }
+
+    this.client = new Client();
   }
 
-  componentWillMount() {
+  async componentWillMount() {
+    this.setState({ version: await this.client.version() });
     this.updateStats();
   }
 
@@ -25,12 +28,7 @@ export default class NodeStatus extends React.Component {
   }
 
   async updateStats() {
-    const client = new Client();
-    this.setState({
-      blockCount: await client.blockCount(),
-      version: await client.version()
-    })
-
+    this.setState({ blockCount: await this.client.blockCount() })
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
