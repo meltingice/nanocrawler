@@ -1,4 +1,6 @@
 import React from 'react'
+import accounting from 'accounting'
+
 import Client from '../../lib/Client'
 import LargeStat from '../partials/LargeStat'
 
@@ -50,8 +52,8 @@ export default class NodeStatus extends React.Component {
 
             <hr />
 
-            <LargeStat value={blockCount.count} text="blocks in ledger" />
-            <LargeStat value={blockCount.unchecked} text="blocks unchecked" />
+            <LargeStat value={accounting.formatNumber(blockCount.count)} text="blocks in ledger" />
+            <LargeStat value={accounting.formatNumber(blockCount.unchecked)} text="blocks unchecked" />
           </div>
         </div>
       </div>
