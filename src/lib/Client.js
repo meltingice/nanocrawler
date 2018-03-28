@@ -18,6 +18,11 @@ export default class Client {
     return (await resp.json());
   }
 
+  async delegatorsCount() {
+    const resp = await this.fetch('delegators_count');
+    return (await resp.json()).count;
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }

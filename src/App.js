@@ -6,7 +6,7 @@ import Client from './lib/Client'
 import Navigation from './app/Navigation'
 import Content from './app/Content'
 
-import AccountWeight from './app/views/AccountWeight'
+import AccountWeight from './app/partials/AccountWeight'
 
 export default class App extends Component {
   constructor(props) {

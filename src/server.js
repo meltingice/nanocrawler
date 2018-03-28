@@ -31,4 +31,8 @@ app.get('/version', async (req, res) => {
   res.json(await nano.rpc('version'))
 });
 
+app.get('/delegators_count', async (req, res) => {
+  res.json(await nano.rpc('delegators_count', { account: config.account }))
+});
+
 app.listen(3001);

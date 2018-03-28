@@ -2,7 +2,6 @@ import React from 'react'
 import accounting from 'accounting'
 
 import Client from '../../lib/Client'
-import LargeStat from '../partials/LargeStat'
 
 export default class NodeStatus extends React.Component {
   constructor(props) {
@@ -11,7 +10,8 @@ export default class NodeStatus extends React.Component {
     this.statTimer = null;
     this.state = {
       blockCount: {},
-      version: {}
+      version: {},
+      delegatorsCount: 0
     }
 
     this.client = new Client();
@@ -30,12 +30,16 @@ export default class NodeStatus extends React.Component {
   }
 
   async updateStats() {
-    this.setState({ blockCount: await this.client.blockCount() })
+    this.setState({
+      blockCount: await this.client.blockCount(),
+      delegatorsCount: await this.client.delegatorsCount()
+    })
+
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
   render() {
-    const { blockCount } = this.state;
+    const { blockCount, delegatorsCount } = this.state;
 
     return (
       <div className="p-4">
@@ -46,14 +50,26 @@ export default class NodeStatus extends React.Component {
                 <h1>Node Status</h1>
               </div>
               <div className="col col-auto">
-                <h3>Version: {this.state.version.node_vendor}</h3>
+                <h3><span className="text-muted">Version</span> {this.state.version.node_vendor}</h3>
               </div>
             </div>
 
             <hr />
 
-            <LargeStat value={accounting.formatNumber(blockCount.count)} text="blocks in ledger" />
-            <LargeStat value={accounting.formatNumber(blockCount.unchecked)} text="blocks unchecked" />
+            <div className="row mt-5">
+              <div className="col text-sm-center">
+                <p className="text-muted mb-0">Blocks in Ledger</p>
+                <h2>{accounting.formatNumber(blockCount.count)}</h2>
+              </div>
+              <div className="col text-sm-center">
+                <p className="text-muted mb-0">Unchecked Blocks</p>
+                <h2>{accounting.formatNumber(blockCount.unchecked)}</h2>
+              </div>
+              <div className="col text-sm-center">
+                <p className="text-muted mb-0">Delegators</p>
+                <h2>{delegatorsCount}</h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
