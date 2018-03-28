@@ -72,7 +72,7 @@ export default class NodeStatus extends React.Component {
           </div>
         </div>
 
-        <div className="row mt-3">
+        <div className="row mt-5">
           <div className="col text-sm-center">
             <p className="text-muted mb-0">Uptime</p>
             <h2>{this.getUptime()}</h2>
