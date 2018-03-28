@@ -23,6 +23,11 @@ export default class Client {
     return (await resp.json()).count;
   }
 
+  async systemInfo() {
+    const resp = await this.fetch('system_info');
+    return (await resp.json());
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }

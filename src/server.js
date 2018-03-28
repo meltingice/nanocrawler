@@ -1,3 +1,4 @@
+import os from 'os'
 import { Nano } from 'nanode'
 import express from 'express'
 import cors from 'cors'
@@ -33,6 +34,17 @@ app.get('/version', async (req, res) => {
 
 app.get('/delegators_count', async (req, res) => {
   res.json(await nano.rpc('delegators_count', { account: config.account }))
+});
+
+app.get('/system_info', async (req, res) => {
+  res.json({
+    uptime: os.uptime(),
+    loadAvg: os.loadavg(),
+    memory: {
+      free: os.freemem(),
+      total: os.totalmem()
+    }
+  });
 });
 
 app.listen(3001);
