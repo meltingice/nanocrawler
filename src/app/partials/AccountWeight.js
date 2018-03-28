@@ -1,4 +1,6 @@
 import React from 'react'
+import accounting from 'accounting'
+
 import './AccountWeight.css'
 
 export default class AccountWeight extends React.Component {
@@ -27,7 +29,7 @@ export default class AccountWeight extends React.Component {
     const { weight } = this.state;
     if (weight === null) return 0;
 
-    return Math.round(weight * 1000000.0) / 1000000.0;
+    return accounting.formatNumber(Math.round(weight * 1000000.0) / 1000000.0);
   }
 
   render() {
@@ -41,7 +43,7 @@ export default class AccountWeight extends React.Component {
               className="text-white">{this.displayAccount()}
             </a>
           </p>
-          <p className="mb-0"><b>Weight:</b> {this.displayWeight()}</p>
+          <p className="mb-0"><b>Weight:</b> {this.displayWeight()} NANO</p>
         </div>
       </div>
     )
