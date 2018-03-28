@@ -1,5 +1,4 @@
 import os from 'os'
-import Promise from 'promise'
 
 import { Nano } from 'nanode'
 import express from 'express'
