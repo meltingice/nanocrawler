@@ -59,30 +59,30 @@ export default class NodeStatus extends React.Component {
 
         <div className="row mt-5">
           <div className="col text-sm-center">
-            <p className="text-muted mb-0">Blocks in Ledger</p>
+            <p className="text-muted mb-2">Blocks in Ledger</p>
             <h2>{accounting.formatNumber(blockCount.count)}</h2>
           </div>
           <div className="col text-sm-center">
-            <p className="text-muted mb-0">Unchecked Blocks</p>
+            <p className="text-muted mb-2">Unchecked Blocks</p>
             <h2>{accounting.formatNumber(blockCount.unchecked)}</h2>
           </div>
           <div className="col text-sm-center">
-            <p className="text-muted mb-0">Delegators</p>
+            <p className="text-muted mb-2">Delegators</p>
             <h2>{delegatorsCount}</h2>
           </div>
         </div>
 
         <div className="row mt-5">
           <div className="col text-sm-center">
-            <p className="text-muted mb-0">Uptime</p>
+            <p className="text-muted mb-2">Uptime</p>
             <h2>{this.getUptime()}</h2>
           </div>
           <div className="col text-sm-center">
-            <p className="text-muted mb-0">Load Average</p>
+            <p className="text-muted mb-2">Load Average</p>
             <h2>{this.getLoadAverage()}</h2>
           </div>
           <div className="col text-sm-center">
-            <p className="text-muted mb-0">Memory <small className="text-muted">(used / total)</small></p>
+            <p className="text-muted mb-2">Memory <small className="text-muted">(used / total)</small></p>
             <h2>{this.getMemory()}</h2>
           </div>
         </div>

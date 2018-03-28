@@ -14,8 +14,12 @@ export default class Account extends React.Component {
     return (
       <div className="p-4">
         <div className="row">
-
+          <div className="col">
+            <h1>Account</h1>
+          </div>
         </div>
+
+        <hr />
       </div>
     )
   }
