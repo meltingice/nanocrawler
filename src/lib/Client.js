@@ -8,6 +8,11 @@ export default class Client {
     return (await resp.json()).account;
   }
 
+  async weight() {
+    const resp = await this.fetch('weight');
+    return (await resp.json()).weight;
+  }
+
   async blockCount() {
     const resp = await this.fetch('block_count');
     return (await resp.json()).blockCount;

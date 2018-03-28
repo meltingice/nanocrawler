@@ -1,5 +1,6 @@
 import React from 'react'
 import accounting from 'accounting'
+import Client from '../../lib/Client'
 
 import './AccountWeight.css'
 
@@ -10,12 +11,13 @@ export default class AccountWeight extends React.Component {
     this.state = {
       weight: null
     }
+
+    this.client = new Client();
   }
 
   async componentWillMount() {
-    const resp = await fetch("http://localhost:3001/weight");
-    const data = await resp.json();
-    this.setState({ weight: data.weight });
+    const weight = await this.client.weight();
+    this.setState({ weight });
   }
 
   displayAccount() {
