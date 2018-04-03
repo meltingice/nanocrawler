@@ -2,9 +2,9 @@ import React from 'react'
 import accounting from 'accounting'
 import moment from 'moment'
 
-import Client from '../../lib/Client'
+import injectClient from '../../lib/ClientComponent'
 
-export default class NodeStatus extends React.Component {
+class NodeStatus extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,12 +15,10 @@ export default class NodeStatus extends React.Component {
       delegatorsCount: 0,
       systemInfo: {}
     }
-
-    this.client = new Client();
   }
 
   async componentWillMount() {
-    this.setState({ version: await this.client.version() });
+    this.setState({ version: await this.props.client.version() });
     this.updateStats();
   }
 
@@ -33,9 +31,9 @@ export default class NodeStatus extends React.Component {
 
   async updateStats() {
     this.setState({
-      blockCount: await this.client.blockCount(),
-      delegatorsCount: await this.client.delegatorsCount(),
-      systemInfo: await this.client.systemInfo()
+      blockCount: await this.props.client.blockCount(),
+      delegatorsCount: await this.props.client.delegatorsCount(),
+      systemInfo: await this.props.client.systemInfo()
     })
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
@@ -121,3 +119,5 @@ export default class NodeStatus extends React.Component {
     return `${formatMemory(memory.total - memory.free)} / ${formatMemory(memory.total)}`
   }
 }
+
+export default injectClient(NodeStatus)

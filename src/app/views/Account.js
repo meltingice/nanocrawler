@@ -1,10 +1,10 @@
 import React from 'react'
 import accounting from 'accounting'
 
-import Client from '../../lib/Client'
+import injectClient from '../../lib/ClientComponent'
 import TransactionHistory from '../partials/TransactionHistory'
 
-export default class Account extends React.Component {
+class Account extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,7 +14,6 @@ export default class Account extends React.Component {
       history: []
     }
 
-    this.client = new Client();
     this.balanceTimeout = this.historyTimeout = null;
   }
 
@@ -36,14 +35,14 @@ export default class Account extends React.Component {
   }
 
   async fetchBalance() {
-    const balance = await this.client.balance();
+    const balance = await this.props.client.balance();
     this.setState({ ...balance });
 
     this.balanceTimeout = setTimeout(this.fetchBalance.bind(this), 60000);
   }
 
   async fetchHistory() {
-    const history = await this.client.history();
+    const history = await this.props.client.history();
     this.setState({ history });
 
     this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
@@ -72,3 +71,5 @@ export default class Account extends React.Component {
     )
   }
 }
+
+export default injectClient(Account)

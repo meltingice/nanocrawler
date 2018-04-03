@@ -1,6 +1,6 @@
 export default class Client {
-  constructor() {
-    this.host = "http://localhost:3001"
+  constructor(config) {
+    this.host = config.server;
   }
 
   async account() {

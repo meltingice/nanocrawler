@@ -1,10 +1,10 @@
 import React from 'react'
 import accounting from 'accounting'
-import Client from '../../lib/Client'
+import injectClient from '../../lib/ClientComponent'
 
 import './AccountWeight.css'
 
-export default class AccountWeight extends React.Component {
+class AccountWeight extends React.Component {
   constructor(props) {
     super(props);
 
@@ -12,7 +12,6 @@ export default class AccountWeight extends React.Component {
       weight: null
     }
 
-    this.client = new Client();
     this.timeout = null;
   }
 
@@ -28,7 +27,7 @@ export default class AccountWeight extends React.Component {
   }
 
   async fetchWeight() {
-    const weight = await this.client.weight();
+    const weight = await this.props.client.weight();
     this.setState({ weight });
 
     this.timeout = setTimeout(this.fetchWeight.bind(this), 60000);
@@ -65,3 +64,5 @@ export default class AccountWeight extends React.Component {
     )
   }
 }
+
+export default injectClient(AccountWeight)

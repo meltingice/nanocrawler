@@ -1,7 +1,8 @@
 {
-  "name": "rai-control-panel",
+  "name": "nano-node-dashboard",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "homepage": "https://meltingice.github.io/nano-node-dashboard",
   "dependencies": {
     "accounting": "^0.4.1",
     "babel-preset-env": "^1.6.1",
@@ -13,8 +14,8 @@
     "moment": "^2.21.0",
     "nanode": "^2.2.1",
     "raiblocks": "^0.4.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-fontawesome": "^1.6.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",

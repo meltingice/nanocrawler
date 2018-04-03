@@ -1,7 +1,7 @@
 import Promise from 'promise'
 import { promisify } from 'es6-promisify'
 import redis from 'redis'
-import config from '../../config.json'
+import config from '../../server-config.json'
 
 let redisClient, redisGet, redisSet;
 if (config.redis) {

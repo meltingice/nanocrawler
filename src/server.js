@@ -5,7 +5,7 @@ import express from 'express'
 import cors from 'cors'
 
 import redisFetch from './server/redisFetch'
-import config from '../config.json'
+import config from '../server-config.json'
 
 const nano = new Nano({ url: config.nodeHost })
 
