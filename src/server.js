@@ -90,4 +90,4 @@ app.get('/system_info', async (req, res) => {
   });
 });
 
-app.listen(3001);
+app.listen(config.serverPort || 3001);
