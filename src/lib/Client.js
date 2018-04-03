@@ -33,6 +33,16 @@ export default class Client {
     return (await resp.json());
   }
 
+  async balance() {
+    const resp = await this.fetch('balance');
+    return (await resp.json());
+  }
+
+  async history() {
+    const resp = await this.fetch('history');
+    return (await resp.json());
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }

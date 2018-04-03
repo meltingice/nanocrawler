@@ -52,6 +52,33 @@ app.get('/delegators_count', async (req, res) => {
   res.json(delegatorsCount);
 });
 
+app.get('/balance', async (req, res) => {
+  const balances = await redisFetch('balance', 300, async () => {
+    const resp = await nano.rpc('account_balance', { account: config.account })
+    return {
+      balance: nano.convert.fromRaw(resp.balance, 'mrai'),
+      pending: nano.convert.fromRaw(resp.pending, 'mrai')
+    }
+  });
+
+  res.json(balances);
+});
+
+app.get('/history', async (req, res) => {
+  const history = await redisFetch('history', 60, async () => {
+    const resp = await nano.accounts.history(config.account);
+    return resp.map(block => {
+      if (block.amount) {
+        block.amount = nano.convert.fromRaw(block.amount, 'mrai');
+      }
+
+      return block;
+    })
+  });
+
+  res.json(history);
+});
+
 app.get('/system_info', async (req, res) => {
   res.json({
     uptime: os.uptime(),

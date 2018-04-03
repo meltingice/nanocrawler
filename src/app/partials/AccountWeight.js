@@ -13,11 +13,25 @@ export default class AccountWeight extends React.Component {
     }
 
     this.client = new Client();
+    this.timeout = null;
   }
 
-  async componentWillMount() {
+  componentWillMount() {
+    this.fetchWeight();
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
+    }
+  }
+
+  async fetchWeight() {
     const weight = await this.client.weight();
     this.setState({ weight });
+
+    this.timeout = setTimeout(this.fetchWeight.bind(this), 60000);
   }
 
   displayAccount() {

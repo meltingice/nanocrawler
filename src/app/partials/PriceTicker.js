@@ -36,7 +36,7 @@ export default class PriceTicker extends React.Component {
           <h5 className="text-sm-center my-0">{accounting.formatMoney(data.price_usd)}</h5>
         </div>
         <div className="col">
-          <h5 className="text-sm-center my-0">
+          <h5 className="text-sm-center my-0" title="1 hour change">
             <FontAwesome name={this.getChangeSymbol()} /> {data.percent_change_1h}%
           </h5>
         </div>
@@ -46,7 +46,7 @@ export default class PriceTicker extends React.Component {
 
   getChangeSymbol() {
     const { data } = this.state;
-    const percentChange = parseInt(data.percent_change_1h, 10);
+    const percentChange = parseFloat(data.percent_change_1h, 10);
     return percentChange >= 0 ? 'arrow-up' : 'arrow-down';
   }
 }
