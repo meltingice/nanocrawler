@@ -10,7 +10,7 @@ export default () => {
   return (
     <div id="Navigation" className="col p-4 h-100">
       <div className="LogoWrap">
-        <ReactSVG path={Logo} className="Logo" /> Control Panel
+        <ReactSVG path={Logo} className="Logo" /> Node Dashboard
       </div>
 
       <div className="mt-3">
