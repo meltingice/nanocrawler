@@ -2,7 +2,6 @@
   "name": "nano-node-dashboard",
   "version": "0.1.0",
   "license": "MIT",
-  "homepage": "https://meltingice.github.io/nano-node-dashboard",
   "dependencies": {
     "accounting": "^0.4.1",
     "babel-preset-env": "^1.6.1",
