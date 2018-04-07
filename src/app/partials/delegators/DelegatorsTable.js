@@ -13,7 +13,7 @@ export default function DelegatorsTable({ delegators }) {
   });
 
   return (
-    <table className="table table-sm">
+    <table className="table">
       <thead>
         <tr>
           <th>Account</th>

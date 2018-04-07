@@ -46,8 +46,6 @@ class Delegators extends React.Component {
           </div>
         </div>
 
-        <hr />
-
         <DelegatorsTable delegators={delegators} />
       </div>
     );
