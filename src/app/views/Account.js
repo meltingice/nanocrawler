@@ -1,8 +1,8 @@
-import React from 'react'
-import accounting from 'accounting'
+import React from "react";
+import accounting from "accounting";
 
-import injectClient from '../../lib/ClientComponent'
-import TransactionHistory from '../partials/TransactionHistory'
+import injectClient from "../../lib/ClientComponent";
+import TransactionHistory from "../partials/TransactionHistory";
 
 class Account extends React.Component {
   constructor(props) {
@@ -12,13 +12,13 @@ class Account extends React.Component {
       balance: 0,
       pending: 0,
       history: []
-    }
+    };
 
     this.balanceTimeout = this.historyTimeout = null;
   }
 
   componentWillMount() {
-    this.fetchBalance()
+    this.fetchBalance();
     this.fetchHistory();
   }
 
@@ -55,11 +55,17 @@ class Account extends React.Component {
       <div className="p-4">
         <div className="row align-items-center">
           <div className="col">
-            <h1>Account</h1>
+            <h1 className="mb-0">Account</h1>
+            <p className="text-muted">{this.props.account}</p>
           </div>
           <div className="col col-auto">
-            <h3 className="mb-0">{accounting.formatNumber(balance, 6)} <span className="text-muted">NANO</span></h3>
-            <p className="text-muted">{accounting.formatNumber(pending, 6)} pending</p>
+            <h3 className="mb-0">
+              {accounting.formatNumber(balance, 6)}{" "}
+              <span className="text-muted">NANO</span>
+            </h3>
+            <p className="text-muted">
+              {accounting.formatNumber(pending, 6)} pending
+            </p>
           </div>
         </div>
 
@@ -68,8 +74,8 @@ class Account extends React.Component {
         <h2>Transactions</h2>
         <TransactionHistory history={history} />
       </div>
-    )
+    );
   }
 }
 
-export default injectClient(Account)
+export default injectClient(Account);
