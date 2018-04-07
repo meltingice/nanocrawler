@@ -1,8 +1,8 @@
-import React from 'react'
-import accounting from 'accounting'
-import moment from 'moment'
+import React from "react";
+import accounting from "accounting";
+import moment from "moment";
 
-import injectClient from '../../lib/ClientComponent'
+import injectClient from "../../lib/ClientComponent";
 
 class NodeStatus extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class NodeStatus extends React.Component {
       version: {},
       delegatorsCount: 0,
       systemInfo: {}
-    }
+    };
   }
 
   async componentWillMount() {
@@ -34,7 +34,7 @@ class NodeStatus extends React.Component {
       blockCount: await this.props.client.blockCount(),
       delegatorsCount: await this.props.client.delegatorsCount(),
       systemInfo: await this.props.client.systemInfo()
-    })
+    });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
@@ -49,7 +49,10 @@ class NodeStatus extends React.Component {
             <h1>Node Status</h1>
           </div>
           <div className="col col-auto">
-            <h3><span className="text-muted">Version</span> {this.state.version.node_vendor}</h3>
+            <h3>
+              <span className="text-muted">Version</span>{" "}
+              {this.state.version.node_vendor}
+            </h3>
           </div>
         </div>
 
@@ -80,18 +83,22 @@ class NodeStatus extends React.Component {
             <h2>{this.getLoadAverage()}</h2>
           </div>
           <div className="col text-sm-center">
-            <p className="text-muted mb-2">Memory <small className="text-muted">(used / total)</small></p>
+            <p className="text-muted mb-2">
+              Memory <small className="text-muted">(used / total)</small>
+            </p>
             <h2>{this.getMemory()}</h2>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   getUptime() {
     const { systemInfo } = this.state;
     if (!systemInfo.uptime) return "...";
-    return moment().subtract(systemInfo.uptime, 'seconds').fromNow(true);
+    return moment()
+      .subtract(systemInfo.uptime, "seconds")
+      .fromNow(true);
   }
 
   getLoadAverage() {
@@ -99,7 +106,7 @@ class NodeStatus extends React.Component {
     if (!systemInfo.loadAvg) return "...";
     return systemInfo.loadAvg
       .map(avg => Math.round(avg * 100.0) / 100.0)
-      .join(', ');
+      .join(", ");
   }
 
   getMemory() {
@@ -107,17 +114,19 @@ class NodeStatus extends React.Component {
     if (!systemInfo.memory) return "...";
     const { memory } = systemInfo;
 
-    const formatMemory = (amt) => {
+    const formatMemory = amt => {
       amt = amt / 1024 / 1024;
       if (amt > 1024) {
         return `${Math.round(amt / 1024.0 * 100.0) / 100.0}GB`;
       }
 
-      return `${Math.round(amt * 100.0) / 100.0}MB`
-    }
+      return `${Math.round(amt * 100.0) / 100.0}MB`;
+    };
 
-    return `${formatMemory(memory.total - memory.free)} / ${formatMemory(memory.total)}`
+    return `${formatMemory(memory.total - memory.free)} / ${formatMemory(
+      memory.total
+    )}`;
   }
 }
 
-export default injectClient(NodeStatus)
+export default injectClient(NodeStatus);
