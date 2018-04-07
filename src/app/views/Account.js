@@ -23,15 +23,8 @@ class Account extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.balanceTimeout) {
-      clearTimeout(this.balanceTimeout);
-      this.balanceTimeout = null;
-    }
-
-    if (this.historyTimeout) {
-      clearTimeout(this.historyTimeout);
-      this.historyTimeout = null;
-    }
+    if (this.balanceTimeout) clearTimeout(this.balanceTimeout);
+    if (this.historyTimeout) clearTimeout(this.historyTimeout);
   }
 
   async fetchBalance() {
