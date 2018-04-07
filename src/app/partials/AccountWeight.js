@@ -1,8 +1,9 @@
-import React from 'react'
-import accounting from 'accounting'
-import injectClient from '../../lib/ClientComponent'
+import React from "react";
+import { Link } from "react-router-dom";
+import accounting from "accounting";
+import injectClient from "../../lib/ClientComponent";
 
-import './AccountWeight.css'
+import "./AccountWeight.css";
 
 class AccountWeight extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class AccountWeight extends React.Component {
 
     this.state = {
       weight: null
-    }
+    };
 
     this.timeout = null;
   }
@@ -37,7 +38,7 @@ class AccountWeight extends React.Component {
     const { account } = this.props;
     if (!this.props.account) return;
 
-    return `${account.substr(0, 9)}...${account.substr(-5)}`
+    return `${account.substr(0, 9)}...${account.substr(-5)}`;
   }
 
   displayWeight() {
@@ -52,17 +53,18 @@ class AccountWeight extends React.Component {
       <div className="AccountEntry row justify-content-end mr-0">
         <div className="col p-4 text-sm-right">
           <p className="mb-0">
-            <b>Account:</b> <a
-              href={`https://nanode.co/account/${this.props.account}`}
-              target="_blank"
-              className="text-white">{this.displayAccount()}
-            </a>
+            <b>Account:</b>{" "}
+            <Link to="/account" className="text-white">
+              {this.displayAccount()}
+            </Link>
           </p>
-          <p className="mb-0"><b>Weight:</b> {this.displayWeight()} NANO</p>
+          <p className="mb-0">
+            <b>Weight:</b> {this.displayWeight()} NANO
+          </p>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default injectClient(AccountWeight)
+export default injectClient(AccountWeight);
