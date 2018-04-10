@@ -12,7 +12,7 @@ class NodeStatus extends React.Component {
     this.state = {
       blockCount: {},
       version: {},
-      delegatorsCount: 0,
+      weight: 0,
       systemInfo: {}
     };
   }
@@ -32,7 +32,7 @@ class NodeStatus extends React.Component {
   async updateStats() {
     this.setState({
       blockCount: await this.props.client.blockCount(),
-      delegatorsCount: await this.props.client.delegatorsCount(),
+      weight: await this.props.client.weight(),
       systemInfo: await this.props.client.systemInfo()
     });
 
@@ -40,7 +40,7 @@ class NodeStatus extends React.Component {
   }
 
   render() {
-    const { blockCount, delegatorsCount } = this.state;
+    const { blockCount, weight } = this.state;
 
     return (
       <div className="p-4">
@@ -68,8 +68,8 @@ class NodeStatus extends React.Component {
             <h2>{accounting.formatNumber(blockCount.unchecked)}</h2>
           </div>
           <div className="col text-sm-center">
-            <p className="text-muted mb-2">Delegators</p>
-            <h2>{delegatorsCount}</h2>
+            <p className="text-muted mb-2">Voting Weight</p>
+            <h2>{accounting.formatNumber(weight)} NANO</h2>
           </div>
         </div>
 
