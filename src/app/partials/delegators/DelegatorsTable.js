@@ -13,19 +13,21 @@ export default function DelegatorsTable({ delegators }) {
   });
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Account</th>
-          <th>Delegated Weight</th>
-        </tr>
-      </thead>
+    <div className="table-responsive">
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Delegated Weight</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {_.map(sortedDelegators, d => (
-          <DelegatorEntry key={d[0]} account={d[0]} balance={d[1]} />
-        ))}
-      </tbody>
-    </table>
+        <tbody>
+          {_.map(sortedDelegators, d => (
+            <DelegatorEntry key={d[0]} account={d[0]} balance={d[1]} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
