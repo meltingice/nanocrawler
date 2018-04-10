@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.css'
+import React, { Component } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
-import injectClient from './lib/ClientComponent'
-import Navigation from './app/Navigation'
-import Content from './app/Content'
-
-import AccountWeight from './app/partials/AccountWeight'
+import injectClient from "./lib/ClientComponent";
+import Navigation from "./app/Navigation";
+import Content from "./app/Content";
 
 class App extends Component {
   constructor(props) {
@@ -24,18 +22,16 @@ class App extends Component {
   render() {
     return (
       <div id="App" className="container-fluid p-0 h-100">
-        <div className="row h-100 mr-0">
-          <Navigation />
-
-          <div className="col p-0 h-100 ContentContainer">
-            <AccountWeight account={this.state.account} />
-
-            <Content account={this.state.account} />
+        <div className="row Header align-items-center">
+          <div className="col">
+            <Navigation />
           </div>
         </div>
+
+        <Content account={this.state.account} />
       </div>
-    )
+    );
   }
 }
 
-export default injectClient(App)
+export default injectClient(App);

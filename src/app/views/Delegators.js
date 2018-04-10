@@ -41,7 +41,7 @@ class Delegators extends React.Component {
           </div>
           <div className="col col-auto">
             <h3>
-              {numDelegators} delegator{numDelegators === 1 ? "" : "s"}
+              {numDelegators} account{numDelegators === 1 ? "" : "s"}
             </h3>
           </div>
         </div>

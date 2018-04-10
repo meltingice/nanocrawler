@@ -1,6 +1,6 @@
-import React from 'react'
-import accounting from 'accounting'
-import FontAwesome from 'react-fontawesome'
+import React from "react";
+import accounting from "accounting";
+import FontAwesome from "react-fontawesome";
 
 export default class PriceTicker extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ export default class PriceTicker extends React.Component {
 
     this.state = {
       data: null
-    }
+    };
   }
 
   componentWillMount() {
@@ -17,8 +17,8 @@ export default class PriceTicker extends React.Component {
 
   async fetchData() {
     const resp = await fetch("https://api.coinmarketcap.com/v1/ticker/nano/", {
-      mode: 'cors'
-    })
+      mode: "cors"
+    });
 
     const data = await resp.json();
     this.setState({ data: data[0] });
@@ -31,22 +31,18 @@ export default class PriceTicker extends React.Component {
     if (data === null) return null;
 
     return (
-      <div className="row">
-        <div className="col">
-          <h5 className="text-sm-center my-0">{accounting.formatMoney(data.price_usd)}</h5>
-        </div>
-        <div className="col">
-          <h5 className="text-sm-center my-0" title="1 hour change">
-            <FontAwesome name={this.getChangeSymbol()} /> {data.percent_change_1h}%
-          </h5>
-        </div>
-      </div>
-    )
+      <p className="text-sm-center my-0 mr-3">
+        {accounting.formatMoney(data.price_usd)}
+        <span className="ml-3" title="1 hour change">
+          <FontAwesome name={this.getChangeSymbol()} /> {data.percent_change_1h}%
+        </span>
+      </p>
+    );
   }
 
   getChangeSymbol() {
     const { data } = this.state;
     const percentChange = parseFloat(data.percent_change_1h, 10);
-    return percentChange >= 0 ? 'arrow-up' : 'arrow-down';
+    return percentChange >= 0 ? "arrow-up" : "arrow-down";
   }
 }

@@ -50,8 +50,8 @@ class AccountWeight extends React.Component {
 
   render() {
     return (
-      <div className="AccountEntry row justify-content-end mr-0">
-        <div className="col p-4 text-sm-right">
+      <div className="AccountEntry">
+        <div className="text-sm-right">
           <p className="mb-0">
             <b>Account:</b>{" "}
             <Link to="/account" className="text-white">
