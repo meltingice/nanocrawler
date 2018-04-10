@@ -49,7 +49,9 @@ class Account extends React.Component {
         <div className="row align-items-center">
           <div className="col">
             <h1 className="mb-0">Account</h1>
-            <p className="text-muted">{this.props.account}</p>
+            <p className="text-muted" style={{ wordWrap: "break-word" }}>
+              {this.props.account}
+            </p>
           </div>
           <div className="col col-auto">
             <h3 className="mb-0">

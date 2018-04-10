@@ -45,7 +45,7 @@ class NodeStatus extends React.Component {
     return (
       <div className="p-4">
         <div className="row align-items-center">
-          <div className="col">
+          <div className="col-sm">
             <h1>Node Status</h1>
           </div>
           <div className="col col-auto">
