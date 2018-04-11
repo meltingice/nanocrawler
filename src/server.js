@@ -109,7 +109,7 @@ app.get("/system_info", async (req, res) => {
 
 // nanonode.ninja support
 app.get("/api.php", async (req, res) => {
-  const data = await redisFetch("nanonode.ninja", 600, async () => {
+  const data = await redisFetch("nanonode.ninja", 10, async () => {
     const blockCount = await nano.blocks.count();
     const peerCount = _.keys((await nano.rpc("peers")).peers).length;
 
