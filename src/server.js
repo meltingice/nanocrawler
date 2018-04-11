@@ -6,6 +6,7 @@ import express from "express";
 import cors from "cors";
 
 import redisFetch from "./server/redisFetch";
+import dbSize from "./server/dbSize";
 import config from "../server-config.json";
 
 const nano = new Nano({ url: config.nodeHost });
@@ -38,6 +39,14 @@ app.get("/block_count", async (req, res) => {
   });
 
   res.json({ blockCount });
+});
+
+app.get("/peer_count", async (req, res) => {
+  const peerCount = await redisFetch("peerCount", 60, async () => {
+    return _.keys((await nano.rpc("peers")).peers).length;
+  });
+
+  res.json({ peerCount: peerCount });
 });
 
 app.get("/version", async (req, res) => {
@@ -103,7 +112,8 @@ app.get("/system_info", async (req, res) => {
     memory: {
       free: os.freemem(),
       total: os.totalmem()
-    }
+    },
+    dbSize: await dbSize()
   });
 });
 

@@ -13,6 +13,7 @@ class NodeStatus extends React.Component {
       blockCount: {},
       version: {},
       weight: 0,
+      peerCount: 0,
       systemInfo: {}
     };
   }
@@ -33,14 +34,15 @@ class NodeStatus extends React.Component {
     this.setState({
       blockCount: await this.props.client.blockCount(),
       weight: await this.props.client.weight(),
-      systemInfo: await this.props.client.systemInfo()
+      systemInfo: await this.props.client.systemInfo(),
+      peerCount: await this.props.client.peerCount()
     });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
   render() {
-    const { blockCount, weight } = this.state;
+    const { blockCount, weight, peerCount } = this.state;
 
     return (
       <div className="p-4">
@@ -71,6 +73,10 @@ class NodeStatus extends React.Component {
             <p className="text-muted mb-2">Voting Weight</p>
             <h2>{accounting.formatNumber(weight)} NANO</h2>
           </div>
+          <div className="col-sm text-sm-center">
+            <p className="text-muted mb-2">Peers</p>
+            <h2>{accounting.formatNumber(peerCount)}</h2>
+          </div>
         </div>
 
         <div className="row mt-5">
@@ -87,6 +93,10 @@ class NodeStatus extends React.Component {
               Memory <small className="text-muted">(used / total)</small>
             </p>
             <h2>{this.getMemory()}</h2>
+          </div>
+          <div className="col-sm text-sm-center">
+            <p className="text-muted mb-2">Database Size</p>
+            <h2>{this.getDatabaseSize()}</h2>
           </div>
         </div>
       </div>
@@ -126,6 +136,15 @@ class NodeStatus extends React.Component {
     return `${formatMemory(memory.total - memory.free)} / ${formatMemory(
       memory.total
     )}`;
+  }
+
+  getDatabaseSize() {
+    const { systemInfo } = this.state;
+    if (!systemInfo.dbSize) return "Unknown";
+    let size = systemInfo.dbSize / 1024.0 / 1024.0;
+    return size > 1024
+      ? `${accounting.formatNumber(size / 1024, 2)}GB`
+      : `${accounting.formatNumber(size, 2)}MB`;
   }
 }
 
