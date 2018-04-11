@@ -106,15 +106,19 @@ app.get("/delegators", async (req, res) => {
 });
 
 app.get("/system_info", async (req, res) => {
-  res.json({
-    uptime: os.uptime(),
-    loadAvg: os.loadavg(),
-    memory: {
-      free: os.freemem(),
-      total: os.totalmem()
-    },
-    dbSize: await dbSize()
+  const data = await redisFetch("systemInfo", 10, async () => {
+    return {
+      uptime: os.uptime(),
+      loadAvg: os.loadavg(),
+      memory: {
+        free: os.freemem(),
+        total: os.totalmem()
+      },
+      dbSize: await dbSize()
+    };
   });
+
+  res.json(data);
 });
 
 // nanonode.ninja support
