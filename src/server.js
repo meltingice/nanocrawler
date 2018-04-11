@@ -115,7 +115,7 @@ app.get("/api.php", async (req, res) => {
 
     return {
       nanoNodeAccount: config.account,
-      version: await nano.rpc("version").node_vendor,
+      version: (await nano.rpc("version")).node_vendor,
       currentBlock: blockCount.count,
       uncheckedBlocks: blockCount.unchecked,
       numPeers: peerCount
