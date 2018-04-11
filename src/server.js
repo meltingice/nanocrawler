@@ -107,4 +107,22 @@ app.get("/system_info", async (req, res) => {
   });
 });
 
+// nanonode.ninja support
+app.get("/api.php", async (req, res) => {
+  const data = await redisFetch("nanonode.ninja", 600, async () => {
+    const blockCount = await nano.blocks.count();
+    const peerCount = _.keys((await nano.rpc("peers")).peers).length;
+
+    return {
+      nanoNodeAccount: config.account,
+      version: await nano.rpc("version").node_vendor,
+      currentBlock: blockCount.count,
+      uncheckedBlocks: blockCount.unchecked,
+      numPeers: peerCount
+    };
+  });
+
+  res.json(data);
+});
+
 app.listen(config.serverPort || 3001);
