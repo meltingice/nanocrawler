@@ -1,5 +1,6 @@
 {
   "account": "xrb_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs",
+  "clientUrl": "https://nano.meltingice.net",
   "nodeHost": "http://10.0.1.152:7076",
   "redis": "redis://127.0.0.1:6379",
   "serverPort": 3001

@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.redirect(config.clientUrl);
 });
 
 app.get("/account", async (req, res) => {
