@@ -126,7 +126,7 @@ app.get("/api.php", async (req, res) => {
   const data = await redisFetch("api.php", 10, async () => {
     const blockCount = await nano.blocks.count();
     const peerCount = _.keys((await nano.rpc("peers")).peers).length;
-    const usedMem = (os.totalmem() - os.freemem()) / 1024 / 1024;
+    const usedMem = Math.round((os.totalmem() - os.freemem()) / 1024 / 1024);
 
     return {
       nanoNodeName: config.nodeName,
@@ -136,7 +136,7 @@ app.get("/api.php", async (req, res) => {
       uncheckedBlocks: blockCount.unchecked,
       numPeers: peerCount,
       usedMem: usedMem,
-      totalMem: os.totalmem() / 1024 / 1024
+      totalMem: Math.round(os.totalmem() / 1024 / 1024)
     };
   });
 
