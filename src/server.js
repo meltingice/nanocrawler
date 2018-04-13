@@ -41,6 +41,14 @@ app.get("/block_count", async (req, res) => {
   res.json({ blockCount });
 });
 
+app.get("/block_count_by_type", async (req, res) => {
+  const blockCount = await redisFetch("blockCountByType", 10, async () => {
+    return await nano.blocks.count(true);
+  });
+
+  res.json(blockCount);
+});
+
 app.get("/peer_count", async (req, res) => {
   const peerCount = await redisFetch("peerCount", 60, async () => {
     return _.keys((await nano.rpc("peers")).peers).length;

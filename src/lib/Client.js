@@ -18,6 +18,11 @@ export default class Client {
     return (await resp.json()).blockCount;
   }
 
+  async blockCountByType() {
+    const resp = await this.fetch("block_count_by_type");
+    return await resp.json();
+  }
+
   async peerCount() {
     const resp = await this.fetch("peer_count");
     return (await resp.json()).peerCount;

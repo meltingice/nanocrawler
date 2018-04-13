@@ -15,11 +15,21 @@ export default () => {
         </div>
       </div>
 
-      <div className="col-sm">
+      <div className="col-md">
         <ul className="NavigationList nav">
           <li className="nav-item">
             <NavLink exact to="/" className="nav-link" activeClassName="active">
               Node Status
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              exact
+              to="/network"
+              className="nav-link"
+              activeClassName="active"
+            >
+              Network Status
             </NavLink>
           </li>
           <li className="nav-item">
@@ -45,7 +55,7 @@ export default () => {
         </ul>
       </div>
 
-      <div className="col col-auto d-none d-md-flex">
+      <div className="col col-auto d-none d-lg-flex">
         <PriceTicker />
       </div>
     </div>
