@@ -36,6 +36,8 @@ class NetworkStatus extends React.Component {
       peers: await this.props.client.peers(),
       representativesOnline: await this.props.client.representativesOnline()
     });
+
+    this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
   onlineWeight() {
