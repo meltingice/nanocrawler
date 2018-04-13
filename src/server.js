@@ -121,6 +121,19 @@ app.get("/delegators", async (req, res) => {
   res.json(delegators);
 });
 
+app.get("/representatives_online", async (req, res) => {
+  const representatives = await redisFetch(
+    "representatives_online",
+    60,
+    async () => {
+      const resp = await nano.rpc("representatives_online");
+      return _.keys(resp.representatives);
+    }
+  );
+
+  res.json({ representatives });
+});
+
 app.get("/system_info", async (req, res) => {
   const data = await redisFetch("systemInfo", 10, async () => {
     return {

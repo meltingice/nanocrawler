@@ -5,7 +5,7 @@ export default function ChangeBlock({ count }) {
   return (
     <h3>
       {accounting.formatNumber(count)}{" "}
-      <small className="text-muted">representatives have been changed</small>
+      <small className="text-muted">representatives changed</small>
     </h3>
   );
 }

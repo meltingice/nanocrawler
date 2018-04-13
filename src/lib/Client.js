@@ -63,6 +63,11 @@ export default class Client {
     return await resp.json();
   }
 
+  async representativesOnline() {
+    const resp = await this.fetch("representatives_online");
+    return (await resp.json()).representatives;
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }

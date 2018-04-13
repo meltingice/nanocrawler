@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
 
 import BlockByTypeStats from "../partials/BlockByTypeStats";
@@ -11,7 +12,8 @@ class NetworkStatus extends React.Component {
 
     this.state = {
       blocksByType: {},
-      peers: {}
+      peers: {},
+      representativesOnline: []
     };
 
     this.statTimer = null;
@@ -29,16 +31,25 @@ class NetworkStatus extends React.Component {
   async updateStats() {
     this.setState({
       blocksByType: await this.props.client.blockCountByType(),
-      peers: await this.props.client.peers()
+      peers: await this.props.client.peers(),
+      representativesOnline: await this.props.client.representativesOnline()
     });
   }
 
   render() {
+    const { representativesOnline } = this.state;
+
     return (
       <div className="p-4">
         <div className="row align-items-center">
           <div className="col-md">
             <h1>Network Status</h1>
+          </div>
+          <div class="col col-auto">
+            <h3>
+              {accounting.formatNumber(representativesOnline.length)}{" "}
+              <span className="text-muted">representatives online</span>
+            </h3>
           </div>
         </div>
 

@@ -5,7 +5,7 @@ export default function SendBlock({ count }) {
   return (
     <h3>
       {accounting.formatNumber(count)}{" "}
-      <small className="text-muted">transactions have been sent</small>
+      <small className="text-muted">transactions sent</small>
     </h3>
   );
 }
