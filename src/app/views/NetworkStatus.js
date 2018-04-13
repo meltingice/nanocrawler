@@ -1,6 +1,5 @@
 import React from "react";
 import _ from "lodash";
-import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
 
 import BlockByTypeStats from "../partials/BlockByTypeStats";
@@ -42,7 +41,9 @@ class NetworkStatus extends React.Component {
 
         <hr />
 
-        <div className="row mt-5">{this.getBlocksByType()}</div>
+        <div className="row mt-5">
+          <div className="col-sm">{this.getBlocksByType()}</div>
+        </div>
       </div>
     );
   }
@@ -51,7 +52,7 @@ class NetworkStatus extends React.Component {
     const { blocksByType } = this.state;
 
     return _.map(blocksByType, (count, type) => {
-      return <BlockByTypeStats type={type} count={count} />;
+      return <BlockByTypeStats key={type} type={type} count={count} />;
     });
   }
 }
