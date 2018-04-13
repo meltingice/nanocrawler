@@ -126,8 +126,16 @@ app.get("/representatives_online", async (req, res) => {
     "representatives_online",
     60,
     async () => {
-      const resp = await nano.rpc("representatives_online");
-      return _.keys(resp.representatives);
+      const reps = (await nano.rpc("representatives")).representatives;
+      const repsOnline = (await nano.rpc("representatives_online"))
+        .representatives;
+
+      return _.fromPairs(
+        _.map(repsOnline, (s, account) => [
+          account,
+          nano.convert.fromRaw(reps[account], "mrai")
+        ])
+      );
     }
   );
 

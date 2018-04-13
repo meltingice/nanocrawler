@@ -6,6 +6,8 @@ import injectClient from "../../lib/ClientComponent";
 import BlockByTypeStats from "../partials/BlockByTypeStats";
 import PeerVersions from "../partials/PeerVersions";
 
+const MAX_SUPPLY = 133248289;
+
 class NetworkStatus extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,7 @@ class NetworkStatus extends React.Component {
     this.state = {
       blocksByType: {},
       peers: {},
-      representativesOnline: []
+      representativesOnline: {}
     };
 
     this.statTimer = null;
@@ -36,6 +38,23 @@ class NetworkStatus extends React.Component {
     });
   }
 
+  onlineWeight() {
+    const { representativesOnline } = this.state;
+    return _.sum(
+      _.values(representativesOnline).map(amt => parseFloat(amt, 10))
+    );
+  }
+
+  amountRepresented() {
+    return <span>{accounting.formatNumber(this.onlineWeight())} NANO</span>;
+  }
+
+  percentRepresented() {
+    return (
+      <span>{(this.onlineWeight() / MAX_SUPPLY * 100.0).toFixed(2)}%</span>
+    );
+  }
+
   render() {
     const { representativesOnline } = this.state;
 
@@ -45,15 +64,26 @@ class NetworkStatus extends React.Component {
           <div className="col-md">
             <h1>Network Status</h1>
           </div>
-          <div class="col col-auto">
-            <h3>
-              {accounting.formatNumber(representativesOnline.length)}{" "}
-              <span className="text-muted">representatives online</span>
-            </h3>
-          </div>
         </div>
 
         <hr />
+
+        <div className="row mt-5">
+          <div className="col">
+            <h2>
+              {accounting.formatNumber(_.keys(representativesOnline).length)}{" "}
+              <span className="text-muted">representatives online</span>
+            </h2>
+            <h5>
+              {this.amountRepresented()}{" "}
+              <span className="text-muted">
+                voting power is online, which is
+              </span>{" "}
+              {this.percentRepresented()}{" "}
+              <span className="text-muted">of the total voting power</span>
+            </h5>
+          </div>
+        </div>
 
         <div className="row mt-5">
           <div className="col-md">
