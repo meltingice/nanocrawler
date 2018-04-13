@@ -131,16 +131,20 @@ app.get("/system_info", async (req, res) => {
 
 // nanonode.ninja support
 app.get("/api.php", async (req, res) => {
-  const data = await redisFetch("nanonode.ninja", 10, async () => {
+  const data = await redisFetch("api.php", 10, async () => {
     const blockCount = await nano.blocks.count();
     const peerCount = _.keys((await nano.rpc("peers")).peers).length;
+    const usedMem = Math.round((os.totalmem() - os.freemem()) / 1024 / 1024);
 
     return {
+      nanoNodeName: config.nodeName,
       nanoNodeAccount: config.account,
       version: (await nano.rpc("version")).node_vendor,
       currentBlock: blockCount.count,
       uncheckedBlocks: blockCount.unchecked,
-      numPeers: peerCount
+      numPeers: peerCount,
+      usedMem: usedMem,
+      totalMem: Math.round(os.totalmem() / 1024 / 1024)
     };
   });
 
