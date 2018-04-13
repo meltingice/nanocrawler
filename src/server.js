@@ -57,6 +57,14 @@ app.get("/peer_count", async (req, res) => {
   res.json({ peerCount: peerCount });
 });
 
+app.get("/peers", async (req, res) => {
+  const peers = await redisFetch("peers", 60, async () => {
+    return await nano.rpc("peers");
+  });
+
+  res.json(peers);
+});
+
 app.get("/version", async (req, res) => {
   const version = await redisFetch("version", 3600, async () => {
     return await nano.rpc("version");

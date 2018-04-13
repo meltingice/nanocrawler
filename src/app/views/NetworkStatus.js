@@ -3,13 +3,15 @@ import _ from "lodash";
 import injectClient from "../../lib/ClientComponent";
 
 import BlockByTypeStats from "../partials/BlockByTypeStats";
+import PeerVersions from "../partials/PeerVersions";
 
 class NetworkStatus extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      blocksByType: {}
+      blocksByType: {},
+      peers: {}
     };
 
     this.statTimer = null;
@@ -26,7 +28,8 @@ class NetworkStatus extends React.Component {
 
   async updateStats() {
     this.setState({
-      blocksByType: await this.props.client.blockCountByType()
+      blocksByType: await this.props.client.blockCountByType(),
+      peers: await this.props.client.peers()
     });
   }
 
@@ -34,7 +37,7 @@ class NetworkStatus extends React.Component {
     return (
       <div className="p-4">
         <div className="row align-items-center">
-          <div className="col-sm">
+          <div className="col-md">
             <h1>Network Status</h1>
           </div>
         </div>
@@ -42,7 +45,13 @@ class NetworkStatus extends React.Component {
         <hr />
 
         <div className="row mt-5">
-          <div className="col-sm">{this.getBlocksByType()}</div>
+          <div className="col-md">
+            <h2>Block Stats</h2>
+            {this.getBlocksByType()}
+          </div>
+          <div className="col-md mt-3 mt-md-0">
+            <PeerVersions peers={this.state.peers} />
+          </div>
         </div>
       </div>
     );

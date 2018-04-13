@@ -23,6 +23,11 @@ export default class Client {
     return await resp.json();
   }
 
+  async peers() {
+    const resp = await this.fetch("peers");
+    return (await resp.json()).peers;
+  }
+
   async peerCount() {
     const resp = await this.fetch("peer_count");
     return (await resp.json()).peerCount;
