@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <div id="App" className="container-fluid p-0 h-100">
-        <div className="row Header align-items-center">
+        <div className="row Header align-items-center mr-0">
           <div className="col">
             <Navigation />
           </div>
