@@ -142,6 +142,23 @@ app.get("/representatives_online", async (req, res) => {
   res.json({ representatives });
 });
 
+app.get("/statistics/:type", async (req, res) => {
+  if (!["counters", "samples"].includes(req.params.type)) {
+    res.sendStatus(400);
+    return;
+  }
+
+  const data = await redisFetch(
+    `statistics/${req.params.type}`,
+    1,
+    async () => {
+      return await nano.rpc("stats", { type: req.params.type });
+    }
+  );
+
+  res.json(data);
+});
+
 app.get("/system_info", async (req, res) => {
   const data = await redisFetch("systemInfo", 10, async () => {
     return {

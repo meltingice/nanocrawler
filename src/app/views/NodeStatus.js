@@ -2,6 +2,7 @@ import React from "react";
 import accounting from "accounting";
 import moment from "moment";
 
+import NodeStatistics from "../partials/NodeStatistics";
 import injectClient from "../../lib/ClientComponent";
 
 class NodeStatus extends React.Component {
@@ -99,6 +100,8 @@ class NodeStatus extends React.Component {
             <h2>{this.getDatabaseSize()}</h2>
           </div>
         </div>
+
+        <NodeStatistics />
       </div>
     );
   }

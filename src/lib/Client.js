@@ -68,6 +68,11 @@ export default class Client {
     return (await resp.json()).representatives;
   }
 
+  async statistics(type) {
+    const resp = await this.fetch(`statistics/${type}`);
+    return await resp.json();
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }
