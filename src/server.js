@@ -133,7 +133,7 @@ app.get("/representatives_online", async (req, res) => {
       return _.fromPairs(
         _.map(repsOnline, (s, account) => [
           account,
-          nano.convert.fromRaw(reps[account], "mrai")
+          reps[account] ? nano.convert.fromRaw(reps[account], "mrai") : 0
         ])
       );
     }
