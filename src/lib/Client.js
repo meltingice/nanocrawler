@@ -68,6 +68,11 @@ export default class Client {
     return (await resp.json()).representatives;
   }
 
+  async networkData() {
+    const resp = await this.fetch("network_data");
+    return (await resp.json()).network;
+  }
+
   fetch(endpoint) {
     return fetch(`${this.host}/${endpoint}`);
   }

@@ -3,6 +3,7 @@ import _ from "lodash";
 import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
 
+import AggregateNetworkData from "../partials/AggregateNetworkData";
 import BlockByTypeStats from "../partials/BlockByTypeStats";
 import PeerVersions from "../partials/PeerVersions";
 
@@ -23,7 +24,6 @@ class NetworkStatus extends React.Component {
 
   componentWillMount() {
     this.updateStats();
-    this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
   componentWillUnmount() {
@@ -96,6 +96,8 @@ class NetworkStatus extends React.Component {
             <PeerVersions peers={this.state.peers} />
           </div>
         </div>
+
+        <AggregateNetworkData />
       </div>
     );
   }
