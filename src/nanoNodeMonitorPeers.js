@@ -126,14 +126,24 @@ function checkForMonitor(peer, url) {
 
 function formatData(data) {
   data.currentBlock = parseInt(
-    data.currentBlock.toString().replace(/[^\d]/g, ""),
+    data.currentBlock.toString().replace(/[^\d\.]/g, ""),
     10
   );
   data.uncheckedBlocks = parseInt(
-    data.uncheckedBlocks.toString().replace(/[^\d]/g, ""),
+    data.uncheckedBlocks.toString().replace(/[^\d\.]/g, ""),
     10
   );
-  data.numPeers = parseInt(data.numPeers.toString().replace(/[^\d]/g, ""), 10);
+  data.numPeers = parseInt(
+    data.numPeers.toString().replace(/[^\d\.]/g, ""),
+    10
+  );
+
+  if (data.votingWeight) {
+    data.votingWeight = parseFloat(
+      data.votingWeight.toString().replace(/[^\d\.]/g, ""),
+      10
+    );
+  }
 
   return data;
 }
