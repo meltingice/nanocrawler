@@ -3,6 +3,8 @@ import _ from "lodash";
 import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
 
+import DiscoveredPeers from "./network/DiscoveredPeers";
+
 class AggregateNetworkData extends React.Component {
   constructor(props) {
     super(props);
@@ -150,6 +152,17 @@ class AggregateNetworkData extends React.Component {
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">Maximum Unchecked Blocks</p>
             <h3>{accounting.formatNumber(blockStats.uncheckedBlocks.max)}</h3>
+          </div>
+        </div>
+
+        <div className="row mt-5">
+          <div className="col">
+            <h3 className="mb-0">Discovered Peers</h3>
+            <p className="text-muted">
+              All discovered peers running nanoNodeMonitor, sorted by block
+              count.
+            </p>
+            <DiscoveredPeers peers={this.state.peers} />
           </div>
         </div>
       </Fragment>
