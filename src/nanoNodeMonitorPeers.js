@@ -44,7 +44,10 @@ async function updateKnownMonitors() {
   const peers = _.keys((await nano.rpc("peers")).peers);
   const data = await getDataFromPeers(peers);
 
-  KNOWN_MONITORS = data.map(m => m.peer);
+  KNOWN_MONITORS = _.uniqBy(
+    data.map(m => m.peer),
+    peer => peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1]
+  );
 }
 
 async function checkKnownMonitors() {
