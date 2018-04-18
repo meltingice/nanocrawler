@@ -7,7 +7,10 @@ import config from "../server-config.json";
 const redisClient = redis.createClient(config.redis);
 const nano = new Nano({ url: config.nodeHost });
 
-const HARDCODED_MONITORS = ["https://nano.nifni.net/api.php"];
+const HARDCODED_MONITORS = [
+  "https://nano.nifni.net/api.php",
+  "http://node.numberwitch.net/api.php"
+];
 let KNOWN_MONITORS = [];
 
 function fetchWithTimeout(url, duration) {
