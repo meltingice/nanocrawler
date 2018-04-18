@@ -87,7 +87,7 @@ class AggregateNetworkData extends React.Component {
           </div>
           <div className="col-auto">
             <h4 className="text-muted">
-              Currently tracking {this.representativePeers().length} nodes
+              Tracking {this.representativePeers().length} nodes
             </h4>
           </div>
         </div>
@@ -155,16 +155,22 @@ class AggregateNetworkData extends React.Component {
           </div>
         </div>
 
-        <div className="row mt-5">
+        <div className="row mt-5 align-items-center">
           <div className="col">
             <h3 className="mb-0">Discovered Peers</h3>
             <p className="text-muted">
               All discovered peers running nanoNodeMonitor, sorted by block
               count.
             </p>
-            <DiscoveredPeers peers={this.state.peers} stats={blockStats} />
+          </div>
+          <div className="col-auto">
+            <h4 className="text-muted">
+              {this.state.peers.length} monitors discovered
+            </h4>
           </div>
         </div>
+
+        <DiscoveredPeers peers={this.state.peers} stats={blockStats} />
       </Fragment>
     );
   }
