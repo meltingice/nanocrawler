@@ -29,6 +29,39 @@ class App extends Component {
         </div>
 
         <Content account={this.state.account} />
+
+        <hr />
+
+        <div className="row mr-0">
+          <div className="col">
+            <div className="py-2 px-4">
+              <p>
+                Created by Ryan LeFevre, Sr. Software Engineer at{" "}
+                <a href="https://www.hodinkee.com" target="_blank">
+                  HODINKEE
+                </a>
+              </p>
+            </div>
+          </div>
+          <div className="col-auto">
+            <div className="py-2 px-4">
+              <a href="https://twitter.com/meltingice" target="_blank">
+                Twitter
+              </a>{" "}
+              &bull;{" "}
+              <a href="https://reddit.com/u/meltingice" target="_blank">
+                Reddit
+              </a>{" "}
+              &bull;{" "}
+              <a
+                href="https://github.com/meltingice/nano-node-dashboard"
+                target="_blank"
+              >
+                Source code
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
