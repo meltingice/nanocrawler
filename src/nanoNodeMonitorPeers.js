@@ -86,7 +86,7 @@ function checkForMonitor(peer, url) {
             .json()
             .then(data => {
               if (data.nanoNodeAccount) {
-                resolve({ peer, url, data });
+                resolve({ peer, url, data: formatData(data) });
               } else {
                 reject();
               }
@@ -105,6 +105,20 @@ function checkForMonitor(peer, url) {
         reject();
       });
   });
+}
+
+function formatData(data) {
+  data.currentBlock = parseInt(
+    data.currentBlock.toString().replace(/[^\d]/g, ""),
+    10
+  );
+  data.uncheckedBlocks = parseInt(
+    data.uncheckedBlocks.toString().replace(/[^\d]/g, ""),
+    10
+  );
+  data.numPeers = parseInt(data.numPeers.toString().replace(/[^\d]/g, ""), 10);
+
+  return data;
 }
 
 export default async function startNetworkDataUpdates() {

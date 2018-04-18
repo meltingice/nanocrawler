@@ -49,7 +49,7 @@ const PeerEntry = ({ peer, currentBlock }) => {
     <i className="text-muted">Unknown</i>
   );
 
-  const peerBlock = parseInt(peer.currentBlock);
+  const peerBlock = parseInt(peer.currentBlock, 10);
   const peerLag = currentBlock - peerBlock;
 
   let statusClass;
