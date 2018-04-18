@@ -6,6 +6,8 @@ import injectClient from "./lib/ClientComponent";
 import Navigation from "./app/Navigation";
 import Content from "./app/Content";
 
+import AccountLink from "./app/partials/AccountLink";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -32,14 +34,18 @@ class App extends Component {
 
         <hr />
 
-        <div className="row mr-0">
+        <div className="row mr-0 align-items-center">
           <div className="col">
             <div className="py-2 px-4">
-              <p>
+              <p className="mb-0">
                 Created by Ryan LeFevre, Sr. Software Engineer at{" "}
                 <a href="https://www.hodinkee.com" target="_blank">
                   HODINKEE
                 </a>
+              </p>
+              <p>
+                Donations:{" "}
+                <AccountLink account="xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh" />
               </p>
             </div>
           </div>
