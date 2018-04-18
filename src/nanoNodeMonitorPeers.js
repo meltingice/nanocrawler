@@ -10,7 +10,8 @@ const nano = new Nano({ url: config.nodeHost });
 const HARDCODED_MONITORS = [
   "https://nano-api.meltingice.net/api.php",
   "https://nano.nifni.net/api.php",
-  "http://node.numberwitch.net/api.php"
+  "http://node.numberwitch.net/api.php",
+  "http://nanode.blizznerds.com/nano/api.php"
 ];
 let KNOWN_MONITORS = [];
 
