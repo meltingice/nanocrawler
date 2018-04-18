@@ -7,6 +7,7 @@ import cors from "cors";
 
 import redisFetch from "./server/redisFetch";
 import dbSize from "./server/dbSize";
+import officialRepresentatives from "./server/officialRepresentatives";
 import config from "../server-config.json";
 
 import startNetworkDataUpdates from "./nanoNodeMonitorPeers";
@@ -137,6 +138,24 @@ app.get("/representatives_online", async (req, res) => {
         _.map(repsOnline, (s, account) => [
           account,
           reps[account] ? nano.convert.fromRaw(reps[account], "mrai") : 0
+        ])
+      );
+    }
+  );
+
+  res.json({ representatives });
+});
+
+app.get("/official_representatives", async (req, res) => {
+  const representatives = await redisFetch(
+    "official_representatives",
+    60,
+    async () => {
+      const reps = (await nano.rpc("representatives")).representatives;
+      return _.fromPairs(
+        officialRepresentatives.map(addr => [
+          addr,
+          nano.convert.fromRaw(reps[addr], "mrai")
         ])
       );
     }

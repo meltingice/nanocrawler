@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import _ from "lodash";
 import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
@@ -16,7 +16,8 @@ class NetworkStatus extends React.Component {
     this.state = {
       blocksByType: {},
       peers: {},
-      representativesOnline: {}
+      representativesOnline: {},
+      officialRepresentatives: {}
     };
 
     this.statTimer = null;
@@ -34,7 +35,8 @@ class NetworkStatus extends React.Component {
     this.setState({
       blocksByType: await this.props.client.blockCountByType(),
       peers: await this.props.client.peers(),
-      representativesOnline: await this.props.client.representativesOnline()
+      representativesOnline: await this.props.client.representativesOnline(),
+      officialRepresentatives: await this.props.client.officialRepresentatives()
     });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
@@ -47,13 +49,46 @@ class NetworkStatus extends React.Component {
     );
   }
 
+  officialWeight() {
+    const { officialRepresentatives } = this.state;
+    return _.sum(
+      _.values(officialRepresentatives).map(amt => parseFloat(amt, 10))
+    );
+  }
+
   amountRepresented() {
-    return <span>{accounting.formatNumber(this.onlineWeight())} NANO</span>;
+    return (
+      <Fragment>{accounting.formatNumber(this.onlineWeight())} NANO</Fragment>
+    );
   }
 
   percentRepresented() {
     return (
-      <span>{(this.onlineWeight() / MAX_SUPPLY * 100.0).toFixed(2)}%</span>
+      <Fragment>
+        {(this.onlineWeight() / MAX_SUPPLY * 100.0).toFixed(2)}%
+      </Fragment>
+    );
+  }
+
+  officialRepresented() {
+    return (
+      <Fragment>{accounting.formatNumber(this.officialWeight())}</Fragment>
+    );
+  }
+
+  officialPercent() {
+    return (
+      <Fragment>
+        {(this.officialWeight() / MAX_SUPPLY * 100).toFixed(2)}%
+      </Fragment>
+    );
+  }
+
+  officialOnlinePercent() {
+    return (
+      <Fragment>
+        {(this.officialWeight() / this.onlineWeight() * 100).toFixed(2)}%
+      </Fragment>
     );
   }
 
@@ -83,6 +118,16 @@ class NetworkStatus extends React.Component {
               </span>{" "}
               {this.percentRepresented()}{" "}
               <span className="text-muted">of the total voting power</span>
+            </h5>
+            <h5>
+              {this.officialRepresented()} NANO{" "}
+              <span className="text-muted">
+                is delegated to official representatives, which is
+              </span>{" "}
+              {this.officialPercent()}{" "}
+              <span className="text-muted">of the total voting power and</span>{" "}
+              {this.officialOnlinePercent()}{" "}
+              <span className="text-muted">of the online voting power</span>
             </h5>
           </div>
         </div>

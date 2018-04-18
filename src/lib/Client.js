@@ -68,6 +68,11 @@ export default class Client {
     return (await resp.json()).representatives;
   }
 
+  async officialRepresentatives() {
+    const resp = await this.fetch("official_representatives");
+    return (await resp.json()).representatives;
+  }
+
   async networkData() {
     const resp = await this.fetch("network_data");
     return (await resp.json()).network;
