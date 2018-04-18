@@ -94,7 +94,7 @@ async function getDataFromPeers(peers) {
 
 function checkForMonitor(peer, url) {
   return new Promise((resolve, reject) => {
-    fetchWithTimeout(url, 2000)
+    fetchWithTimeout(url, 5000)
       .then(resp => {
         if (resp.ok) {
           console.log("OK", url);
