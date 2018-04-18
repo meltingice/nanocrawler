@@ -18,7 +18,7 @@ export default function DiscoveredPeers({ peers, stats }) {
 
   return (
     <div className="table-responsive mt-3">
-      <table className="table">
+      <table className="table table-sm">
         <thead>
           <tr>
             <th>Name</th>
