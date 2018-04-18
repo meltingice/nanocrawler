@@ -2,13 +2,17 @@ import React, { Fragment } from "react";
 import accounting from "accounting";
 import AccountLink from "../AccountLink";
 
-export default function DiscoveredPeers({ peers }) {
-  const sortedPeers = peers.sort((a, b) => {
-    const blocksA = parseInt(a.data.currentBlock, 10);
-    const blocksB = parseInt(b.data.currentBlock, 10);
+const STATUSES = {
+  ok: 1000,
+  warning: 10000
+};
 
-    if (blocksA > blocksB) return -1;
-    if (blocksA < blocksB) return 1;
+export default function DiscoveredPeers({ peers, stats }) {
+  const sortedPeers = peers.sort((a, b) => {
+    if (!a.data.nanoNodeName) return 1;
+    if (!b.data.nanoNodeName) return -1;
+    if (a.data.nanoNodeName < b.data.nanoNodeName) return -1;
+    if (a.data.nanoNodeName > b.data.nanoNodeName) return 1;
     return 0;
   });
 
@@ -26,7 +30,11 @@ export default function DiscoveredPeers({ peers }) {
         </thead>
         <tbody>
           {sortedPeers.map(peer => (
-            <PeerEntry key={peer.peer} peer={peer.data} />
+            <PeerEntry
+              key={peer.peer}
+              peer={peer.data}
+              currentBlock={stats.currentBlocks.max}
+            />
           ))}
         </tbody>
       </table>
@@ -34,14 +42,27 @@ export default function DiscoveredPeers({ peers }) {
   );
 }
 
-const PeerEntry = ({ peer }) => {
+const PeerEntry = ({ peer, currentBlock }) => {
   const name = peer.nanoNodeName ? (
     <Fragment>{peer.nanoNodeName}</Fragment>
   ) : (
     <i className="text-muted">Unknown</i>
   );
+
+  const peerBlock = parseInt(peer.currentBlock);
+  const peerLag = currentBlock - peerBlock;
+
+  let statusClass;
+  if (peerLag < STATUSES.ok) {
+    statusClass = "text-success";
+  } else if (peerLag < STATUSES.warning) {
+    statusClass = "text-warning";
+  } else {
+    statusClass = "text-danger";
+  }
+
   return (
-    <tr>
+    <tr className={statusClass}>
       <td>{name}</td>
       <td>{accounting.formatNumber(peer.currentBlock)}</td>
       <td>{accounting.formatNumber(peer.uncheckedBlocks)}</td>

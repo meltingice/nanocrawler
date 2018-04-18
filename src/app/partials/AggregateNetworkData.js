@@ -162,7 +162,7 @@ class AggregateNetworkData extends React.Component {
               All discovered peers running nanoNodeMonitor, sorted by block
               count.
             </p>
-            <DiscoveredPeers peers={this.state.peers} />
+            <DiscoveredPeers peers={this.state.peers} stats={blockStats} />
           </div>
         </div>
       </Fragment>
