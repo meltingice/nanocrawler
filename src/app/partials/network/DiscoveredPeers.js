@@ -24,6 +24,7 @@ export default function DiscoveredPeers({ peers, stats }) {
             <th>Name</th>
             <th>Checked Blocks</th>
             <th>Unchecked Blocks</th>
+            <th>Voting Weight</th>
             <th>Peers</th>
             <th>Account</th>
           </tr>
@@ -46,7 +47,15 @@ const PeerEntry = ({ peer, currentBlock }) => {
   const { url, data } = peer;
   const rootUrl = url.replace("api.php", "");
   const name = data.nanoNodeName ? (
-    <Fragment>{data.nanoNodeName}</Fragment>
+    data.nanoNodeName
+  ) : (
+    <i className="text-muted">Unknown</i>
+  );
+
+  const votingWeight = data.votingWeight ? (
+    <Fragment>
+      {accounting.formatNumber(parseFloat(data.votingWeight, 10))} NANO
+    </Fragment>
   ) : (
     <i className="text-muted">Unknown</i>
   );
@@ -72,6 +81,7 @@ const PeerEntry = ({ peer, currentBlock }) => {
       </td>
       <td>{accounting.formatNumber(data.currentBlock)}</td>
       <td>{accounting.formatNumber(data.uncheckedBlocks)}</td>
+      <td>{votingWeight}</td>
       <td>{accounting.formatNumber(data.numPeers)}</td>
       <td>
         <AccountLink account={data.nanoNodeAccount} short />
