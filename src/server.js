@@ -9,6 +9,9 @@ import redisFetch from "./server/redisFetch";
 import dbSize from "./server/dbSize";
 import config from "../server-config.json";
 
+import startNetworkDataUpdates from "./nanoNodeMonitorPeers";
+startNetworkDataUpdates();
+
 const nano = new Nano({ url: config.nodeHost });
 
 const app = express();
@@ -158,7 +161,7 @@ app.get("/system_info", async (req, res) => {
   res.json(data);
 });
 
-// nanonode.ninja support
+// nanoNodeMonitor support
 app.get("/api.php", async (req, res) => {
   const data = await redisFetch("api.php", 10, async () => {
     const blockCount = await nano.blocks.count();
@@ -178,6 +181,15 @@ app.get("/api.php", async (req, res) => {
   });
 
   res.json(data);
+});
+
+// nanoNodeMonitor network data
+app.get("/network_data", async (req, res) => {
+  const data = await redisFetch("nanoNodeMonitorPeerData", 10, async () => {
+    return [];
+  });
+
+  res.json({ network: data });
 });
 
 app.listen(config.serverPort || 3001);

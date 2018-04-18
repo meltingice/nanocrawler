@@ -1,0 +1,117 @@
+import _ from "lodash";
+import fetch from "node-fetch";
+import redis from "redis";
+import { Nano } from "nanode";
+import config from "../server-config.json";
+
+const redisClient = redis.createClient(config.redis);
+const nano = new Nano({ url: config.nodeHost });
+
+let KNOWN_MONITORS = [];
+
+function fetchWithTimeout(url, duration) {
+  let didTimeOut = false;
+
+  return new Promise(function(resolve, reject) {
+    const timeout = setTimeout(function() {
+      didTimeOut = true;
+      reject(new Error("Request timed out"));
+    }, duration);
+
+    fetch(url)
+      .then(function(response) {
+        // Clear the timeout as cleanup
+        clearTimeout(timeout);
+        if (!didTimeOut) {
+          // console.log("fetch good! ", url);
+          resolve(response);
+        }
+      })
+      .catch(function(err) {
+        // console.log("fetch failed! ", url);
+
+        // Rejection already happened with setTimeout
+        if (didTimeOut) return;
+        // Reject with error
+        reject(err);
+      });
+  });
+}
+
+async function updateKnownMonitors() {
+  console.log("Updating our list of known nanoNodeMonitors");
+
+  const peers = _.keys((await nano.rpc("peers")).peers);
+  const data = await getDataFromPeers(peers);
+
+  KNOWN_MONITORS = data.map(m => m.peer);
+}
+
+async function checkKnownMonitors() {
+  console.log("Checking known nanoNodeMonitors");
+
+  const data = await getDataFromPeers(KNOWN_MONITORS);
+  redisClient.set(
+    "nano-control-panel/nanoNodeMonitorPeerData",
+    JSON.stringify(data)
+  );
+
+  setTimeout(checkKnownMonitors, 10000);
+}
+
+async function getDataFromPeers(peers) {
+  return _.compact(
+    await Promise.all(
+      peers.map(peer => {
+        return new Promise((resolve, reject) => {
+          const peerIp = peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1];
+          const apiUrl = `http://${peerIp}/api.php`;
+
+          checkForMonitor(peer, apiUrl)
+            .then(data => resolve(data))
+            .catch(resolve);
+        });
+      })
+    )
+  );
+}
+
+function checkForMonitor(peer, url) {
+  return new Promise((resolve, reject) => {
+    fetchWithTimeout(url, 2000)
+      .then(resp => {
+        if (resp.ok) {
+          console.log("OK", url);
+          return resp
+            .json()
+            .then(data => {
+              if (data.nanoNodeAccount) {
+                resolve({ peer, url, data });
+              } else {
+                reject();
+              }
+            })
+            .catch(e => {
+              console.log("FAIL", "JSON not parseable");
+              reject();
+            });
+        }
+
+        console.log("FAIL", `Received ${resp.status}`);
+        reject();
+      })
+      .catch(e => {
+        console.log("FAIL", e.message);
+        reject();
+      });
+  });
+}
+
+export default async function startNetworkDataUpdates() {
+  await updateKnownMonitors();
+
+  // Update known monitors every 5 minutes.
+  setInterval(updateKnownMonitors, 300000);
+
+  checkKnownMonitors();
+}

@@ -12,6 +12,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.21.0",
     "nanode": "^2.2.1",
+    "node-fetch": "^2.1.2",
     "raiblocks": "^0.4.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
