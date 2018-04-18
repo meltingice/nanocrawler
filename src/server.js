@@ -167,6 +167,10 @@ app.get("/api.php", async (req, res) => {
     const blockCount = await nano.blocks.count();
     const peerCount = _.keys((await nano.rpc("peers")).peers).length;
     const usedMem = Math.round((os.totalmem() - os.freemem()) / 1024 / 1024);
+    const weight = parseFloat(
+      nano.convert.fromRaw(await nano.accounts.weight(config.account), "mrai"),
+      10
+    );
 
     return {
       nanoNodeName: config.nodeName,
@@ -174,6 +178,7 @@ app.get("/api.php", async (req, res) => {
       version: (await nano.rpc("version")).node_vendor,
       currentBlock: blockCount.count,
       uncheckedBlocks: blockCount.unchecked,
+      votingWeight: weight,
       numPeers: peerCount,
       usedMem: usedMem,
       totalMem: Math.round(os.totalmem() / 1024 / 1024)
