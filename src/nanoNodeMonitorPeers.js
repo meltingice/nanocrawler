@@ -109,7 +109,7 @@ function checkForMonitor(peer, url) {
               }
             })
             .catch(e => {
-              console.log("FAIL", "JSON not parseable");
+              console.log("FAIL", "JSON not parseable", url);
               reject();
             });
         }
