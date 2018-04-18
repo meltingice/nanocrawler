@@ -32,7 +32,7 @@ export default function DiscoveredPeers({ peers, stats }) {
           {sortedPeers.map(peer => (
             <PeerEntry
               key={peer.peer}
-              peer={peer.data}
+              peer={peer}
               currentBlock={stats.currentBlocks.max}
             />
           ))}
@@ -43,13 +43,15 @@ export default function DiscoveredPeers({ peers, stats }) {
 }
 
 const PeerEntry = ({ peer, currentBlock }) => {
-  const name = peer.nanoNodeName ? (
-    <Fragment>{peer.nanoNodeName}</Fragment>
+  const { url, data } = peer;
+  const rootUrl = url.replace("api.php", "");
+  const name = data.nanoNodeName ? (
+    <Fragment>{data.nanoNodeName}</Fragment>
   ) : (
     <i className="text-muted">Unknown</i>
   );
 
-  const peerBlock = parseInt(peer.currentBlock, 10);
+  const peerBlock = parseInt(data.currentBlock, 10);
   const peerLag = currentBlock - peerBlock;
 
   let statusClass;
@@ -63,12 +65,16 @@ const PeerEntry = ({ peer, currentBlock }) => {
 
   return (
     <tr className={statusClass}>
-      <td>{name}</td>
-      <td>{accounting.formatNumber(peer.currentBlock)}</td>
-      <td>{accounting.formatNumber(peer.uncheckedBlocks)}</td>
-      <td>{accounting.formatNumber(peer.numPeers)}</td>
       <td>
-        <AccountLink account={peer.nanoNodeAccount} short />
+        <a href={rootUrl} className={statusClass} target="_blank">
+          {name}
+        </a>
+      </td>
+      <td>{accounting.formatNumber(data.currentBlock)}</td>
+      <td>{accounting.formatNumber(data.uncheckedBlocks)}</td>
+      <td>{accounting.formatNumber(data.numPeers)}</td>
+      <td>
+        <AccountLink account={data.nanoNodeAccount} short />
       </td>
     </tr>
   );
