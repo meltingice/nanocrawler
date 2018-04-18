@@ -8,6 +8,7 @@ const redisClient = redis.createClient(config.redis);
 const nano = new Nano({ url: config.nodeHost });
 
 const HARDCODED_MONITORS = [
+  "https://nano.meltingice.net/api.php",
   "https://nano.nifni.net/api.php",
   "http://node.numberwitch.net/api.php"
 ];
