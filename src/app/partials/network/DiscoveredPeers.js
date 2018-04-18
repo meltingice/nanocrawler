@@ -26,6 +26,7 @@ export default function DiscoveredPeers({ peers, stats }) {
             <th>Unchecked Blocks</th>
             <th>Voting Weight</th>
             <th>Peers</th>
+            <th>Version</th>
             <th>Account</th>
           </tr>
         </thead>
@@ -46,19 +47,6 @@ export default function DiscoveredPeers({ peers, stats }) {
 const PeerEntry = ({ peer, currentBlock }) => {
   const { url, data } = peer;
   const rootUrl = url.replace("api.php", "");
-  const name = data.nanoNodeName ? (
-    data.nanoNodeName
-  ) : (
-    <i className="text-muted">Unknown</i>
-  );
-
-  const votingWeight = data.votingWeight ? (
-    <Fragment>
-      {accounting.formatNumber(parseFloat(data.votingWeight, 10))} NANO
-    </Fragment>
-  ) : (
-    <i className="text-muted">Unknown</i>
-  );
 
   const peerBlock = parseInt(data.currentBlock, 10);
   const peerLag = currentBlock - peerBlock;
@@ -76,16 +64,37 @@ const PeerEntry = ({ peer, currentBlock }) => {
     <tr className={statusClass}>
       <td>
         <a href={rootUrl} className={statusClass} target="_blank">
-          {name}
+          <OptionalField value={data.nanoNodeName} />
         </a>
       </td>
       <td>{accounting.formatNumber(data.currentBlock)}</td>
       <td>{accounting.formatNumber(data.uncheckedBlocks)}</td>
-      <td>{votingWeight}</td>
-      <td>{accounting.formatNumber(data.numPeers)}</td>
+      <td>
+        <OptionalField value={data.votingWeight}>
+          {value => (
+            <Fragment>
+              {accounting.formatNumber(parseFloat(data.votingWeight, 10))} NANO
+            </Fragment>
+          )}
+        </OptionalField>
+      </td>
+      <td>
+        <OptionalField value={data.numPeers}>
+          {value => accounting.formatNumber(value)}
+        </OptionalField>
+      </td>
+      <td>
+        <OptionalField value={data.version} />
+      </td>
       <td>
         <AccountLink account={data.nanoNodeAccount} short />
       </td>
     </tr>
   );
+};
+
+const OptionalField = ({ value, children }) => {
+  if (!value) return <i className="text-muted">Unknown</i>;
+  if (!children) return <Fragment>{value}</Fragment>;
+  return children(value);
 };
