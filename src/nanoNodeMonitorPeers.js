@@ -7,6 +7,7 @@ import config from "../server-config.json";
 const redisClient = redis.createClient(config.redis);
 const nano = new Nano({ url: config.nodeHost });
 
+const HARDCODED_MONITORS = ["https://nano.nifni.net/api.php"];
 let KNOWN_MONITORS = [];
 
 function fetchWithTimeout(url, duration) {
@@ -45,7 +46,7 @@ async function updateKnownMonitors() {
   const data = await getDataFromPeers(peers);
 
   KNOWN_MONITORS = _.uniqBy(
-    data.map(m => m.peer),
+    data.map(m => m.peer).filter(peer => !HARDCODED_MONITORS.includes(peer)),
     peer => peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1]
   );
 }
@@ -65,16 +66,24 @@ async function checkKnownMonitors() {
 async function getDataFromPeers(peers) {
   return _.compact(
     await Promise.all(
-      peers.map(peer => {
+      HARDCODED_MONITORS.map(apiUrl => {
         return new Promise((resolve, reject) => {
-          const peerIp = peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1];
-          const apiUrl = `http://${peerIp}/api.php`;
-
-          checkForMonitor(peer, apiUrl)
+          checkForMonitor(apiUrl, apiUrl)
             .then(data => resolve(data))
             .catch(resolve);
         });
-      })
+      }).concat(
+        peers.map(peer => {
+          return new Promise((resolve, reject) => {
+            const peerIp = peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1];
+            const apiUrl = `http://${peerIp}/api.php`;
+
+            checkForMonitor(peer, apiUrl)
+              .then(data => resolve(data))
+              .catch(resolve);
+          });
+        })
+      )
     )
   );
 }
