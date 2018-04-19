@@ -14,7 +14,7 @@ export default class DiscoveredPeers extends React.PureComponent {
 
     this.state = {
       repsOnly: false,
-      sortVersion: null
+      sortVersion: ""
     };
   }
 
@@ -65,7 +65,7 @@ export default class DiscoveredPeers extends React.PureComponent {
               value={this.state.sortVersion}
               onChange={e => this.setState({ sortVersion: e.target.value })}
             >
-              <option value="">Sort by version</option>
+              <option value="">Filter by version</option>
               {this.versions().map(version => (
                 <option key={version} value={version}>
                   {version}
