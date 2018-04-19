@@ -8,6 +8,7 @@ import cors from "cors";
 import redisFetch from "./server/redisFetch";
 import dbSize from "./server/dbSize";
 import officialRepresentatives from "./server/officialRepresentatives";
+import raiNodeInfo from "./server/raiNodeInfo";
 import config from "../server-config.json";
 
 import startNetworkDataUpdates from "./nanoNodeMonitorPeers";
@@ -166,6 +167,7 @@ app.get("/official_representatives", async (req, res) => {
 
 app.get("/system_info", async (req, res) => {
   const data = await redisFetch("systemInfo", 10, async () => {
+    const stats = await raiNodeInfo();
     return {
       uptime: os.uptime(),
       loadAvg: os.loadavg(),
@@ -173,7 +175,12 @@ app.get("/system_info", async (req, res) => {
         free: os.freemem(),
         total: os.totalmem()
       },
-      dbSize: await dbSize()
+      dbSize: await dbSize(),
+      raiStats: {
+        cpu: stats.cpu,
+        memory: stats.memory,
+        elapsed: stats.elapsed
+      }
     };
   });
 
