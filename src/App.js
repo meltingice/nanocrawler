@@ -35,7 +35,7 @@ class App extends Component {
         <hr />
 
         <div className="row mr-0 align-items-center">
-          <div className="col">
+          <div className="col-md">
             <div className="py-2 px-4">
               <p className="mb-0">
                 Created by Ryan LeFevre, Sr. Software Engineer at{" "}
