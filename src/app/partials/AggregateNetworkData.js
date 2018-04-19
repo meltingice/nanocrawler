@@ -171,7 +171,7 @@ class AggregateNetworkData extends React.Component {
             </p>
           </div>
           <div className="col-auto">
-            <h4 className="text-muted">
+            <h4 className="text-muted mb-0">
               {this.state.peers.length} monitors discovered
             </h4>
           </div>

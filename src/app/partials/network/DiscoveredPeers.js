@@ -7,41 +7,90 @@ const STATUSES = {
   warning: 10000
 };
 
-export default function DiscoveredPeers({ peers, stats }) {
-  const sortedPeers = peers.sort((a, b) => {
-    if (!a.data.nanoNodeName) return 1;
-    if (!b.data.nanoNodeName) return -1;
-    if (a.data.nanoNodeName < b.data.nanoNodeName) return -1;
-    if (a.data.nanoNodeName > b.data.nanoNodeName) return 1;
-    return 0;
-  });
+export default class DiscoveredPeers extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div className="table-responsive mt-3">
-      <table className="table table-sm">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Checked Blocks</th>
-            <th>Unchecked Blocks</th>
-            <th>Voting Weight</th>
-            <th>Peers</th>
-            <th>Version</th>
-            <th>Account</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sortedPeers.map(peer => (
-            <PeerEntry
-              key={peer.peer}
-              peer={peer}
-              currentBlock={stats.currentBlocks.max}
-            />
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    this.state = {
+      repsOnly: false
+    };
+  }
+
+  filteredPeers() {
+    const { peers } = this.props;
+    const { repsOnly } = this.state;
+
+    if (!repsOnly) return peers;
+
+    return peers.filter(peer => {
+      if (repsOnly) {
+        return peer.data.votingWeight && peer.data.votingWeight >= 256;
+      }
+
+      return true;
+    });
+  }
+
+  sortedPeers() {
+    return this.filteredPeers().sort((a, b) => {
+      if (!a.data.nanoNodeName) return 1;
+      if (!b.data.nanoNodeName) return -1;
+      if (a.data.nanoNodeName < b.data.nanoNodeName) return -1;
+      if (a.data.nanoNodeName > b.data.nanoNodeName) return 1;
+      return 0;
+    });
+  }
+
+  render() {
+    const { peers, stats } = this.props;
+    const sortedPeers = this.sortedPeers();
+
+    return (
+      <Fragment>
+        <div className="row">
+          <div className="col">
+            <div className="form-group form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                checked={this.state.repsOnly}
+                id="PeerListRepsOnly"
+                onChange={e => this.setState({ repsOnly: e.target.checked })}
+              />
+              <label className="form-check-label" htmlFor="PeerListRepsOnly">
+                Representatives only
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="table-responsive">
+          <table className="table table-sm">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Checked Blocks</th>
+                <th>Unchecked Blocks</th>
+                <th>Voting Weight</th>
+                <th>Peers</th>
+                <th>Version</th>
+                <th>Account</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedPeers.map(peer => (
+                <PeerEntry
+                  key={peer.peer}
+                  peer={peer}
+                  currentBlock={stats.currentBlocks.max}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Fragment>
+    );
+  }
 }
 
 const PeerEntry = ({ peer, currentBlock }) => {
