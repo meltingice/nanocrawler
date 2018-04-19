@@ -22,7 +22,7 @@ function fetchWithTimeout(url, duration) {
   return new Promise(function(resolve, reject) {
     const timeout = setTimeout(function() {
       didTimeOut = true;
-      reject(new Error("Request timed out"));
+      reject(new Error(`Request timed out: ${url}`));
     }, duration);
 
     fetch(url)
