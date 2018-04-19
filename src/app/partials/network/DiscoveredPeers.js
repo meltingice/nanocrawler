@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import _ from "lodash";
 import accounting from "accounting";
 import AccountLink from "../AccountLink";
 
@@ -12,22 +13,26 @@ export default class DiscoveredPeers extends React.PureComponent {
     super(props);
 
     this.state = {
-      repsOnly: false
+      repsOnly: false,
+      sortVersion: null
     };
   }
 
   filteredPeers() {
     const { peers } = this.props;
-    const { repsOnly } = this.state;
-
-    if (!repsOnly) return peers;
+    const { repsOnly, sortVersion } = this.state;
 
     return peers.filter(peer => {
+      let status = true;
       if (repsOnly) {
-        return peer.data.votingWeight && peer.data.votingWeight >= 256;
+        status = peer.data.votingWeight && peer.data.votingWeight >= 256;
       }
 
-      return true;
+      if (sortVersion) {
+        status = status & (peer.data.version === sortVersion);
+      }
+
+      return status;
     });
   }
 
@@ -41,15 +46,35 @@ export default class DiscoveredPeers extends React.PureComponent {
     });
   }
 
+  versions() {
+    return _.uniq(
+      this.props.peers.map(peer => peer.data.version || "Unknown").sort()
+    );
+  }
+
   render() {
     const { peers, stats } = this.props;
     const sortedPeers = this.sortedPeers();
 
     return (
       <Fragment>
-        <div className="row">
-          <div className="col">
-            <div className="form-group form-check">
+        <div className="form-row align-items-center mt-3 mt-sm-0">
+          <div className="col-auto">
+            <select
+              className="form-control"
+              value={this.state.sortVersion}
+              onChange={e => this.setState({ sortVersion: e.target.value })}
+            >
+              <option>Sort by version</option>
+              {this.versions().map(version => (
+                <option key={version} value={version}>
+                  {version}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-auto">
+            <div className="form-check">
               <input
                 type="checkbox"
                 className="form-check-input"
@@ -64,7 +89,7 @@ export default class DiscoveredPeers extends React.PureComponent {
           </div>
         </div>
 
-        <div className="table-responsive">
+        <div className="table-responsive mt-3">
           <table className="table table-sm">
             <thead>
               <tr>

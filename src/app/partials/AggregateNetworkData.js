@@ -156,7 +156,7 @@ class AggregateNetworkData extends React.Component {
         </div>
 
         <div className="row mt-5 align-items-center">
-          <div className="col">
+          <div className="col-sm">
             <h3 className="mb-0">Discovered Peers</h3>
             <p className="text-muted mb-0">
               All discovered peers running nanoNodeMonitor, sorted by name.
