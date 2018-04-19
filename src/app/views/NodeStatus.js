@@ -107,7 +107,7 @@ class NodeStatus extends React.Component {
     const { systemInfo } = this.state;
     if (!systemInfo.raiStats) return "...";
     return moment()
-      .subtract(systemInfo.raiStats.elapsed || 0, "seconds")
+      .subtract((systemInfo.raiStats.elapsed || 0) / 1000, "seconds")
       .fromNow(true);
   }
 
