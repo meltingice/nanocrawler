@@ -53,7 +53,7 @@ export default class DiscoveredPeers extends React.PureComponent {
   }
 
   render() {
-    const { peers, stats } = this.props;
+    const { stats } = this.props;
     const sortedPeers = this.sortedPeers();
 
     return (

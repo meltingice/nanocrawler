@@ -4,6 +4,8 @@ import moment from "moment";
 
 import injectClient from "../../lib/ClientComponent";
 
+import AccountLink from "../partials/AccountLink";
+
 class NodeStatus extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +50,13 @@ class NodeStatus extends React.Component {
       <div className="p-4">
         <div className="row align-items-center">
           <div className="col-sm">
-            <h1>Node Status</h1>
+            <h1 className="mb-0">Node Status</h1>
+            <p className="text-muted" style={{ wordWrap: "break-word" }}>
+              <AccountLink
+                account={this.props.account}
+                className="text-muted"
+              />
+            </p>
           </div>
           <div className="col col-auto">
             <h3>
