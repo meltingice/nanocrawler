@@ -9,6 +9,7 @@ import redisFetch from "./server/redisFetch";
 import dbSize from "./server/dbSize";
 import officialRepresentatives from "./server/officialRepresentatives";
 import raiNodeInfo from "./server/raiNodeInfo";
+import { accountIsValid } from "./server/util";
 import config from "../server-config.json";
 
 import startNetworkDataUpdates from "./nanoNodeMonitorPeers";
@@ -87,6 +88,10 @@ app.get("/delegators_count", async (req, res) => {
 });
 
 app.get("/balance/:account", async (req, res) => {
+  if (!accountIsValid(req.params.account)) {
+    res.status(400).send({ error: "Invalid account" });
+  }
+
   const balances = await redisFetch(
     `balance/${req.params.account}`,
     60,
@@ -105,6 +110,10 @@ app.get("/balance/:account", async (req, res) => {
 });
 
 app.get("/history/:account", async (req, res) => {
+  if (!accountIsValid(req.params.account)) {
+    res.status(400).send({ error: "Invalid account" });
+  }
+
   const history = await redisFetch(
     `history/${req.params.account}`,
     60,
