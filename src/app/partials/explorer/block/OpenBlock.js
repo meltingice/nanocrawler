@@ -21,14 +21,19 @@ export default function OpenBlock({ block }) {
         <small>The account that this block created</small>
       </p>
 
-      <h4>
+      <h4 className="mb-0">
         Amount Sent{" "}
         <small className="text-muted">
           {accounting.formatNumber(block.amount, 6)} NANO
         </small>
       </h4>
+      <p>
+        <small>
+          The amount of NANO sent to open this account, which can be 0
+        </small>
+      </p>
 
-      <h4>
+      <h4 className="mb-0">
         Opened By{" "}
         <small>
           <AccountLink
@@ -37,8 +42,11 @@ export default function OpenBlock({ block }) {
           />
         </small>
       </h4>
+      <p>
+        <small>The account whose transaction opened this account</small>
+      </p>
 
-      <h4>
+      <h4 className="mb-0">
         Representative{" "}
         <small>
           <AccountLink
@@ -47,8 +55,11 @@ export default function OpenBlock({ block }) {
           />
         </small>
       </h4>
+      <p>
+        <small>The representative assigned to this account</small>
+      </p>
 
-      <h4>
+      <h4 className="mb-0">
         Source{" "}
         <small>
           <BlockLink
@@ -57,6 +68,9 @@ export default function OpenBlock({ block }) {
           />
         </small>
       </h4>
+      <p>
+        <small>The corresponding send block for this transaction</small>
+      </p>
 
       <h5>
         Proof of Work{" "}
