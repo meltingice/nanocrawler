@@ -1,11 +1,11 @@
-import React from 'react'
-import ConfigContext from './ConfigContext'
+import React from "react";
+import ConfigContext from "./ConfigContext";
 
 export default class ConfigProvider extends React.Component {
-  state = { config: null }
+  state = { config: null };
 
   async componentWillMount() {
-    const resp = await fetch('/client-config.json');
+    const resp = await fetch("/client-config.json");
     const config = await resp.json();
     this.setState({ config });
   }
@@ -17,6 +17,6 @@ export default class ConfigProvider extends React.Component {
       <ConfigContext.Provider value={config}>
         {this.props.children}
       </ConfigContext.Provider>
-    )
+    );
   }
 }
