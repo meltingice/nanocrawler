@@ -5,7 +5,6 @@ import "./Content.css";
 
 import NodeStatus from "./views/NodeStatus";
 import NetworkStatus from "./views/NetworkStatus";
-import Delegators from "./views/Delegators";
 
 import Explorer from "./views/Explorer";
 import ExplorerAccount from "./views/explorer/Account";
@@ -27,11 +26,6 @@ export default ({ account }) => {
       <Route exact path="/explorer" render={props => <Explorer {...props} />} />
       <Route path="/explorer/account/:account" component={ExplorerAccount} />
       <Route path="/explorer/block/:block" component={ExplorerBlock} />
-      <Route
-        exact
-        path="/delegators"
-        render={props => <Delegators {...props} account={account} />}
-      />
     </div>
   );
 };

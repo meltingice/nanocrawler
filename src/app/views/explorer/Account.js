@@ -133,7 +133,8 @@ class Account extends React.Component {
         <hr />
 
         <div className="mt-5">
-          <h2>Transactions</h2>
+          <h2 className="mb-0">Transactions</h2>
+          <p className="text-muted">Showing up to the last 20 transactions</p>
           <TransactionHistory history={history} />
         </div>
 

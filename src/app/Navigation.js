@@ -41,16 +41,6 @@ export default () => {
               Explorer
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              to="/delegators"
-              className="nav-link"
-              activeClassName="active"
-            >
-              Delegators
-            </NavLink>
-          </li>
         </ul>
       </div>
 
