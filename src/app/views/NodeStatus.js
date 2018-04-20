@@ -35,7 +35,7 @@ class NodeStatus extends React.Component {
   async updateStats() {
     this.setState({
       blockCount: await this.props.client.blockCount(),
-      weight: await this.props.client.weight(),
+      weight: await this.props.client.weight(this.props.account),
       systemInfo: await this.props.client.systemInfo(),
       peerCount: await this.props.client.peerCount()
     });

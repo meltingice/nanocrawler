@@ -28,13 +28,21 @@ app.get("/account", async (req, res) => {
   res.json({ account: config.account });
 });
 
-app.get("/weight", async (req, res) => {
-  const weight = await redisFetch("weight", 300, async () => {
-    return nano.convert.fromRaw(
-      await nano.accounts.weight(config.account),
-      "mrai"
-    );
-  });
+app.get("/weight/:account", async (req, res) => {
+  if (!accountIsValid(req.params.account)) {
+    res.status(400).send({ error: "Invalid account" });
+  }
+
+  const weight = await redisFetch(
+    `weight/${req.params.account}`,
+    600,
+    async () => {
+      return nano.convert.fromRaw(
+        await nano.accounts.weight(req.params.account),
+        "mrai"
+      );
+    }
+  );
 
   res.json({ weight });
 });
@@ -79,12 +87,27 @@ app.get("/version", async (req, res) => {
   res.json(version);
 });
 
-app.get("/delegators_count", async (req, res) => {
-  const delegatorsCount = await redisFetch("delegatorsCount", 300, async () => {
-    return await nano.rpc("delegators_count", { account: config.account });
-  });
+app.get("/delegators/:account", async (req, res) => {
+  if (!accountIsValid(req.params.account)) {
+    res.status(400).send({ error: "Invalid account" });
+  }
 
-  res.json(delegatorsCount);
+  const delegators = await redisFetch(
+    `delegators/${req.params.account}`,
+    3600,
+    async () => {
+      const resp = await nano.rpc("delegators", {
+        account: req.params.account
+      });
+      return _.fromPairs(
+        _.map(resp.delegators, (balance, account) => {
+          return [account, nano.convert.fromRaw(balance, "mrai")];
+        })
+      );
+    }
+  );
+
+  res.json(delegators);
 });
 
 app.get("/balance/:account", async (req, res) => {
@@ -153,19 +176,6 @@ app.get("/block/:hash", async (req, res) => {
   );
 
   res.json(block);
-});
-
-app.get("/delegators", async (req, res) => {
-  const delegators = await redisFetch("delegators", 300, async () => {
-    const resp = await nano.rpc("delegators", { account: config.account });
-    return _.fromPairs(
-      _.map(resp.delegators, (balance, account) => {
-        return [account, nano.convert.fromRaw(balance, "mrai")];
-      })
-    );
-  });
-
-  res.json(delegators);
 });
 
 app.get("/representatives_online", async (req, res) => {

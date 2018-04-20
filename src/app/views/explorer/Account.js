@@ -1,9 +1,11 @@
 import React from "react";
+import _ from "lodash";
 import { Redirect } from "react-router-dom";
 import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
 import TransactionHistory from "../../partials/TransactionHistory";
+import DelegatorsTable from "../../partials/delegators/DelegatorsTable";
 import AccountQR from "../../partials/AccountQR";
 
 class Account extends React.Component {
@@ -13,15 +15,16 @@ class Account extends React.Component {
     this.state = {
       balance: 0,
       pending: 0,
-      history: []
+      history: [],
+      delegators: {},
+      weight: 0
     };
 
     this.balanceTimeout = this.historyTimeout = null;
   }
 
-  componentWillMount() {
-    this.fetchBalance();
-    this.fetchHistory();
+  componentDidMount() {
+    this.fetchData();
   }
 
   componentWillUnmount() {
@@ -32,9 +35,14 @@ class Account extends React.Component {
     if (prevProps.match.params.account !== this.props.match.params.account) {
       this.clearTimers();
 
-      this.fetchBalance();
-      this.fetchHistory();
+      this.fetchData();
     }
+  }
+
+  fetchData() {
+    this.fetchBalance();
+    this.fetchHistory();
+    this.fetchDelegators();
   }
 
   clearTimers() {
@@ -58,14 +66,37 @@ class Account extends React.Component {
     this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
   }
 
+  async fetchDelegators() {
+    const { match } = this.props;
+
+    let delegators = {};
+    const weight = await this.props.client.weight(match.params.account);
+    if (weight >= 256) {
+      delegators = await this.props.client.delegators(match.params.account);
+    }
+
+    this.setState({ weight, delegators });
+  }
+
+  async fetchWeight() {
+    const { match } = this.props;
+    const weight = await this.props.client.weight(match.params.account);
+    this.setState({ weight });
+  }
+
   accountIsValid() {
     const { match } = this.props;
     return /^(xrb_|nano_)/.test(match.params.account);
   }
 
+  isRepresentative() {
+    const { weight } = this.state;
+    return weight >= 256;
+  }
+
   render() {
     const { match } = this.props;
-    const { balance, pending, history } = this.state;
+    const { balance, pending, history, delegators, weight } = this.state;
 
     if (!this.accountIsValid()) {
       return this.redirect();
@@ -73,9 +104,11 @@ class Account extends React.Component {
 
     return (
       <div className="p-4">
-        <div className="row align-items-center">
+        <div className="row align-items-center ">
           <div className="col">
-            <h1 className="mb-0">Account</h1>
+            <h1 className="mb-0">
+              {this.isRepresentative() ? "Representative " : ""}Account
+            </h1>
             <p className="text-muted" style={{ wordWrap: "break-word" }}>
               {match.params.account}
             </p>
@@ -99,8 +132,37 @@ class Account extends React.Component {
 
         <hr />
 
-        <h2>Transactions</h2>
-        <TransactionHistory history={history} />
+        <div className="mt-5">
+          <h2>Transactions</h2>
+          <TransactionHistory history={history} />
+        </div>
+
+        {this.getDelegators()}
+      </div>
+    );
+  }
+
+  getDelegators() {
+    const { delegators, weight } = this.state;
+    if (!this.isRepresentative()) return;
+
+    return (
+      <div className="mt-5">
+        <div className="row align-items-center">
+          <div className="col">
+            <h2 className="mb-0">Delegators</h2>
+            <p className="text-muted">
+              {_.keys(delegators).length} delegators, sorted by weight
+            </p>
+          </div>
+          <div className="col-auto">
+            <h3 className="mb-0">
+              {accounting.formatNumber(weight)}{" "}
+              <span className="text-muted">NANO weight</span>
+            </h3>
+          </div>
+        </div>
+        <DelegatorsTable delegators={delegators} />
       </div>
     );
   }

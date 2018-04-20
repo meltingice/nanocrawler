@@ -8,9 +8,9 @@ export default class Client {
     return (await resp.json()).account;
   }
 
-  async weight() {
-    const resp = await this.fetch("weight");
-    return (await resp.json()).weight;
+  async weight(account) {
+    const resp = await this.fetch(`weight/${account}`);
+    return parseFloat((await resp.json()).weight, 10);
   }
 
   async blockCount() {
@@ -38,11 +38,6 @@ export default class Client {
     return await resp.json();
   }
 
-  async delegatorsCount() {
-    const resp = await this.fetch("delegators_count");
-    return (await resp.json()).count;
-  }
-
   async systemInfo() {
     const resp = await this.fetch("system_info");
     return await resp.json();
@@ -63,8 +58,8 @@ export default class Client {
     return await resp.json();
   }
 
-  async delegators() {
-    const resp = await this.fetch("delegators");
+  async delegators(account) {
+    const resp = await this.fetch(`delegators/${account}`);
     return await resp.json();
   }
 
