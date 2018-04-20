@@ -86,29 +86,39 @@ app.get("/delegators_count", async (req, res) => {
   res.json(delegatorsCount);
 });
 
-app.get("/balance", async (req, res) => {
-  const balances = await redisFetch("balance", 300, async () => {
-    const resp = await nano.rpc("account_balance", { account: config.account });
-    return {
-      balance: nano.convert.fromRaw(resp.balance, "mrai"),
-      pending: nano.convert.fromRaw(resp.pending, "mrai")
-    };
-  });
+app.get("/balance/:account", async (req, res) => {
+  const balances = await redisFetch(
+    `balance/${req.params.account}`,
+    60,
+    async () => {
+      const resp = await nano.rpc("account_balance", {
+        account: req.params.account
+      });
+      return {
+        balance: nano.convert.fromRaw(resp.balance, "mrai"),
+        pending: nano.convert.fromRaw(resp.pending, "mrai")
+      };
+    }
+  );
 
   res.json(balances);
 });
 
-app.get("/history", async (req, res) => {
-  const history = await redisFetch("history", 60, async () => {
-    const resp = await nano.accounts.history(config.account);
-    return resp.map(block => {
-      if (block.amount) {
-        block.amount = nano.convert.fromRaw(block.amount, "mrai");
-      }
+app.get("/history/:account", async (req, res) => {
+  const history = await redisFetch(
+    `history/${req.params.account}`,
+    60,
+    async () => {
+      const resp = await nano.accounts.history(req.params.account);
+      return resp.map(block => {
+        if (block.amount) {
+          block.amount = nano.convert.fromRaw(block.amount, "mrai");
+        }
 
-      return block;
-    });
-  });
+        return block;
+      });
+    }
+  );
 
   res.json(history);
 });
