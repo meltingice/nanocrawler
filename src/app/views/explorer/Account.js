@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
@@ -50,9 +51,18 @@ class Account extends React.Component {
     this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
   }
 
+  accountIsValid() {
+    const { match } = this.props;
+    return /^(xrb_|nano_)/.test(match.params.account);
+  }
+
   render() {
     const { match } = this.props;
     const { balance, pending, history } = this.state;
+
+    if (!this.accountIsValid()) {
+      return this.redirect();
+    }
 
     return (
       <div className="p-4">
@@ -80,6 +90,10 @@ class Account extends React.Component {
         <TransactionHistory history={history} />
       </div>
     );
+  }
+
+  redirect() {
+    return <Redirect to="/explorer" />;
   }
 }
 
