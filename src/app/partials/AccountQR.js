@@ -11,7 +11,7 @@ export default class AccountQR extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.account != this.props.account) {
+    if (prevProps.account !== this.props.account) {
       this.generateDataUrl();
     }
   }

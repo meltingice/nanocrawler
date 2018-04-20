@@ -118,7 +118,12 @@ app.get("/history/:account", async (req, res) => {
     `history/${req.params.account}`,
     60,
     async () => {
-      const resp = await nano.accounts.history(req.params.account, 20);
+      // const resp = await nano.accounts.history(req.params.account, 20);
+      const resp = (await nano.rpc("account_history", {
+        account: req.params.account,
+        count: 20,
+        raw: "true"
+      })).history;
       return resp.map(block => {
         if (block.amount) {
           block.amount = nano.convert.fromRaw(block.amount, "mrai");

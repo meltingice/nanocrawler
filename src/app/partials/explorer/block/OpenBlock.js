@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import accounting from "accounting";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";

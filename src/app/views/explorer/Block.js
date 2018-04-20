@@ -1,6 +1,5 @@
 import React from "react";
 import _ from "lodash";
-import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
 

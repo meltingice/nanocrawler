@@ -2,6 +2,8 @@ import React from "react";
 
 import HistorySendBlock from "./history/HistorySendBlock";
 import HistoryReceiveBlock from "./history/HistoryReceiveBlock";
+import HistoryOpenBlock from "./history/HistoryOpenBlock";
+import HistoryChangeBlock from "./history/HistoryChangeBlock";
 import HistoryStateBlock from "./history/HistoryStateBlock";
 
 export default function TransactionHistory({ history }) {
@@ -11,6 +13,10 @@ export default function TransactionHistory({ history }) {
         return <HistorySendBlock key={block.hash} block={block} />;
       case "receive":
         return <HistoryReceiveBlock key={block.hash} block={block} />;
+      case "open":
+        return <HistoryOpenBlock key={block.hash} block={block} />;
+      case "change":
+        return <HistoryChangeBlock key={block.hash} block={block} />;
       case "state":
         return <HistoryStateBlock key={block.hash} block={block} />;
       default:
