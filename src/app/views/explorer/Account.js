@@ -4,6 +4,7 @@ import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
 import TransactionHistory from "../../partials/TransactionHistory";
+import AccountQR from "../../partials/AccountQR";
 
 class Account extends React.Component {
   constructor(props) {
@@ -24,15 +25,21 @@ class Account extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.balanceTimeout) clearTimeout(this.balanceTimeout);
-    if (this.historyTimeout) clearTimeout(this.historyTimeout);
+    this.clearTimers();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.account !== this.props.match.params.account) {
+      this.clearTimers();
+
       this.fetchBalance();
       this.fetchHistory();
     }
+  }
+
+  clearTimers() {
+    if (this.balanceTimeout) clearTimeout(this.balanceTimeout);
+    if (this.historyTimeout) clearTimeout(this.historyTimeout);
   }
 
   async fetchBalance() {
@@ -73,12 +80,18 @@ class Account extends React.Component {
               {match.params.account}
             </p>
           </div>
-          <div className="col col-auto">
+          <div className="col-auto">
+            <AccountQR
+              account={match.params.account}
+              style={{ width: "80px" }}
+            />
+          </div>
+          <div className="col-auto">
             <h3 className="mb-0">
               {accounting.formatNumber(balance, 6)}{" "}
               <span className="text-muted">NANO</span>
             </h3>
-            <p className="text-muted">
+            <p className="text-muted mb-0">
               {accounting.formatNumber(pending, 6)} pending
             </p>
           </div>

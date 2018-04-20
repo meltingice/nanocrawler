@@ -14,6 +14,7 @@
     "nanode": "^2.2.1",
     "node-fetch": "^2.1.2",
     "pidusage": "^2.0.6",
+    "qrcode": "^1.2.0",
     "raiblocks": "^0.4.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
