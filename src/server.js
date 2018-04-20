@@ -9,11 +9,11 @@ import redisFetch from "./server/redisFetch";
 import dbSize from "./server/dbSize";
 import officialRepresentatives from "./server/officialRepresentatives";
 import raiNodeInfo from "./server/raiNodeInfo";
-import { accountIsValid } from "./server/util";
+import { accountIsValid, processBlock } from "./server/util";
 import config from "../server-config.json";
 
 import startNetworkDataUpdates from "./nanoNodeMonitorPeers";
-startNetworkDataUpdates();
+// startNetworkDataUpdates();
 
 const nano = new Nano({ url: config.nodeHost });
 
@@ -130,6 +130,24 @@ app.get("/history/:account", async (req, res) => {
   );
 
   res.json(history);
+});
+
+app.get("/block/:hash", async (req, res) => {
+  const block = await redisFetch(
+    `block/${req.params.hash}`,
+    86400,
+    async () => {
+      const blocks = (await nano.rpc("blocks_info", {
+        hashes: [req.params.hash],
+        pending: true,
+        source: true
+      })).blocks;
+
+      return processBlock(blocks[_.keys(blocks)[0]]);
+    }
+  );
+
+  res.json(block);
 });
 
 app.get("/delegators", async (req, res) => {

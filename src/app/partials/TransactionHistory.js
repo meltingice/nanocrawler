@@ -2,7 +2,7 @@ import React from "react";
 
 import HistorySendBlock from "./history/HistorySendBlock";
 import HistoryReceiveBlock from "./history/HistoryReceiveBlock";
-import HistoryUniversalBlock from "./history/HistoryUniversalBlock";
+import HistoryStateBlock from "./history/HistoryStateBlock";
 
 export default function TransactionHistory({ history }) {
   const blocks = history.map(block => {
@@ -11,8 +11,8 @@ export default function TransactionHistory({ history }) {
         return <HistorySendBlock key={block.hash} block={block} />;
       case "receive":
         return <HistoryReceiveBlock key={block.hash} block={block} />;
-      case "utx":
-        return <HistoryUniversalBlock key={block.hash} block={block} />;
+      case "state":
+        return <HistoryStateBlock key={block.hash} block={block} />;
       default:
         return null;
     }

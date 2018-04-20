@@ -58,6 +58,11 @@ export default class Client {
     return await resp.json();
   }
 
+  async block(hash) {
+    const resp = await this.fetch(`block/${hash}`);
+    return await resp.json();
+  }
+
   async delegators() {
     const resp = await this.fetch("delegators");
     return await resp.json();

@@ -11,7 +11,7 @@ class Explorer extends React.PureComponent {
     const { history } = this.props;
     const { search } = this.state;
 
-    if (/^(xrb_|nano_)/) {
+    if (/^(xrb_|nano_)/.test(search)) {
       history.push(`/explorer/account/${search}`);
     } else {
       history.push(`/explorer/block/${search}`);

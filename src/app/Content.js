@@ -9,6 +9,7 @@ import Delegators from "./views/Delegators";
 
 import Explorer from "./views/Explorer";
 import ExplorerAccount from "./views/explorer/Account";
+import ExplorerBlock from "./views/explorer/Block";
 
 export default ({ account }) => {
   return (
@@ -25,6 +26,7 @@ export default ({ account }) => {
       />
       <Route exact path="/explorer" render={props => <Explorer {...props} />} />
       <Route path="/explorer/account/:account" component={ExplorerAccount} />
+      <Route path="/explorer/block/:block" component={ExplorerBlock} />
       <Route
         exact
         path="/delegators"

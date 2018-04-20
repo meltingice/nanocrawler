@@ -4,14 +4,14 @@ import accounting from "accounting";
 import AccountLink from "../AccountLink";
 import BlockLink from "../BlockLink";
 
-export default function HistoryReceiveBlock({ block }) {
+export default function HistoryStateBlock({ block }) {
   return (
     <tr>
-      <td>Receive</td>
+      <td>Universal</td>
       <td>
         <AccountLink account={block.account} />
       </td>
-      <td>{accounting.formatNumber(block.amount, 6)} NANO</td>
+      <td>{accounting.formatNumber(block.balance, 6)} NANO</td>
       <td>
         <BlockLink hash={block.hash} short />
       </td>
