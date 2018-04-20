@@ -8,6 +8,7 @@ import BlockByTypeStats from "../partials/BlockByTypeStats";
 import PeerVersions from "../partials/PeerVersions";
 
 const MAX_SUPPLY = 133248289;
+const REBROADCASTABLE_THRESHOLD = MAX_SUPPLY * 0.0001;
 
 class NetworkStatus extends React.Component {
   constructor(props) {
@@ -40,6 +41,15 @@ class NetworkStatus extends React.Component {
     });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
+  }
+
+  rebroadcastableReps() {
+    const { representativesOnline } = this.state;
+    return _.fromPairs(
+      _.toPairs(representativesOnline).filter(rep => {
+        return parseFloat(rep[1], 10) >= REBROADCASTABLE_THRESHOLD;
+      })
+    );
   }
 
   onlineWeight() {
@@ -94,6 +104,7 @@ class NetworkStatus extends React.Component {
 
   render() {
     const { representativesOnline } = this.state;
+    console.log(this.rebroadcastableReps());
 
     return (
       <div className="p-4">
@@ -107,28 +118,45 @@ class NetworkStatus extends React.Component {
 
         <div className="row mt-5">
           <div className="col">
-            <h2>
+            <h2 className="mb-0">
               {accounting.formatNumber(_.keys(representativesOnline).length)}{" "}
               <span className="text-muted">representatives online</span>
             </h2>
-            <h5>
-              {this.amountRepresented()}{" "}
+            <p className="text-muted">
+              A representative must have at least 256 NANO delegated to them
+            </p>
+            <h2 className="mb-0">
+              {accounting.formatNumber(
+                _.keys(this.rebroadcastableReps()).length
+              )}{" "}
               <span className="text-muted">
-                voting power is online, which is
-              </span>{" "}
+                representatives rebroadcasting votes
+              </span>
+            </h2>
+            <p className="text-muted">
+              A representative will only rebroadcast votes if it's delegated >
+              0.1% of the total supply
+            </p>
+            <h5 className="mb-0">
+              {this.amountRepresented()}{" "}
+              <span className="text-muted">voting power is online</span>{" "}
+            </h5>
+            <p className="text-muted">
               {this.percentRepresented()}{" "}
               <span className="text-muted">of the total voting power</span>
-            </h5>
-            <h5>
+            </p>
+            <h5 className="mb-0">
               {this.officialRepresented()} NANO{" "}
               <span className="text-muted">
-                is delegated to official representatives, which is
-              </span>{" "}
+                is delegated to official representatives
+              </span>
+            </h5>
+            <p className="text-muted">
               {this.officialPercent()}{" "}
               <span className="text-muted">of the total voting power and</span>{" "}
               {this.officialOnlinePercent()}{" "}
               <span className="text-muted">of the online voting power</span>
-            </h5>
+            </p>
           </div>
         </div>
 
