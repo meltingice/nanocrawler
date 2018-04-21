@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import accounting from "accounting";
 
 export default class PriceWithConversions extends React.PureComponent {
@@ -36,6 +36,8 @@ export default class PriceWithConversions extends React.PureComponent {
         return amount * parseFloat(ticker.price_usd, 10);
       case "btc":
         return amount * parseFloat(ticker.price_btc, 10);
+      default:
+        return new Error(`${cur} is not currently supported`);
     }
   }
 
@@ -49,11 +51,13 @@ export default class PriceWithConversions extends React.PureComponent {
         return accounting.formatMoney(value);
       case "btc":
         return accounting.formatMoney(value, "₿", 6);
+      default:
+        return null;
     }
   }
 
   getConvertedValues() {
-    const { amount, currencies } = this.props;
+    const { currencies } = this.props;
     const { ticker } = this.state;
     if (!ticker) return null;
 
@@ -64,8 +68,7 @@ export default class PriceWithConversions extends React.PureComponent {
   }
 
   render() {
-    const { amount, currencies } = this.props;
-    const { ticker } = this.state;
+    const { currencies } = this.props;
 
     if (this.props.children) {
       return this.props.children(

@@ -31,7 +31,7 @@ function uint4ToUint5(uintValue) {
     let z = n + (i - m) / 4;
     let right = uintValue[z] << m;
     let left;
-    if ((length - i) % 4 == 0) left = uintValue[z - 1] << 4;
+    if ((length - i) % 4 === 0) left = uintValue[z - 1] << 4;
     else left = uintValue[z + 1] >> (4 - m);
     uint5[n] = (left + right) % 32;
   }

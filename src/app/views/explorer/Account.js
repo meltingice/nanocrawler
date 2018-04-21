@@ -97,7 +97,7 @@ class Account extends React.Component {
 
   render() {
     const { match } = this.props;
-    const { balance, pending, history, delegators, weight } = this.state;
+    const { balance, pending, history } = this.state;
 
     if (!this.accountIsValid()) {
       return this.redirect();
@@ -134,7 +134,7 @@ class Account extends React.Component {
                       {usd} / {btc}
                     </p>
                     <p className="text-muted mb-0">
-                      {accounting.formatNumber(pending, 6)} pending
+                      {accounting.formatNumber(pending, 6)} NANO pending
                     </p>
                   </Fragment>
                 );
