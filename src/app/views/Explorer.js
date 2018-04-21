@@ -3,7 +3,8 @@ import { withRouter } from "react-router-dom";
 
 class Explorer extends React.PureComponent {
   state = {
-    search: ""
+    search: "",
+    error: false
   };
 
   handleSubmit(e) {
@@ -11,15 +12,17 @@ class Explorer extends React.PureComponent {
     const { history } = this.props;
     const { search } = this.state;
 
-    if (/^(xrb_|nano_)/.test(search)) {
+    if (/^(xrb_|nano_)\w+/.test(search)) {
       history.push(`/explorer/account/${search}`);
-    } else {
+    } else if (/[A-F0-9]{64}/.test(search)) {
       history.push(`/explorer/block/${search}`);
+    } else {
+      this.setState({ error: true });
     }
   }
 
   render() {
-    const { search } = this.state;
+    const { search, error } = this.state;
 
     return (
       <div className="row justify-content-center my-5">
@@ -35,7 +38,9 @@ class Explorer extends React.PureComponent {
               <div className="col">
                 <input
                   type="text"
-                  className="form-control form-control-lg"
+                  className={`form-control form-control-lg ${
+                    error ? "is-invalid" : ""
+                  }`}
                   value={search}
                   onChange={e => this.setState({ search: e.target.value })}
                 />
