@@ -4,9 +4,15 @@ import accounting from "accounting";
 import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
 
 export default class NodeNinjaAccount extends React.Component {
-  state = {
-    data: null
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: null
+    };
+
+    this.timeout = null;
+  }
 
   componentDidMount() {
     this.fetchNinja();
@@ -18,12 +24,18 @@ export default class NodeNinjaAccount extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.timeout) clearTimeout(this.timeout);
+  }
+
   async fetchNinja() {
     const { account } = this.props;
     const ninja = new NanoNodeNinja(account);
     await ninja.fetch();
 
     this.setState({ data: ninja.data });
+
+    this.timeout = setTimeout(this.fetchNinja.bind(this), 60000);
   }
 
   render() {
@@ -61,18 +73,18 @@ export default class NodeNinjaAccount extends React.Component {
 
         <hr />
 
-        <div className="row">
+        <div className="row mt-3">
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">Sync Status</p>
             <h2>{accounting.formatNumber(data.monitor.sync, 2)}%</h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Uptime</p>
-            <h2>{accounting.formatNumber(data.uptime, 2)}%</h2>
-          </div>
-          <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">Block Count</p>
             <h2>{accounting.formatNumber(data.monitor.blocks)}</h2>
+          </div>
+          <div className="col-sm text-sm-center">
+            <p className="text-muted mb-2">Uptime</p>
+            <h2>{accounting.formatNumber(data.uptime, 2)}%</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">Last Voted</p>
