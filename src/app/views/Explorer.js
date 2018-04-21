@@ -46,7 +46,7 @@ class Explorer extends React.PureComponent {
                 />
               </div>
               <div className="col-auto">
-                <button className="btn btn-primary btn-lg">Search</button>
+                <button className="btn btn-nano-primary btn-lg">Search</button>
               </div>
             </div>
           </form>

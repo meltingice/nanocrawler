@@ -10,7 +10,7 @@ export default class ConfigProvider extends React.Component {
     config.ticker = await this.fetchTicker();
 
     this.setState({ config }, () =>
-      setTimeout(this.updateTicker.bind(this), 60000)
+      setTimeout(this.updateTicker.bind(this), 300000)
     );
   }
 
@@ -19,7 +19,7 @@ export default class ConfigProvider extends React.Component {
     config.ticker = await this.fetchTicker();
     this.setState({ config });
 
-    setTimeout(this.updateTicker.bind(this), 60000);
+    setTimeout(this.updateTicker.bind(this), 300000);
   }
 
   async fetchTicker() {

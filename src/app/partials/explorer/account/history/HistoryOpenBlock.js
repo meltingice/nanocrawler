@@ -1,8 +1,8 @@
 import React from "react";
 import accounting from "accounting";
 
-import AccountLink from "../AccountLink";
-import BlockLink from "../BlockLink";
+import AccountLink from "../../../AccountLink";
+import BlockLink from "../../../BlockLink";
 
 export default function HistoryOpenBlock({ block }) {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import accounting from "accounting";
-import AccountLink from "../AccountLink";
+import AccountLink from "../../AccountLink";
 
 export default function DelegatorEntry({ account, balance }) {
   return (

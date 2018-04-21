@@ -1,6 +1,6 @@
 import React from "react";
-import AccountLink from "../AccountLink";
-import BlockLink from "../BlockLink";
+import AccountLink from "../../../AccountLink";
+import BlockLink from "../../../BlockLink";
 
 export default function HistoryChangeBlock({ block }) {
   return (

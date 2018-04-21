@@ -1,13 +1,13 @@
 import React from "react";
 import accounting from "accounting";
 
-import AccountLink from "../AccountLink";
-import BlockLink from "../BlockLink";
+import AccountLink from "../../../AccountLink";
+import BlockLink from "../../../BlockLink";
 
-export default function HistorySendBlock({ block }) {
+export default function HistoryReceiveBlock({ block }) {
   return (
     <tr>
-      <td>Send</td>
+      <td>Receive</td>
       <td>
         <AccountLink account={block.account} />
       </td>

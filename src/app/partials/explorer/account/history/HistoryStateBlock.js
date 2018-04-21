@@ -1,9 +1,9 @@
 import React from "react";
 import accounting from "accounting";
 
-import AccountLink from "../AccountLink";
-import BlockLink from "../BlockLink";
-import { keyToPublicAccountId } from "../../../lib/util";
+import AccountLink from "../../../AccountLink";
+import BlockLink from "../../../BlockLink";
+import { keyToPublicAccountId } from "../../../../../lib/util";
 
 export default function HistoryStateBlock({ block }) {
   let account, amount;

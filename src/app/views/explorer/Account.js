@@ -4,10 +4,12 @@ import { Redirect } from "react-router-dom";
 import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
-import TransactionHistory from "../../partials/TransactionHistory";
-import DelegatorsTable from "../../partials/delegators/DelegatorsTable";
+
 import AccountQR from "../../partials/AccountQR";
 import PriceWithConversions from "../../partials/PriceWithConversions";
+import NodeNinjaAccount from "../../partials/explorer/account/NodeNinjaAccount";
+import TransactionHistory from "../../partials/explorer/account/TransactionHistory";
+import DelegatorsTable from "../../partials/explorer/account/DelegatorsTable";
 
 class Account extends React.Component {
   constructor(props) {
@@ -144,6 +146,8 @@ class Account extends React.Component {
         </div>
 
         <hr />
+
+        <NodeNinjaAccount account={match.params.account} />
 
         <div className="mt-5">
           <h2 className="mb-0">Transactions</h2>
