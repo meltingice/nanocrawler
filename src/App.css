@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+.btn-nano-primary:hover {
+  color: #e2e2e2;
+}
+
 #App .ContentContainer {
   overflow-y: auto;
 }

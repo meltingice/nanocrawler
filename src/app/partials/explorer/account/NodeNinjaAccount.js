@@ -20,11 +20,16 @@ export default class NodeNinjaAccount extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.account !== this.props.account) {
+      this.clearTimeout();
       this.fetchNinja();
     }
   }
 
   componentWillUnmount() {
+    this.clearTimeout();
+  }
+
+  clearTimeout() {
     if (this.timeout) clearTimeout(this.timeout);
   }
 
@@ -68,34 +73,34 @@ export default class NodeNinjaAccount extends React.Component {
           </a>
         </div>
         <div className="col-sm mt-3 mt-sm-0">
-          <h3>
+          <h4>
             Sync status{" "}
             <small className="text-muted">
               {accounting.formatNumber(data.monitor.sync, 2)}%
             </small>
-          </h3>
-          <h3>
+          </h4>
+          <h4>
             Block count{" "}
             <small className="text-muted">
               {accounting.formatNumber(data.monitor.blocks)}
             </small>
-          </h3>
-          <h3>
+          </h4>
+          <h4>
             Uptime{" "}
             <small className="text-muted">
               {accounting.formatNumber(data.uptime, 2)}%
             </small>
-          </h3>
-          <h3>
+          </h4>
+          <h4>
             Last voted{" "}
             <small className="text-muted">
               {moment(data.lastVoted).fromNow()}
             </small>
-          </h3>
-          <h3>
+          </h4>
+          <h4>
             Node version{" "}
             <small className="text-muted">{data.monitor.version}</small>
-          </h3>
+          </h4>
         </div>
       </div>
     );
