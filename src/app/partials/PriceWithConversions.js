@@ -1,32 +1,10 @@
 import React from "react";
 import accounting from "accounting";
+import injectClient from "../../lib/ClientComponent";
 
-export default class PriceWithConversions extends React.PureComponent {
-  state = {
-    ticker: null
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.fetchData();
-  }
-
-  componentWillUpdate(prevProps, prevState) {
-    if (prevProps.amount !== this.props.amount) this.fetchData();
-  }
-
-  async fetchData() {
-    const resp = await fetch("https://api.coinmarketcap.com/v1/ticker/nano/", {
-      mode: "cors"
-    });
-    const ticker = (await resp.json())[0];
-    this.setState({ ticker });
-  }
-
+class PriceWithConversions extends React.PureComponent {
   getValueForCurrency(cur) {
-    const { amount } = this.props;
-    const { ticker } = this.state;
+    const { amount, ticker } = this.props;
     if (!ticker) return 0;
 
     switch (cur) {
@@ -57,8 +35,7 @@ export default class PriceWithConversions extends React.PureComponent {
   }
 
   getConvertedValues() {
-    const { currencies } = this.props;
-    const { ticker } = this.state;
+    const { currencies, ticker } = this.props;
     if (!ticker) return null;
 
     let conversions = currencies.map(cur =>
@@ -79,3 +56,5 @@ export default class PriceWithConversions extends React.PureComponent {
     }
   }
 }
+
+export default injectClient(PriceWithConversions);
