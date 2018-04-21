@@ -13,19 +13,6 @@ export function keyToPublicAccountId(accountHex) {
   return `xrb_${account}${checksum}`;
 }
 
-function uint8ToHex(uintValue) {
-  let hex = "";
-  let aux;
-  for (let i = 0; i < uintValue.length; i++) {
-    aux = uintValue[i].toString(16).toUpperCase();
-    if (aux.length == 1) aux = "0" + aux;
-    hex += aux;
-    aux = "";
-  }
-
-  return hex;
-}
-
 function uint4ToUint8(uintValue) {
   const length = uintValue.length / 2;
   const uint8 = new Uint8Array(length);

@@ -38,7 +38,10 @@ export default function OpenBlock({ block }) {
       <h4 className="mb-0">
         Amount{" "}
         <small className="text-muted">
-          <PriceWithConversions amount={block.amount} usd btc />
+          <PriceWithConversions
+            amount={block.amount}
+            currencies={["nano", "usd", "btc"]}
+          />
         </small>
       </h4>
       <p>

@@ -24,35 +24,55 @@ export default class PriceWithConversions extends React.PureComponent {
     this.setState({ ticker });
   }
 
-  getConvertedValues() {
-    const { amount, usd, btc } = this.props;
+  getValueForCurrency(cur) {
+    const { amount } = this.props;
     const { ticker } = this.state;
-    if (!ticker) return;
+    if (!ticker) return 0;
 
-    let conversions = [];
-    if (usd)
-      conversions.push(
-        accounting.formatMoney(amount * parseFloat(ticker.price_usd, 10))
-      );
-    if (btc)
-      conversions.push(
-        accounting.formatMoney(
-          amount * parseFloat(ticker.price_btc, 10),
-          "₿",
-          6
-        )
-      );
+    switch (cur) {
+      case "nano":
+        return amount;
+      case "usd":
+        return amount * parseFloat(ticker.price_usd, 10);
+      case "btc":
+        return amount * parseFloat(ticker.price_btc, 10);
+    }
+  }
 
-    return ` / ${conversions.join(" / ")}`;
+  getDisplayValueForCurrency(cur) {
+    const value = this.getValueForCurrency(cur);
+
+    switch (cur) {
+      case "nano":
+        return `${accounting.formatNumber(value, 6)} NANO`;
+      case "usd":
+        return accounting.formatMoney(value);
+      case "btc":
+        return accounting.formatMoney(value, "₿", 6);
+    }
+  }
+
+  getConvertedValues() {
+    const { amount, currencies } = this.props;
+    const { ticker } = this.state;
+    if (!ticker) return null;
+
+    let conversions = currencies.map(cur =>
+      this.getDisplayValueForCurrency(cur)
+    );
+    return conversions.join(" / ");
   }
 
   render() {
-    const { amount } = this.props;
+    const { amount, currencies } = this.props;
+    const { ticker } = this.state;
 
-    return (
-      <Fragment>
-        {accounting.formatNumber(amount, 6)} NANO {this.getConvertedValues()}
-      </Fragment>
-    );
+    if (this.props.children) {
+      return this.props.children(
+        ...currencies.map(cur => this.getDisplayValueForCurrency(cur))
+      );
+    } else {
+      return this.getConvertedValues();
+    }
   }
 }

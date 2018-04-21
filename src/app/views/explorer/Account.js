@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import _ from "lodash";
 import { Redirect } from "react-router-dom";
 import accounting from "accounting";
@@ -7,6 +7,7 @@ import injectClient from "../../../lib/ClientComponent";
 import TransactionHistory from "../../partials/TransactionHistory";
 import DelegatorsTable from "../../partials/delegators/DelegatorsTable";
 import AccountQR from "../../partials/AccountQR";
+import PriceWithConversions from "../../partials/PriceWithConversions";
 
 class Account extends React.Component {
   constructor(props) {
@@ -120,13 +121,25 @@ class Account extends React.Component {
             />
           </div>
           <div className="col-auto">
-            <h3 className="mb-0">
-              {accounting.formatNumber(balance, 6)}{" "}
-              <span className="text-muted">NANO</span>
-            </h3>
-            <p className="text-muted mb-0">
-              {accounting.formatNumber(pending, 6)} pending
-            </p>
+            <PriceWithConversions
+              amount={balance}
+              currencies={["nano", "usd", "btc"]}
+            >
+              {(nano, usd, btc) => {
+                return (
+                  <Fragment>
+                    <h3 className="mb-0">{nano}</h3>
+
+                    <p className="text-muted mb-0">
+                      {usd} / {btc}
+                    </p>
+                    <p className="text-muted mb-0">
+                      {accounting.formatNumber(pending, 6)} pending
+                    </p>
+                  </Fragment>
+                );
+              }}
+            </PriceWithConversions>
           </div>
         </div>
 
@@ -134,7 +147,7 @@ class Account extends React.Component {
 
         <div className="mt-5">
           <h2 className="mb-0">Transactions</h2>
-          <p className="text-muted">Showing up to the last 20 transactions</p>
+          <p className="text-muted">Showing the last 20 transactions</p>
           <TransactionHistory history={history} />
         </div>
 
