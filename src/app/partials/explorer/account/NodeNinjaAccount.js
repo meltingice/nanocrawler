@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import moment from "moment";
 import accounting from "accounting";
 import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
@@ -45,57 +45,59 @@ export default class NodeNinjaAccount extends React.Component {
     if (!data || !data.monitor) return null;
 
     return (
-      <Fragment>
-        <div className="row mt-5 align-items-center">
-          <div className="col-sm">
-            <h2 className="mb-0">{data.alias}</h2>
-            <p className="text-muted mb-0">
-              Verified by{" "}
-              <a
-                href={`https://nanonode.ninja/account/${account}`}
-                className="text-muted"
-                target="_blank"
-              >
-                Nano Node Ninja
-              </a>
-            </p>
-          </div>
-          <div className="col-auto">
+      <div className="row mt-5">
+        <div className="col-sm text-sm-right">
+          <h2 className="mb-0">{data.alias}</h2>
+          <p className="text-muted">
+            Verified by{" "}
             <a
-              href={data.monitor.url}
-              className="btn btn-nano-primary"
+              href={`https://nanonode.ninja/account/${account}`}
+              className="text-muted"
               target="_blank"
             >
-              Open Node Monitor
+              Nano Node Ninja
             </a>
-          </div>
-        </div>
+          </p>
 
-        <hr />
-
-        <div className="row mt-3">
-          <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Sync Status</p>
-            <h2>{accounting.formatNumber(data.monitor.sync, 2)}%</h2>
-          </div>
-          <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Block Count</p>
-            <h2>{accounting.formatNumber(data.monitor.blocks)}</h2>
-          </div>
-          <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Uptime</p>
-            <h2>{accounting.formatNumber(data.uptime, 2)}%</h2>
-          </div>
-          <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Last Voted</p>
-            <h3>{moment(data.lastVoted).fromNow()}</h3>
-          </div>
-          <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Node Version</p>
-            <h2>{data.monitor.version}</h2>
-          </div>
+          <a
+            href={data.monitor.url}
+            className="btn btn-nano-primary"
+            target="_blank"
+          >
+            Open Node Monitor
+          </a>
         </div>
-      </Fragment>
+        <div className="col-sm mt-3 mt-sm-0">
+          <h3>
+            Sync status{" "}
+            <small className="text-muted">
+              {accounting.formatNumber(data.monitor.sync, 2)}%
+            </small>
+          </h3>
+          <h3>
+            Block count{" "}
+            <small className="text-muted">
+              {accounting.formatNumber(data.monitor.blocks)}
+            </small>
+          </h3>
+          <h3>
+            Uptime{" "}
+            <small className="text-muted">
+              {accounting.formatNumber(data.uptime, 2)}%
+            </small>
+          </h3>
+          <h3>
+            Last voted{" "}
+            <small className="text-muted">
+              {moment(data.lastVoted).fromNow()}
+            </small>
+          </h3>
+          <h3>
+            Node version{" "}
+            <small className="text-muted">{data.monitor.version}</small>
+          </h3>
+        </div>
+      </div>
     );
   }
 }
