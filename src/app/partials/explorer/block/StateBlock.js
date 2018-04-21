@@ -74,6 +74,16 @@ export default function StateBlock({ block }) {
       </h5>
 
       <h5>
+        Link as account{" "}
+        <small>
+          <AccountLink
+            account={block.contents.link_as_account}
+            className="text-muted break-word"
+          />
+        </small>
+      </h5>
+
+      <h5>
         Proof of Work{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>

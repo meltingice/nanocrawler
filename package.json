@@ -6,6 +6,7 @@
     "accounting": "^0.4.1",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
+    "blakejs": "^1.1.0",
     "bootstrap": "^4.0.0",
     "cors": "^2.8.4",
     "es6-promisify": "^6.0.0",
@@ -33,6 +34,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "concurrently": "^3.5.1"
   }
 }

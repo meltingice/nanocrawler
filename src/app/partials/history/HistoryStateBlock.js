@@ -3,15 +3,33 @@ import accounting from "accounting";
 
 import AccountLink from "../AccountLink";
 import BlockLink from "../BlockLink";
+import { keyToPublicAccountId } from "../../../lib/util";
 
 export default function HistoryStateBlock({ block }) {
+  let account, amount;
+  switch (block.subtype) {
+    case "send":
+    case "receive":
+    case "open":
+      account = keyToPublicAccountId(block.link);
+      amount = block.amount;
+      break;
+
+    case "change":
+      account = block.representative;
+      amount = 0;
+      break;
+  }
+
   return (
     <tr>
-      <td>Universal</td>
       <td>
-        <AccountLink account={block.account} />
+        State <span className="text-muted">{block.subtype}</span>
       </td>
-      <td>{accounting.formatNumber(block.balance, 6)} NANO</td>
+      <td>
+        <AccountLink account={account} />
+      </td>
+      <td>{accounting.formatNumber(amount, 6)} NANO</td>
       <td>
         <BlockLink hash={block.hash} short />
       </td>
