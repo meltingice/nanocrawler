@@ -128,6 +128,7 @@ class Account extends React.Component {
               <AccountLink
                 account={representative}
                 short
+                ninja
                 className="text-muted"
               />
             </p>

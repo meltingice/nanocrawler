@@ -7,7 +7,7 @@ export default function HistoryChangeBlock({ block }) {
     <tr>
       <td>Change</td>
       <td>
-        <AccountLink account={block.representative} />
+        <AccountLink account={block.representative} ninja />
       </td>
       <td>
         <i className="text-muted">N/A</i>
