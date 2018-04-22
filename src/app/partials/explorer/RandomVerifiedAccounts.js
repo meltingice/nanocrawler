@@ -12,11 +12,7 @@ export default class RandomVerifiedAccounts extends React.Component {
     });
     const accounts = await data.json();
 
-    this.setState({ accounts });
-  }
-
-  randomAccounts() {
-    return _.sampleSize(this.state.accounts, this.props.count);
+    this.setState({ accounts: _.sampleSize(accounts, this.props.count) });
   }
 
   render() {
@@ -36,7 +32,7 @@ export default class RandomVerifiedAccounts extends React.Component {
 
         <hr />
 
-        {this.randomAccounts().map(account => (
+        {this.state.accounts.map(account => (
           <VerifiedAccount account={account} />
         ))}
       </Fragment>
