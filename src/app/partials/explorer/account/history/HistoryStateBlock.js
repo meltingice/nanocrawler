@@ -29,18 +29,6 @@ class HistoryStateBlock extends React.Component {
     this.setState({ sendBlock });
   }
 
-  transactionAmount() {
-    const { block } = this.props;
-    switch (block.subtype) {
-      case "send":
-      case "open":
-      case "receive":
-        return block.amount;
-      default:
-        return 0;
-    }
-  }
-
   transactionAccount() {
     const { block } = this.props;
     switch (block.subtype) {
@@ -65,7 +53,7 @@ class HistoryStateBlock extends React.Component {
         <td>
           <AccountLink account={this.transactionAccount()} />
         </td>
-        <td>{accounting.formatNumber(this.transactionAmount(), 6)} NANO</td>
+        <td>{accounting.formatNumber(block.amount, 6)} NANO</td>
         <td>
           <BlockLink hash={block.hash} short />
         </td>
