@@ -6,6 +6,25 @@ import PriceWithConversions from "../../PriceWithConversions";
 import "./Block.css";
 
 export default function StateBlock({ block }) {
+  const getPreviousBlock = () => {
+    if (parseInt(block.contents.previous, 16) === 0) {
+      return (
+        <small className="text-muted">
+          None (this block opened the account)
+        </small>
+      );
+    }
+
+    return (
+      <small>
+        <BlockLink
+          hash={block.contents.previous}
+          className="text-muted break-word"
+        />
+      </small>
+    );
+  };
+
   return (
     <div className="Block">
       <h4 className="mb-0">
@@ -60,15 +79,7 @@ export default function StateBlock({ block }) {
         <small>The account's representative</small>
       </p>
 
-      <h5 className="mb-0">
-        Previous Block{" "}
-        <small>
-          <BlockLink
-            hash={block.contents.previous}
-            className="text-muted break-word"
-          />
-        </small>
-      </h5>
+      <h5 className="mb-0">Previous Block {getPreviousBlock(block)}</h5>
       <p>
         <small>The previous block in this account's chain</small>
       </p>

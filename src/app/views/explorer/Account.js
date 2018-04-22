@@ -10,6 +10,7 @@ import PriceWithConversions from "../../partials/PriceWithConversions";
 import NodeNinjaAccount from "../../partials/explorer/account/NodeNinjaAccount";
 import TransactionHistory from "../../partials/explorer/account/TransactionHistory";
 import DelegatorsTable from "../../partials/explorer/account/DelegatorsTable";
+import UnopenedAccount from "../../partials/explorer/account/UnopenedAccount";
 
 class Account extends React.Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class Account extends React.Component {
       pending: 0,
       history: [],
       delegators: {},
-      weight: 0
+      weight: 0,
+      failed: false
     };
 
     this.balanceTimeout = this.historyTimeout = null;
@@ -55,30 +57,41 @@ class Account extends React.Component {
 
   async fetchBalance() {
     const { match } = this.props;
-    const balance = await this.props.client.balance(match.params.account);
-    this.setState({ ...balance });
-
-    this.balanceTimeout = setTimeout(this.fetchBalance.bind(this), 60000);
+    try {
+      const balance = await this.props.client.balance(match.params.account);
+      this.setState({ ...balance });
+      this.balanceTimeout = setTimeout(this.fetchBalance.bind(this), 60000);
+    } catch (e) {
+      this.setState({ failed: true });
+    }
   }
 
   async fetchHistory() {
     const { match } = this.props;
-    const history = await this.props.client.history(match.params.account);
-    this.setState({ history });
+    try {
+      const history = await this.props.client.history(match.params.account);
+      this.setState({ history });
 
-    this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
+      this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
+    } catch (e) {
+      this.setState({ failed: true });
+    }
   }
 
   async fetchDelegators() {
     const { match } = this.props;
 
-    let delegators = {};
-    const weight = await this.props.client.weight(match.params.account);
-    if (weight >= 256) {
-      delegators = await this.props.client.delegators(match.params.account);
-    }
+    try {
+      let delegators = {};
+      const weight = await this.props.client.weight(match.params.account);
+      if (weight >= 256) {
+        delegators = await this.props.client.delegators(match.params.account);
+      }
 
-    this.setState({ weight, delegators });
+      this.setState({ weight, delegators });
+    } catch (e) {
+      this.setState({ failed: true });
+    }
   }
 
   accountIsValid() {
@@ -97,6 +110,10 @@ class Account extends React.Component {
 
     if (!this.accountIsValid()) {
       return this.redirect();
+    }
+
+    if (this.state.failed) {
+      return <UnopenedAccount account={match.params.account} />;
     }
 
     return (

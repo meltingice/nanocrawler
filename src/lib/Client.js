@@ -78,7 +78,10 @@ export default class Client {
     return (await resp.json()).network;
   }
 
-  fetch(endpoint) {
-    return fetch(`${this.host}/${endpoint}`);
+  async fetch(endpoint) {
+    const resp = await fetch(`${this.host}/${endpoint}`);
+    if (resp.ok) return resp;
+    const data = await resp.json();
+    throw new Error(data.error);
   }
 }
