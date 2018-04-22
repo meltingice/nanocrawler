@@ -5,6 +5,7 @@ import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
 
+import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 import NodeNinjaAccount from "../../partials/explorer/account/NodeNinjaAccount";
@@ -19,6 +20,7 @@ class Account extends React.Component {
     this.state = {
       balance: 0,
       pending: 0,
+      representative: null,
       history: [],
       delegators: {},
       weight: 0,
@@ -39,7 +41,6 @@ class Account extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.account !== this.props.match.params.account) {
       this.clearTimers();
-
       this.fetchData();
     }
   }
@@ -101,7 +102,7 @@ class Account extends React.Component {
 
   render() {
     const { match } = this.props;
-    const { balance, pending, history } = this.state;
+    const { balance, pending, history, representative } = this.state;
 
     if (!this.accountIsValid()) {
       return this.redirect();
@@ -148,6 +149,15 @@ class Account extends React.Component {
                 );
               }}
             </PriceWithConversions>
+
+            <p className="text-muted mb-0">
+              Represented by{" "}
+              <AccountLink
+                account={representative}
+                short
+                className="text-muted"
+              />
+            </p>
           </div>
         </div>
 
