@@ -13,9 +13,14 @@ export function processBlock(block) {
 
   switch (block.contents.type) {
     case "send":
-    case "state":
       block.contents.balance = nano.convert.fromRaw(
         parseInt(block.contents.balance, 16).toString(),
+        "mrai"
+      );
+      break;
+    case "state":
+      block.contents.balance = nano.convert.fromRaw(
+        block.contents.balance,
         "mrai"
       );
       break;

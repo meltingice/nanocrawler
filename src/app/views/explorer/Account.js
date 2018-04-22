@@ -70,7 +70,7 @@ class Account extends React.Component {
     const { match } = this.props;
     try {
       const history = await this.props.client.history(match.params.account);
-      this.setState({ history });
+      this.setState({ history, failed: false });
 
       this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
     } catch (e) {
