@@ -18,6 +18,12 @@ export default class NodeNinjaAccount extends React.Component {
     this.fetchNinja();
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.account !== this.props.account) {
+      this.setState({ data: null });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.account !== this.props.account) {
       this.clearTimeout();
@@ -38,9 +44,10 @@ export default class NodeNinjaAccount extends React.Component {
     const ninja = new NanoNodeNinja(account);
     await ninja.fetch();
 
-    this.setState({ data: ninja.data });
-
-    this.timeout = setTimeout(this.fetchNinja.bind(this), 60000);
+    if (!ninja.data.error) {
+      this.setState({ data: ninja.data });
+      this.timeout = setTimeout(this.fetchNinja.bind(this), 60000);
+    }
   }
 
   render() {
