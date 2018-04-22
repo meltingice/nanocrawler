@@ -51,7 +51,10 @@ class HistoryStateBlock extends React.Component {
           State <span className="text-muted">{block.subtype}</span>
         </td>
         <td>
-          <AccountLink account={this.transactionAccount()} />
+          <AccountLink
+            account={this.transactionAccount()}
+            ninja={block.subtype === "change"}
+          />
         </td>
         <td>{accounting.formatNumber(block.amount, 6)} NANO</td>
         <td>
