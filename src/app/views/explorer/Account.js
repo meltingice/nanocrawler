@@ -119,8 +119,17 @@ class Account extends React.Component {
             <h1 className="mb-0">
               {this.isRepresentative() ? "Representative " : ""}Account
             </h1>
-            <p className="text-muted" style={{ wordWrap: "break-word" }}>
+            <p className="text-muted mb-0" style={{ wordWrap: "break-word" }}>
               {match.params.account}
+            </p>
+
+            <p className="text-muted mb-0">
+              Represented by{" "}
+              <AccountLink
+                account={representative}
+                short
+                className="text-muted"
+              />
             </p>
           </div>
           <div className="col-auto">
@@ -149,15 +158,6 @@ class Account extends React.Component {
                 );
               }}
             </PriceWithConversions>
-
-            <p className="text-muted mb-0">
-              Represented by{" "}
-              <AccountLink
-                account={representative}
-                short
-                className="text-muted"
-              />
-            </p>
           </div>
         </div>
 
