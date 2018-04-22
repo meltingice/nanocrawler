@@ -4,6 +4,10 @@ import accounting from "accounting";
 import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
 
 export default class NodeNinjaAccount extends React.Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return { data: null };
+  }
+
   constructor(props) {
     super(props);
 
@@ -16,12 +20,6 @@ export default class NodeNinjaAccount extends React.Component {
 
   componentDidMount() {
     this.fetchNinja();
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    if (nextProps.account !== this.props.account) {
-      this.setState({ data: null });
-    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,7 +52,7 @@ export default class NodeNinjaAccount extends React.Component {
     const { account } = this.props;
     const { data } = this.state;
 
-    if (!data) return null;
+    if (!data || !data.alias) return null;
 
     return (
       <div className="row mt-5">
