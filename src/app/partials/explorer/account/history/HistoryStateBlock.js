@@ -1,38 +1,77 @@
 import React from "react";
 import accounting from "accounting";
 
+import injectClient from "../../../../../lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import { keyToPublicAccountId } from "../../../../../lib/util";
 
-export default function HistoryStateBlock({ block }) {
-  let account, amount;
-  switch (block.subtype) {
-    case "send":
-    case "receive":
-    case "open":
-      account = keyToPublicAccountId(block.link);
-      amount = block.amount;
-      break;
+class HistoryStateBlock extends React.Component {
+  state = {
+    sendBlock: null
+  };
 
-    case "change":
-      account = block.representative;
-      amount = 0;
-      break;
+  componentDidMount() {
+    this.fetchSendBlock();
   }
 
-  return (
-    <tr>
-      <td>
-        State <span className="text-muted">{block.subtype}</span>
-      </td>
-      <td>
-        <AccountLink account={account} />
-      </td>
-      <td>{accounting.formatNumber(amount, 6)} NANO</td>
-      <td>
-        <BlockLink hash={block.hash} short />
-      </td>
-    </tr>
-  );
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.block.hash !== this.props.block.hash) {
+      this.fetchSendBlock();
+    }
+  }
+
+  async fetchSendBlock() {
+    if (!["receive", "open"].includes(this.props.block.subtype)) return;
+
+    const { block } = this.props;
+    const sendBlock = await this.props.client.block(block.link);
+    this.setState({ sendBlock });
+  }
+
+  transactionAmount() {
+    const { block } = this.props;
+    switch (block.subtype) {
+      case "send":
+      case "open":
+      case "receive":
+        return block.amount;
+      default:
+        return 0;
+    }
+  }
+
+  transactionAccount() {
+    const { block } = this.props;
+    switch (block.subtype) {
+      case "receive":
+      case "open":
+        const { sendBlock } = this.state;
+        return sendBlock ? sendBlock.block_account : null;
+      case "send":
+        return keyToPublicAccountId(block.link);
+      case "change":
+        return block.representative;
+    }
+  }
+
+  render() {
+    const { block } = this.props;
+    return (
+      <tr>
+        <td>
+          State <span className="text-muted">{block.subtype}</span>
+        </td>
+        <td>
+          <AccountLink account={this.transactionAccount()} />
+        </td>
+        <td>{accounting.formatNumber(this.transactionAmount(), 6)} NANO</td>
+        <td>
+          <BlockLink hash={block.hash} short />
+        </td>
+      </tr>
+    );
+  }
 }
+
+export default injectClient(HistoryStateBlock);
