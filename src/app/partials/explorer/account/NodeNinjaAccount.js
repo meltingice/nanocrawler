@@ -5,7 +5,9 @@ import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
 
 export default class NodeNinjaAccount extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    return { data: null };
+    if (prevState.data && prevState.data.account !== nextProps.account) {
+      return { data: null };
+    }
   }
 
   constructor(props) {
