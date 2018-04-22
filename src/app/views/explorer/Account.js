@@ -81,12 +81,6 @@ class Account extends React.Component {
     this.setState({ weight, delegators });
   }
 
-  async fetchWeight() {
-    const { match } = this.props;
-    const weight = await this.props.client.weight(match.params.account);
-    this.setState({ weight });
-  }
-
   accountIsValid() {
     const { match } = this.props;
     return /^(xrb_|nano_)/.test(match.params.account);

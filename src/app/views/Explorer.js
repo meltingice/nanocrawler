@@ -1,6 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
+import RandomVerifiedAccounts from "../partials/explorer/RandomVerifiedAccounts";
+
 class Explorer extends React.PureComponent {
   state = {
     search: "",
@@ -50,6 +52,8 @@ class Explorer extends React.PureComponent {
               </div>
             </div>
           </form>
+
+          <RandomVerifiedAccounts count={5} />
         </div>
       </div>
     );
