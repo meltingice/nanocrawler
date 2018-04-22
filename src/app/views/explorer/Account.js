@@ -96,7 +96,7 @@ class Account extends React.Component {
 
   accountIsValid() {
     const { match } = this.props;
-    return /^(xrb_|nano_)/.test(match.params.account);
+    return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(match.params.account);
   }
 
   isRepresentative() {
