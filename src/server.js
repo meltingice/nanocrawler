@@ -33,6 +33,37 @@ app.get("/account", async (req, res) => {
   res.json({ account: config.account });
 });
 
+app.get("/account/:account", async (req, res) => {
+  if (!accountIsValid(req.params.account)) {
+    res.status(400).send({ error: "Invalid account" });
+  }
+
+  try {
+    const account = await redisFetch(
+      `account/${req.params.account}`,
+      60,
+      async () => {
+        const account = await nano.rpc("account_info", {
+          account: req.params.account,
+          representative: true,
+          weight: true,
+          pending: true
+        });
+
+        account.balance = nano.convert.fromRaw(account.balance, "mrai");
+        account.pending = nano.convert.fromRaw(account.pending, "mrai");
+        account.weight = nano.convert.fromRaw(account.weight, "mrai");
+
+        return account;
+      }
+    );
+
+    res.json({ account });
+  } catch (e) {
+    res.status(500).send({ error: e });
+  }
+});
+
 app.get("/weight/:account", async (req, res) => {
   if (!accountIsValid(req.params.account)) {
     res.status(400).send({ error: "Invalid account" });
@@ -138,32 +169,6 @@ app.get("/delegators/:account", async (req, res) => {
     );
 
     res.json(delegators);
-  } catch (e) {
-    res.status(500).send({ error: e });
-  }
-});
-
-app.get("/balance/:account", async (req, res) => {
-  if (!accountIsValid(req.params.account)) {
-    res.status(400).send({ error: "Invalid account" });
-  }
-
-  try {
-    const balances = await redisFetch(
-      `balance/${req.params.account}`,
-      60,
-      async () => {
-        const resp = await nano.rpc("account_balance", {
-          account: req.params.account
-        });
-        return {
-          balance: nano.convert.fromRaw(resp.balance, "mrai"),
-          pending: nano.convert.fromRaw(resp.pending, "mrai")
-        };
-      }
-    );
-
-    res.json(balances);
   } catch (e) {
     res.status(500).send({ error: e });
   }

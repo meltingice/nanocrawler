@@ -25,7 +25,7 @@ class Account extends React.Component {
       failed: false
     };
 
-    this.balanceTimeout = this.historyTimeout = null;
+    this.accountTimeout = this.historyTimeout = null;
   }
 
   componentDidMount() {
@@ -44,25 +44,26 @@ class Account extends React.Component {
     }
   }
 
-  fetchData() {
-    this.fetchBalance();
+  async fetchData() {
+    await this.fetchAccount();
     this.fetchHistory();
     this.fetchDelegators();
   }
 
   clearTimers() {
-    if (this.balanceTimeout) clearTimeout(this.balanceTimeout);
+    if (this.accountTimeout) clearTimeout(this.accountTimeout);
     if (this.historyTimeout) clearTimeout(this.historyTimeout);
   }
 
-  async fetchBalance() {
+  async fetchAccount() {
     const { match } = this.props;
     try {
-      const balance = await this.props.client.balance(match.params.account);
-      this.setState({ ...balance });
-      this.balanceTimeout = setTimeout(this.fetchBalance.bind(this), 60000);
+      const account = await this.props.client.account(match.params.account);
+      return this.setState({ ...account });
+
+      this.accountTimeout = setTimeout(this.fetchAccount.bind(this), 60000);
     } catch (e) {
-      this.setState({ failed: true });
+      return this.setState({ failed: true });
     }
   }
 
@@ -80,18 +81,12 @@ class Account extends React.Component {
 
   async fetchDelegators() {
     const { match } = this.props;
+    const { weight } = this.state;
 
-    try {
-      let delegators = {};
-      const weight = await this.props.client.weight(match.params.account);
-      if (weight >= 256) {
-        delegators = await this.props.client.delegators(match.params.account);
-      }
+    if (weight < 256) return;
 
-      this.setState({ weight, delegators });
-    } catch (e) {
-      this.setState({ failed: true });
-    }
+    const delegators = await this.props.client.delegators(match.params.account);
+    this.setState({ delegators });
   }
 
   accountIsValid() {

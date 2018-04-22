@@ -8,6 +8,8 @@ export default class NodeNinjaAccount extends React.Component {
     if (prevState.data && prevState.data.account !== nextProps.account) {
       return { data: null };
     }
+
+    return null;
   }
 
   constructor(props) {

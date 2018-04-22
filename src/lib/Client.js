@@ -3,8 +3,8 @@ export default class Client {
     this.host = config.server;
   }
 
-  async account() {
-    const resp = await this.fetch("account");
+  async account(account = "") {
+    const resp = await this.fetch(`account/${account}`);
     return (await resp.json()).account;
   }
 
@@ -40,11 +40,6 @@ export default class Client {
 
   async systemInfo() {
     const resp = await this.fetch("system_info");
-    return await resp.json();
-  }
-
-  async balance(account) {
-    const resp = await this.fetch(`balance/${account}`);
     return await resp.json();
   }
 
