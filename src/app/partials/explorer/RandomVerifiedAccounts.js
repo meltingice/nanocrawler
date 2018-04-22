@@ -48,7 +48,13 @@ const VerifiedAccount = ({ account }) => {
   return (
     <div className="row">
       <div className="col">
-        <h5 className="mb-0">{account.alias}</h5>
+        <h5 className="mb-0">
+          <AccountLink
+            account={account.account}
+            name={account.alias}
+            className="text-dark"
+          />
+        </h5>
         <p>
           <AccountLink account={account.account} className="text-muted" />
         </p>
