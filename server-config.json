@@ -5,5 +5,6 @@
   "raiblocksDir": "/home/ryanlefevre/RaiBlocks",
   "nodeHost": "http://10.0.1.152:7076",
   "redis": "redis://127.0.0.1:6379",
+  "redisNamespace": "production",
   "serverPort": 3001
 }

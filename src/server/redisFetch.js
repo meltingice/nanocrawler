@@ -1,7 +1,7 @@
-import Promise from 'promise'
-import { promisify } from 'es6-promisify'
-import redis from 'redis'
-import config from '../../server-config.json'
+import Promise from "promise";
+import { promisify } from "es6-promisify";
+import redis from "redis";
+import config from "../../server-config.json";
 
 let redisClient, redisGet, redisSet;
 if (config.redis) {
@@ -12,15 +12,16 @@ if (config.redis) {
 
 const redisFetch = async (key, expire, func) => {
   if (!redisClient) return func();
-  const namespacedKey = `nano-control-panel/${key}`;
+  const namespacedKey = `nano-control-panel/${config.redisNamespace ||
+    "default"}/${key}`;
   const resp = await redisGet(namespacedKey);
   if (resp === null) {
     const result = await Promise.resolve(func());
-    redisSet(namespacedKey, JSON.stringify(result), 'EX', expire);
+    redisSet(namespacedKey, JSON.stringify(result), "EX", expire);
     return result;
   } else {
     return JSON.parse(resp);
   }
-}
+};
 
-export default redisFetch
+export default redisFetch;
