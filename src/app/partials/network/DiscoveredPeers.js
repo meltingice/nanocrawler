@@ -29,7 +29,12 @@ export default class DiscoveredPeers extends React.PureComponent {
       }
 
       if (sortVersion) {
-        status = status & (peer.data.version === sortVersion);
+        status =
+          status &&
+          peer.data.version &&
+          peer.data.version.match(
+            new RegExp(`${sortVersion.replace(".", ".")}$`)
+          );
       }
 
       return status;
@@ -48,7 +53,13 @@ export default class DiscoveredPeers extends React.PureComponent {
 
   versions() {
     return _.uniq(
-      this.props.peers.map(peer => peer.data.version || "Unknown").sort()
+      _.compact(
+        this.props.peers.map(peer => {
+          if (!peer.data.version) return null;
+          const match = peer.data.version.match(/(\d+\.\d+)/);
+          return match ? match[1] : null;
+        })
+      ).sort()
     );
   }
 
