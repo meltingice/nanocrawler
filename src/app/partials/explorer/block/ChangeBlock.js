@@ -3,8 +3,6 @@ import React from "react";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
-import "./Block.css";
-
 export default function ChangeBlock({ block }) {
   return (
     <div className="Block">

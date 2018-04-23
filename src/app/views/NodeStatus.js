@@ -51,7 +51,7 @@ class NodeStatus extends React.Component {
         <div className="row align-items-center">
           <div className="col-sm">
             <h1 className="mb-0">Node Status</h1>
-            <p className="text-muted" style={{ wordWrap: "break-word" }}>
+            <p className="text-muted break-word">
               <AccountLink
                 account={this.props.account}
                 className="text-muted"

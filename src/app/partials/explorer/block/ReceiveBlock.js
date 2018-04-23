@@ -3,8 +3,6 @@ import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 
-import "./Block.css";
-
 export default function ReceiveBlock({ block }) {
   return (
     <div className="Block">

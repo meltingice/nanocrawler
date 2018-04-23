@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import NanoNodeNinja from "../../lib/NanoNodeNinja";
 
-import "./AccountLink.css";
-
 export default class AccountLink extends React.Component {
   state = { ninjaData: null };
 
@@ -49,7 +47,7 @@ export default class AccountLink extends React.Component {
 
     return (
       <Link
-        className="AccountLink"
+        className="break-word"
         to={`/explorer/account/${account}`}
         {...otherProps}
       >

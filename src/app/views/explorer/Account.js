@@ -119,9 +119,7 @@ class Account extends React.Component {
             <h1 className="mb-0">
               {this.isRepresentative() ? "Representative " : ""}Account
             </h1>
-            <p className="text-muted mb-0" style={{ wordWrap: "break-word" }}>
-              {match.params.account}
-            </p>
+            <p className="text-muted mb-0 break-word">{match.params.account}</p>
 
             <p className="text-muted mb-0">
               Represented by{" "}

@@ -48,15 +48,13 @@ const VerifiedAccount = ({ account }) => {
           <AccountLink
             account={account.account}
             name={account.alias}
-            className="text-dark"
-            style={{ wordBreak: "break-word" }}
+            className="text-dark break-word"
           />
         </h5>
         <p>
           <AccountLink
             account={account.account}
-            className="text-muted"
-            style={{ wordBreak: "break-word" }}
+            className="text-muted break-word"
           />
         </p>
       </div>

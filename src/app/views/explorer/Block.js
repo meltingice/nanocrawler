@@ -45,9 +45,7 @@ class Block extends React.PureComponent {
         <div className="row align-items-center">
           <div className="col">
             <h1 className="mb-0">{_.capitalize(block.contents.type)} Block</h1>
-            <p className="text-muted" style={{ wordWrap: "break-word" }}>
-              {match.params.block}
-            </p>
+            <p className="text-muted break-word">{match.params.block}</p>
           </div>
         </div>
 

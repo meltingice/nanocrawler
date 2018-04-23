@@ -4,8 +4,6 @@ import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 
-import "./Block.css";
-
 class StateBlock extends React.PureComponent {
   inferBlockSubtype() {
     const { block } = this.props;

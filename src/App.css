@@ -12,6 +12,10 @@
   color: #e2e2e2;
 }
 
+.break-word {
+  word-wrap: break-word;
+}
+
 #App .ContentContainer {
   overflow-y: auto;
 }
