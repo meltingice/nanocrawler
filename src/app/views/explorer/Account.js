@@ -184,8 +184,11 @@ class Account extends React.Component {
         <div className="row align-items-center">
           <div className="col">
             <h2 className="mb-0">Delegators</h2>
-            <p className="text-muted">
+            <p className="text-muted mb-0">
               {_.keys(delegators).length} delegators, sorted by weight
+            </p>
+            <p className="text-muted">
+              Only showing accounts with at least 1 NANO
             </p>
           </div>
           <div className="col-auto">
