@@ -104,7 +104,6 @@ class NetworkStatus extends React.Component {
 
   render() {
     const { representativesOnline } = this.state;
-    console.log(this.rebroadcastableReps());
 
     return (
       <div className="p-4">
