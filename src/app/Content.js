@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
 
@@ -28,6 +28,16 @@ class Content extends React.PureComponent {
     }
   }
 
+  determineQueryDestination(search) {
+    if (/^(xrb_|nano_)\w+/.test(search)) {
+      return `/explorer/account/${search}`;
+    } else if (/[A-F0-9]{64}/.test(search)) {
+      return `/explorer/block/${search}`;
+    } else {
+      return "/not_found";
+    }
+  }
+
   render() {
     const { account } = this.props;
 
@@ -53,6 +63,15 @@ class Content extends React.PureComponent {
             path="/explorer"
             render={props => <Explorer {...props} />}
           />
+          <Route
+            path="/explorer/auto/:query"
+            render={props => (
+              <Redirect
+                to={this.determineQueryDestination(props.match.params.query)}
+              />
+            )}
+          />
+
           <Route
             path="/explorer/account/:account"
             component={ExplorerAccount}
