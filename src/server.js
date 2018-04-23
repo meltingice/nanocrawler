@@ -210,7 +210,7 @@ app.get("/block/:hash", async (req, res) => {
   try {
     const block = await redisFetch(
       `block/${req.params.hash}`,
-      86400,
+      2592000,
       async () => {
         const blocks = (await nano.rpc("blocks_info", {
           hashes: [req.params.hash],
