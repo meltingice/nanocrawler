@@ -46,7 +46,7 @@ export default class NodeNinjaAccount extends React.Component {
     const ninja = new NanoNodeNinja(account);
     await ninja.fetch();
 
-    if (!ninja.data.error) {
+    if (ninja.hasAccount()) {
       this.setState({ data: ninja.data });
       this.timeout = setTimeout(this.fetchNinja.bind(this), 60000);
     }

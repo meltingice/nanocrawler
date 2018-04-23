@@ -22,7 +22,7 @@ export default class AccountLink extends React.Component {
   async fetchNinjaData() {
     const ninja = new NanoNodeNinja(this.props.account);
     await ninja.fetch();
-    if (!ninja.data.error) {
+    if (ninja.hasAccount()) {
       this.setState({ ninjaData: ninja.data });
     }
   }

@@ -6,6 +6,8 @@ export default class NanoNodeNinja {
   }
 
   async fetch() {
+    if (!this.account) return;
+
     try {
       const data = await fetch(
         `https://nanonode.ninja/api/accounts/${this.account}`,
@@ -21,6 +23,6 @@ export default class NanoNodeNinja {
   }
 
   hasAccount() {
-    return this.data !== null;
+    return this.data !== null && !this.data.error;
   }
 }
