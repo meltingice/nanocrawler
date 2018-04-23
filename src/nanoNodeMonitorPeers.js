@@ -62,7 +62,8 @@ async function checkKnownMonitors() {
 
   const data = await getDataFromPeers(KNOWN_MONITORS);
   redisClient.set(
-    "nano-control-panel/nanoNodeMonitorPeerData",
+    `nano-control-panel/${config.redisNamespace ||
+      "default"}/nanoNodeMonitorPeerData`,
     JSON.stringify(data)
   );
 
