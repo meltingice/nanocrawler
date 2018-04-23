@@ -43,22 +43,54 @@ class HistoryStateBlock extends React.Component {
     }
   }
 
+  statusClass() {
+    const { block } = this.props;
+    switch (block.subtype) {
+      case "receive":
+      case "open":
+        return "text-success";
+      case "send":
+        return "text-danger";
+      case "change":
+        return "text-info";
+      default:
+        return "text-dark";
+    }
+  }
+
+  transactionSymbol() {
+    const { block } = this.props;
+    switch (block.subtype) {
+      case "receive":
+      case "open":
+        return "+";
+      case "send":
+        return "-";
+      default:
+        return "";
+    }
+  }
+
   render() {
     const { block } = this.props;
     return (
       <tr>
         <td>
-          State <span className="text-muted">{block.subtype}</span>
+          State <span className={this.statusClass()}>{block.subtype}</span>
         </td>
         <td>
           <AccountLink
             account={this.transactionAccount()}
             ninja={block.subtype === "change"}
+            className="text-dark"
           />
         </td>
-        <td>{accounting.formatNumber(block.amount, 6)} NANO</td>
+        <td className={this.statusClass()}>
+          {this.transactionSymbol()}
+          {accounting.formatNumber(block.amount, 6)} NANO
+        </td>
         <td>
-          <BlockLink hash={block.hash} short />
+          <BlockLink hash={block.hash} short className="text-muted" />
         </td>
       </tr>
     );

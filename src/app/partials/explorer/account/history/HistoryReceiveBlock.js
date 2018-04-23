@@ -7,13 +7,15 @@ import BlockLink from "../../../BlockLink";
 export default function HistoryReceiveBlock({ block }) {
   return (
     <tr>
-      <td>Receive</td>
+      <td className="text-success">Receive</td>
       <td>
-        <AccountLink account={block.account} />
+        <AccountLink account={block.account} className="text-dark" />
       </td>
-      <td>{accounting.formatNumber(block.amount, 6)} NANO</td>
+      <td className="text-success">
+        +{accounting.formatNumber(block.amount, 6)} NANO
+      </td>
       <td>
-        <BlockLink hash={block.hash} short />
+        <BlockLink hash={block.hash} short className="text-muted" />
       </td>
     </tr>
   );

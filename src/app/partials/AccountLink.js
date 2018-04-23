@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import NanoNodeNinja from "../../lib/NanoNodeNinja";
 
@@ -35,7 +35,11 @@ export default class AccountLink extends React.Component {
     }
 
     if (ninja && ninjaData && ninjaData.alias) {
-      accountName = `${ninjaData.alias} - ${accountName}`;
+      accountName = (
+        <Fragment>
+          <b>{ninjaData.alias}</b> - {accountName}
+        </Fragment>
+      );
     }
 
     return accountName;

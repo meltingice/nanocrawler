@@ -5,15 +5,19 @@ import BlockLink from "../../../BlockLink";
 export default function HistoryChangeBlock({ block }) {
   return (
     <tr>
-      <td>Change</td>
+      <td className="text-info">Change</td>
       <td>
-        <AccountLink account={block.representative} ninja />
+        <AccountLink
+          account={block.representative}
+          ninja
+          className="text-dark"
+        />
       </td>
       <td>
         <i className="text-muted">N/A</i>
       </td>
       <td>
-        <BlockLink hash={block.hash} short />
+        <BlockLink hash={block.hash} short className="text-muted" />
       </td>
     </tr>
   );
