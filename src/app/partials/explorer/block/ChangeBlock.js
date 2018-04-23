@@ -12,6 +12,7 @@ export default function ChangeBlock({ block }) {
           <AccountLink
             account={block.block_account}
             className="text-muted break-word"
+            ninja
           />
         </small>
       </h4>
@@ -25,6 +26,7 @@ export default function ChangeBlock({ block }) {
           <AccountLink
             account={block.contents.representative}
             className="text-muted break-word"
+            ninja
           />
         </small>
       </h4>

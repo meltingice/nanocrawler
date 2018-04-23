@@ -32,6 +32,7 @@ class StateBlock extends React.PureComponent {
             <AccountLink
               account={block.contents.account}
               className="text-muted break-word"
+              ninja
             />
           </small>
         </h4>
@@ -71,6 +72,7 @@ class StateBlock extends React.PureComponent {
             <AccountLink
               account={block.contents.representative}
               className="text-muted break-word"
+              ninja
             />
           </small>
         </h4>
@@ -135,6 +137,7 @@ class StateBlock extends React.PureComponent {
                 <AccountLink
                   account={block.source_account}
                   className="text-muted break-word"
+                  ninja
                 />
               </small>
             </h4>
@@ -152,6 +155,7 @@ class StateBlock extends React.PureComponent {
                 <AccountLink
                   account={block.contents.link_as_account}
                   className="text-muted break-word"
+                  ninja
                 />
               </small>
             </h4>

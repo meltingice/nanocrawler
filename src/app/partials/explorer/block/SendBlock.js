@@ -12,6 +12,7 @@ export default function SendBlock({ block }) {
           <AccountLink
             account={block.block_account}
             className="text-muted break-word"
+            ninja
           />
         </small>
       </h4>
@@ -25,6 +26,7 @@ export default function SendBlock({ block }) {
           <AccountLink
             account={block.contents.destination}
             className="text-muted break-word"
+            ninja
           />
         </small>
       </h4>

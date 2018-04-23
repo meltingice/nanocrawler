@@ -12,6 +12,7 @@ export default function OpenBlock({ block }) {
           <AccountLink
             account={block.contents.account}
             className="text-muted break-word"
+            ninja
           />
         </small>
       </h4>
@@ -25,6 +26,7 @@ export default function OpenBlock({ block }) {
           <AccountLink
             className="text-muted break-word"
             account={block.source_account}
+            ninja
           />
         </small>
       </h4>
@@ -53,6 +55,7 @@ export default function OpenBlock({ block }) {
           <AccountLink
             className="text-muted break-word"
             account={block.contents.representative}
+            ninja
           />
         </small>
       </h4>
