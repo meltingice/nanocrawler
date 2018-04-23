@@ -27,8 +27,8 @@ class Explorer extends React.PureComponent {
     const { search, error } = this.state;
 
     return (
-      <div className="row justify-content-center my-5">
-        <div className="col-8">
+      <div className="row justify-content-center my-5 mx-0">
+        <div className="col col-md-8">
           <h1>Network Explorer</h1>
 
           <hr />
@@ -37,7 +37,7 @@ class Explorer extends React.PureComponent {
             <label>Enter a Nano address or block hash to get started.</label>
 
             <div className="form-row">
-              <div className="col">
+              <div className="col-md">
                 <input
                   type="text"
                   className={`form-control form-control-lg ${
@@ -47,7 +47,7 @@ class Explorer extends React.PureComponent {
                   onChange={e => this.setState({ search: e.target.value })}
                 />
               </div>
-              <div className="col-auto">
+              <div className="col-auto mt-2 mt-md-0">
                 <button className="btn btn-nano-primary btn-lg">Search</button>
               </div>
             </div>

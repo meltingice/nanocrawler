@@ -33,7 +33,7 @@ export default class RandomVerifiedAccounts extends React.Component {
         <hr />
 
         {this.state.accounts.map(account => (
-          <VerifiedAccount account={account} />
+          <VerifiedAccount key={account.account} account={account} />
         ))}
       </Fragment>
     );
@@ -49,10 +49,15 @@ const VerifiedAccount = ({ account }) => {
             account={account.account}
             name={account.alias}
             className="text-dark"
+            style={{ wordBreak: "break-word" }}
           />
         </h5>
         <p>
-          <AccountLink account={account.account} className="text-muted" />
+          <AccountLink
+            account={account.account}
+            className="text-muted"
+            style={{ wordBreak: "break-word" }}
+          />
         </p>
       </div>
     </div>
