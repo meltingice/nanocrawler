@@ -7,7 +7,17 @@ export default class ConfigProvider extends React.Component {
   async componentDidMount() {
     const resp = await fetch("/client-config.json");
     let config = await resp.json();
-    config.ticker = await this.fetchTicker();
+
+    try {
+      config.ticker = await this.fetchTicker();
+    } catch (e) {
+      config.ticker = {
+        price_usd: 0,
+        price_btc: 0,
+        percent_change_1h: 0,
+        percent_change_24h: 0
+      };
+    }
 
     this.setState({ config }, () =>
       setTimeout(this.updateTicker.bind(this), 300000)
