@@ -129,7 +129,7 @@ class NetworkStatus extends React.Component {
                 _.keys(this.rebroadcastableReps()).length
               )}{" "}
               <span className="text-muted">
-                representatives rebroadcasting votes
+                online representatives rebroadcasting votes
               </span>
             </h2>
             <p className="text-muted">
