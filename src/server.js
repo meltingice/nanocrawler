@@ -13,7 +13,7 @@ import { accountIsValid, processBlock } from "./server/util";
 import config from "../server-config.json";
 
 import startNetworkDataUpdates from "./nanoNodeMonitorPeers";
-// startNetworkDataUpdates();
+startNetworkDataUpdates();
 
 const nano = new Nano({ url: config.nodeHost });
 
