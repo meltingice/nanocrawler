@@ -8,7 +8,7 @@ import BlockByTypeStats from "../partials/BlockByTypeStats";
 import PeerVersions from "../partials/PeerVersions";
 
 const MAX_SUPPLY = 133248289;
-const REBROADCASTABLE_THRESHOLD = MAX_SUPPLY * 0.0001;
+const REBROADCASTABLE_THRESHOLD = MAX_SUPPLY * 0.001;
 
 class NetworkStatus extends React.Component {
   constructor(props) {
