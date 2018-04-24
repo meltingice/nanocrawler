@@ -24,7 +24,9 @@ class Account extends React.Component {
       history: [],
       delegators: {},
       weight: 0,
-      failed: false
+      block_count: 0,
+      failed: false,
+      nextPageHead: null
     };
 
     this.accountTimeout = this.historyTimeout = null;
@@ -51,6 +53,15 @@ class Account extends React.Component {
     this.fetchDelegators();
   }
 
+  loadMore() {
+    if (this.historyTimeout) clearTimeout(this.historyTimeout);
+    this.fetchHistory();
+  }
+
+  hasMore() {
+    return parseInt(this.state.block_count, 10) > this.state.history.length;
+  }
+
   clearTimers() {
     if (this.accountTimeout) clearTimeout(this.accountTimeout);
     if (this.historyTimeout) clearTimeout(this.historyTimeout);
@@ -70,9 +81,22 @@ class Account extends React.Component {
 
   async fetchHistory() {
     const { match } = this.props;
+    let { history, nextPageHead } = this.state;
+
     try {
-      const history = await this.props.client.history(match.params.account);
-      this.setState({ history, failed: false });
+      let resp = await this.props.client.history(
+        match.params.account,
+        this.state.nextPageHead
+      );
+
+      if (nextPageHead) {
+        resp = resp.slice(1);
+      }
+
+      history = history.concat(resp);
+
+      nextPageHead = _.last(history).hash;
+      this.setState({ history, nextPageHead, failed: false });
 
       this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
     } catch (e) {
@@ -166,11 +190,29 @@ class Account extends React.Component {
 
         <div className="mt-5">
           <h2 className="mb-0">Transactions</h2>
-          <p className="text-muted">Showing the last 20 transactions</p>
+          <p className="text-muted">
+            {this.state.block_count} transactions total
+          </p>
           <TransactionHistory history={history} />
+
+          {this.getLoadMore()}
         </div>
 
         {this.getDelegators()}
+      </div>
+    );
+  }
+
+  getLoadMore() {
+    if (!this.hasMore()) return;
+    return (
+      <div className="text-center">
+        <button
+          className="btn btn-nano-primary"
+          onClick={this.loadMore.bind(this)}
+        >
+          Load More Transactions
+        </button>
       </div>
     );
   }

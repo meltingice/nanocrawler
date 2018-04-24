@@ -43,8 +43,10 @@ export default class Client {
     return await resp.json();
   }
 
-  async history(account) {
-    const resp = await this.fetch(`history/${account}`);
+  async history(account, head = null) {
+    let url = `history/${account}`;
+    if (head) url += `?head=${head}`;
+    const resp = await this.fetch(url);
     return await resp.json();
   }
 

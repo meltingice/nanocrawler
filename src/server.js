@@ -35,7 +35,7 @@ app.get("/account", async (req, res) => {
 
 app.get("/account/:account", async (req, res) => {
   if (!accountIsValid(req.params.account)) {
-    res.status(400).send({ error: "Invalid account" });
+    return res.status(400).send({ error: "Invalid account" });
   }
 
   try {
@@ -66,7 +66,7 @@ app.get("/account/:account", async (req, res) => {
 
 app.get("/weight/:account", async (req, res) => {
   if (!accountIsValid(req.params.account)) {
-    res.status(400).send({ error: "Invalid account" });
+    return res.status(400).send({ error: "Invalid account" });
   }
 
   try {
@@ -149,7 +149,7 @@ app.get("/version", async (req, res) => {
 
 app.get("/delegators/:account", async (req, res) => {
   if (!accountIsValid(req.params.account)) {
-    res.status(400).send({ error: "Invalid account" });
+    return res.status(400).send({ error: "Invalid account" });
   }
 
   try {
@@ -176,19 +176,26 @@ app.get("/delegators/:account", async (req, res) => {
 
 app.get("/history/:account", async (req, res) => {
   if (!accountIsValid(req.params.account)) {
-    res.status(400).send({ error: "Invalid account" });
+    return res.status(400).send({ error: "Invalid account" });
+  }
+
+  if (req.query.head) {
+    if (req.query.head.length !== 64 || /[^A-F0-9]+/.test(req.query.head)) {
+      return res.status(400).send({ error: "Invalid head block" });
+    }
   }
 
   try {
     const history = await redisFetch(
-      `history/${req.params.account}`,
+      `history/${req.params.account}/${req.query.head}`,
       60,
       async () => {
         // const resp = await nano.accounts.history(req.params.account, 20);
         const resp = (await nano.rpc("account_history", {
           account: req.params.account,
           count: 20,
-          raw: "true"
+          raw: "true",
+          head: req.query.head
         })).history;
         return resp.map(block => {
           if (block.amount) {
