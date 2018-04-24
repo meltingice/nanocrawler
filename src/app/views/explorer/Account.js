@@ -43,6 +43,7 @@ class Account extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.account !== this.props.match.params.account) {
       this.clearTimers();
+      this.setState({ history: [], nextPageHead: null });
       this.fetchData();
     }
   }
