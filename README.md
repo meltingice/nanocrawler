@@ -1,6 +1,6 @@
-# Nano Control Panel
+# Nano Node Dashboard
 
-A lightweight web UI for viewing realtime information about your Nano node. This project is currently a heavy work-in-progress.
+A lightweight web UI for viewing realtime information about your Nano node and exploring the Nano network.
 
 ## What is Nano?
 
@@ -33,7 +33,7 @@ The web front-end needs to know where the API server can be reached. Edit `publi
 
 Once the config has been set, you can build the project.
 
-``` bash
+```bash
 npm i
 npm run build
 ```
