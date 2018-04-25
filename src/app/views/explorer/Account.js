@@ -154,9 +154,6 @@ class Account extends React.Component {
 
   async fetchDelegators() {
     const { match } = this.props;
-    const { weight } = this.state;
-
-    if (weight < 256) return;
 
     const delegators = await this.props.client.delegators(match.params.account);
     this.setState({ delegators });
@@ -167,9 +164,12 @@ class Account extends React.Component {
     return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(match.params.account);
   }
 
-  isRepresentative() {
-    const { weight } = this.state;
-    return weight >= 256;
+  accountTitle() {
+    const { weight, delegators } = this.state;
+
+    if (weight >= 133248.289) return "Rebroadcasting Account";
+    if (_.keys(delegators).length > 0) return "Representative Account";
+    return "Account";
   }
 
   render() {
@@ -188,9 +188,7 @@ class Account extends React.Component {
       <div className="p-4">
         <div className="row align-items-center ">
           <div className="col">
-            <h1 className="mb-0">
-              {this.isRepresentative() ? "Representative " : ""}Account
-            </h1>
+            <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">{match.params.account}</p>
 
             <p className="text-muted mb-0">
@@ -273,7 +271,9 @@ class Account extends React.Component {
 
   getDelegators() {
     const { delegators, weight } = this.state;
-    if (!this.isRepresentative()) return;
+
+    if (_.values(delegators).filter(amt => parseInt(amt, 10) > 1).length === 0)
+      return;
 
     return (
       <div className="mt-5">

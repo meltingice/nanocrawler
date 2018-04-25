@@ -25,7 +25,7 @@ export default class DiscoveredPeers extends React.PureComponent {
     return peers.filter(peer => {
       let status = true;
       if (repsOnly) {
-        status = peer.data.votingWeight && peer.data.votingWeight >= 256;
+        status = peer.data.votingWeight && peer.data.votingWeight >= 133248.289;
       }
 
       if (sortVersion) {
@@ -94,7 +94,7 @@ export default class DiscoveredPeers extends React.PureComponent {
                 onChange={e => this.setState({ repsOnly: e.target.checked })}
               />
               <label className="form-check-label" htmlFor="PeerListRepsOnly">
-                Representatives only
+                Rebroadcasting nodes only
               </label>
             </div>
           </div>

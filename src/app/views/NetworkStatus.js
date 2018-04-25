@@ -122,7 +122,8 @@ class NetworkStatus extends React.Component {
               <span className="text-muted">representatives online</span>
             </h2>
             <p className="text-muted">
-              A representative must have at least 256 NANO delegated to them
+              Accounts that have at least 1 delegator, regardless of voting
+              weight
             </p>
             <h2 className="mb-0">
               {accounting.formatNumber(

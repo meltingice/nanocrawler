@@ -61,7 +61,7 @@ class AggregateNetworkData extends React.Component {
   representativePeers() {
     const { peers } = this.state;
     return peers.filter(
-      peer => peer.data.votingWeight && peer.data.votingWeight >= 256
+      peer => peer.data.votingWeight && peer.data.votingWeight >= 0
     );
   }
 
@@ -74,7 +74,7 @@ class AggregateNetworkData extends React.Component {
         <div className="row mt-5 align-items-center">
           <div className="col-md">
             <h1 className="mb-0">Aggregate Network Stats</h1>
-            <p className="text-muted">
+            <p className="text-muted mb-0">
               Stats are collected from discovered{" "}
               <a
                 href="https://github.com/NanoTools/nanoNodeMonitor"
@@ -82,11 +82,11 @@ class AggregateNetworkData extends React.Component {
               >
                 nanoNodeMonitors
               </a>{" "}
-              and filtered to include representative nodes only.
+              and filtered to only include nodes with voting weight
             </p>
           </div>
           <div className="col-auto">
-            <h4 className="text-muted">
+            <h4 className="text-muted mb-0">
               Tracking {this.representativePeers().length} nodes
             </h4>
           </div>
