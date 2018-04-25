@@ -38,7 +38,6 @@ export default class RecentBlockStream extends React.Component {
   }
 
   render() {
-    const { events } = this.state;
     return (
       <Fragment>
         <h3 className="mb-0">Recent Transactions</h3>
@@ -48,8 +47,22 @@ export default class RecentBlockStream extends React.Component {
 
         <hr />
 
-        {events.map(event => <RecentBlock event={event} />)}
+        {this.getEvents()}
       </Fragment>
+    );
+  }
+
+  getEvents() {
+    const { events } = this.state;
+    if (events.length === 0) return this.emptyState();
+    return events.map(event => <RecentBlock key={event.hash} event={event} />);
+  }
+
+  emptyState() {
+    return (
+      <div className="my-5 text-center">
+        <h5 className="text-muted">Waiting for transactions...</h5>
+      </div>
     );
   }
 }
@@ -58,19 +71,19 @@ const RecentBlock = ({ event }) => {
   let block;
   switch (event.block.type) {
     case "change":
-      block = <ChangeBlock key={event.hash} event={event} />;
+      block = <ChangeBlock event={event} />;
       break;
     case "open":
-      block = <OpenBlock key={event.hash} event={event} />;
+      block = <OpenBlock event={event} />;
       break;
     case "receive":
-      block = <ReceiveBlock key={event.hash} event={event} />;
+      block = <ReceiveBlock event={event} />;
       break;
     case "send":
-      block = <SendBlock key={event.hash} event={event} />;
+      block = <SendBlock event={event} />;
       break;
     case "state":
-      block = <StateBlock key={event.hash} event={event} />;
+      block = <StateBlock event={event} />;
       break;
   }
 
