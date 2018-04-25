@@ -9,7 +9,10 @@ export default function SendBlock({ event }) {
     <div className="row">
       <div className="col">
         <p className="mb-0">
-          <AccountLink account={block.account} className="text-dark" />
+          <AccountLink
+            account={block.account}
+            className="text-dark break-word"
+          />
         </p>
         <p className="mb-0">
           <span className="text-danger">
@@ -17,7 +20,7 @@ export default function SendBlock({ event }) {
           </span>
         </p>
         <p className="mb-0">
-          <BlockLink hash={block.hash} className="text-muted" />
+          <BlockLink hash={block.hash} className="text-muted break-word" />
         </p>
       </div>
     </div>

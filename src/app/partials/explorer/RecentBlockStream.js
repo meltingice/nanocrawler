@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import accounting from "accounting";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
 
 import ChangeBlock from "./stream/ChangeBlock";
@@ -12,38 +13,64 @@ export default class RecentBlockStream extends React.Component {
     super(props);
 
     this.state = {
-      events: []
+      events: [],
+      throughput: 0,
+      tpsCount: 0
     };
 
     this.websocket = new AccountWebsocket();
+    this.tpsInterval = null;
   }
 
   async componentDidMount() {
     try {
       await this.websocket.connect();
       this.websocket.subscribeAll(this.onWebsocketEvent.bind(this));
+      this.tpsInterval = setInterval(
+        this.calculateThroughput.bind(this),
+        10000
+      );
     } catch (e) {
       console.log(e.message);
     }
   }
 
   componentWillUnmount() {
+    if (this.tpsInterval) clearInterval(this.tpsInterval);
     this.websocket.disconnect();
   }
 
   onWebsocketEvent(event) {
-    let { events } = this.state;
+    let { events, tpsCount } = this.state;
     events.unshift(event);
-    this.setState({ events: events.slice(0, this.props.count) });
+    tpsCount++;
+    this.setState({ tpsCount, events: events.slice(0, this.props.count) });
+  }
+
+  calculateThroughput() {
+    const { tpsCount } = this.state;
+    this.setState({ throughput: tpsCount / 10.0, tpsCount: 0 });
   }
 
   render() {
+    const { throughput } = this.state;
+
     return (
       <Fragment>
-        <h3 className="mb-0">Recent Transactions</h3>
-        <p className="text-muted">
-          A real-time stream of transactions on the Nano network
-        </p>
+        <div className="row align-items-center">
+          <div className="col-sm">
+            <h3 className="mb-0">Recent Transactions</h3>
+            <p className="text-muted mb-0">
+              A real-time stream of transactions on the Nano network
+            </p>
+          </div>
+          <div className="col-auto">
+            <h5 className="mb-0">
+              {accounting.formatNumber(throughput, 1)}{" "}
+              <span className="text-muted">tx / sec</span>
+            </h5>
+          </div>
+        </div>
 
         <hr />
 
