@@ -13,7 +13,8 @@ const HARDCODED_MONITORS = [
   "http://node.numberwitch.net/api.php",
   "http://nanode.blizznerds.com/nano/api.php",
   "http://78.233.80.228:8000/api.php",
-  "http://nanotipbot.tk/nanoNodeMonitor/api.php"
+  "http://nanotipbot.tk/nanoNodeMonitor/api.php",
+  "https://nano-rep.xyz/api.php"
 ];
 let KNOWN_MONITORS = [];
 
