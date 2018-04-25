@@ -1,5 +1,5 @@
 import { Nano } from "nanode";
-import config from "../../server-config.json";
+import config from "../../../server-config.json";
 
 const nano = new Nano({ url: config.nodeHost });
 
