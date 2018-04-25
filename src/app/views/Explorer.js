@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import RandomVerifiedAccounts from "../partials/explorer/RandomVerifiedAccounts";
+import RecentBlockStream from "../partials/explorer/RecentBlockStream";
 
 class Explorer extends React.PureComponent {
   state = {
@@ -54,6 +55,10 @@ class Explorer extends React.PureComponent {
           </form>
 
           <RandomVerifiedAccounts count={5} />
+
+          <div className="mt-5">
+            <RecentBlockStream count={5} />
+          </div>
         </div>
       </div>
     );

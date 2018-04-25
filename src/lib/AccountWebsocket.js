@@ -40,6 +40,10 @@ export default class AccountWebsocket {
     this.queuedCommands = [];
   }
 
+  subscribeAll(subscriber) {
+    this.subscribeAccounts(["all"], subscriber);
+  }
+
   subscribeAccount(account, subscriber) {
     this.subscribeAccounts([account], subscriber);
   }
