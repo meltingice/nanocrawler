@@ -83,6 +83,7 @@ class Account extends React.Component {
         balance += parseFloat(event.block.amount, 10);
         break;
       case "send":
+        event.block.account = event.block.destination;
         balance -= parseFloat(event.block.amount, 10);
         break;
       case "change":
