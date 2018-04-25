@@ -236,15 +236,21 @@ class Account extends React.Component {
 
         <NodeNinjaAccount account={match.params.account} />
 
-        <div className="mt-5">
-          <h2 className="mb-0">Transactions</h2>
-          <p className="text-muted">
-            {this.state.block_count} transactions total
-          </p>
-          <TransactionHistory history={history} />
-
-          {this.getLoadMore()}
+        <div className="row mt-5 align-items-center">
+          <div className="col">
+            <h2>Transactions</h2>
+          </div>
+          <div className="col-auto">
+            <h4>
+              {accounting.formatNumber(this.state.block_count)}{" "}
+              <span className="text-muted">transactions total</span>
+            </h4>
+          </div>
         </div>
+
+        <TransactionHistory history={history} />
+
+        {this.getLoadMore()}
 
         {this.getDelegators()}
       </div>
