@@ -39,7 +39,7 @@ export default function(app, nano) {
     }
   });
 
-  app.get("/weight/:account", async (req, res) => {
+  app.get("/account/:account/weight", async (req, res) => {
     if (!accountIsValid(req.params.account)) {
       return res.status(400).send({ error: "Invalid account" });
     }
@@ -62,7 +62,7 @@ export default function(app, nano) {
     }
   });
 
-  app.get("/delegators/:account", async (req, res) => {
+  app.get("/account/:account/delegators", async (req, res) => {
     if (!accountIsValid(req.params.account)) {
       return res.status(400).send({ error: "Invalid account" });
     }
@@ -89,7 +89,7 @@ export default function(app, nano) {
     }
   });
 
-  app.get("/history/:account", async (req, res) => {
+  app.get("/account/:account/history", async (req, res) => {
     if (!accountIsValid(req.params.account)) {
       return res.status(400).send({ error: "Invalid account" });
     }
