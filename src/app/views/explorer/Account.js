@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
+import AccountWebsocket from "../../../lib/AccountWebsocket";
 
 import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
@@ -29,20 +30,39 @@ class Account extends React.Component {
       nextPageHead: null
     };
 
-    this.accountTimeout = this.historyTimeout = null;
+    this.accountTimeout = null;
+    this.websocket = new AccountWebsocket();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.fetchData();
+
+    try {
+      await this.websocket.connect();
+      this.websocket.subscribeAccount(
+        this.props.match.params.account,
+        this.onWebsocketEvent.bind(this)
+      );
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 
   componentWillUnmount() {
     this.clearTimers();
+    this.websocket.disconnect();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.account !== this.props.match.params.account) {
       this.clearTimers();
+
+      this.websocket.unsubscribeAccount(prevProps.match.params.account);
+      this.websocket.subscribeAccount(
+        this.props.match.params.account,
+        this.onWebsocketEvent.bind(this)
+      );
+
       this.setState({ history: [], nextPageHead: null });
       this.fetchData();
     }
@@ -54,8 +74,38 @@ class Account extends React.Component {
     this.fetchDelegators();
   }
 
+  async onWebsocketEvent(event) {
+    let { history, balance, representative, block_count } = this.state;
+
+    event.block.hash = event.hash;
+    switch (event.block.type) {
+      case "receive":
+        balance += parseFloat(event.block.amount, 10);
+        break;
+      case "send":
+        balance -= parseFloat(event.block.amount, 10);
+        break;
+      case "change":
+        representative = event.block.representative;
+        break;
+      case "state":
+        representative = event.block.representative;
+        if (event.is_send === "true") {
+          balance -= parseFloat(event.block.amount, 10);
+        } else {
+          balance += parseFloat(event.block.amount, 10);
+        }
+
+        break;
+    }
+
+    history.unshift(event.block);
+    block_count++;
+
+    this.setState({ history, balance, representative, block_count });
+  }
+
   loadMore() {
-    if (this.historyTimeout) clearTimeout(this.historyTimeout);
     this.fetchHistory();
   }
 
@@ -65,7 +115,6 @@ class Account extends React.Component {
 
   clearTimers() {
     if (this.accountTimeout) clearTimeout(this.accountTimeout);
-    if (this.historyTimeout) clearTimeout(this.historyTimeout);
   }
 
   async fetchAccount() {
@@ -98,8 +147,6 @@ class Account extends React.Component {
 
       nextPageHead = _.last(history).hash;
       this.setState({ history, nextPageHead, failed: false });
-
-      this.historyTimeout = setTimeout(this.fetchHistory.bind(this), 60000);
     } catch (e) {
       this.setState({ failed: true });
     }

@@ -11,6 +11,7 @@ export default function injectClient(WrappedComponent) {
             return (
               <WrappedComponent
                 {...props}
+                config={config}
                 client={new Client(config)}
                 ticker={config.ticker}
               />
