@@ -100,7 +100,7 @@ export default class AccountWebsocket {
   }
 
   onOpen(event) {
-    console.log("Socket opened!");
+    // console.log("Socket opened!");
     this.socket.connected = true;
 
     this.queuedCommands.forEach(event =>
@@ -118,7 +118,7 @@ export default class AccountWebsocket {
 
   onClose(event) {
     this.socket.connected = false;
-    console.log("Socket closed", event);
+    // console.log("Socket closed", event);
 
     setTimeout(this.attemptReconnect.bind(this), this.reconnectTimeout);
   }
