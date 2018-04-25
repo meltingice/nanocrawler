@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import accounting from "accounting";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
 
@@ -82,7 +83,15 @@ export default class RecentBlockStream extends React.Component {
   getEvents() {
     const { events } = this.state;
     if (events.length === 0) return this.emptyState();
-    return events.map(event => <RecentBlock key={event.hash} event={event} />);
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="Transaction"
+        transitionEnterTimeout={500}
+        transitionLeave={false}
+      >
+        {events.map(event => <RecentBlock key={event.hash} event={event} />)}
+      </ReactCSSTransitionGroup>
+    );
   }
 
   emptyState() {

@@ -1,4 +1,5 @@
 import React from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 import HistorySendBlock from "./history/HistorySendBlock";
 import HistoryReceiveBlock from "./history/HistoryReceiveBlock";
@@ -35,7 +36,15 @@ export default function TransactionHistory({ history }) {
             <th>Block</th>
           </tr>
         </thead>
-        <tbody>{blocks}</tbody>
+
+        <ReactCSSTransitionGroup
+          component="tbody"
+          transitionName="Transaction"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {blocks}
+        </ReactCSSTransitionGroup>
       </table>
     </div>
   );
