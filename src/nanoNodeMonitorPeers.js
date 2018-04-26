@@ -2,6 +2,7 @@ import _ from "lodash";
 import fetch from "node-fetch";
 import redis from "redis";
 import { Nano } from "nanode";
+import whichCloud from "which-cloud";
 import config from "../server-config.json";
 
 const redisClient = redis.createClient(config.redis);
@@ -113,7 +114,25 @@ function checkForMonitor(peer, url) {
             .json()
             .then(data => {
               if (data.nanoNodeAccount) {
-                resolve({ peer, url, data: formatData(data) });
+                let ipCheck = peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/);
+                if (ipCheck) {
+                  whichCloud(ipCheck[1], (err, provider) => {
+                    if (err) console.error(err);
+                    resolve({
+                      peer,
+                      url,
+                      data: formatData(data),
+                      provider: err ? null : provider
+                    });
+                  });
+                } else {
+                  resolve({
+                    peer,
+                    url,
+                    data: formatData(data),
+                    provider: null
+                  });
+                }
               } else {
                 reject();
               }

@@ -111,6 +111,7 @@ export default class DiscoveredPeers extends React.PureComponent {
                 <th>Peers</th>
                 <th>Version</th>
                 <th>Account</th>
+                <th>Hosting Provider</th>
               </tr>
             </thead>
             <tbody>
@@ -145,12 +146,12 @@ const PeerEntry = ({ peer, currentBlock }) => {
     statusClass = "text-danger";
   }
 
+  if (peer.provider === "unknown") peer.provider = null;
+
   return (
     <tr className={statusClass}>
       <td>
-        <a href={rootUrl} className={statusClass} target="_blank">
-          <OptionalField value={data.nanoNodeName} />
-        </a>
+        <OptionalField value={data.nanoNodeName} />
       </td>
       <td>{accounting.formatNumber(data.currentBlock)}</td>
       <td>{accounting.formatNumber(data.uncheckedBlocks)}</td>
@@ -173,6 +174,9 @@ const PeerEntry = ({ peer, currentBlock }) => {
       </td>
       <td>
         <AccountLink account={data.nanoNodeAccount} short />
+      </td>
+      <td>
+        <OptionalField value={peer.provider} />
       </td>
     </tr>
   );
