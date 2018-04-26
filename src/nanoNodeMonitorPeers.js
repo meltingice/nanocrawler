@@ -16,7 +16,8 @@ const HARDCODED_MONITORS = [
   "http://nanotipbot.tk/nanoNodeMonitor/api.php",
   "https://nano-rep.xyz/api.php",
   "https://node.nanovault.io/api.php",
-  "https://brainblocks.io/monitor/api.php"
+  "https://brainblocks.io/monitor/api.php",
+  "http://207.148.8.82/api.php"
 ];
 let KNOWN_MONITORS = [];
 
@@ -56,7 +57,10 @@ async function updateKnownMonitors() {
   const data = await getDataFromPeers(peers);
 
   KNOWN_MONITORS = _.uniqBy(
-    data.map(m => m.peer).filter(peer => !HARDCODED_MONITORS.includes(peer)),
+    data
+      .map(m => ({ peer: m.peer, url: m.url }))
+      .filter(peer => !HARDCODED_MONITORS.includes(peer.url))
+      .map(peer => peer.peer),
     peer => peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1]
   );
 }
