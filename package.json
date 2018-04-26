@@ -4,6 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "accounting": "^0.4.1",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "blakejs": "^1.1.0",
@@ -24,7 +25,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-svg": "^2.2.15",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "whatwg-fetch": "^2.0.4"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
