@@ -1,5 +1,6 @@
 import os from "os";
 import _ from "lodash";
+import config from "../../../server-config.json";
 import redisFetch from "../helpers/redisFetch";
 import raiNodeInfo from "../helpers/raiNodeInfo";
 
