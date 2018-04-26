@@ -15,7 +15,8 @@ const HARDCODED_MONITORS = [
   "http://78.233.80.228:8000/api.php",
   "http://nanotipbot.tk/nanoNodeMonitor/api.php",
   "https://nano-rep.xyz/api.php",
-  "https://node.nanovault.io/api.php"
+  "https://node.nanovault.io/api.php",
+  "https://brainblocks.io/monitor/api.php"
 ];
 let KNOWN_MONITORS = [];
 
