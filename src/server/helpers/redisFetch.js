@@ -1,4 +1,3 @@
-import Promise from "promise";
 import { promisify } from "es6-promisify";
 import redis from "redis";
 import config from "../../../server-config.json";

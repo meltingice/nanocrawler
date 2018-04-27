@@ -313,7 +313,7 @@ async@^1.4.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.1.2, async@^2.1.4, async@^2.4.1, async@~2.6.0:
+async@^2.1.2, async@^2.1.4, async@^2.4.1, async@^2.6.0, async@~2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
   dependencies:
@@ -2807,6 +2807,10 @@ fbjs@^0.8.16:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
+
+fetch-timeout@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/fetch-timeout/-/fetch-timeout-0.0.2.tgz#f59beb2269359ce84da07ae614da360109c25338"
 
 figures@^2.0.0:
   version "2.0.0"
