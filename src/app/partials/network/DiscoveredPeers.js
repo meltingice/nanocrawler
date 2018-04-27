@@ -86,15 +86,16 @@ export default class DiscoveredPeers extends React.PureComponent {
           </div>
           <div className="col-auto">
             <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                checked={this.state.repsOnly}
-                id="PeerListRepsOnly"
-                onChange={e => this.setState({ repsOnly: e.target.checked })}
-              />
-              <label className="form-check-label" htmlFor="PeerListRepsOnly">
-                Rebroadcasting nodes only
+              <label className="form-check-label">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  checked={this.state.repsOnly}
+                  id="PeerListRepsOnly"
+                  onChange={e => this.setState({ repsOnly: e.target.checked })}
+                  style={{ marginTop: "0.2rem" }}
+                />
+                Rebroadcasting representatives only
               </label>
             </div>
           </div>
@@ -116,7 +117,7 @@ export default class DiscoveredPeers extends React.PureComponent {
             <tbody>
               {sortedPeers.map(peer => (
                 <PeerEntry
-                  key={peer.peer}
+                  key={peer.url}
                   peer={peer}
                   currentBlock={stats.currentBlocks.max}
                 />
