@@ -51,7 +51,7 @@ async function checkKnownMonitors() {
     JSON.stringify(data)
   );
 
-  setTimeout(checkKnownMonitors, 10000);
+  setTimeout(checkKnownMonitors, 30 * 1000);
 }
 
 export default async function startNetworkDataUpdates() {
