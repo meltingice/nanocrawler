@@ -1,4 +1,3 @@
-import { promisify } from "es6-promisify";
 import fetchTimeout from "fetch-timeout";
 
 const TIMEOUT = 5 * 1000;
@@ -14,29 +13,37 @@ export default class NodeMonitor {
     this.apiUrl = apiUrl;
   }
 
-  async fetch() {
-    const resp = await promisify(fetchTimeout)(
-      this.apiUrl,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      },
-      TIMEOUT
-    );
+  fetch() {
+    console.log("Checking", this.apiUrl);
 
-    if (resp.ok) {
-      const data = await resp.json();
-      if (data.nanoNodeAccount) {
-        console.log("OK", this.apiUrl);
-        return { url: this.apiUrl, data: this.formatData(data) };
-      } else {
-        throw new Error("Missing nanoNodeAccount data");
-      }
-    } else {
-      throw new Error(`Received ${resp.status}`);
-    }
+    return new Promise((resolve, reject) => {
+      return fetchTimeout(
+        this.apiUrl,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        },
+        TIMEOUT
+      )
+        .then(resp => {
+          if (resp.ok) {
+            return resp.json();
+          } else {
+            reject(`Received ${resp.status}`);
+          }
+        })
+        .then(data => {
+          if (data.nanoNodeAccount) {
+            console.log("OK", this.apiUrl);
+            resolve({ url: this.apiUrl, data: this.formatData(data) });
+          } else {
+            reject("Missing nanoNodeAccount data");
+          }
+        })
+        .catch(reject);
+    });
   }
 
   formatData(data) {

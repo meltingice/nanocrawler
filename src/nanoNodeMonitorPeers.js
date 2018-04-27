@@ -2,9 +2,6 @@ import _ from "lodash";
 import fetch from "node-fetch";
 import redis from "redis";
 import { Nano } from "nanode";
-import parallel from "async/parallel";
-import reflectAll from "async/reflectAll";
-import asyncify from "async/asyncify";
 import config from "../server-config.json";
 
 import NodeMonitor from "./server/NodeMonitor";
@@ -37,38 +34,30 @@ async function updateKnownMonitors() {
     "apiUrl"
   );
 
-  try {
-    const results = await parallel(
-      reflectAll(monitors.map(monitor => monitor.fetch))
-    );
+  KNOWN_MONITORS = _.compact(
+    await Promise.all(
+      monitors.map(monitor =>
+        monitor.fetch().catch(e => console.error(e.message))
+      )
+    )
+  ).map(data => data.url);
 
-    KNOWN_MONITORS = results.map(monitor => monitor.url);
+  console.log(`There are now ${KNOWN_MONITORS.length} known monitors`);
 
-    console.log(KNOWN_MONITORS);
-  } catch (e) {
-    console.log(e.stack);
-  }
+  setTimeout(updateKnownMonitors, 5 * 60 * 1000);
 }
-
-// async function updateKnownMonitors() {
-//   console.log("Updating our list of known nanoNodeMonitors");
-
-//   const peers = _.keys((await nano.rpc("peers")).peers);
-//   const data = await getDataFromPeers(peers);
-
-//   KNOWN_MONITORS = _.uniqBy(
-//     data
-//       .map(m => ({ peer: m.peer, url: m.url }))
-//       .filter(peer => !HARDCODED_MONITORS.includes(peer.url))
-//       .map(peer => peer.peer),
-//     peer => peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1]
-//   );
-// }
 
 async function checkKnownMonitors() {
   console.log("Checking known nanoNodeMonitors");
 
-  const data = await getDataFromPeers(KNOWN_MONITORS);
+  const data = _.compact(
+    await Promise.all(
+      KNOWN_MONITORS.map(url =>
+        new NodeMonitor(url).fetch().catch(e => console.error(e.message))
+      )
+    )
+  );
+
   redisClient.set(
     `nano-control-panel/${config.redisNamespace ||
       "default"}/nanoNodeMonitorPeerData`,
@@ -80,9 +69,5 @@ async function checkKnownMonitors() {
 
 export default async function startNetworkDataUpdates() {
   await updateKnownMonitors();
-
-  // Update known monitors every 5 minutes.
-  // setInterval(updateKnownMonitors, 300000);
-
-  // checkKnownMonitors();
+  checkKnownMonitors();
 }
