@@ -16,22 +16,57 @@ async function updateKnownMonitors() {
     NodeMonitor.fromPeerAddress(peer)
   );
 
-  monitors = _.uniqBy(
-    monitors.concat(config.knownMonitors.map(url => new NodeMonitor(url))),
-    "apiUrl"
+  monitors = monitors.concat(await fetchNanoNodeNinjaMonitors());
+  monitors = monitors.concat(
+    config.knownMonitors.map(url => new NodeMonitor(url))
   );
 
-  KNOWN_MONITORS = _.compact(
-    await Promise.all(
-      monitors.map(monitor =>
-        monitor.fetch().catch(e => console.error(e.message))
+  monitors = _.uniqBy(monitors, "apiUrl");
+
+  KNOWN_MONITORS = _.uniqBy(
+    _.compact(
+      await Promise.all(
+        monitors.map(monitor =>
+          monitor.fetch().catch(e => console.error(e.message))
+        )
       )
-    )
+    ),
+    "data.nanoNodeAccount"
   ).map(data => data.url);
 
   console.log(`There are now ${KNOWN_MONITORS.length} known monitors`);
 
   setTimeout(updateKnownMonitors, 5 * 60 * 1000);
+}
+
+async function fetchNanoNodeNinjaMonitors() {
+  let accounts = [];
+  let monitors = [];
+
+  try {
+    console.log("Gathering monitors from nanonode.ninja");
+    const resp = await fetch("https://nanonode.ninja/api/accounts/verified");
+    accounts = await resp.json();
+  } catch (e) {
+    return [];
+  }
+
+  console.log(`Checking ${accounts.length} accounts for node monitors...`);
+  for (let i = 0; i < accounts.length; i++) {
+    try {
+      const accountResp = await fetch(
+        `https://nanonode.ninja/api/accounts/${accounts[i].account}`
+      );
+      const accountData = await accountResp.json();
+
+      if (accountData.monitor && accountData.monitor.url) {
+        console.log("OK", accountData.monitor.url);
+        monitors.push(new NodeMonitor(`${accountData.monitor.url}/api.php`));
+      }
+    } catch (e) {}
+  }
+
+  return monitors;
 }
 
 async function checkKnownMonitors() {
