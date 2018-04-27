@@ -9,19 +9,6 @@ import NodeMonitor from "./server/NodeMonitor";
 const redisClient = redis.createClient(config.redis);
 const nano = new Nano({ url: config.nodeHost });
 
-const HARDCODED_MONITORS = [
-  "https://nano-api.meltingice.net/api.php",
-  "https://nano.nifni.net/api.php",
-  "http://node.numberwitch.net/api.php",
-  "http://nanode.blizznerds.com/nano/api.php",
-  "http://78.233.80.228:8000/api.php",
-  "http://nanotipbot.tk/nanoNodeMonitor/api.php",
-  "https://nano-rep.xyz/api.php",
-  "https://node.nanovault.io/api.php",
-  "https://brainblocks.io/monitor/api.php",
-  "http://207.148.8.82/api.php"
-];
-
 let KNOWN_MONITORS = [];
 
 async function updateKnownMonitors() {
@@ -30,7 +17,7 @@ async function updateKnownMonitors() {
   );
 
   monitors = _.uniqBy(
-    monitors.concat(HARDCODED_MONITORS.map(url => new NodeMonitor(url))),
+    monitors.concat(config.knownMonitors.map(url => new NodeMonitor(url))),
     "apiUrl"
   );
 
