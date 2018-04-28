@@ -81,6 +81,10 @@ class Account extends React.Component {
     switch (event.block.type) {
       case "receive":
         balance += parseFloat(event.block.amount, 10);
+
+        // Need to fetch the source block to get the sender
+        const sendBlock = await this.props.client.block(event.block.source);
+        event.block.account = sendBlock.block_account;
         break;
       case "send":
         event.block.account = event.block.destination;
