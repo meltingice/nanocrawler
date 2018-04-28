@@ -270,20 +270,7 @@ class Account extends React.Component {
 
         <NodeNinjaAccount account={match.params.account} />
 
-        <div className="row mt-5 align-items-center">
-          <div className="col">
-            <h2 className="mb-0">Pending Transactions</h2>
-            <p className="text-muted">Only showing up to 20 pending deposits</p>
-          </div>
-          <div className="col-auto">
-            <h4>
-              {accounting.formatNumber(pendingTransactions.total)}{" "}
-              <span className="text-muted">pending transactions</span>
-            </h4>
-          </div>
-        </div>
-
-        <TransactionHistory history={this.pendingTransactions()} />
+        {this.getPendingTransactions()}
 
         <div className="row mt-5 align-items-center">
           <div className="col">
@@ -303,6 +290,30 @@ class Account extends React.Component {
 
         {this.getDelegators()}
       </div>
+    );
+  }
+
+  getPendingTransactions() {
+    const { pendingTransactions } = this.state;
+    if (pendingTransactions.total === 0) return;
+
+    return (
+      <Fragment>
+        <div className="row mt-5 align-items-center">
+          <div className="col">
+            <h2 className="mb-0">Pending Transactions</h2>
+            <p className="text-muted">Only showing up to 20 pending deposits</p>
+          </div>
+          <div className="col-auto">
+            <h4>
+              {accounting.formatNumber(pendingTransactions.total)}{" "}
+              <span className="text-muted">pending transactions</span>
+            </h4>
+          </div>
+        </div>
+
+        <TransactionHistory history={this.pendingTransactions()} />
+      </Fragment>
     );
   }
 
