@@ -127,4 +127,44 @@ export default function(app, nano) {
       res.status(500).send({ error: e.message });
     }
   });
+
+  app.get("/account/:account/pending", async (req, res) => {
+    if (!accountIsValid(req.params.account)) {
+      return res.status(400).send({ error: "Invalid account" });
+    }
+
+    try {
+      const data = await redisFetch(
+        `pending/${req.params.account}`,
+        10,
+        async () => {
+          const resp = await nano.rpc("accounts_pending", {
+            accounts: [req.params.account],
+            source: true,
+            threshold: nano.convert.toRaw(0.000001, "mrai")
+          });
+
+          const blocks = _.toPairs(resp.blocks[req.params.account])
+            .slice(0, 20)
+            .map(data => {
+              return {
+                type: "pending",
+                amount: nano.convert.fromRaw(data[1].amount, "mrai"),
+                hash: data[0],
+                source: data[1].source
+              };
+            });
+
+          return {
+            total: _.keys(resp.blocks[req.params.account]).length,
+            blocks
+          };
+        }
+      );
+
+      res.json(data);
+    } catch (e) {
+      res.status(500).send({ error: e.message });
+    }
+  });
 }

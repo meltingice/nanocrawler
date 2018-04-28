@@ -23,6 +23,7 @@ class Account extends React.Component {
       pending: 0,
       representative: null,
       history: [],
+      pendingTransactions: { blocks: [], total: 0 },
       delegators: {},
       weight: 0,
       block_count: 0,
@@ -30,7 +31,7 @@ class Account extends React.Component {
       nextPageHead: null
     };
 
-    this.accountTimeout = null;
+    this.accountTimeout = this.pendingTimeout = null;
     this.websocket = new AccountWebsocket();
   }
 
@@ -71,6 +72,7 @@ class Account extends React.Component {
   async fetchData() {
     await this.fetchAccount();
     this.fetchHistory();
+    this.fetchPending();
     this.fetchDelegators();
   }
 
@@ -120,6 +122,7 @@ class Account extends React.Component {
 
   clearTimers() {
     if (this.accountTimeout) clearTimeout(this.accountTimeout);
+    if (this.pendingTimeout) clearTimeout(this.pendingTimeout);
   }
 
   async fetchAccount() {
@@ -157,6 +160,21 @@ class Account extends React.Component {
     }
   }
 
+  async fetchPending() {
+    const { match } = this.props;
+
+    try {
+      const pendingTransactions = await this.props.client.pendingTransactions(
+        match.params.account
+      );
+      this.setState({ pendingTransactions });
+
+      this.pendingTimeout = setTimeout(this.fetchPending.bind(this), 10000);
+    } catch (e) {
+      // We don't have to fail hard if this doesn't work
+    }
+  }
+
   async fetchDelegators() {
     const { match } = this.props;
 
@@ -177,9 +195,22 @@ class Account extends React.Component {
     return "Account";
   }
 
+  pendingTransactions() {
+    return this.state.pendingTransactions.blocks.map(block => {
+      block.account = block.source;
+      return block;
+    });
+  }
+
   render() {
     const { match } = this.props;
-    const { balance, pending, history, representative } = this.state;
+    const {
+      balance,
+      pending,
+      history,
+      representative,
+      pendingTransactions
+    } = this.state;
 
     if (!this.accountIsValid()) {
       return this.redirect();
@@ -238,6 +269,21 @@ class Account extends React.Component {
         <hr />
 
         <NodeNinjaAccount account={match.params.account} />
+
+        <div className="row mt-5 align-items-center">
+          <div className="col">
+            <h2 className="mb-0">Pending Transactions</h2>
+            <p className="text-muted">Only showing up to 20 pending deposits</p>
+          </div>
+          <div className="col-auto">
+            <h4>
+              {accounting.formatNumber(pendingTransactions.total)}{" "}
+              <span className="text-muted">pending transactions</span>
+            </h4>
+          </div>
+        </div>
+
+        <TransactionHistory history={this.pendingTransactions()} />
 
         <div className="row mt-5 align-items-center">
           <div className="col">

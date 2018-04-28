@@ -13,6 +13,7 @@ export default function TransactionHistory({ history }) {
       case "send":
         return <HistorySendBlock key={block.hash} block={block} />;
       case "receive":
+      case "pending":
         return <HistoryReceiveBlock key={block.hash} block={block} />;
       case "open":
         return <HistoryOpenBlock key={block.hash} block={block} />;
