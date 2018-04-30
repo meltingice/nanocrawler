@@ -92,7 +92,7 @@ class HistoryStateBlock extends React.Component {
           State <span className={this.statusClass()}>{block.subtype}</span>
         </td>
         <td>
-          {this.accountAction()}{" "}
+          <span className="text-muted">{this.accountAction()}</span>{" "}
           <AccountLink
             account={this.transactionAccount()}
             ninja={block.subtype === "change"}
