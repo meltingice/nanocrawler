@@ -12,9 +12,14 @@ const nano = new Nano({ url: config.nodeHost });
 let KNOWN_MONITORS = [];
 
 async function updateKnownMonitors() {
-  let monitors = _.keys((await nano.rpc("peers")).peers).map(peer =>
-    NodeMonitor.fromPeerAddress(peer)
-  );
+  let monitors = _.keys((await nano.rpc("peers")).peers)
+    .filter(
+      peer =>
+        !config.blacklistedPeers.includes(
+          peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1]
+        )
+    )
+    .map(peer => NodeMonitor.fromPeerAddress(peer));
 
   monitors = monitors.concat(await fetchNanoNodeNinjaMonitors());
   monitors = monitors.concat(
