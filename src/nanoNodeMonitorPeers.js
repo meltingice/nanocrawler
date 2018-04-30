@@ -61,7 +61,11 @@ async function fetchNanoNodeNinjaMonitors() {
 
       if (accountData.monitor && accountData.monitor.url) {
         console.log("OK", accountData.monitor.url);
-        monitors.push(new NodeMonitor(`${accountData.monitor.url}/api.php`));
+        monitors.push(
+          new NodeMonitor(
+            `${accountData.monitor.url.replace(/(\/$)/, "")}/api.php`
+          )
+        );
       }
     } catch (e) {}
   }
