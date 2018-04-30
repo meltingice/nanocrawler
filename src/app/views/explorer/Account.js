@@ -99,8 +99,16 @@ class Account extends React.Component {
         representative = event.block.representative;
         if (event.is_send === "true") {
           balance -= parseFloat(event.block.amount, 10);
+          event.block.subtype = "send";
         } else {
           balance += parseFloat(event.block.amount, 10);
+          if (parseInt(event.block.previous, 16) === 0) {
+            event.block.subtype = "open";
+          } else if (parseInt(event.block.link, 16) === 0) {
+            event.block.subtype = "change";
+          } else {
+            event.block.subtype = "receive";
+          }
         }
 
         break;
