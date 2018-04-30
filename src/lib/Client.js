@@ -3,14 +3,14 @@ export default class Client {
     this.host = config.server;
   }
 
-  async account() {
-    const resp = await this.fetch("account");
+  async account(account = "") {
+    const resp = await this.fetch(`account/${account}`);
     return (await resp.json()).account;
   }
 
-  async weight() {
-    const resp = await this.fetch("weight");
-    return (await resp.json()).weight;
+  async weight(account) {
+    const resp = await this.fetch(`account/${account}/weight`);
+    return parseFloat((await resp.json()).weight, 10);
   }
 
   async blockCount() {
@@ -38,28 +38,30 @@ export default class Client {
     return await resp.json();
   }
 
-  async delegatorsCount() {
-    const resp = await this.fetch("delegators_count");
-    return (await resp.json()).count;
-  }
-
   async systemInfo() {
     const resp = await this.fetch("system_info");
     return await resp.json();
   }
 
-  async balance() {
-    const resp = await this.fetch("balance");
+  async history(account, head = null) {
+    let url = `account/${account}/history`;
+    if (head) url += `?head=${head}`;
+    const resp = await this.fetch(url);
     return await resp.json();
   }
 
-  async history() {
-    const resp = await this.fetch("history");
+  async pendingTransactions(account) {
+    const resp = await this.fetch(`account/${account}/pending`);
     return await resp.json();
   }
 
-  async delegators() {
-    const resp = await this.fetch("delegators");
+  async block(hash) {
+    const resp = await this.fetch(`block/${hash}`);
+    return await resp.json();
+  }
+
+  async delegators(account) {
+    const resp = await this.fetch(`account/${account}/delegators`);
     return await resp.json();
   }
 
@@ -73,7 +75,20 @@ export default class Client {
     return await resp.json();
   }
 
-  fetch(endpoint) {
-    return fetch(`${this.host}/${endpoint}`);
+  async officialRepresentatives() {
+    const resp = await this.fetch("official_representatives");
+    return (await resp.json()).representatives;
+  }
+
+  async networkData() {
+    const resp = await this.fetch("network_data");
+    return (await resp.json()).network;
+  }
+
+  async fetch(endpoint) {
+    const resp = await fetch(`${this.host}/${endpoint}`);
+    if (resp.ok) return resp;
+    const data = await resp.json();
+    throw new Error(data.error);
   }
 }

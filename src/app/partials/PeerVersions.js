@@ -28,16 +28,22 @@ export default function PeerVersions({ peers }) {
     versions[version]++;
   });
 
+  const sortedVersions = _.toPairs(versions).sort((a, b) => {
+    if (a[0] > b[0]) return -1;
+    if (a[0] < b[0]) return 1;
+    return 0;
+  });
+
   return (
     <Fragment>
       <h2>Peer Versions</h2>
 
       <dl className="PeerVersions">
-        {_.map(versions, (count, version) => (
+        {_.map(sortedVersions, data => (
           <Version
-            key={version}
-            version={version}
-            count={count}
+            key={data[0]}
+            version={data[0]}
+            count={data[1]}
             total={totalPeers}
           />
         ))}

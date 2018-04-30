@@ -1,8 +1,11 @@
 import React from "react";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 import HistorySendBlock from "./history/HistorySendBlock";
 import HistoryReceiveBlock from "./history/HistoryReceiveBlock";
-import HistoryUniversalBlock from "./history/HistoryUniversalBlock";
+import HistoryOpenBlock from "./history/HistoryOpenBlock";
+import HistoryChangeBlock from "./history/HistoryChangeBlock";
+import HistoryStateBlock from "./history/HistoryStateBlock";
 
 export default function TransactionHistory({ history }) {
   const blocks = history.map(block => {
@@ -10,9 +13,14 @@ export default function TransactionHistory({ history }) {
       case "send":
         return <HistorySendBlock key={block.hash} block={block} />;
       case "receive":
+      case "pending":
         return <HistoryReceiveBlock key={block.hash} block={block} />;
-      case "utx":
-        return <HistoryUniversalBlock key={block.hash} block={block} />;
+      case "open":
+        return <HistoryOpenBlock key={block.hash} block={block} />;
+      case "change":
+        return <HistoryChangeBlock key={block.hash} block={block} />;
+      case "state":
+        return <HistoryStateBlock key={block.hash} block={block} />;
       default:
         return null;
     }
@@ -29,7 +37,15 @@ export default function TransactionHistory({ history }) {
             <th>Block</th>
           </tr>
         </thead>
-        <tbody>{blocks}</tbody>
+
+        <ReactCSSTransitionGroup
+          component="tbody"
+          transitionName="Transaction"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {blocks}
+        </ReactCSSTransitionGroup>
       </table>
     </div>
   );

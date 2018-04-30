@@ -1,9 +1,7 @@
-/*
-  Colors:
-    - Dark Blue: ##2C3E50;
-*/
-
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
 body {
   margin: 0;

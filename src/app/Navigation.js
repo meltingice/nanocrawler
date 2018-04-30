@@ -34,22 +34,11 @@ export default () => {
           </li>
           <li className="nav-item">
             <NavLink
-              exact
-              to="/account"
+              to="/explorer"
               className="nav-link"
               activeClassName="active"
             >
-              Account
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              to="/delegators"
-              className="nav-link"
-              activeClassName="active"
-            >
-              Delegators
+              Explorer
             </NavLink>
           </li>
         </ul>

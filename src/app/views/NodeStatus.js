@@ -5,6 +5,8 @@ import moment from "moment";
 import NodeStatistics from "../partials/NodeStatistics";
 import injectClient from "../../lib/ClientComponent";
 
+import AccountLink from "../partials/AccountLink";
+
 class NodeStatus extends React.Component {
   constructor(props) {
     super(props);
@@ -34,7 +36,7 @@ class NodeStatus extends React.Component {
   async updateStats() {
     this.setState({
       blockCount: await this.props.client.blockCount(),
-      weight: await this.props.client.weight(),
+      weight: await this.props.client.weight(this.props.account),
       systemInfo: await this.props.client.systemInfo(),
       peerCount: await this.props.client.peerCount()
     });
@@ -49,7 +51,13 @@ class NodeStatus extends React.Component {
       <div className="p-4">
         <div className="row align-items-center">
           <div className="col-sm">
-            <h1>Node Status</h1>
+            <h1 className="mb-0">Node Status</h1>
+            <p className="text-muted break-word">
+              <AccountLink
+                account={this.props.account}
+                className="text-muted"
+              />
+            </p>
           </div>
           <div className="col col-auto">
             <h3>
@@ -86,8 +94,8 @@ class NodeStatus extends React.Component {
             <h2>{this.getUptime()}</h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Load Average</p>
-            <h2>{this.getLoadAverage()}</h2>
+            <p className="text-muted mb-2">CPU Usage</p>
+            <h2>{this.getCpuUsage()}</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
@@ -108,24 +116,22 @@ class NodeStatus extends React.Component {
 
   getUptime() {
     const { systemInfo } = this.state;
-    if (!systemInfo.uptime) return "...";
+    if (!systemInfo.raiStats) return "...";
     return moment()
-      .subtract(systemInfo.uptime, "seconds")
+      .subtract((systemInfo.raiStats.elapsed || 0) / 1000, "seconds")
       .fromNow(true);
   }
 
-  getLoadAverage() {
+  getCpuUsage() {
     const { systemInfo } = this.state;
-    if (!systemInfo.loadAvg) return "...";
-    return systemInfo.loadAvg
-      .map(avg => Math.round(avg * 100.0) / 100.0)
-      .join(", ");
+    if (!systemInfo.raiStats) return "...";
+    return `${systemInfo.raiStats.cpu || 0}%`;
   }
 
   getMemory() {
     const { systemInfo } = this.state;
     if (!systemInfo.memory) return "...";
-    const { memory } = systemInfo;
+    const { memory, raiStats } = systemInfo;
 
     const formatMemory = amt => {
       amt = amt / 1024 / 1024;
@@ -136,7 +142,7 @@ class NodeStatus extends React.Component {
       return `${Math.round(amt * 100.0) / 100.0}MB`;
     };
 
-    return `${formatMemory(memory.total - memory.free)} / ${formatMemory(
+    return `${formatMemory(raiStats.memory || 0)} / ${formatMemory(
       memory.total
     )}`;
   }

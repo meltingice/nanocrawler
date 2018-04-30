@@ -4,13 +4,15 @@ import _ from "lodash";
 import DelegatorEntry from "./DelegatorEntry";
 
 export default function DelegatorsTable({ delegators }) {
-  const sortedDelegators = _.toPairs(delegators).sort((a, b) => {
-    const aBalance = parseFloat(a[1]);
-    const bBalance = parseFloat(b[1]);
-    if (aBalance < bBalance) return 1;
-    if (aBalance > bBalance) return -1;
-    return 0;
-  });
+  const sortedDelegators = _.toPairs(delegators)
+    .filter(d => parseFloat(d[1], 10) >= 1)
+    .sort((a, b) => {
+      const aBalance = parseFloat(a[1], 10);
+      const bBalance = parseFloat(b[1], 10);
+      if (aBalance < bBalance) return 1;
+      if (aBalance > bBalance) return -1;
+      return 0;
+    });
 
   return (
     <div className="table-responsive">
