@@ -71,6 +71,19 @@ class HistoryStateBlock extends React.Component {
     }
   }
 
+  accountAction() {
+    const { block } = this.props;
+    switch (block.subtype) {
+      case "open":
+      case "receive":
+        return "from";
+      case "send":
+        return "to";
+      default:
+        return "";
+    }
+  }
+
   render() {
     const { block } = this.props;
     return (
@@ -79,6 +92,7 @@ class HistoryStateBlock extends React.Component {
           State <span className={this.statusClass()}>{block.subtype}</span>
         </td>
         <td>
+          {this.accountAction()}{" "}
           <AccountLink
             account={this.transactionAccount()}
             ninja={block.subtype === "change"}

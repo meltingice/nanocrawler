@@ -10,6 +10,7 @@ export default function HistoryReceiveBlock({ block }) {
     <tr>
       <td className="text-success">{_.capitalize(block.type)}</td>
       <td>
+        <span className="text-muted">from</span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-success">

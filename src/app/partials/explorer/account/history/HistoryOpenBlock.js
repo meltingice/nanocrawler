@@ -9,6 +9,7 @@ export default function HistoryOpenBlock({ block }) {
     <tr>
       <td className="text-success">Open</td>
       <td>
+        <span className="text-muted">from</span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-success">

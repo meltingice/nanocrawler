@@ -9,6 +9,7 @@ export default function HistorySendBlock({ block }) {
     <tr>
       <td className="text-danger">Send</td>
       <td>
+        <span className="text-muted">to</span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-danger">
