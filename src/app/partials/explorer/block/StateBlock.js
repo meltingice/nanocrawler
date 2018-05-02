@@ -92,7 +92,8 @@ class StateBlock extends React.PureComponent {
         </h4>
         <p>
           <small>
-            The date and time this block was discovered in your local time
+            The date and time this block was discovered converted to your local
+            time
           </small>
         </p>
 

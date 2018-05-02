@@ -6,10 +6,9 @@ import * as blake from "blakejs";
 
 export function formatTimestamp(timestamp) {
   if (!timestamp) return null;
-  return moment
-    .utc(parseInt(timestamp, 10))
-    .local()
-    .format("MMM D, YYYY h:mm:ssa");
+  const d = new Date();
+  d.setTime(parseInt(timestamp, 10) - d.getTimezoneOffset() * 60 * 1000);
+  return moment(d).format("MMM D, YYYY h:mm:ssa");
 }
 
 export function keyToPublicAccountId(accountHex) {
