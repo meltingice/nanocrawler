@@ -6,7 +6,7 @@ import * as blake from "blakejs";
 
 export function formatTimestamp(timestamp) {
   if (!timestamp) return null;
-  return moment(parseInt(timestamp, 10)).format("MMM D, YYYY h:mm:ssa");
+  return moment(parseInt(timestamp, 10)).format("MMM D, YYYY HH:mm:ss");
 }
 
 export function keyToPublicAccountId(accountHex) {
