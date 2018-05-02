@@ -24,3 +24,4 @@ const redisFetch = async (key, expire, func) => {
 };
 
 export default redisFetch;
+export { redisGet };

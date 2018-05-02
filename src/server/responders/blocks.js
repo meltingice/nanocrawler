@@ -15,7 +15,7 @@ export default function(app, nano) {
             source: true
           })).blocks;
 
-          return processBlock(blocks[_.keys(blocks)[0]]);
+          return await processBlock(blocks[_.keys(blocks)[0]]);
         }
       );
 
