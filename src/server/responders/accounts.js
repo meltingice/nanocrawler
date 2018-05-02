@@ -16,7 +16,7 @@ export default function(app, nano) {
     try {
       const account = await redisFetch(
         `account/${req.params.account}`,
-        60,
+        10,
         async () => {
           const account = await nano.rpc("account_info", {
             account: req.params.account,
@@ -103,7 +103,7 @@ export default function(app, nano) {
     try {
       const history = await redisFetch(
         `history/${req.params.account}/${req.query.head}`,
-        60,
+        10,
         async () => {
           // const resp = await nano.accounts.history(req.params.account, 20);
           const resp = (await nano.rpc("account_history", {
