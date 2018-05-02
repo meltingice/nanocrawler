@@ -8,20 +8,18 @@ export function accountIsValid(account) {
   return /^(xrb_|nano_)/.test(account);
 }
 
-export async function addTimestampToBlock(block) {
+export async function getTimestampForHash(hash) {
   try {
-    const timestamp = await redisGet(`block_timestamp/${block.hash}`);
+    const timestamp = await redisGet(`block_timestamp/${hash}`);
     if (timestamp) {
-      block.timestamp = timestamp;
+      return timestamp;
     }
   } catch (e) {}
 
-  return block;
+  return null;
 }
 
 export async function processBlock(block) {
-  block = await addTimestampToBlock(block);
-
   block.amount = nano.convert.fromRaw(block.amount, "mrai");
   block.contents = JSON.parse(block.contents);
 

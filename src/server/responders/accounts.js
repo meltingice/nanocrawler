@@ -1,7 +1,7 @@
 import _ from "lodash";
 import config from "../../../server-config.json";
 import redisFetch from "../helpers/redisFetch";
-import { accountIsValid, addTimestampToBlock } from "../helpers/util";
+import { accountIsValid, getTimestampForHash } from "../helpers/util";
 
 export default function(app, nano) {
   app.get("/account", async (req, res) => {
@@ -112,14 +112,15 @@ export default function(app, nano) {
             raw: "true",
             head: req.query.head
           })).history;
-          return resp.map(async block => {
-            block = await addTimestampToBlock(block);
-            if (block.amount) {
-              block.amount = nano.convert.fromRaw(block.amount, "mrai");
-            }
 
-            return block;
-          });
+          for (let i = 0; i < resp.length; i++) {
+            resp[i].timestamp = await getTimestampForHash(resp[i].hash);
+            if (resp[i].amount) {
+              resp[i].amount = nano.convert.fromRaw(resp[i].amount, "mrai");
+            }
+          }
+
+          return resp;
         }
       );
 
