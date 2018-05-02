@@ -1,7 +1,8 @@
 import React from "react";
 import injectClient from "../../lib/ClientComponent";
 import Statistics from "../../lib/Statistics";
-import NetworkChart from "./charts/NetworkChart";
+import ResponsiveChart from "./charts/ResponsiveChart";
+import { AreaChart, Legend } from "react-easy-chart";
 
 class NodeStatistics extends React.Component {
   constructor(props) {
@@ -10,7 +11,9 @@ class NodeStatistics extends React.Component {
     this.statistics = new Statistics(this.props.client);
     this.timeout = null;
 
-    this.state = {};
+    this.state = {
+      data: {}
+    };
   }
 
   componentWillMount() {
@@ -19,23 +22,46 @@ class NodeStatistics extends React.Component {
 
   async updateStats() {
     await this.statistics.fetch();
-    this.forceUpdate();
+    this.setState({
+      data: this.statistics.data
+    });
 
-    this.timeout = setTimeout(this.updateStats.bind(this), 1000);
+    this.timeout = setTimeout(this.updateStats.bind(this), 5000);
+  }
+
+  chartData(key) {
+    const { data } = this.state;
+    if (data[key]) return data[key].toArray();
+    return [];
   }
 
   render() {
     return (
       <div className="row">
-        <div className="col-md">
-          <h3>Traffic</h3>
-          <NetworkChart
-            in={this.statistics.getTimeSeries("traffic.all.in")}
-            out={this.statistics.getTimeSeries("traffic.all.out")}
+        <div className="col">
+          <ResponsiveChart>
+            {width => (
+              <AreaChart
+                xType="time"
+                datePattern="%H:%M:%S"
+                axes
+                axisLabels={{ x: "Time", y: "Bytes" }}
+                interpolate={"cardinal"}
+                width={width}
+                height={width * 9 / 16}
+                data={[
+                  this.chartData("traffic.all.in") || [],
+                  this.chartData("traffic.all.out") || []
+                ]}
+              />
+            )}
+          </ResponsiveChart>
+          <Legend
+            data={[{ key: "Traffic In" }, { key: "Traffic Out" }]}
+            dataId="key"
+            horizontal
           />
         </div>
-
-        <div className="col-md" />
       </div>
     );
   }

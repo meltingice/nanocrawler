@@ -1,6 +1,6 @@
 import redisFetch from "../helpers/redisFetch";
 
-export default function (app, nano) {
+export default function(app, nano) {
   app.get("/statistics/:type", async (req, res) => {
     if (!["counters", "samples"].includes(req.params.type)) {
       res.sendStatus(400);
@@ -9,7 +9,7 @@ export default function (app, nano) {
 
     const data = await redisFetch(
       `statistics/${req.params.type}`,
-      1,
+      5,
       async () => {
         return await nano.rpc("stats", { type: req.params.type });
       }
