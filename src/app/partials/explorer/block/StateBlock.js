@@ -3,6 +3,8 @@ import injectClient from "../../../../lib/ClientComponent";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
+import OptionalField from "../../OptionalField";
+import { formatTimestamp } from "../../../../lib/util";
 
 class StateBlock extends React.PureComponent {
   inferBlockSubtype() {
@@ -81,6 +83,18 @@ class StateBlock extends React.PureComponent {
         </p>
 
         {this.getStateBlockExtraInfo()}
+
+        <h4 className="mb-0">
+          Date{" "}
+          <small className="text-muted">
+            <OptionalField value={formatTimestamp(block.timestamp)} />
+          </small>
+        </h4>
+        <p>
+          <small>
+            The date and time this block was discovered in your local time
+          </small>
+        </p>
 
         <h5 className="mb-0">Previous Block {this.getPreviousBlock(block)}</h5>
         <p>

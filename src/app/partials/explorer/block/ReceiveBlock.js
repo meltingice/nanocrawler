@@ -2,6 +2,8 @@ import React from "react";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
+import OptionalField from "../../OptionalField";
+import { formatTimestamp } from "../../../../lib/util";
 
 export default function ReceiveBlock({ block }) {
   return (
@@ -58,6 +60,19 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>The corresponding send block for this transaction</small>
+      </p>
+
+      <h4 className="mb-0">
+        Date{" "}
+        <small className="text-muted">
+          <OptionalField value={formatTimestamp(block.timestamp)} />
+        </small>
+      </h4>
+      <p>
+        <small>
+          The date and time this block was discovered converted to your local
+          time
+        </small>
       </p>
 
       <h5 className="mb-0">
