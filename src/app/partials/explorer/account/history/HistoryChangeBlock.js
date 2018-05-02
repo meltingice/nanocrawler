@@ -1,6 +1,8 @@
 import React from "react";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
+import OptionalField from "../../../OptionalField";
+import { formatTimestamp } from "../../../../../lib/util";
 
 export default function HistoryChangeBlock({ block }) {
   return (
@@ -15,6 +17,9 @@ export default function HistoryChangeBlock({ block }) {
       </td>
       <td>
         <i className="text-muted">N/A</i>
+      </td>
+      <td>
+        <OptionalField value={formatTimestamp(block.timestamp)} />
       </td>
       <td>
         <BlockLink hash={block.hash} short className="text-muted" />

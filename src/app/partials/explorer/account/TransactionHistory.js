@@ -34,6 +34,7 @@ export default function TransactionHistory({ history }) {
             <th>Type</th>
             <th>Account</th>
             <th>Amount</th>
+            <th>Date</th>
             <th>Block</th>
           </tr>
         </thead>

@@ -157,6 +157,10 @@ export default function(app, nano) {
               };
             });
 
+          for (let i = 0; i < blocks.length; i++) {
+            blocks[i].timestamp = await getTimestampForHash(blocks[i].hash);
+          }
+
           return {
             total: _.keys(resp.blocks[req.params.account]).length,
             blocks

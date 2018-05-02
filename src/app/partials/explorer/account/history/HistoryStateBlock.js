@@ -4,7 +4,8 @@ import accounting from "accounting";
 import injectClient from "../../../../../lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
-import { keyToPublicAccountId } from "../../../../../lib/util";
+import { keyToPublicAccountId, formatTimestamp } from "../../../../../lib/util";
+import OptionalField from "../../../OptionalField";
 
 class HistoryStateBlock extends React.Component {
   state = {
@@ -102,6 +103,9 @@ class HistoryStateBlock extends React.Component {
         <td className={this.statusClass()}>
           {this.transactionSymbol()}
           {accounting.formatNumber(block.amount, 6)} NANO
+        </td>
+        <td>
+          <OptionalField value={formatTimestamp(block.timestamp)} />
         </td>
         <td>
           <BlockLink hash={block.hash} short className="text-muted" />

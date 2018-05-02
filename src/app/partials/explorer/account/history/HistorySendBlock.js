@@ -3,6 +3,8 @@ import accounting from "accounting";
 
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
+import OptionalField from "../../../OptionalField";
+import { formatTimestamp } from "../../../../../lib/util";
 
 export default function HistorySendBlock({ block }) {
   return (
@@ -14,6 +16,9 @@ export default function HistorySendBlock({ block }) {
       </td>
       <td className="text-danger">
         -{accounting.formatNumber(block.amount, 6)} NANO
+      </td>
+      <td>
+        <OptionalField value={formatTimestamp(block.timestamp)} />
       </td>
       <td>
         <BlockLink hash={block.hash} short className="text-muted" />
