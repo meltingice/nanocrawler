@@ -6,9 +6,7 @@ import * as blake from "blakejs";
 
 export function formatTimestamp(timestamp) {
   if (!timestamp) return null;
-  const d = new Date();
-  d.setTime(parseInt(timestamp, 10) - d.getTimezoneOffset() * 60 * 1000);
-  return moment(d).format("MMM D, YYYY h:mm:ssa");
+  return moment(parseInt(timestamp, 10)).format("MMM D, YYYY h:mm:ssa");
 }
 
 export function keyToPublicAccountId(accountHex) {
