@@ -80,6 +80,7 @@ class Account extends React.Component {
     let { history, balance, representative, block_count } = this.state;
 
     event.block.hash = event.hash;
+    event.block.timestamp = event.timestamp;
     switch (event.block.type) {
       case "receive":
         balance += parseFloat(event.block.amount, 10);
