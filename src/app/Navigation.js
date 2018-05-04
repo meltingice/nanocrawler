@@ -16,7 +16,7 @@ export default () => {
       </div>
 
       <div className="col-md">
-        <ul className="NavigationList nav">
+        <ul className="NavigationList nav ml-2">
           <li className="nav-item">
             <NavLink exact to="/" className="nav-link" activeClassName="active">
               Node Status
