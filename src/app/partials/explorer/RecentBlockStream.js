@@ -57,6 +57,8 @@ class RecentBlockStream extends React.Component {
   render() {
     const { throughput } = this.state;
 
+    if (!this.props.config.websocketServer) return null;
+
     return (
       <Fragment>
         <div className="row align-items-center">
