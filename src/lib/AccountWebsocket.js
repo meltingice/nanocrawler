@@ -1,6 +1,6 @@
 export default class AccountWebsocket {
-  constructor() {
-    this.websocketHost = "nano-ws.meltingice.net";
+  constructor(host) {
+    this.websocketHost = host;
     this.keepalivePing = 60 * 1000;
     this.reconnectTimeout = 5 * 1000;
     this.keepaliveTimeout = null;
