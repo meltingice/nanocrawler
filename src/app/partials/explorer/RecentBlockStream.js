@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import accounting from "accounting";
+import injectClient from "../../../lib/ClientComponent";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
 
 import ChangeBlock from "./stream/ChangeBlock";
@@ -9,7 +10,7 @@ import ReceiveBlock from "./stream/ReceiveBlock";
 import SendBlock from "./stream/SendBlock";
 import StateBlock from "./stream/StateBlock";
 
-export default class RecentBlockStream extends React.Component {
+class RecentBlockStream extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,7 +20,7 @@ export default class RecentBlockStream extends React.Component {
       tpsCount: 0
     };
 
-    this.websocket = new AccountWebsocket();
+    this.websocket = new AccountWebsocket(this.props.config.websocketServer);
     this.tpsInterval = null;
   }
 
@@ -55,6 +56,8 @@ export default class RecentBlockStream extends React.Component {
 
   render() {
     const { throughput } = this.state;
+
+    if (!this.props.config.websocketServer) return null;
 
     return (
       <Fragment>
@@ -129,3 +132,5 @@ const RecentBlock = ({ event }) => {
     </Fragment>
   );
 };
+
+export default injectClient(RecentBlockStream);

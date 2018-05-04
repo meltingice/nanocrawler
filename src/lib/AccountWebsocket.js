@@ -1,6 +1,6 @@
 export default class AccountWebsocket {
-  constructor() {
-    this.websocketHost = "nano-ws.meltingice.net";
+  constructor(host) {
+    this.websocketHost = host;
     this.keepalivePing = 60 * 1000;
     this.reconnectTimeout = 5 * 1000;
     this.keepaliveTimeout = null;
@@ -17,6 +17,7 @@ export default class AccountWebsocket {
   }
 
   async connect() {
+    if (!this.websocketHost) return;
     if (this.socket.connected && this.socket.ws) return;
 
     this.socket.ws = new WebSocket(`wss://${this.websocketHost}`);

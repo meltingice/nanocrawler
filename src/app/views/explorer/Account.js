@@ -32,7 +32,7 @@ class Account extends React.Component {
     };
 
     this.accountTimeout = this.pendingTimeout = null;
-    this.websocket = new AccountWebsocket();
+    this.websocket = new AccountWebsocket(this.props.config.websocketServer);
   }
 
   async componentDidMount() {
