@@ -38,7 +38,7 @@ class PriceWithConversions extends React.PureComponent {
           this.props.precision.nano
         )} NANO`;
       case "usd":
-        return accounting.formatMoney(value, this.props.precision.usd);
+        return accounting.formatMoney(value, "$", this.props.precision.usd);
       case "btc":
         return accounting.formatMoney(value, "₿", this.props.precision.btc);
       default:
