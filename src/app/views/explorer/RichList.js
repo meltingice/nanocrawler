@@ -12,24 +12,75 @@ class RichList extends React.Component {
 
     this.state = {
       accounts: [],
-      officialRepresentatives: {}
+      officialRepresentatives: {},
+      representativesOnline: {}
     };
   }
 
   async componentDidMount() {
     const accounts = await this.props.client.richList();
     const officialRepresentatives = await this.props.client.officialRepresentatives();
-    this.setState({ accounts, officialRepresentatives });
+    const representativesOnline = await this.props.client.representativesOnline();
+
+    this.setState({ accounts, officialRepresentatives, representativesOnline });
+  }
+
+  top100Balance() {
+    return _.sum(this.state.accounts.map(account => account.balance));
+  }
+
+  top100Percentage() {
+    return (
+      Math.round(
+        this.top100Balance() / this.props.config.maxCoinSupply * 10000
+      ) / 100
+    );
+  }
+
+  officialRepAccounts() {
+    const officialReps = _.keys(this.state.officialRepresentatives);
+    return this.state.accounts.filter(account =>
+      officialReps.includes(account.representative)
+    );
+  }
+
+  topAccountsOnline() {
+    const { accounts, representativesOnline } = this.state;
+    const repAccounts = _.keys(representativesOnline);
+    return accounts.filter(account => repAccounts.includes(account.account));
   }
 
   render() {
-    const { officialRepresentatives } = this.state;
+    const { officialRepresentatives, representativesOnline } = this.state;
 
     return (
       <div className="p-4">
         <div className="row justify-content-center my-5 mx-0">
           <div className="col col-md-10">
-            <h1 className="mb-0">Largest Accounts</h1>
+            <h3 className="text-muted">
+              <span className="text-dark">
+                {this.top100Percentage()}% of the total supply
+              </span>{" "}
+              is held by the top 100 accounts
+            </h3>
+            <h3 className="text-muted">
+              <span className="text-dark">
+                {this.officialRepAccounts().length}% of the top accounts
+              </span>{" "}
+              are delegating their weight to official representatives
+            </h3>
+            <h3 className="text-muted">
+              <span className="text-dark">
+                {this.topAccountsOnline().length} accounts
+              </span>{" "}
+              are running their own node
+            </h3>
+          </div>
+        </div>
+
+        <div className="row justify-content-center my-5 mx-0">
+          <div className="col col-md-10">
+            <h1 className="mb-0">Top 100 Accounts</h1>
             <p className="text-muted">Sorted by balance</p>
 
             <hr />
@@ -38,7 +89,10 @@ class RichList extends React.Component {
               <TopAccount
                 key={account.account}
                 account={account}
-                officialRepresentatives={officialRepresentatives}
+                officialRep={_.keys(officialRepresentatives).includes(
+                  account.representative
+                )}
+                online={_.keys(representativesOnline).includes(account.account)}
               />
             ))}
           </div>
@@ -48,13 +102,13 @@ class RichList extends React.Component {
   }
 }
 
-const TopAccount = ({ account, officialRepresentatives }) => {
-  const repStatus = _.keys(officialRepresentatives).includes(
-    account.representative
-  )
-    ? "text-danger"
-    : "text-muted";
-
+const TopAccount = ({ account, officialRep, online }) => {
+  const repStatus = officialRep ? "text-danger" : "text-muted";
+  const onlineBadge = online ? (
+    <span className="badge badge-info mr-1">Online</span>
+  ) : (
+    ""
+  );
   return (
     <Fragment>
       <div className="row">
@@ -67,6 +121,7 @@ const TopAccount = ({ account, officialRepresentatives }) => {
             />
           </h5>
           <p className={repStatus}>
+            {onlineBadge}
             Represented by{" "}
             <AccountLink
               account={account.representative}
