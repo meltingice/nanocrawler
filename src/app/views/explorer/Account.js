@@ -253,8 +253,8 @@ class Account extends React.Component {
 
     return (
       <div className="alert alert-danger">
-        This account's representative is offline. If this is your account, you
-        should consider switching your representative to a{" "}
+        This account's representative has less than 95% uptime. If this is your
+        account, you should consider switching your representative to a{" "}
         <a
           href="https://nanonode.ninja/"
           target="_blank"
