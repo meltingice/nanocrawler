@@ -5,6 +5,7 @@ import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
+import NanoNodeNinja from "../../../lib/NanoNodeNinja";
 
 import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
@@ -29,7 +30,8 @@ class Account extends React.Component {
       weight: 0,
       block_count: 0,
       failed: false,
-      nextPageHead: null
+      nextPageHead: null,
+      uptime: 0
     };
 
     this.accountTimeout = this.pendingTimeout = null;
@@ -73,6 +75,7 @@ class Account extends React.Component {
   async fetchData() {
     await this.fetchAccount();
     this.fetchOnlineReps();
+    this.fetchUptime();
     this.fetchHistory();
     this.fetchPending();
     this.fetchDelegators();
@@ -153,6 +156,13 @@ class Account extends React.Component {
     this.setState({ representativesOnline });
   }
 
+  async fetchUptime() {
+    const { match } = this.props;
+    const ninja = new NanoNodeNinja(match.params.account);
+    await ninja.fetch();
+    this.setState({ uptime: ninja.data.uptime });
+  }
+
   async fetchHistory() {
     const { match } = this.props;
     let { history, nextPageHead } = this.state;
@@ -218,16 +228,41 @@ class Account extends React.Component {
     });
   }
 
-  representativeOnlineStatus() {
+  representativeOnline() {
     const { representative } = this.state;
-    const repOnline = _.keys(this.state.representativesOnline).includes(
-      representative
-    );
+    return _.keys(this.state.representativesOnline).includes(representative);
+  }
 
-    return repOnline ? (
+  representativeOnlineStatus() {
+    return this.representativeOnline() ? (
       <span className="badge badge-success mr-1">Representative online</span>
     ) : (
       <span className="badge badge-danger mr-1">Representative offline</span>
+    );
+  }
+
+  representativeOfflineWarning() {
+    if (
+      !this.state.representative ||
+      _.isEmpty(this.state.representativesOnline)
+    )
+      return;
+
+    if (this.representativeOnline()) return;
+    if (this.state.uptime > 95) return;
+
+    return (
+      <div className="alert alert-danger">
+        This account's representative is offline. If this is your account, you
+        should consider switching your representative to a{" "}
+        <a
+          href="https://nanonode.ninja/"
+          target="_blank"
+          className="alert-link"
+        >
+          verified one that is online
+        </a>.
+      </div>
     );
   }
 
@@ -297,6 +332,8 @@ class Account extends React.Component {
         </div>
 
         <hr />
+
+        {this.representativeOfflineWarning()}
 
         <NodeNinjaAccount account={match.params.account} />
 
