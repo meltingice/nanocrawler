@@ -9,6 +9,7 @@ import NetworkStatus from "./views/NetworkStatus";
 import Explorer from "./views/Explorer";
 import ExplorerAccount from "./views/explorer/Account";
 import ExplorerBlock from "./views/explorer/Block";
+import RichList from "./views/explorer/RichList";
 
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
@@ -62,6 +63,11 @@ class Content extends React.PureComponent {
             exact
             path="/explorer"
             render={props => <Explorer {...props} />}
+          />
+          <Route
+            exact
+            path="/explorer/top_accounts"
+            render={props => <RichList {...props} />}
           />
           <Route
             path="/explorer/auto/:query"
