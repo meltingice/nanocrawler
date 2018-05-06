@@ -22,6 +22,7 @@ class Account extends React.Component {
       balance: 0,
       pending: 0,
       representative: null,
+      representativesOnline: {},
       history: [],
       pendingTransactions: { blocks: [], total: 0 },
       delegators: {},
@@ -71,6 +72,7 @@ class Account extends React.Component {
 
   async fetchData() {
     await this.fetchAccount();
+    this.fetchOnlineReps();
     this.fetchHistory();
     this.fetchPending();
     this.fetchDelegators();
@@ -146,6 +148,11 @@ class Account extends React.Component {
     }
   }
 
+  async fetchOnlineReps() {
+    const representativesOnline = await this.props.client.representativesOnline();
+    this.setState({ representativesOnline });
+  }
+
   async fetchHistory() {
     const { match } = this.props;
     let { history, nextPageHead } = this.state;
@@ -211,6 +218,19 @@ class Account extends React.Component {
     });
   }
 
+  representativeOnlineStatus() {
+    const { representative } = this.state;
+    const repOnline = _.keys(this.state.representativesOnline).includes(
+      representative
+    );
+
+    return repOnline ? (
+      <span className="badge badge-success mr-1">Representative online</span>
+    ) : (
+      <span className="badge badge-danger mr-1">Representative offline</span>
+    );
+  }
+
   render() {
     const { match } = this.props;
     const {
@@ -237,6 +257,7 @@ class Account extends React.Component {
             <p className="text-muted mb-0 break-word">{match.params.account}</p>
 
             <p className="text-muted mb-0">
+              {this.representativeOnlineStatus()}
               Represented by{" "}
               <AccountLink
                 account={representative}
