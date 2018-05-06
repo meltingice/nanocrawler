@@ -50,6 +50,14 @@ class RichList extends React.Component {
     return accounts.filter(account => repAccounts.includes(account.account));
   }
 
+  accountsWithOfflineRep() {
+    const { accounts, representativesOnline } = this.state;
+    const repAccounts = _.keys(representativesOnline);
+    return accounts.filter(
+      account => !repAccounts.includes(account.representative)
+    );
+  }
+
   render() {
     const { officialRepresentatives, representativesOnline } = this.state;
 
@@ -57,24 +65,30 @@ class RichList extends React.Component {
       <div className="p-4">
         <div className="row justify-content-center my-5 mx-0">
           <div className="col col-md-10">
-            <h3 className="text-muted">
+            <h3 className="text-muted mb-0">
               <span className="text-dark">
                 {this.top100Percentage()}% of the total supply
               </span>{" "}
               is held by the top 100 accounts
             </h3>
-            <h3 className="text-muted">
-              <span className="text-dark">
-                {this.officialRepAccounts().length}% of the top accounts
-              </span>{" "}
-              are delegating their weight to official representatives
-            </h3>
-            <h3 className="text-muted">
-              <span className="text-dark">
-                {this.topAccountsOnline().length} accounts
-              </span>{" "}
-              are running their own node
-            </h3>
+            <p className="text-muted">
+              That's {accounting.formatNumber(this.top100Balance(), 0)} NANO out
+              of the{" "}
+              {accounting.formatNumber(this.props.config.maxCoinSupply, 0)} NANO{" "}
+              circulating supply
+            </p>
+
+            <h4>
+              {this.officialRepAccounts().length}% are delegating their weight
+              to official representatives
+            </h4>
+            <h4>
+              {this.accountsWithOfflineRep().length}% are delegating their
+              weight to offline representatives
+            </h4>
+            <h4>
+              {this.topAccountsOnline().length} accounts are currently online
+            </h4>
           </div>
         </div>
 
@@ -93,6 +107,9 @@ class RichList extends React.Component {
                   account.representative
                 )}
                 online={_.keys(representativesOnline).includes(account.account)}
+                repOnline={_.keys(representativesOnline).includes(
+                  account.representative
+                )}
               />
             ))}
           </div>
@@ -102,17 +119,23 @@ class RichList extends React.Component {
   }
 }
 
-const TopAccount = ({ account, officialRep, online }) => {
+const TopAccount = ({ account, officialRep, online, repOnline }) => {
   const repStatus = officialRep ? "text-danger" : "text-muted";
   const onlineBadge = online ? (
     <span className="badge badge-info mr-1">Online</span>
   ) : (
     ""
   );
+  const repOnlineBadge = repOnline ? (
+    <span className="badge badge-success mr-1">Representative online</span>
+  ) : (
+    <span className="badge badge-danger mr-1">Representative offline</span>
+  );
+
   return (
     <Fragment>
       <div className="row">
-        <div className="col">
+        <div className="col col-md-9">
           <h5 className="mb-0">
             <AccountLink
               account={account.account}
@@ -122,6 +145,7 @@ const TopAccount = ({ account, officialRep, online }) => {
           </h5>
           <p className={repStatus}>
             {onlineBadge}
+            {repOnlineBadge}
             Represented by{" "}
             <AccountLink
               account={account.representative}
@@ -131,7 +155,7 @@ const TopAccount = ({ account, officialRep, online }) => {
             />
           </p>
         </div>
-        <div className="col-auto text-right">
+        <div className="col col-md-3 text-right">
           <PriceWithConversions
             amount={account.balance}
             currencies={["nano", "usd", "btc"]}
