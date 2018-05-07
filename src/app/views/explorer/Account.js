@@ -213,6 +213,13 @@ class Account extends React.Component {
     return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(match.params.account);
   }
 
+  hasDelegatedWeight() {
+    const { delegators } = this.state;
+    return (
+      _.values(delegators).filter(amt => parseInt(amt, 10) > 1).length >= 0
+    );
+  }
+
   accountTitle() {
     const { weight, delegators } = this.state;
 
@@ -242,19 +249,14 @@ class Account extends React.Component {
   }
 
   representativeOfflineWarning() {
-    if (
-      !this.state.representative ||
-      _.isEmpty(this.state.representativesOnline)
-    )
-      return;
-
-    if (this.representativeOnline()) return;
+    if (_.isEmpty(this.state.representativesOnline)) return;
+    if (!this.hasDelegatedWeight()) return;
     if (this.state.uptime > 95) return;
 
     return (
       <div className="alert alert-danger">
-        This account's representative has less than 95% uptime. If this is your
-        account, you should consider switching your representative to a{" "}
+        This representative account is frequently offline. If you are delegating
+        your voting weight to it, you may want to consider switching to a{" "}
         <a
           href="https://nanonode.ninja/"
           target="_blank"
