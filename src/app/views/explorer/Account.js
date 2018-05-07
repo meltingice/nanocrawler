@@ -251,7 +251,7 @@ class Account extends React.Component {
   representativeOfflineWarning() {
     if (_.isEmpty(this.state.representativesOnline)) return;
     if (!this.hasDelegatedWeight()) return;
-    if (this.state.uptime > 95) return;
+    if (!this.state.uptime || this.state.uptime > 95) return;
 
     return (
       <div className="alert alert-warning">
