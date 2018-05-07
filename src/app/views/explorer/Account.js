@@ -253,13 +253,11 @@ class Account extends React.Component {
     if (!this.hasDelegatedWeight()) return;
     if (this.state.uptime > 95) return;
 
-    const uptime = Math.round(this.state.uptime * 100.0) / 100.0;
-
     return (
       <div className="alert alert-warning">
-        This representative account has a {Math.round(uptime)}% uptime. If you
-        are delegating your voting weight to it, you may want to consider
-        switching to a{" "}
+        This representative account has a {this.state.uptime.toFixed(2)}%
+        uptime. If you are delegating your voting weight to it, you may want to
+        consider switching to a{" "}
         <a
           href="https://nanonode.ninja/"
           target="_blank"
