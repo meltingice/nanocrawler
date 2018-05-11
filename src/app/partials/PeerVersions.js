@@ -29,8 +29,11 @@ export default function PeerVersions({ peers }) {
   });
 
   const sortedVersions = _.toPairs(versions).sort((a, b) => {
-    if (a[0] > b[0]) return -1;
-    if (a[0] < b[0]) return 1;
+    const aVersion = parseInt(a[0], 10);
+    const bVersion = parseInt(b[0], 10);
+
+    if (aVersion > bVersion) return -1;
+    if (aVersion < bVersion) return 1;
     return 0;
   });
 
