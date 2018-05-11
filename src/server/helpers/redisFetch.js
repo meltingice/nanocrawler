@@ -14,7 +14,7 @@ if (config.redis) {
 }
 
 const redisFetch = async (key, expire, func) => {
-  if (!redisClient.connected) return func();
+  if (!redisClient || !redisClient.connected) return func();
   const namespacedKey = `nano-control-panel/${config.redisNamespace ||
     "default"}/${key}`;
   const resp = await redisGet(namespacedKey);
