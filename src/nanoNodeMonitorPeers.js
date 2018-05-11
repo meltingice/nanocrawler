@@ -7,6 +7,10 @@ import config from "../server-config.json";
 import NodeMonitor from "./server/NodeMonitor";
 
 const redisClient = redis.createClient(config.redis);
+redisClient.on("error", err => {
+  console.error("Redis unavailable");
+});
+
 const nano = new Nano({ url: config.nodeHost });
 
 let KNOWN_MONITORS = [];
@@ -98,7 +102,9 @@ async function checkKnownMonitors() {
   setTimeout(checkKnownMonitors, 30 * 1000);
 }
 
-export default async function startNetworkDataUpdates() {
-  await updateKnownMonitors();
-  checkKnownMonitors();
+export default function startNetworkDataUpdates() {
+  redisClient.on("ready", async () => {
+    await updateKnownMonitors();
+    checkKnownMonitors();
+  });
 }

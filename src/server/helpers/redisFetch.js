@@ -5,12 +5,16 @@ import config from "../../../server-config.json";
 let redisClient, redisGet, redisSet;
 if (config.redis) {
   redisClient = redis.createClient(config.redis);
+  redisClient.on("error", err => {
+    console.error("Redis unavailable");
+  });
+
   redisGet = promisify(redisClient.get.bind(redisClient));
   redisSet = promisify(redisClient.set.bind(redisClient));
 }
 
 const redisFetch = async (key, expire, func) => {
-  if (!redisClient) return func();
+  if (!redisClient.connected) return func();
   const namespacedKey = `nano-control-panel/${config.redisNamespace ||
     "default"}/${key}`;
   const resp = await redisGet(namespacedKey);
