@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import accounting from "accounting";
 import moment from "moment";
 
@@ -48,6 +49,10 @@ class NodeStatus extends React.Component {
 
     return (
       <div className="p-4">
+        <Helmet>
+          <title>Node Status</title>
+        </Helmet>
+
         <div className="row align-items-center">
           <div className="col-sm">
             <h1 className="mb-0">Node Status</h1>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
@@ -48,6 +49,15 @@ class Content extends React.PureComponent {
 
     return (
       <div id="Content">
+        <Helmet>
+          <meta charSet="utf-9" />
+          <meta
+            name="description"
+            content="Network data tracking and browsing for the NANO cryptocurrency"
+          />
+          <title>Nano Node Dashboard</title>
+        </Helmet>
+
         <Switch>
           <Route exact path="/" render={props => <Explorer {...props} />} />
           <Route
