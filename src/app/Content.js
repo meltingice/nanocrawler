@@ -49,11 +49,7 @@ class Content extends React.PureComponent {
     return (
       <div id="Content">
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={props => <NodeStatus {...props} account={account} />}
-          />
+          <Route exact path="/" render={props => <Explorer {...props} />} />
           <Route
             exact
             path="/network"
@@ -61,9 +57,10 @@ class Content extends React.PureComponent {
           />
           <Route
             exact
-            path="/explorer"
-            render={props => <Explorer {...props} />}
+            path="/status"
+            render={props => <NodeStatus {...props} account={account} />}
           />
+          <Route exact path="/explorer" render={props => <Redirect to="/" />} />
           <Route
             exact
             path="/explorer/top_accounts"
