@@ -8,6 +8,7 @@
   "redisNamespace": "production",
   "serverPort": 3001,
   "networkUpdatesEnabled": false,
+  "calculateRichList": false,
   "knownMonitors": [],
   "blacklistedPeers": []
 }

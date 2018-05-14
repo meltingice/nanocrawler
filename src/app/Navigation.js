@@ -7,6 +7,10 @@ import Logo from "./images/logo.svg";
 import PriceTicker from "./partials/PriceTicker";
 
 export default () => {
+  const explorerActive = (match, location) => {
+    return location.pathname === "/" || /^\/explorer\//.test(location.pathname);
+  };
+
   return (
     <div id="Navigation" className="row align-items-center">
       <div className="col-auto my-3">
@@ -18,8 +22,13 @@ export default () => {
       <div className="col-md">
         <ul className="NavigationList nav ml-2">
           <li className="nav-item">
-            <NavLink exact to="/" className="nav-link" activeClassName="active">
-              Node Status
+            <NavLink
+              to="/"
+              className="nav-link"
+              activeClassName="active"
+              isActive={explorerActive}
+            >
+              Explorer
             </NavLink>
           </li>
           <li className="nav-item">
@@ -34,11 +43,12 @@ export default () => {
           </li>
           <li className="nav-item">
             <NavLink
-              to="/explorer"
+              exact
+              to="/status"
               className="nav-link"
               activeClassName="active"
             >
-              Explorer
+              Node Status
             </NavLink>
           </li>
         </ul>

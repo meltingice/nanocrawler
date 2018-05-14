@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { Redirect } from "react-router-dom";
 import accounting from "accounting";
@@ -289,6 +290,12 @@ class Account extends React.Component {
 
     return (
       <div className="p-4">
+        <Helmet>
+          <title>
+            {this.accountTitle()} - {match.params.account}
+          </title>
+        </Helmet>
+
         <div className="row align-items-center ">
           <div className="col">
             <h1 className="mb-0">{this.accountTitle()}</h1>

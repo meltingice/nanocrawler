@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import _ from "lodash";
 
 import injectClient from "../../../lib/ClientComponent";
@@ -42,6 +43,10 @@ class Block extends React.PureComponent {
 
     return (
       <div className="p-4">
+        <Helmet>
+          <title>Block - {match.params.block}</title>
+        </Helmet>
+
         <div className="row align-items-center">
           <div className="col">
             <h1 className="mb-0">{_.capitalize(block.contents.type)} Block</h1>

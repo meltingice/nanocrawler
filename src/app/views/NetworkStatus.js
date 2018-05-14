@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Helmet } from "react-helmet";
 import _ from "lodash";
 import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
@@ -116,6 +117,10 @@ class NetworkStatus extends React.Component {
 
     return (
       <div className="p-4">
+        <Helmet>
+          <title>Network Status</title>
+        </Helmet>
+
         <div className="row align-items-center">
           <div className="col-md">
             <h1>Network Status</h1>
