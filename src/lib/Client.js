@@ -80,6 +80,11 @@ export default class Client {
     return (await resp.json()).network;
   }
 
+  async richList() {
+    const resp = await this.fetch("rich_list");
+    return (await resp.json()).richList;
+  }
+
   async fetch(endpoint) {
     const resp = await fetch(`${this.host}/${endpoint}`);
     if (resp.ok) return resp;

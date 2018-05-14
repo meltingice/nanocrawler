@@ -5,6 +5,7 @@ import accounting from "accounting";
 
 import injectClient from "../../../lib/ClientComponent";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
+import NanoNodeNinja from "../../../lib/NanoNodeNinja";
 
 import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
@@ -22,13 +23,15 @@ class Account extends React.Component {
       balance: 0,
       pending: 0,
       representative: null,
+      representativesOnline: {},
       history: [],
       pendingTransactions: { blocks: [], total: 0 },
       delegators: {},
       weight: 0,
       block_count: 0,
       failed: false,
-      nextPageHead: null
+      nextPageHead: null,
+      uptime: 0
     };
 
     this.accountTimeout = this.pendingTimeout = null;
@@ -71,6 +74,8 @@ class Account extends React.Component {
 
   async fetchData() {
     await this.fetchAccount();
+    this.fetchOnlineReps();
+    this.fetchUptime();
     this.fetchHistory();
     this.fetchPending();
     this.fetchDelegators();
@@ -146,6 +151,18 @@ class Account extends React.Component {
     }
   }
 
+  async fetchOnlineReps() {
+    const representativesOnline = await this.props.client.representativesOnline();
+    this.setState({ representativesOnline });
+  }
+
+  async fetchUptime() {
+    const { match } = this.props;
+    const ninja = new NanoNodeNinja(match.params.account);
+    await ninja.fetch();
+    this.setState({ uptime: ninja.data.uptime });
+  }
+
   async fetchHistory() {
     const { match } = this.props;
     let { history, nextPageHead } = this.state;
@@ -196,6 +213,13 @@ class Account extends React.Component {
     return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(match.params.account);
   }
 
+  hasDelegatedWeight() {
+    const { delegators } = this.state;
+    return (
+      _.values(delegators).filter(amt => parseInt(amt, 10) > 1).length >= 0
+    );
+  }
+
   accountTitle() {
     const { weight, delegators } = this.state;
 
@@ -209,6 +233,40 @@ class Account extends React.Component {
       block.account = block.source;
       return block;
     });
+  }
+
+  representativeOnline() {
+    const { representative } = this.state;
+    return _.keys(this.state.representativesOnline).includes(representative);
+  }
+
+  representativeOnlineStatus() {
+    return this.representativeOnline() ? (
+      <span className="badge badge-success mr-1">Representative online</span>
+    ) : (
+      <span className="badge badge-danger mr-1">Representative offline</span>
+    );
+  }
+
+  representativeOfflineWarning() {
+    if (_.isEmpty(this.state.representativesOnline)) return;
+    if (!this.hasDelegatedWeight()) return;
+    if (!this.state.uptime || this.state.uptime > 95) return;
+
+    return (
+      <div className="alert alert-warning">
+        This representative account has a {this.state.uptime.toFixed(2)}%
+        uptime. If you are delegating your voting weight to it, you may want to
+        consider switching to a{" "}
+        <a
+          href="https://nanonode.ninja/"
+          target="_blank"
+          className="alert-link"
+        >
+          verified one with at least 95% uptime
+        </a>.
+      </div>
+    );
   }
 
   render() {
@@ -237,6 +295,7 @@ class Account extends React.Component {
             <p className="text-muted mb-0 break-word">{match.params.account}</p>
 
             <p className="text-muted mb-0">
+              {this.representativeOnlineStatus()}
               Represented by{" "}
               <AccountLink
                 account={representative}
@@ -276,6 +335,8 @@ class Account extends React.Component {
         </div>
 
         <hr />
+
+        {this.representativeOfflineWarning()}
 
         <NodeNinjaAccount account={match.params.account} />
 
