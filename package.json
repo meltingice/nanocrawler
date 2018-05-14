@@ -12,6 +12,7 @@
     "cors": "^2.8.4",
     "es6-promisify": "^6.0.0",
     "fetch-timeout": "^0.0.2",
+    "history": "^4.7.2",
     "lodash": "^4.17.4",
     "moment": "^2.21.0",
     "nanode": "^2.2.1",
