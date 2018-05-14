@@ -14,7 +14,8 @@ const history = createBrowserHistory();
 history.listen(location => {
   if (window.ga) {
     console.log("tracking page view: " + location.pathname);
-    window.ga("send", "pageview", location.pathname);
+    window.ga("set", "page", location.pathname);
+    window.ga("send", "pageview");
   } else {
     console.log("GA unavailable");
   }
