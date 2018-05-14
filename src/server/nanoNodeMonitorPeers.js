@@ -2,9 +2,9 @@ import _ from "lodash";
 import fetch from "node-fetch";
 import redis from "redis";
 import { Nano } from "nanode";
-import config from "../server-config.json";
+import config from "../../server-config.json";
 
-import NodeMonitor from "./server/NodeMonitor";
+import NodeMonitor from "./NodeMonitor";
 
 const redisClient = redis.createClient(config.redis);
 redisClient.on("error", err => {
