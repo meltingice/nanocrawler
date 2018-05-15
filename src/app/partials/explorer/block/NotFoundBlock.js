@@ -1,9 +1,14 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 export default function NotFoundBlock({ block }) {
   return (
     <div className="p-4">
+      <Helmet>
+        <title>Block - Not Found</title>
+      </Helmet>
+
       <div className="row">
         <div className="col">
           <h1 className="mb-0">Unknown Block</h1>
