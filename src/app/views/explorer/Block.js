@@ -9,13 +9,15 @@ import SendBlock from "../../partials/explorer/block/SendBlock";
 import ReceiveBlock from "../../partials/explorer/block/ReceiveBlock";
 import ChangeBlock from "../../partials/explorer/block/ChangeBlock";
 import StateBlock from "../../partials/explorer/block/StateBlock";
+import NotFoundBlock from "../../partials/explorer/block/NotFoundBlock";
 
 class Block extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      block: null
+      block: null,
+      failed: false
     };
   }
 
@@ -31,14 +33,20 @@ class Block extends React.PureComponent {
 
   async fetchData() {
     const { match } = this.props;
-    const block = await this.props.client.block(match.params.block);
-    this.setState({ block });
+
+    try {
+      const block = await this.props.client.block(match.params.block);
+      this.setState({ block });
+    } catch (e) {
+      this.setState({ failed: true });
+    }
   }
 
   render() {
     const { match } = this.props;
-    const { block } = this.state;
+    const { block, failed } = this.state;
 
+    if (failed) return <NotFoundBlock block={match.params.block} />;
     if (!block) return null;
 
     return (
