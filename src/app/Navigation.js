@@ -5,8 +5,9 @@ import { NavLink } from "react-router-dom";
 import "./Navigation.css";
 import Logo from "./images/logo.svg";
 import PriceTicker from "./partials/PriceTicker";
+import injectClient from "../lib/ClientComponent";
 
-export default () => {
+const Navigation = ({ config }) => {
   const explorerActive = (match, location) => {
     return location.pathname === "/" || /^\/explorer\//.test(location.pathname);
   };
@@ -41,16 +42,18 @@ export default () => {
               Network Status
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink
-              exact
-              to="/status"
-              className="nav-link"
-              activeClassName="active"
-            >
-              Node Status
-            </NavLink>
-          </li>
+          {config.features.nodeStatus && (
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/status"
+                className="nav-link"
+                activeClassName="active"
+              >
+                Node Status
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -60,3 +63,5 @@ export default () => {
     </div>
   );
 };
+
+export default injectClient(Navigation);
