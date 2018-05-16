@@ -328,7 +328,7 @@ class Account extends React.Component {
               />
             </p>
           </div>
-          <div className="col-auto">
+          <div className="col-auto pr-0">
             <AccountQR
               account={match.params.account}
               style={{ width: "80px" }}
