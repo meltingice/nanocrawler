@@ -1,6 +1,5 @@
 import React from "react";
 import accounting from "accounting";
-import FontAwesome from "react-fontawesome";
 import injectClient from "../../lib/ClientComponent";
 
 class PriceTicker extends React.PureComponent {
@@ -12,7 +11,7 @@ class PriceTicker extends React.PureComponent {
       <p className="text-sm-center my-0 mr-3">
         {accounting.formatMoney(ticker.price_usd)}
         <span className="ml-3" title="1 hour change">
-          <FontAwesome name={this.getChangeSymbol()} />{" "}
+          <i className={`fa fa-${this.getChangeSymbol()}`} />{" "}
           {ticker.percent_change_1h}%
         </span>
       </p>
