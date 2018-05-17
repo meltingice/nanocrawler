@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { Redirect } from "react-router-dom";
 import accounting from "accounting";
+import Clipboard from "react-clipboard.js";
 
 import injectClient from "../../../lib/ClientComponent";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
@@ -299,7 +300,22 @@ class Account extends React.Component {
         <div className="row align-items-center ">
           <div className="col">
             <h1 className="mb-0">{this.accountTitle()}</h1>
-            <p className="text-muted mb-0 break-word">{match.params.account}</p>
+            <p className="text-muted mb-0 break-word">
+              {match.params.account}
+
+              <span
+                className="tooltipped tooltipped-e ml-1"
+                aria-label="Copy to clipboard"
+              >
+                <Clipboard
+                  component="span"
+                  style={{ cursor: "pointer" }}
+                  data-clipboard-text={match.params.account}
+                >
+                  <i className="fa fa-clipboard" />
+                </Clipboard>
+              </span>
+            </p>
 
             <p className="text-muted mb-0">
               {this.representativeOnlineStatus()}
@@ -312,7 +328,7 @@ class Account extends React.Component {
               />
             </p>
           </div>
-          <div className="col-auto">
+          <div className="col-auto pr-0">
             <AccountQR
               account={match.params.account}
               style={{ width: "80px" }}

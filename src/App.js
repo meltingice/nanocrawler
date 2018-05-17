@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "primer-tooltips/build/build.css";
 
 import injectClient from "./lib/ClientComponent";
 import Navigation from "./app/Navigation";
