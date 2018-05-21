@@ -13,9 +13,11 @@ import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 import NodeNinjaAccount from "../../partials/explorer/account/NodeNinjaAccount";
-import TransactionHistory from "../../partials/explorer/account/TransactionHistory";
 import DelegatorsTable from "../../partials/explorer/account/DelegatorsTable";
 import UnopenedAccount from "../../partials/explorer/account/UnopenedAccount";
+
+import AccountHistory from "../../partials/explorer/account/AccountHistory";
+import AccountDelegators from "../../partials/explorer/account/AccountDelegators";
 
 class Account extends React.Component {
   constructor(props) {
@@ -26,18 +28,16 @@ class Account extends React.Component {
       pending: 0,
       representative: null,
       representativesOnline: {},
-      history: [],
       pendingTransactions: { blocks: [], total: 0 },
       delegators: {},
       weight: 0,
       block_count: 0,
       failed: false,
-      nextPageHead: null,
       uptime: 0
     };
 
-    this.accountTimeout = this.pendingTimeout = null;
     this.websocket = new AccountWebsocket(this.props.config.websocketServer);
+    this.accountTimeout = null;
   }
 
   async componentDidMount() {
@@ -46,7 +46,7 @@ class Account extends React.Component {
     try {
       await this.websocket.connect();
       this.websocket.subscribeAccount(
-        this.props.match.params.account,
+        this.props.accountAddress,
         this.onWebsocketEvent.bind(this)
       );
     } catch (e) {
@@ -69,7 +69,6 @@ class Account extends React.Component {
         this.onWebsocketEvent.bind(this)
       );
 
-      this.setState({ history: [], nextPageHead: null });
       this.fetchData();
     }
   }
@@ -78,9 +77,6 @@ class Account extends React.Component {
     await this.fetchAccount();
     this.fetchOnlineReps();
     this.fetchUptime();
-    this.fetchHistory();
-    this.fetchPending();
-    this.fetchDelegators();
   }
 
   async onWebsocketEvent(event) {
@@ -128,24 +124,16 @@ class Account extends React.Component {
     this.setState({ history, balance, representative, block_count });
   }
 
-  loadMore() {
-    this.fetchHistory();
-  }
-
-  hasMore() {
-    return parseInt(this.state.block_count, 10) > this.state.history.length;
-  }
-
   clearTimers() {
     if (this.accountTimeout) clearTimeout(this.accountTimeout);
-    if (this.pendingTimeout) clearTimeout(this.pendingTimeout);
   }
 
   async fetchAccount() {
     const { match } = this.props;
     try {
       const account = await this.props.client.account(match.params.account);
-      return this.setState({ ...account });
+      account.block_count = parseInt(account.block_count, 10);
+      this.setState({ ...account });
 
       this.accountTimeout = setTimeout(this.fetchAccount.bind(this), 60000);
     } catch (e) {
@@ -163,44 +151,6 @@ class Account extends React.Component {
     const ninja = new NanoNodeNinja(match.params.account);
     await ninja.fetch();
     this.setState({ uptime: ninja.data.uptime });
-  }
-
-  async fetchHistory() {
-    const { match } = this.props;
-    let { history, nextPageHead } = this.state;
-
-    try {
-      let resp = await this.props.client.history(
-        match.params.account,
-        this.state.nextPageHead
-      );
-
-      if (nextPageHead) {
-        resp = resp.slice(1);
-      }
-
-      history = history.concat(resp);
-
-      nextPageHead = _.last(history).hash;
-      this.setState({ history, nextPageHead, failed: false });
-    } catch (e) {
-      this.setState({ failed: true });
-    }
-  }
-
-  async fetchPending() {
-    const { match } = this.props;
-
-    try {
-      const pendingTransactions = await this.props.client.pendingTransactions(
-        match.params.account
-      );
-      this.setState({ pendingTransactions });
-
-      this.pendingTimeout = setTimeout(this.fetchPending.bind(this), 10000);
-    } catch (e) {
-      // We don't have to fail hard if this doesn't work
-    }
   }
 
   async fetchDelegators() {
@@ -228,13 +178,6 @@ class Account extends React.Component {
     if (weight >= 133248.289) return "Rebroadcasting Account";
     if (_.keys(delegators).length > 0) return "Representative Account";
     return "Account";
-  }
-
-  pendingTransactions() {
-    return this.state.pendingTransactions.blocks.map(block => {
-      block.account = block.source;
-      return block;
-    });
   }
 
   representativeOnline() {
@@ -273,13 +216,7 @@ class Account extends React.Component {
 
   render() {
     const { match } = this.props;
-    const {
-      balance,
-      pending,
-      history,
-      representative,
-      pendingTransactions
-    } = this.state;
+    const { balance, pending, representative } = this.state;
 
     if (!this.accountIsValid()) {
       return this.redirect();
@@ -363,65 +300,29 @@ class Account extends React.Component {
 
         <NodeNinjaAccount account={match.params.account} />
 
-        {this.getPendingTransactions()}
-
-        <div className="row mt-5 align-items-center">
-          <div className="col">
-            <h2>Transactions</h2>
-          </div>
-          <div className="col-auto">
-            <h4>
-              {accounting.formatNumber(this.state.block_count)}{" "}
-              <span className="text-muted">transactions total</span>
-            </h4>
-          </div>
-        </div>
-
-        <TransactionHistory history={history} />
-
-        {this.getLoadMore()}
-
-        {this.getDelegators()}
+        {this.getAccountContent()}
       </div>
     );
   }
 
-  getPendingTransactions() {
-    const { pendingTransactions } = this.state;
-    if (pendingTransactions.total === 0) return;
-
-    return (
-      <Fragment>
-        <div className="row mt-5 align-items-center">
-          <div className="col">
-            <h2 className="mb-0">Pending Transactions</h2>
-            <p className="text-muted">Only showing up to 20 pending deposits</p>
-          </div>
-          <div className="col-auto">
-            <h4>
-              {accounting.formatNumber(pendingTransactions.total)}{" "}
-              <span className="text-muted">pending transactions</span>
-            </h4>
-          </div>
-        </div>
-
-        <TransactionHistory history={this.pendingTransactions()} />
-      </Fragment>
-    );
-  }
-
-  getLoadMore() {
-    if (!this.hasMore()) return;
-    return (
-      <div className="text-center">
-        <button
-          className="btn btn-nano-primary"
-          onClick={this.loadMore.bind(this)}
-        >
-          Load More Transactions
-        </button>
-      </div>
-    );
+  getAccountContent() {
+    const { match } = this.props;
+    switch (match.params.page) {
+      case "history":
+        return (
+          <AccountHistory
+            account={match.params.account}
+            blockCount={this.state.block_count}
+          />
+        );
+      case "delegators":
+        return (
+          <AccountDelegators
+            account={this.state.account}
+            accountAddress={match.params.account}
+          />
+        );
+    }
   }
 
   getDelegators() {
