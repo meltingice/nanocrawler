@@ -6,7 +6,7 @@ export default function DelegatorEntry({ account, balance }) {
   return (
     <tr>
       <td>
-        <AccountLink account={account} className="text-dark" />
+        <AccountLink account={account} className="text-dark" delegators />
       </td>
       <td>{accounting.formatNumber(balance, 6)} NANO</td>
     </tr>
