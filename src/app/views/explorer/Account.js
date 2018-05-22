@@ -6,14 +6,12 @@ import accounting from "accounting";
 import Clipboard from "react-clipboard.js";
 
 import injectClient from "../../../lib/ClientComponent";
-import AccountWebsocket from "../../../lib/AccountWebsocket";
 import NanoNodeNinja from "../../../lib/NanoNodeNinja";
 
 import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 import NodeNinjaAccount from "../../partials/explorer/account/NodeNinjaAccount";
-import DelegatorsTable from "../../partials/explorer/account/DelegatorsTable";
 import UnopenedAccount from "../../partials/explorer/account/UnopenedAccount";
 
 import AccountHistory from "../../partials/explorer/account/AccountHistory";
@@ -28,47 +26,26 @@ class Account extends React.Component {
       pending: 0,
       representative: null,
       representativesOnline: {},
-      pendingTransactions: { blocks: [], total: 0 },
-      delegators: {},
       weight: 0,
       block_count: 0,
       failed: false,
       uptime: 0
     };
 
-    this.websocket = new AccountWebsocket(this.props.config.websocketServer);
     this.accountTimeout = null;
   }
 
   async componentDidMount() {
     this.fetchData();
-
-    try {
-      await this.websocket.connect();
-      this.websocket.subscribeAccount(
-        this.props.accountAddress,
-        this.onWebsocketEvent.bind(this)
-      );
-    } catch (e) {
-      console.log(e.message);
-    }
   }
 
   componentWillUnmount() {
     this.clearTimers();
-    this.websocket.disconnect();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params.account !== this.props.match.params.account) {
       this.clearTimers();
-
-      this.websocket.unsubscribeAccount(prevProps.match.params.account);
-      this.websocket.subscribeAccount(
-        this.props.match.params.account,
-        this.onWebsocketEvent.bind(this)
-      );
-
       this.fetchData();
     }
   }
@@ -77,51 +54,6 @@ class Account extends React.Component {
     await this.fetchAccount();
     this.fetchOnlineReps();
     this.fetchUptime();
-  }
-
-  async onWebsocketEvent(event) {
-    let { history, balance, representative, block_count } = this.state;
-
-    event.block.hash = event.hash;
-    event.block.timestamp = event.timestamp;
-    switch (event.block.type) {
-      case "receive":
-        balance += parseFloat(event.block.amount, 10);
-
-        // Need to fetch the source block to get the sender
-        const sendBlock = await this.props.client.block(event.block.source);
-        event.block.account = sendBlock.block_account;
-        break;
-      case "send":
-        event.block.account = event.block.destination;
-        balance -= parseFloat(event.block.amount, 10);
-        break;
-      case "change":
-        representative = event.block.representative;
-        break;
-      case "state":
-        representative = event.block.representative;
-        if (event.is_send === "true") {
-          balance -= parseFloat(event.block.amount, 10);
-          event.block.subtype = "send";
-        } else {
-          balance += parseFloat(event.block.amount, 10);
-          if (parseInt(event.block.previous, 16) === 0) {
-            event.block.subtype = "open";
-          } else if (parseInt(event.block.link, 16) === 0) {
-            event.block.subtype = "change";
-          } else {
-            event.block.subtype = "receive";
-          }
-        }
-
-        break;
-    }
-
-    history.unshift(event.block);
-    block_count++;
-
-    this.setState({ history, balance, representative, block_count });
   }
 
   clearTimers() {
@@ -153,30 +85,21 @@ class Account extends React.Component {
     this.setState({ uptime: ninja.data.uptime });
   }
 
-  async fetchDelegators() {
-    const { match } = this.props;
-
-    const delegators = await this.props.client.delegators(match.params.account);
-    this.setState({ delegators });
-  }
-
   accountIsValid() {
     const { match } = this.props;
     return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(match.params.account);
   }
 
   hasDelegatedWeight() {
-    const { delegators } = this.state;
-    return (
-      _.values(delegators).filter(amt => parseInt(amt, 10) > 1).length >= 0
-    );
+    const { weight } = this.state;
+    return weight > 0;
   }
 
   accountTitle() {
-    const { weight, delegators } = this.state;
+    const { weight } = this.state;
 
     if (weight >= 133248.289) return "Rebroadcasting Account";
-    if (_.keys(delegators).length > 0) return "Representative Account";
+    if (weight > 0) return "Representative Account";
     return "Account";
   }
 
@@ -313,46 +236,17 @@ class Account extends React.Component {
           <AccountHistory
             account={match.params.account}
             blockCount={this.state.block_count}
+            balance={this.state.balance}
           />
         );
       case "delegators":
         return (
           <AccountDelegators
-            account={this.state.account}
-            accountAddress={match.params.account}
+            account={match.params.account}
+            weight={this.state.weight}
           />
         );
     }
-  }
-
-  getDelegators() {
-    const { delegators, weight } = this.state;
-
-    if (_.values(delegators).filter(amt => parseInt(amt, 10) > 1).length === 0)
-      return;
-
-    return (
-      <div className="mt-5">
-        <div className="row align-items-center">
-          <div className="col">
-            <h2 className="mb-0">Delegators</h2>
-            <p className="text-muted mb-0">
-              {_.keys(delegators).length} delegators, sorted by weight
-            </p>
-            <p className="text-muted">
-              Only showing accounts with at least 1 NANO
-            </p>
-          </div>
-          <div className="col-auto">
-            <h3 className="mb-0">
-              {accounting.formatNumber(weight)}{" "}
-              <span className="text-muted">NANO weight</span>
-            </h3>
-          </div>
-        </div>
-        <DelegatorsTable delegators={delegators} />
-      </div>
-    );
   }
 
   redirect() {

@@ -4,6 +4,7 @@ import accounting from "accounting";
 import TransactionHistory from "./TransactionHistory";
 
 import injectClient from "../../../../lib/ClientComponent";
+import AccountWebsocket from "../../../../lib/AccountWebsocket";
 
 class AccountHistory extends React.Component {
   state = {
@@ -14,20 +15,39 @@ class AccountHistory extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.websocket = new AccountWebsocket(this.props.config.websocketServer);
     this.pendingTimeout = null;
   }
 
   async componentDidMount() {
     this.fetchData();
+
+    try {
+      await this.websocket.connect();
+      this.websocket.subscribeAccount(
+        this.props.account,
+        this.onWebsocketEvent.bind(this)
+      );
+    } catch (e) {
+      console.log(e.message);
+    }
   }
 
   componentWillUnmount() {
     this.clearTimers();
+    this.websocket.disconnect();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.account !== this.props.account) {
       this.clearTimers();
+
+      this.websocket.unsubscribeAccount(prevProps.account);
+      this.websocket.subscribeAccount(
+        this.props.account,
+        this.onWebsocketEvent.bind(this)
+      );
 
       this.setState(
         {
@@ -85,6 +105,54 @@ class AccountHistory extends React.Component {
     } catch (e) {
       // We don't have to fail hard if this doesn't work
     }
+  }
+
+  async onWebsocketEvent(event) {
+    let { history } = this.state;
+    let { balance, blockCount } = this.props;
+    let representative;
+
+    event.block.hash = event.hash;
+    event.block.timestamp = event.timestamp;
+    switch (event.block.type) {
+      case "receive":
+        balance += parseFloat(event.block.amount, 10);
+
+        // Need to fetch the source block to get the sender
+        const sendBlock = await this.props.client.block(event.block.source);
+        event.block.account = sendBlock.block_account;
+        break;
+      case "send":
+        event.block.account = event.block.destination;
+        balance -= parseFloat(event.block.amount, 10);
+        break;
+      case "change":
+        representative = event.block.representative;
+        break;
+      case "state":
+        representative = event.block.representative;
+        if (event.is_send === "true") {
+          balance -= parseFloat(event.block.amount, 10);
+          event.block.subtype = "send";
+        } else {
+          balance += parseFloat(event.block.amount, 10);
+          if (parseInt(event.block.previous, 16) === 0) {
+            event.block.subtype = "open";
+          } else if (parseInt(event.block.link, 16) === 0) {
+            event.block.subtype = "change";
+          } else {
+            event.block.subtype = "receive";
+          }
+        }
+
+        break;
+    }
+
+    history.unshift(event.block);
+    blockCount++;
+
+    this.setState({ history });
+    // this.props.onAccountUpdate({ balance, representative, block_count: blockCount })
   }
 
   loadMore() {
