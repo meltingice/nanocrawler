@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import accounting from "accounting";
 import Clipboard from "react-clipboard.js";
 
@@ -157,7 +157,7 @@ class Account extends React.Component {
           </title>
         </Helmet>
 
-        <div className="row align-items-center ">
+        <div className="row align-items-center">
           <div className="col">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
@@ -218,6 +218,29 @@ class Account extends React.Component {
         </div>
 
         <hr />
+
+        <ul className="nav nav-pills justify-content-center my-3">
+          <li className="nav-item">
+            <NavLink
+              to={`/explorer/account/${match.params.account}/history`}
+              className="nav-link nano"
+              activeClassName="active"
+              isActive={(m, l) => match.params.page === "history"}
+            >
+              History
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to={`/explorer/account/${match.params.account}/delegators`}
+              className="nav-link nano"
+              activeClassName="active text-"
+              isActive={(m, l) => match.params.page === "delegators"}
+            >
+              Delegators
+            </NavLink>
+          </li>
+        </ul>
 
         {this.representativeOfflineWarning()}
 
