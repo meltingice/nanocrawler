@@ -47,7 +47,7 @@ export default function(app, nano) {
     try {
       const weight = await redisFetch(
         `weight/${req.params.account}`,
-        600,
+        300,
         async () => {
           return nano.convert.fromRaw(
             await nano.accounts.weight(req.params.account),
@@ -70,7 +70,7 @@ export default function(app, nano) {
     try {
       const delegators = await redisFetch(
         `delegators/${req.params.account}`,
-        3600,
+        300,
         async () => {
           const resp = await nano.rpc("delegators", {
             account: req.params.account
