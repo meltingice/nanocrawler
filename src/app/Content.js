@@ -86,9 +86,19 @@ class Content extends React.PureComponent {
           />
 
           <Route
+            exact
             path="/explorer/account/:account"
+            render={props => (
+              <Redirect
+                to={`/explorer/account/${props.match.params.account}/history`}
+              />
+            )}
+          />
+          <Route
+            path="/explorer/account/:account/:page"
             component={ExplorerAccount}
           />
+
           <Route path="/explorer/block/:block" component={ExplorerBlock} />
           <Route component={NotFound} />
         </Switch>

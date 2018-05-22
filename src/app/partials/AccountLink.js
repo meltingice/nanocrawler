@@ -52,7 +52,7 @@ export default class AccountLink extends React.Component {
     return (
       <Link
         className="break-word"
-        to={`/explorer/account/${account}`}
+        to={`/explorer/account/${account}/history`}
         {...otherProps}
       >
         {this.accountName()}
