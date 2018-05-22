@@ -112,7 +112,12 @@ class Account extends React.Component {
     return this.representativeOnline() ? (
       <span className="badge badge-success mr-1">Representative online</span>
     ) : (
-      <span className="badge badge-danger mr-1">Representative offline</span>
+      <span
+        className="badge badge-danger mr-1 tooltipped tooltipped-e tooltipped-multiline"
+        aria-label="An offline representative means this account is no longer voting. It does not affect transactions in any way."
+      >
+        Representative offline
+      </span>
     );
   }
 
