@@ -46,13 +46,22 @@ export default class AccountLink extends React.Component {
   }
 
   render() {
-    const { account, name, short, ninja, ...otherProps } = this.props;
+    const {
+      account,
+      name,
+      short,
+      ninja,
+      delegators,
+      ...otherProps
+    } = this.props;
     if (!account) return null;
 
     return (
       <Link
         className="break-word"
-        to={`/explorer/account/${account}/history`}
+        to={`/explorer/account/${account}/${
+          delegators ? "delegators" : "history"
+        }`}
         {...otherProps}
       >
         {this.accountName()}
