@@ -5,10 +5,14 @@ import DelegatorsTable from "./DelegatorsTable";
 
 import injectClient from "../../../../lib/ClientComponent";
 
+import LoadingState from "./delegators/LoadingState";
+import EmptyState from "./delegators/EmptyState";
+
 class AccountDelegators extends React.Component {
   state = {
     delegators: [],
-    weight: 0
+    weight: 0,
+    loading: true
   };
 
   constructor(props) {
@@ -21,6 +25,7 @@ class AccountDelegators extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.account != this.props.account) {
+      this.setState({ loading: true });
       this.fetchDelegators();
     }
   }
@@ -29,15 +34,15 @@ class AccountDelegators extends React.Component {
     const { account } = this.props;
 
     const delegators = await this.props.client.delegators(account);
-    this.setState({ delegators });
+    this.setState({ delegators, loading: false });
   }
 
   render() {
-    const { delegators } = this.state;
+    const { delegators, loading } = this.state;
     const { weight } = this.props;
 
-    if (_.values(delegators).filter(amt => parseInt(amt, 10) > 1).length === 0)
-      return null;
+    if (loading) return <LoadingState />;
+    if (_.keys(delegators).length === 0) return <EmptyState />;
 
     return (
       <div className="mt-5">
