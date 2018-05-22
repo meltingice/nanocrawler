@@ -183,7 +183,7 @@ class AccountHistory extends React.Component {
           </div>
           <div className="col-auto">
             <h4>
-              {accounting.formatNumber(this.props.block_count)}{" "}
+              {accounting.formatNumber(this.props.blockCount)}{" "}
               <span className="text-muted">transactions total</span>
             </h4>
           </div>
