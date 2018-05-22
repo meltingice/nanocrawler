@@ -65,7 +65,7 @@ class Account extends React.Component {
     try {
       const account = await this.props.client.account(match.params.account);
       account.block_count = parseInt(account.block_count, 10);
-      this.setState({ ...account });
+      this.setState({ ...account, failed: false });
 
       this.accountTimeout = setTimeout(this.fetchAccount.bind(this), 60000);
     } catch (e) {
