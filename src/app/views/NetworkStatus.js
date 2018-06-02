@@ -143,6 +143,11 @@ class NetworkStatus extends React.Component {
     );
   }
 
+  totalBlocks() {
+    const { blocksByType } = this.state;
+    return _.sum(_.values(blocksByType).map(amt => parseInt(amt, 10)));
+  }
+
   render() {
     const { representativesOnline } = this.state;
 
@@ -229,6 +234,11 @@ class NetworkStatus extends React.Component {
           <div className="col-md">
             <h2>Block Stats</h2>
             {this.getBlocksByType()}
+
+            <h3>
+              {accounting.formatNumber(this.totalBlocks())}{" "}
+              <small className="text-muted">total blocks created</small>
+            </h3>
           </div>
           <div className="col-md mt-3 mt-md-0">
             <PeerVersions peers={this.state.peers} />
