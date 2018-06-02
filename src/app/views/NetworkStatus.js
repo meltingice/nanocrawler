@@ -61,6 +61,37 @@ class NetworkStatus extends React.Component {
     );
   }
 
+  onlineRebroadcastWeight() {
+    const { representativesOnline } = this.state;
+    return _.sum(
+      _.values(representativesOnline)
+        .map(amt => parseFloat(amt, 10))
+        .filter(amt => amt >= this.rebroadcastThreshold())
+    );
+  }
+
+  rebroadcastPercent() {
+    return (
+      <Fragment>
+        {(
+          this.onlineRebroadcastWeight() /
+          this.props.config.maxCoinSupply *
+          100.0
+        ).toFixed(2)}%
+      </Fragment>
+    );
+  }
+
+  onlineRebroadcastPercent() {
+    return (
+      <Fragment>
+        {(this.onlineRebroadcastWeight() / this.onlineWeight() * 100.0).toFixed(
+          2
+        )}%
+      </Fragment>
+    );
+  }
+
   officialWeight() {
     const { officialRepresentatives } = this.state;
     return _.sum(
@@ -112,6 +143,11 @@ class NetworkStatus extends React.Component {
     );
   }
 
+  totalBlocks() {
+    const { blocksByType } = this.state;
+    return _.sum(_.values(blocksByType).map(amt => parseInt(amt, 10)));
+  }
+
   render() {
     const { representativesOnline } = this.state;
 
@@ -130,7 +166,7 @@ class NetworkStatus extends React.Component {
         <hr />
 
         <div className="row mt-5">
-          <div className="col">
+          <div className="col-md">
             <h2 className="mb-0">
               {accounting.formatNumber(_.keys(representativesOnline).length)}{" "}
               <span className="text-muted">representatives online</span>
@@ -139,36 +175,56 @@ class NetworkStatus extends React.Component {
               Accounts that have at least 1 delegator, regardless of voting
               weight
             </p>
-            <h2 className="mb-0">
-              {accounting.formatNumber(
-                _.keys(this.rebroadcastableReps()).length
-              )}{" "}
-              <span className="text-muted">
-                online representatives rebroadcasting votes
-              </span>
-            </h2>
-            <p className="text-muted">
-              A representative will only rebroadcast votes if it's delegated >
-              0.1% of the total supply
-            </p>
+
             <h5 className="mb-0">
               {this.amountRepresented()}{" "}
               <span className="text-muted">voting power is online</span>{" "}
             </h5>
-            <p className="text-muted">
+            <p>
               {this.percentRepresented()}{" "}
               <span className="text-muted">of the total voting power</span>
             </p>
+
             <h5 className="mb-0">
               {this.officialRepresented()} NANO{" "}
               <span className="text-muted">
                 is delegated to official representatives
               </span>
             </h5>
-            <p className="text-muted">
+            <p>
               {this.officialPercent()}{" "}
               <span className="text-muted">of the total voting power and</span>{" "}
               {this.officialOnlinePercent()}{" "}
+              <span className="text-muted">of the online voting power</span>
+            </p>
+          </div>
+          <div className="col-md">
+            <h2 className="mb-0">
+              {accounting.formatNumber(
+                _.keys(this.rebroadcastableReps()).length
+              )}{" "}
+              <span className="text-muted">
+                online rebroadcasting representatives
+              </span>
+            </h2>
+            <p className="text-muted">
+              A representative will only rebroadcast votes if it's delegated >
+              0.1% of the total supply ({accounting.formatNumber(
+                this.rebroadcastThreshold()
+              )}{" "}
+              NANO)
+            </p>
+
+            <h5 className="mb-0">
+              {accounting.formatNumber(this.onlineRebroadcastWeight())} NANO{" "}
+              <span className="text-muted">
+                is assigned to rebroadcasting representatives
+              </span>{" "}
+            </h5>
+            <p className="mb-0">
+              {this.rebroadcastPercent()}{" "}
+              <span className="text-muted">of the total voting power and</span>{" "}
+              {this.onlineRebroadcastPercent()}{" "}
               <span className="text-muted">of the online voting power</span>
             </p>
           </div>
@@ -178,6 +234,11 @@ class NetworkStatus extends React.Component {
           <div className="col-md">
             <h2>Block Stats</h2>
             {this.getBlocksByType()}
+
+            <h3>
+              {accounting.formatNumber(this.totalBlocks())}{" "}
+              <small className="text-muted">total blocks created</small>
+            </h3>
           </div>
           <div className="col-md mt-3 mt-md-0">
             <PeerVersions peers={this.state.peers} />

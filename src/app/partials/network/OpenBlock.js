@@ -5,7 +5,7 @@ export default function OpenBlock({ count }) {
   return (
     <h3>
       {accounting.formatNumber(count)}{" "}
-      <small className="text-muted">accounts opened</small>
+      <small className="text-muted">open blocks</small>
     </h3>
   );
 }
