@@ -29,6 +29,7 @@ class Account extends React.Component {
       weight: 0,
       block_count: 0,
       failed: false,
+      unopened: false,
       uptime: 0
     };
 
@@ -69,7 +70,7 @@ class Account extends React.Component {
 
       this.accountTimeout = setTimeout(this.fetchAccount.bind(this), 60000);
     } catch (e) {
-      return this.setState({ failed: true });
+      this.setState({ unopened: true });
     }
   }
 
@@ -96,10 +97,11 @@ class Account extends React.Component {
   }
 
   accountTitle() {
-    const { weight } = this.state;
+    const { weight, unopened } = this.state;
 
     if (weight >= 133248.289) return "Rebroadcasting Account";
     if (weight > 0) return "Representative Account";
+    if (unopened) return "Unopened Account";
     return "Account";
   }
 
@@ -182,16 +184,7 @@ class Account extends React.Component {
               </span>
             </p>
 
-            <p className="text-muted mb-0">
-              {this.representativeOnlineStatus()}
-              Represented by{" "}
-              <AccountLink
-                account={representative}
-                short
-                ninja
-                className="text-muted"
-              />
-            </p>
+            {this.getRepresentative()}
           </div>
           <div className="col-auto pr-0">
             <AccountQR
@@ -256,8 +249,27 @@ class Account extends React.Component {
     );
   }
 
+  getRepresentative() {
+    const { representative } = this.state;
+    if (!representative) return;
+
+    return (
+      <p className="text-muted mb-0">
+        {this.representativeOnlineStatus()}
+        Represented by{" "}
+        <AccountLink
+          account={representative}
+          short
+          ninja
+          className="text-muted"
+        />
+      </p>
+    );
+  }
+
   getAccountContent() {
     const { match } = this.props;
+
     switch (match.params.page) {
       case "history":
         return (

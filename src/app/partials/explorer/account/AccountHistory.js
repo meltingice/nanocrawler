@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import _ from "lodash";
 import accounting from "accounting";
 import TransactionHistory from "./TransactionHistory";
+import UnopenedAccount from "./UnopenedAccount";
 
 import injectClient from "../../../../lib/ClientComponent";
 import AccountWebsocket from "../../../../lib/AccountWebsocket";
@@ -83,13 +84,12 @@ class AccountHistory extends React.Component {
         resp = resp.slice(1);
       }
 
+      if (resp === "") return;
       history = history.concat(resp);
 
       nextPageHead = _.last(history).hash;
-      this.setState({ history, nextPageHead, failed: false });
-    } catch (e) {
-      this.setState({ failed: true });
-    }
+      this.setState({ history, nextPageHead });
+    } catch (e) {}
   }
 
   async fetchPending() {
@@ -171,26 +171,16 @@ class AccountHistory extends React.Component {
   }
 
   render() {
-    const { history } = this.state;
+    const { history, pendingTransactions } = this.state;
+
+    if (history.length === 0 && !pendingTransactions) {
+      return <UnopenedAccount />;
+    }
 
     return (
       <Fragment>
         {this.getPendingTransactions()}
-
-        <div className="row mt-5 align-items-center">
-          <div className="col">
-            <h2>Transactions</h2>
-          </div>
-          <div className="col-auto">
-            <h4>
-              {accounting.formatNumber(this.props.blockCount)}{" "}
-              <span className="text-muted">transactions total</span>
-            </h4>
-          </div>
-        </div>
-
-        <TransactionHistory history={history} />
-
+        {this.getTransactions()}
         {this.getLoadMore()}
       </Fragment>
     );
@@ -216,6 +206,29 @@ class AccountHistory extends React.Component {
         </div>
 
         <TransactionHistory history={this.pendingTransactions()} />
+      </Fragment>
+    );
+  }
+
+  getTransactions() {
+    const { history } = this.state;
+    if (history.length === 0) return;
+
+    return (
+      <Fragment>
+        <div className="row mt-5 align-items-center">
+          <div className="col">
+            <h2>Transactions</h2>
+          </div>
+          <div className="col-auto">
+            <h4>
+              {accounting.formatNumber(this.props.blockCount)}{" "}
+              <span className="text-muted">transactions total</span>
+            </h4>
+          </div>
+        </div>
+
+        <TransactionHistory history={history} />
       </Fragment>
     );
   }
