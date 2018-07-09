@@ -31,15 +31,20 @@ class AccountDelegators extends React.Component {
   }
 
   async fetchDelegators() {
+    let weight;
     const { account } = this.props;
 
     const delegators = await this.props.client.delegators(account);
-    this.setState({ delegators, loading: false });
+
+    if (_.keys(delegators).length > 0) {
+      weight = await this.props.client.weight(account);
+    }
+
+    this.setState({ delegators, weight, loading: false });
   }
 
   render() {
-    const { delegators, loading } = this.state;
-    const { weight } = this.props;
+    const { delegators, loading, state, weight } = this.state;
 
     if (loading) return <LoadingState />;
     if (_.keys(delegators).length === 0) return <EmptyState />;
