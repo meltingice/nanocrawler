@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 import "./Navigation.css";
 import Logo from "./images/logo.svg";
-import PriceTicker from "./partials/PriceTicker";
+import GlobalSearch from "./partials/GlobalSearch";
 import injectClient from "../lib/ClientComponent";
 
 const Navigation = ({ config }) => {
@@ -57,8 +57,8 @@ const Navigation = ({ config }) => {
         </ul>
       </div>
 
-      <div className="col col-auto d-none d-lg-flex">
-        <PriceTicker />
+      <div className="col-lg-3 mb-3 mb-lg-0">
+        <GlobalSearch />
       </div>
     </div>
   );
