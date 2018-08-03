@@ -38,4 +38,16 @@ export default function(app, nano) {
       res.status(500).send({ error: e.message });
     }
   });
+
+  app.get("/operations", async (req, res) => {
+    try {
+      const data = await redisFetch("operations", 60, async () => {
+        return await nano.blocks.count();
+      });
+
+      res.send(data.count);
+    } catch (e) {
+      res.status(500).send("Error");
+    }
+  });
 }
