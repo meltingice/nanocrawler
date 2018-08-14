@@ -46,7 +46,12 @@ class App extends Component {
               </p>
               <p>
                 Donations:{" "}
-                <AccountLink account="xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh" />
+                <a
+                  href="https://nano.meltingice.net/explorer/account/xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh/history"
+                  target="_blank"
+                >
+                  xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh
+                </a>
               </p>
             </div>
           </div>

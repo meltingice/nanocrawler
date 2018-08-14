@@ -35,7 +35,7 @@ class Explorer extends React.PureComponent {
         </Helmet>
 
         <div className="col col-md-8">
-          <h1>Network Explorer</h1>
+          <h1>Beta Network Explorer</h1>
 
           <hr />
 
@@ -58,8 +58,6 @@ class Explorer extends React.PureComponent {
               </div>
             </div>
           </form>
-
-          <RandomVerifiedAccounts count={5} />
 
           <div className="mt-5">
             <RecentBlockStream count={10} />

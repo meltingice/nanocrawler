@@ -16,7 +16,7 @@ const Navigation = ({ config }) => {
     <div id="Navigation" className="row align-items-center">
       <div className="col-auto my-3">
         <div className="LogoWrap">
-          <ReactSVG path={Logo} className="Logo" /> Node Dashboard
+          <ReactSVG path={Logo} className="Logo" /> Beta Explorer
         </div>
       </div>
 

@@ -10,7 +10,7 @@ export function accountIsValid(account) {
 
 export async function getTimestampForHash(hash) {
   try {
-    const timestamp = await redisGet(`block_timestamp/${hash}`);
+    const timestamp = await redisGet(`block_timestamp/beta/${hash}`);
     if (timestamp) {
       return timestamp;
     }
