@@ -8,6 +8,8 @@ import AggregateNetworkData from "../partials/AggregateNetworkData";
 import BlockByTypeStats from "../partials/BlockByTypeStats";
 import PeerVersions from "../partials/PeerVersions";
 
+import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
+
 class NetworkStatus extends React.Component {
   constructor(props) {
     super(props);
@@ -74,8 +76,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         {(
-          this.onlineRebroadcastWeight() /
-          this.props.config.maxCoinSupply *
+          (this.onlineRebroadcastWeight() / this.props.config.maxCoinSupply) *
           100.0
         ).toFixed(2)}%
       </Fragment>
@@ -85,9 +86,10 @@ class NetworkStatus extends React.Component {
   onlineRebroadcastPercent() {
     return (
       <Fragment>
-        {(this.onlineRebroadcastWeight() / this.onlineWeight() * 100.0).toFixed(
-          2
-        )}%
+        {(
+          (this.onlineRebroadcastWeight() / this.onlineWeight()) *
+          100.0
+        ).toFixed(2)}%
       </Fragment>
     );
   }
@@ -109,8 +111,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         {(
-          this.onlineWeight() /
-          this.props.config.maxCoinSupply *
+          (this.onlineWeight() / this.props.config.maxCoinSupply) *
           100.0
         ).toFixed(2)}%
       </Fragment>
@@ -127,8 +128,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         {(
-          this.officialWeight() /
-          this.props.config.maxCoinSupply *
+          (this.officialWeight() / this.props.config.maxCoinSupply) *
           100
         ).toFixed(2)}%
       </Fragment>
@@ -138,7 +138,7 @@ class NetworkStatus extends React.Component {
   officialOnlinePercent() {
     return (
       <Fragment>
-        {(this.officialWeight() / this.onlineWeight() * 100).toFixed(2)}%
+        {((this.officialWeight() / this.onlineWeight()) * 100).toFixed(2)}%
       </Fragment>
     );
   }
@@ -146,6 +146,15 @@ class NetworkStatus extends React.Component {
   totalBlocks() {
     const { blocksByType } = this.state;
     return _.sum(_.values(blocksByType).map(amt => parseInt(amt, 10)));
+  }
+
+  filteredRepresentatives() {
+    const { representativesOnline } = this.state;
+    return _.fromPairs(
+      _.toPairs(representativesOnline).filter(
+        rep => parseInt(rep[1], 10) >= this.rebroadcastThreshold()
+      )
+    );
   }
 
   render() {
@@ -246,6 +255,17 @@ class NetworkStatus extends React.Component {
         </div>
 
         <AggregateNetworkData />
+
+        <div className="row mt-5 justify-content-center">
+          <div className="col-md">
+            <h2 className="mb-0">Representatives Online</h2>
+            <p className="text-muted">
+              Only showing reps with rebroadcasting weight
+            </p>
+          </div>
+        </div>
+
+        <DelegatorsTable delegators={this.filteredRepresentatives()} />
       </div>
     );
   }
