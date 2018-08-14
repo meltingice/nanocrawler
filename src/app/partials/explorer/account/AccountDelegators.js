@@ -58,13 +58,13 @@ class AccountDelegators extends React.Component {
               {_.keys(delegators).length} delegators, sorted by weight
             </p>
             <p className="text-muted">
-              Only showing accounts with at least 1 NANO
+              Only showing accounts with at least 1 βNANO
             </p>
           </div>
           <div className="col-auto">
             <h3 className="mb-0">
               {accounting.formatNumber(weight)}{" "}
-              <span className="text-muted">NANO weight</span>
+              <span className="text-muted">βNANO weight</span>
             </h3>
           </div>
         </div>

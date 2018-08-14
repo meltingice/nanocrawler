@@ -102,7 +102,7 @@ class HistoryStateBlock extends React.Component {
         </td>
         <td className={this.statusClass()}>
           {this.transactionSymbol()}
-          {accounting.formatNumber(block.amount, 6)} NANO
+          {accounting.formatNumber(block.amount, 6)} βNANO
         </td>
         <td>
           <OptionalField value={formatTimestamp(block.timestamp)} />

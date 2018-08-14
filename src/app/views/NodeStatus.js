@@ -84,7 +84,7 @@ class NodeStatus extends React.Component {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">Voting Weight</p>
-            <h2>{accounting.formatNumber(weight)} NANO</h2>
+            <h2>{accounting.formatNumber(weight)} βNANO</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">Peers</p>
@@ -138,7 +138,7 @@ class NodeStatus extends React.Component {
     const formatMemory = amt => {
       amt = amt / 1024 / 1024;
       if (amt > 1024) {
-        return `${Math.round(amt / 1024.0 * 100.0) / 100.0}GB`;
+        return `${Math.round((amt / 1024.0) * 100.0) / 100.0}GB`;
       }
 
       return `${Math.round(amt * 100.0) / 100.0}MB`;

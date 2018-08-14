@@ -16,7 +16,7 @@ export default function ReceiveBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-success">
-            received {accounting.formatNumber(block.amount, 6)} NANO
+            received {accounting.formatNumber(block.amount, 6)} βNANO
           </span>
         </p>
         <p className="mb-0">

@@ -16,7 +16,7 @@ export default function SendBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-danger">
-            sent {accounting.formatNumber(block.amount, 6)} NANO
+            sent {accounting.formatNumber(block.amount, 6)} βNANO
           </span>
         </p>
         <p className="mb-0">

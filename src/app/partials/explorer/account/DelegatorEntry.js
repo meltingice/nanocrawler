@@ -8,7 +8,7 @@ export default function DelegatorEntry({ account, balance }) {
       <td>
         <AccountLink account={account} className="text-dark" delegators />
       </td>
-      <td>{accounting.formatNumber(balance, 6)} NANO</td>
+      <td>{accounting.formatNumber(balance, 6)} βNANO</td>
     </tr>
   );
 }

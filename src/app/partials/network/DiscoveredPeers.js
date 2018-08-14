@@ -160,7 +160,7 @@ const PeerEntry = ({ peer, currentBlock }) => {
         <OptionalField value={data.votingWeight}>
           {value => (
             <Fragment>
-              {accounting.formatNumber(parseFloat(data.votingWeight, 10))} NANO
+              {accounting.formatNumber(parseFloat(data.votingWeight, 10))} βNANO
             </Fragment>
           )}
         </OptionalField>

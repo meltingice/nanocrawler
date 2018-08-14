@@ -16,7 +16,7 @@ export default function HistoryReceiveBlock({ block }) {
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-success">
-        +{accounting.formatNumber(block.amount, 6)} NANO
+        +{accounting.formatNumber(block.amount, 6)} βNANO
       </td>
       <td>
         <OptionalField value={formatTimestamp(block.timestamp)} />

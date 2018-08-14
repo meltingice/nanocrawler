@@ -32,7 +32,7 @@ class RichList extends React.Component {
   top100Percentage() {
     return (
       Math.round(
-        this.top100Balance() / this.props.config.maxCoinSupply * 10000
+        (this.top100Balance() / this.props.config.maxCoinSupply) * 10000
       ) / 100
     );
   }
@@ -72,10 +72,10 @@ class RichList extends React.Component {
               is held by the top 100 accounts
             </h3>
             <p className="text-muted">
-              That's {accounting.formatNumber(this.top100Balance(), 0)} NANO out
-              of the{" "}
-              {accounting.formatNumber(this.props.config.maxCoinSupply, 0)} NANO{" "}
-              circulating supply
+              That's {accounting.formatNumber(this.top100Balance(), 0)} βNANO
+              out of the{" "}
+              {accounting.formatNumber(this.props.config.maxCoinSupply, 0)}{" "}
+              βNANO circulating supply
             </p>
 
             <h4>

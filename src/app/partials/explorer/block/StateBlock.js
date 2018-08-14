@@ -52,7 +52,7 @@ class StateBlock extends React.PureComponent {
           </small>
         </h4>
         <p>
-          <small>The amount of NANO that was sent in this transaction</small>
+          <small>The amount of βNANO that was sent in this transaction</small>
         </p>
 
         <h4 className="mb-0">

@@ -206,7 +206,7 @@ class Account extends React.Component {
                       {usd} / {btc}
                     </p>
                     <p className="text-muted mb-0">
-                      {accounting.formatNumber(pending, 6)} NANO pending
+                      {accounting.formatNumber(pending, 6)} βNANO pending
                     </p>
                   </Fragment>
                 );

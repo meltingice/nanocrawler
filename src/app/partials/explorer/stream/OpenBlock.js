@@ -16,7 +16,7 @@ export default function OpenBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-success">
-            was created with {accounting.formatNumber(block.amount, 6)} NANO
+            was created with {accounting.formatNumber(block.amount, 6)} βNANO
           </span>
         </p>
         <p className="mb-0">

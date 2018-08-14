@@ -8,7 +8,7 @@ export default function UnopenedAccount({ account }) {
         <h2>This account hasn't been opened yet</h2>
         <p>
           While the account address is valid, no blocks have been published to
-          its chain yet. If NANO has been sent to this account, it still needs
+          its chain yet. If βNANO has been sent to this account, it still needs
           to publish a corresponding block to pocket the funds.
         </p>
       </div>

@@ -103,7 +103,7 @@ class NetworkStatus extends React.Component {
 
   amountRepresented() {
     return (
-      <Fragment>{accounting.formatNumber(this.onlineWeight())} NANO</Fragment>
+      <Fragment>{accounting.formatNumber(this.onlineWeight())} βNANO</Fragment>
     );
   }
 
@@ -195,7 +195,7 @@ class NetworkStatus extends React.Component {
             </p>
 
             <h5 className="mb-0">
-              {this.officialRepresented()} NANO{" "}
+              {this.officialRepresented()} βNANO{" "}
               <span className="text-muted">
                 is delegated to official representatives
               </span>
@@ -221,11 +221,11 @@ class NetworkStatus extends React.Component {
               0.1% of the total supply ({accounting.formatNumber(
                 this.rebroadcastThreshold()
               )}{" "}
-              NANO)
+              βNANO)
             </p>
 
             <h5 className="mb-0">
-              {accounting.formatNumber(this.onlineRebroadcastWeight())} NANO{" "}
+              {accounting.formatNumber(this.onlineRebroadcastWeight())} βNANO{" "}
               <span className="text-muted">
                 is assigned to rebroadcasting representatives
               </span>{" "}
