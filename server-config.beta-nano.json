@@ -1,0 +1,15 @@
+{
+  "nodeName": "beta.nano.meltingice.net",
+  "account": "xrb_1beta4m4hzgw555gf6yir74ua5x7m8awjrxub8oicfkonmq736seyzwi97t3",
+  "clientUrl": "https://beta.nano.meltingice.net",
+  "raiblocksDir": "/home/ryanlefevre/RaiBlocks",
+  "nodeHost": "http://10.0.1.152:55000",
+  "redis": "redis://127.0.0.1:6379",
+  "redisNamespace": "beta",
+  "serverPort": 3001,
+  "networkUpdatesEnabled": false,
+  "calculateRichList": false,
+  "calculateNetworkTps": true,
+  "knownMonitors": [],
+  "blacklistedPeers": ["95.216.137.65"]
+}
