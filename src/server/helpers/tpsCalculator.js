@@ -29,11 +29,22 @@ const tpsCalculator = async period => {
   const now = new Date().getTime();
   const lowBound = now - KNOWN_PERIODS[period];
 
-  const blockCounts = await zRangeByScore(STORAGE_KEY, lowBound, now);
-  const startCount = blockCounts[0];
-  const endCount = blockCounts[blockCounts.length - 1];
+  const blockCounts = await zRangeByScore([
+    STORAGE_KEY,
+    lowBound,
+    now,
+    "WITHSCORES"
+  ]);
 
-  return (endCount - startCount) / (KNOWN_PERIODS[period] / 1000.0);
+  const startCount = parseInt(blockCounts[0]);
+  const startDate = parseInt(blockCounts[1]);
+  const endCount = blockCounts[blockCounts.length - 2];
+  const endDate = blockCounts[blockCounts.length - 1];
+
+  console.log(startDate, ":", startCount);
+  console.log(endDate, ":", endCount);
+
+  return (endCount - startCount) / ((endDate - startDate) / 1000.0);
 };
 
 export default tpsCalculator;
