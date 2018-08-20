@@ -5,7 +5,7 @@ import config from "../../../server-config.json";
 const redisClient = redis.createClient(config.redis);
 const zRangeByScore = promisify(redisClient.zrangebyscore.bind(redisClient));
 
-const STORAGE_KEY = `nano-control-panel/${config.redisNamesapce ||
+const STORAGE_KEY = `nano-control-panel/${config.redisNamespace ||
   "default"}/networkTps`;
 
 const KNOWN_PERIODS = {

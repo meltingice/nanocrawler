@@ -7,7 +7,7 @@ const redisClient = redis.createClient(config.redis);
 
 const nano = new Nano({ url: config.nodeHost });
 const STORAGE_PERIOD = 60 * 60 * 24 * 7 * 1000; // 1 week
-const STORAGE_KEY = `nano-control-panel/${config.redisNamesapce ||
+const STORAGE_KEY = `nano-control-panel/${config.redisNamespace ||
   "default"}/networkTps`;
 
 function recordBlockCount() {
