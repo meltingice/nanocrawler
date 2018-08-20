@@ -41,9 +41,6 @@ const tpsCalculator = async period => {
   const endCount = blockCounts[blockCounts.length - 2];
   const endDate = blockCounts[blockCounts.length - 1];
 
-  console.log(startDate, ":", startCount);
-  console.log(endDate, ":", endCount);
-
   return (endCount - startCount) / ((endDate - startDate) / 1000.0);
 };
 
