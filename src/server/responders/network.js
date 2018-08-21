@@ -53,7 +53,7 @@ export default function(app, nano) {
   app.get("/tps/:period", async (req, res) => {
     try {
       const calc = await tpsCalculator(req.params.period);
-      res.json({ tps: calc });
+      res.json({ tps: calc || 0.0 });
     } catch (e) {
       res.status(500).send({ error: e.message });
     }
