@@ -20,15 +20,18 @@ export default function NetworkThroughput() {
 
       <div className="row">
         <div className="col-lg mb-3">
-          <TpsCounter period="1hr" title="1 hour" />
+          <TpsCounter period="30m" title="30 minutes" />
         </div>
 
         <div className="col-lg mb-3">
-          <TpsCounter period="1d" title="1 day" />
+          <TpsCounter period="1hr" title="1 hour" />
         </div>
       </div>
 
       <div className="row">
+        <div className="col-lg mb-3">
+          <TpsCounter period="1d" title="1 day" />
+        </div>
         <div className="col-lg mb-3">
           <TpsCounter period="1w" title="1 week" />
         </div>
