@@ -23,6 +23,11 @@ export default class Client {
     return await resp.json();
   }
 
+  async networkTps(period) {
+    const resp = await this.fetch(`tps/${period}`);
+    return (await resp.json()).tps;
+  }
+
   async peers() {
     const resp = await this.fetch("peers");
     return (await resp.json()).peers;

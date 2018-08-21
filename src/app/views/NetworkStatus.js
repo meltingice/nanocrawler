@@ -5,7 +5,7 @@ import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
-import BlockByTypeStats from "../partials/BlockByTypeStats";
+import NetworkThroughput from "../partials/network/NetworkThroughput";
 import PeerVersions from "../partials/PeerVersions";
 
 import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
@@ -241,13 +241,7 @@ class NetworkStatus extends React.Component {
 
         <div className="row mt-5">
           <div className="col-md">
-            <h2>Block Stats</h2>
-            {this.getBlocksByType()}
-
-            <h3>
-              {accounting.formatNumber(this.totalBlocks())}{" "}
-              <small className="text-muted">total blocks created</small>
-            </h3>
+            <NetworkThroughput />
           </div>
           <div className="col-md mt-3 mt-md-0">
             <PeerVersions peers={this.state.peers} />
@@ -268,14 +262,6 @@ class NetworkStatus extends React.Component {
         <DelegatorsTable delegators={this.filteredRepresentatives()} />
       </div>
     );
-  }
-
-  getBlocksByType() {
-    const { blocksByType } = this.state;
-
-    return _.map(blocksByType, (count, type) => {
-      return <BlockByTypeStats key={type} type={type} count={count} />;
-    });
   }
 }
 
