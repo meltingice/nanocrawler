@@ -27,6 +27,8 @@ class RecentBlockStream extends React.Component {
     try {
       await this.websocket.connect();
       this.websocket.subscribeAll(this.onWebsocketEvent.bind(this));
+
+      this.calculateThroughput();
       this.tpsInterval = setInterval(
         this.calculateThroughput.bind(this),
         10000
