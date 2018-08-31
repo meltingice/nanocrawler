@@ -133,11 +133,7 @@ class Account extends React.Component {
         This representative account has a {this.state.uptime.toFixed(2)}%
         uptime. If you are delegating your voting weight to it, you may want to
         consider switching to a{" "}
-        <a
-          href="https://nanonode.ninja/"
-          target="_blank"
-          className="alert-link"
-        >
+        <a href="https://mynano.ninja/" target="_blank" className="alert-link">
           verified one with at least 95% uptime
         </a>.
       </div>
