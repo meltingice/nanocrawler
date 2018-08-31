@@ -3,6 +3,7 @@ module.exports = {
     {
       name: "explorer-api",
       script: "server.api.js",
+      instances: 4,
       env: {
         NODE_ENV: "development"
       },
