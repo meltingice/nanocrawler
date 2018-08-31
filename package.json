@@ -11,6 +11,7 @@
     "blakejs": "^1.1.0",
     "bootstrap": "^4.0.0",
     "cors": "^2.8.4",
+    "curlrequest": "^1.0.1",
     "es6-promisify": "^6.0.0",
     "fetch-timeout": "^0.0.2",
     "history": "^4.7.2",
