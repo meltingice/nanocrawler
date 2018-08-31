@@ -69,7 +69,7 @@ export default class NodeNinjaAccount extends React.Component {
               className="text-muted"
               target="_blank"
             >
-              Nano Node Ninja
+              My Nano Ninja
             </a>
           </p>
 

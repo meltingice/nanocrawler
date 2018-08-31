@@ -22,7 +22,7 @@ export default class RandomVerifiedAccounts extends React.Component {
         <p className="text-muted">
           A random sampling of accounts verified with{" "}
           <a href="https://mynano.ninja" target="_blank" className="text-muted">
-            Nano Node Ninja
+            My Nano Ninja
           </a>
         </p>
 
