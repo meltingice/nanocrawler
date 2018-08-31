@@ -53,8 +53,8 @@ async function fetchNanoNodeNinjaMonitors() {
   let monitors = [];
 
   try {
-    console.log("Gathering monitors from nanonode.ninja");
-    const resp = await fetch("https://nanonode.ninja/api/accounts/verified");
+    console.log("Gathering monitors from mynano.ninja");
+    const resp = await fetch("https://mynano.ninja/api/accounts/verified");
     accounts = await resp.json();
   } catch (e) {
     return [];
@@ -64,7 +64,7 @@ async function fetchNanoNodeNinjaMonitors() {
   for (let i = 0; i < accounts.length; i++) {
     try {
       const accountResp = await fetch(
-        `https://nanonode.ninja/api/accounts/${accounts[i].account}`
+        `https://mynano.ninja/api/accounts/${accounts[i].account}`
       );
       const accountData = await accountResp.json();
 

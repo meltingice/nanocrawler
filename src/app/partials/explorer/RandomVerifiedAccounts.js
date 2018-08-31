@@ -7,7 +7,7 @@ export default class RandomVerifiedAccounts extends React.Component {
   state = { accounts: [] };
 
   async componentDidMount() {
-    const data = await fetch("https://nanonode.ninja/api/accounts/verified", {
+    const data = await fetch("https://mynano.ninja/api/accounts/verified", {
       mode: "cors"
     });
     const accounts = await data.json();
@@ -22,11 +22,11 @@ export default class RandomVerifiedAccounts extends React.Component {
         <p className="text-muted">
           A random sampling of accounts verified with{" "}
           <a
-            href="https://nanonode.ninja"
+            href="https://mynano.ninja"
             target="_blank"
             className="text-muted"
           >
-            Nano Node Ninja
+            My Nano Ninja
           </a>
         </p>
 

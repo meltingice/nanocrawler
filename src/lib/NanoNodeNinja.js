@@ -10,7 +10,7 @@ export default class NanoNodeNinja {
 
     try {
       const data = await fetch(
-        `https://nanonode.ninja/api/accounts/${this.account}`,
+        `https://mynano.ninja/api/accounts/${this.account}`,
         { mode: "cors" }
       );
 
