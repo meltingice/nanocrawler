@@ -1,21 +1,14 @@
 import { Nano } from "nanode";
 import express from "express";
+import morgan from "morgan";
 import cors from "cors";
 
 import config from "../server-config.json";
 
-import startNetworkDataUpdates from "./server/nanoNodeMonitorPeers";
-if (config.networkUpdatesEnabled) startNetworkDataUpdates();
-
-import startRichListUpdates from "./server/richList";
-if (config.calculateRichList) startRichListUpdates();
-
-import networkTps from "./server/networkTps";
-if (config.calculateNetworkTps) networkTps();
-
 const app = express();
 const nano = new Nano({ url: config.nodeHost });
 
+app.use(morgan("combined"));
 app.use(cors());
 
 app.use(function(err, req, res, next) {
