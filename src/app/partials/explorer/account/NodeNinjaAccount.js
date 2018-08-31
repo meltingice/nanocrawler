@@ -65,11 +65,11 @@ export default class NodeNinjaAccount extends React.Component {
           <p className="text-muted">
             Verified by{" "}
             <a
-              href={`https://nanonode.ninja/account/${account}`}
+              href={`https://mynano.ninja/account/${account}`}
               className="text-muted"
               target="_blank"
             >
-              Nano Node Ninja
+              My Nano Ninja
             </a>
           </p>
 

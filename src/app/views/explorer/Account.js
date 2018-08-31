@@ -134,7 +134,7 @@ class Account extends React.Component {
         uptime. If you are delegating your voting weight to it, you may want to
         consider switching to a{" "}
         <a
-          href="https://nanonode.ninja/"
+          href="https://mynano.ninja/"
           target="_blank"
           className="alert-link"
         >
