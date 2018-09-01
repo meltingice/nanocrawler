@@ -55,7 +55,7 @@ class Content extends React.PureComponent {
             name="description"
             content="Network data tracking and browsing for the NANO cryptocurrency"
           />
-          <title>Nano Node Dashboard</title>
+          <title>Nano Network Explorer</title>
         </Helmet>
 
         <Switch>
