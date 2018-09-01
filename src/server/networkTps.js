@@ -12,18 +12,35 @@ const STORAGE_KEY = `nano-control-panel/${config.redisNamespace ||
 
 function recordBlockCount() {
   setTimeout(async () => {
-    const blockCounts = await nano.blocks.count();
-    const now = new Date().getTime();
+    try {
+      const blockCounts = await nano.blocks.count();
+      const now = new Date().getTime();
 
-    console.log("Recording block count:", blockCounts.count);
-    redisClient.zadd(STORAGE_KEY, now, parseInt(blockCounts.count, 10), () => {
-      redisClient.zremrangebyscore(
-        STORAGE_KEY,
-        "-inf",
-        now - STORAGE_PERIOD,
-        recordBlockCount
+      console.log(
+        `[${new Date()}]`,
+        "Recording block count:",
+        blockCounts.count
       );
-    });
+
+      redisClient.zadd(
+        STORAGE_KEY,
+        now,
+        parseInt(blockCounts.count, 10),
+        () => {
+          redisClient.zremrangebyscore(
+            STORAGE_KEY,
+            "-inf",
+            now - STORAGE_PERIOD,
+            recordBlockCount
+          );
+        }
+      );
+    } catch (e) {
+      console.error(`[${new Date()}]`, "Error recording block count");
+      console.error(e);
+
+      recordBlockCount();
+    }
   }, 10000);
 }
 
