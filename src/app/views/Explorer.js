@@ -35,6 +35,18 @@ class Explorer extends React.PureComponent {
         </Helmet>
 
         <div className="col col-md-8">
+          <div className="alert alert-info mb-5">
+            You're in the right place! The MeltingIce Explorer is now known as
+            the NanoCrawler. All old URLs will redirect to the new
+            nanocrawler.cc domain. You can read more{" "}
+            <a
+              href="https://www.reddit.com/r/nanocurrency/comments/9cxvuf/nanomeltingicenet_is_now_known_as_the_nanocrawler/"
+              target="_blank"
+            >
+              here
+            </a>.
+          </div>
+
           <h1>Network Explorer</h1>
 
           <hr />
