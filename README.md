@@ -63,13 +63,13 @@ While I highly recommend hosting via a proper webserver, as a last resort you ca
 
 ### Hosting the Server
 
-There are multiple options for hosting a NodeJS server. If you have experience with one option, feel free to use it. All you need to do is run `node server.js` to start the API server.
+The server-side components are broken up into multiple processes in order to separate the API server from some long-running reoccurring jobs. They're comprised of:
 
-I use and recommend [PM2](https://www.npmjs.com/package/pm2) for managing NodeJS servers. If you also want to use it, getting up and running is as simple as:
+- `server.api.js` - the API server
+- `server.peers.js` - reoccurring job for discovering and fetching data from other Nano monitors
+- `server.top-accounts.js` - reoccurring job for building the top accounts list
+- `server.tps.js` - reoccurring job for recording the current block count to calculate blocks/sec
 
-```
-npm i pm2 -g
-pm2 start server.js --name "nano-api"
-```
+There are multiple options for hosting a NodeJS server. If you have experience with one option, feel free to use it. All of the scripts can be run directly with `node` and they all use the same `server-config.json`.
 
-And if you want the API server to automatically start whenever the server reboots, you can run `pm2 startup`.
+I use and recommend [PM2](https://www.npmjs.com/package/pm2) for managing NodeJS servers. There is an `ecosystem.config.js` file included so all you have to do is run `pm2 start ecosystem.config.js` to start all the processes. The API server will start in cluster mode with 4 processes by default. Feel free to tweak this in the `ecosystem.config.js` file.
