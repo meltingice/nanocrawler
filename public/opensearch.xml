@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-    <ShortName>Nano Node Dashboard</ShortName>
-    <LongName>Nano Node Dashboard Explorer</LongName>
+    <ShortName>Nano Crawler</ShortName>
+    <LongName>Nano Crawler</LongName>
     <Description>Search for accounts and blocks on the Nano network</Description>
     <InputEncoding>UTF-8</InputEncoding>
     <OutputEncoding>UTF-8</OutputEncoding>
@@ -10,9 +10,9 @@
     <Developer>Ryan LeFevre</Developer>
     <Contact>meltingice8917@gmail.com</Contact>
     <Tags>cryptocurrency nano xrb raiblocks account block blockchain node</Tags>
-    <Attribution>Search the Nano currency network, https://nano.meltingice.net/explorer</Attribution>
+    <Attribution>Search the Nano currency network, https://nanocrawler.cc/</Attribution>
     <SyndicationRight>open</SyndicationRight>
     <Query role="example" searchTerms="xrb_1x7biz69cem95oo7gxkrw6kzhfywq4x5dupw4z1bdzkb74dk9kpxwzjbdhhs"/>
-    <Image height="16" width="16" type="image/vnd.microsoft.icon">https://nano.meltingice.net/favicon.ico</Image>
-    <Url type="text/html" template="https://nano.meltingice.net/explorer/auto/{searchTerms}"/>
+    <Image height="16" width="16" type="image/vnd.microsoft.icon">https://nanocrawler.cc/favicon.ico</Image>
+    <Url type="text/html" template="https://nanocrawler.cc/explorer/auto/{searchTerms}"/>
 </OpenSearchDescription>

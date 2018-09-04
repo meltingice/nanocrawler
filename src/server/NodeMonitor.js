@@ -1,6 +1,9 @@
-import fetchTimeout from "fetch-timeout";
+import { promisify } from "es6-promisify";
+import curl from "curlrequest";
 
-const TIMEOUT = 5 * 1000;
+const request = promisify(curl.request.bind(curl));
+
+const TIMEOUT = 5;
 
 export default class NodeMonitor {
   static fromPeerAddress(peer) {
@@ -17,24 +20,16 @@ export default class NodeMonitor {
     console.log("Checking", this.apiUrl);
 
     return new Promise((resolve, reject) => {
-      return fetchTimeout(
-        this.apiUrl,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          }
+      return request({
+        url: this.apiUrl,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
         },
-        TIMEOUT
-      )
+        timeout: TIMEOUT
+      })
         .then(resp => {
-          if (resp.ok) {
-            return resp.json();
-          } else {
-            reject(`Received ${resp.status}`);
-          }
-        })
-        .then(data => {
+          const data = JSON.parse(resp);
           if (data.nanoNodeAccount) {
             console.log("OK", this.apiUrl);
             resolve({ url: this.apiUrl, data: this.formatData(data) });

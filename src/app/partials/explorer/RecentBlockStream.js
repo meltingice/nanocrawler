@@ -16,8 +16,7 @@ class RecentBlockStream extends React.Component {
 
     this.state = {
       events: [],
-      throughput: 0,
-      tpsCount: 0
+      throughput: 0
     };
 
     this.websocket = new AccountWebsocket(this.props.config.websocketServer);
@@ -28,6 +27,8 @@ class RecentBlockStream extends React.Component {
     try {
       await this.websocket.connect();
       this.websocket.subscribeAll(this.onWebsocketEvent.bind(this));
+
+      this.calculateThroughput();
       this.tpsInterval = setInterval(
         this.calculateThroughput.bind(this),
         10000
@@ -43,15 +44,14 @@ class RecentBlockStream extends React.Component {
   }
 
   onWebsocketEvent(event) {
-    let { events, tpsCount } = this.state;
+    let { events } = this.state;
     events.unshift(event);
-    tpsCount++;
-    this.setState({ tpsCount, events: events.slice(0, this.props.count) });
+    this.setState({ events: events.slice(0, this.props.count) });
   }
 
-  calculateThroughput() {
-    const { tpsCount } = this.state;
-    this.setState({ throughput: tpsCount / 10.0, tpsCount: 0 });
+  async calculateThroughput() {
+    const tps = await this.props.client.networkTps("1m");
+    this.setState({ throughput: tps });
   }
 
   render() {
