@@ -227,32 +227,50 @@ class NetworkStatus extends React.Component {
           </div>
           <div className="col-md">
             <h2 className="mb-0">
-              {accounting.formatNumber(
-                _.keys(this.rebroadcastableReps()).length
-              )}{" "}
+              <FormattedNumber
+                value={_.keys(this.rebroadcastableReps()).length}
+                maximumFractionDigits={0}
+              />{" "}
               <span className="text-muted">
-                online rebroadcasting representatives
+                <FormattedMessage id="network.online_rebroadcasting" />
               </span>
             </h2>
             <p className="text-muted">
-              A representative will only rebroadcast votes if it's delegated >
-              0.1% of the total supply ({accounting.formatNumber(
-                this.rebroadcastThreshold()
-              )}{" "}
-              NANO)
+              <FormattedMessage
+                id="network.online_rebroadcasting_desc"
+                values={{
+                  amount: (
+                    <FormattedNumber
+                      value={this.rebroadcastThreshold()}
+                      maximumFractionDigits={0}
+                    />
+                  )
+                }}
+              />
             </p>
 
             <h5 className="mb-0">
               {accounting.formatNumber(this.onlineRebroadcastWeight())} NANO{" "}
               <span className="text-muted">
-                is assigned to rebroadcasting representatives
+                <FormattedMessage id="network.rebroadcast_amt" />
               </span>{" "}
             </h5>
-            <p className="mb-0">
-              {this.rebroadcastPercent()}{" "}
-              <span className="text-muted">of the total voting power and</span>{" "}
-              {this.onlineRebroadcastPercent()}{" "}
-              <span className="text-muted">of the online voting power</span>
+            <p className="mb-0 text-muted">
+              <FormattedMessage
+                id="network.rebroadcast_stat"
+                values={{
+                  totalPower: (
+                    <span className="text-body">
+                      {this.rebroadcastPercent()}
+                    </span>
+                  ),
+                  onlinePower: (
+                    <span className="text-body">
+                      {this.onlineRebroadcastPercent()}
+                    </span>
+                  )
+                }}
+              />
             </p>
           </div>
         </div>
