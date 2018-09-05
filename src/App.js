@@ -9,13 +9,38 @@ import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
 
+import { addLocaleData, IntlProvider } from "react-intl";
+import en from "react-intl/locale-data/en";
+import fr from "react-intl/locale-data/fr";
+import messages from "./translations";
+
+addLocaleData([...en, ...fr]);
+
 class App extends Component {
   constructor(props) {
     super(props);
 
+    const language =
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      navigator.userLanguage;
+
     this.state = {
-      account: null
+      account: null,
+      language
     };
+  }
+
+  get messages() {
+    const languageWithoutRegionCode = this.state.language
+      .toLowerCase()
+      .split(/[_-]+/)[0];
+
+    return (
+      messages[languageWithoutRegionCode] ||
+      messages[this.state.language] ||
+      messages.en
+    );
   }
 
   async componentWillMount() {
@@ -24,52 +49,54 @@ class App extends Component {
 
   render() {
     return (
-      <div id="App" className="container-fluid p-0 h-100">
-        <div className="row Header align-items-center mr-0">
-          <div className="col">
-            <Navigation />
+      <IntlProvider locale={this.state.language} messages={this.messages}>
+        <div id="App" className="container-fluid p-0 h-100">
+          <div className="row Header align-items-center mr-0">
+            <div className="col">
+              <Navigation />
+            </div>
           </div>
-        </div>
 
-        <Content account={this.state.account} />
+          <Content account={this.state.account} />
 
-        <hr />
+          <hr />
 
-        <div className="row mr-0 align-items-center">
-          <div className="col-md">
-            <div className="py-2 px-4">
-              <p className="mb-0">
-                Created by Ryan LeFevre, Sr. Software Engineer at{" "}
-                <a href="https://www.hodinkee.com" target="_blank">
-                  HODINKEE
+          <div className="row mr-0 align-items-center">
+            <div className="col-md">
+              <div className="py-2 px-4">
+                <p className="mb-0">
+                  Created by Ryan LeFevre, Sr. Software Engineer at{" "}
+                  <a href="https://www.hodinkee.com" target="_blank">
+                    HODINKEE
+                  </a>
+                </p>
+                <p>
+                  Donations:{" "}
+                  <AccountLink account="xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh" />
+                </p>
+              </div>
+            </div>
+            <div className="col-auto">
+              <div className="py-2 px-4">
+                <a href="https://twitter.com/meltingice" target="_blank">
+                  Twitter
+                </a>{" "}
+                &bull;{" "}
+                <a href="https://reddit.com/u/meltingice" target="_blank">
+                  Reddit
+                </a>{" "}
+                &bull;{" "}
+                <a
+                  href="https://github.com/meltingice/nano-node-dashboard"
+                  target="_blank"
+                >
+                  Source code
                 </a>
-              </p>
-              <p>
-                Donations:{" "}
-                <AccountLink account="xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh" />
-              </p>
-            </div>
-          </div>
-          <div className="col-auto">
-            <div className="py-2 px-4">
-              <a href="https://twitter.com/meltingice" target="_blank">
-                Twitter
-              </a>{" "}
-              &bull;{" "}
-              <a href="https://reddit.com/u/meltingice" target="_blank">
-                Reddit
-              </a>{" "}
-              &bull;{" "}
-              <a
-                href="https://github.com/meltingice/nano-node-dashboard"
-                target="_blank"
-              >
-                Source code
-              </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </IntlProvider>
     );
   }
 }

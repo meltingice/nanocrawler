@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 import RandomVerifiedAccounts from "../partials/explorer/RandomVerifiedAccounts";
 import RecentBlockStream from "../partials/explorer/RecentBlockStream";
@@ -36,6 +37,9 @@ class Explorer extends React.PureComponent {
 
         <div className="col col-md-8">
           <h1>Network Explorer</h1>
+          <h2>
+            <FormattedMessage id="test.foobar" values={{ name: "Ryan" }} />
+          </h2>
 
           <hr />
 

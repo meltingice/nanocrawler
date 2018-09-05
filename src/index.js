@@ -9,18 +9,11 @@ import App from "./App";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { addLocaleData, IntlProvider } from "react-intl";
-import en from "react-intl/locale-data/en";
-
-addLocaleData([...en]);
-
 ReactDOM.render(
   <ConfigProvider>
-    <IntlProvider locale={navigator.language} messages={messages}>
-      <Router>
-        <App />
-      </Router>
-    </IntlProvider>
+    <Router>
+      <App />
+    </Router>
   </ConfigProvider>,
   document.getElementById("root")
 );
