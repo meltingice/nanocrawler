@@ -1,6 +1,7 @@
 import React from "react";
 import ReactSVG from "react-svg";
 import { NavLink } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 import "./Navigation.css";
 import Logo from "./images/logo.svg";
@@ -29,7 +30,7 @@ const Navigation = ({ config }) => {
               activeClassName="active"
               isActive={explorerActive}
             >
-              Explorer
+              <FormattedMessage id="nav.explorer" />
             </NavLink>
           </li>
           <li className="nav-item">
@@ -39,7 +40,7 @@ const Navigation = ({ config }) => {
               className="nav-link"
               activeClassName="active"
             >
-              Network Status
+              <FormattedMessage id="nav.network" />
             </NavLink>
           </li>
           {config.features.nodeStatus && (
@@ -50,7 +51,7 @@ const Navigation = ({ config }) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                Node Status
+                <FormattedMessage id="nav.status" />
               </NavLink>
             </li>
           )}

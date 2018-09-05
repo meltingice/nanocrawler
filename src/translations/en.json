@@ -1,3 +1,10 @@
 {
-  "test.foobar": "Hello, {name}!"
+  "nav.explorer": "Explorer",
+  "nav.network": "Network Status",
+  "nav.status": "Node Status",
+
+  "explorer.title": "Network Explorer",
+  "explorer.form.help": "Enter a Nano address or block hash to get started.",
+
+  "search": "Search"
 }

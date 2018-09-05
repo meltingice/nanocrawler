@@ -36,15 +36,16 @@ class Explorer extends React.PureComponent {
         </Helmet>
 
         <div className="col col-md-8">
-          <h1>Network Explorer</h1>
-          <h2>
-            <FormattedMessage id="test.foobar" values={{ name: "Ryan" }} />
-          </h2>
+          <h1>
+            <FormattedMessage id="explorer.title" />
+          </h1>
 
           <hr />
 
           <form className="my-5" onSubmit={this.handleSubmit.bind(this)}>
-            <label>Enter a Nano address or block hash to get started.</label>
+            <label>
+              <FormattedMessage id="explorer.form.help" />
+            </label>
 
             <div className="form-row">
               <div className="col-md">
@@ -58,7 +59,9 @@ class Explorer extends React.PureComponent {
                 />
               </div>
               <div className="col-auto mt-2 mt-md-0">
-                <button className="btn btn-nano-primary btn-lg">Search</button>
+                <button className="btn btn-nano-primary btn-lg">
+                  <FormattedMessage id="search" />
+                </button>
               </div>
             </div>
           </form>
