@@ -10,11 +10,8 @@ import Content from "./app/Content";
 import AccountLink from "./app/partials/AccountLink";
 
 import { addLocaleData, IntlProvider } from "react-intl";
-import en from "react-intl/locale-data/en";
-import fr from "react-intl/locale-data/fr";
-import messages from "./translations";
-
-addLocaleData([...en, ...fr]);
+import { messages, localeData } from "./translations";
+addLocaleData(localeData);
 
 class App extends Component {
   constructor(props) {
