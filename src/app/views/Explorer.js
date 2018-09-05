@@ -32,7 +32,7 @@ class Explorer extends React.PureComponent {
     return (
       <div className="row justify-content-center my-5 mx-0">
         <Helmet>
-          <title>Explorer</title>
+          <title>Network Explorer</title>
         </Helmet>
 
         <div className="col col-md-8">

@@ -24,5 +24,14 @@
   "network.rebroadcast_stat":
     "{totalPower} of the total voting power and {onlinePower} of the online voting power",
 
+  "status.checked_blocks": "Checked Blocks",
+  "status.unchecked_blocks": "Unchecked Blocks",
+  "status.voting_weight": "Voting Weight",
+  "status.peers": "Peers",
+  "status.uptime": "Uptime",
+  "status.cpu_usage": "CPU Usage",
+  "status.memory": "Memory (used / total)",
+  "status.database": "Database Size",
+
   "search": "Search"
 }

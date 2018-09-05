@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
-import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 
