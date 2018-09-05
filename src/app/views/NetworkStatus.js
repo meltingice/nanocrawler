@@ -115,10 +115,12 @@ class NetworkStatus extends React.Component {
   percentRepresented() {
     return (
       <Fragment>
-        {(
-          (this.onlineWeight() / this.props.config.maxCoinSupply) *
-          100.0
-        ).toFixed(2)}%
+        <FormattedNumber
+          value={
+            (this.onlineWeight() / this.props.config.maxCoinSupply) * 100.0
+          }
+          maximumFractionDigits={2}
+        />%
       </Fragment>
     );
   }
@@ -138,10 +140,12 @@ class NetworkStatus extends React.Component {
   officialPercent() {
     return (
       <Fragment>
-        {(
-          (this.officialWeight() / this.props.config.maxCoinSupply) *
-          100
-        ).toFixed(2)}%
+        <FormattedNumber
+          value={
+            (this.officialWeight() / this.props.config.maxCoinSupply) * 100
+          }
+          maximumFractionDigits={2}
+        />%
       </Fragment>
     );
   }
@@ -149,7 +153,10 @@ class NetworkStatus extends React.Component {
   officialOnlinePercent() {
     return (
       <Fragment>
-        {((this.officialWeight() / this.onlineWeight()) * 100).toFixed(2)}%
+        <FormattedNumber
+          value={(this.officialWeight() / this.onlineWeight()) * 100}
+          maximumFractionDigits={2}
+        />%
       </Fragment>
     );
   }
@@ -180,34 +187,60 @@ class NetworkStatus extends React.Component {
 
         <div className="row mt-5">
           <div className="col-md">
-            <h2 className="mb-0">
-              <FormattedNumber value={_.keys(representativesOnline).length} />{" "}
-              <span className="text-muted">
-                <FormattedMessage id="network.reps_online" />
-              </span>
+            <h2 className="mb-0 text-muted">
+              <FormattedMessage
+                id="network.reps_online"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      <FormattedNumber
+                        value={_.keys(representativesOnline).length}
+                      />
+                    </span>
+                  )
+                }}
+              />
             </h2>
             <p className="text-muted">
               <FormattedMessage id="network.reps_online_desc" />
             </p>
 
-            <h5 className="mb-0">
-              {this.amountRepresented()}{" "}
-              <span className="text-muted">
-                <FormattedMessage id="network.online_voting_power" />
-              </span>{" "}
+            <h5 className="mb-0 text-muted">
+              <FormattedMessage
+                id="network.online_voting_power"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      {this.amountRepresented()}
+                    </span>
+                  )
+                }}
+              />
             </h5>
-            <p>
-              {this.percentRepresented()}{" "}
-              <span className="text-muted">
-                <FormattedMessage id="network.total_voting_power" />
-              </span>
+            <p className="text-muted">
+              <FormattedMessage
+                id="network.total_voting_power"
+                values={{
+                  percent: (
+                    <span className="text-body">
+                      {this.percentRepresented()}
+                    </span>
+                  )
+                }}
+              />
             </p>
 
-            <h5 className="mb-0">
-              {this.officialRepresented()}{" "}
-              <span className="text-muted">
-                <FormattedMessage id="network.official_reps" />
-              </span>
+            <h5 className="mb-0 text-muted">
+              <FormattedMessage
+                id="network.official_reps"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      {this.officialRepresented()}
+                    </span>
+                  )
+                }}
+              />
             </h5>
             <p className="text-muted">
               <FormattedMessage
@@ -226,14 +259,20 @@ class NetworkStatus extends React.Component {
             </p>
           </div>
           <div className="col-md">
-            <h2 className="mb-0">
-              <FormattedNumber
-                value={_.keys(this.rebroadcastableReps()).length}
-                maximumFractionDigits={0}
-              />{" "}
-              <span className="text-muted">
-                <FormattedMessage id="network.online_rebroadcasting" />
-              </span>
+            <h2 className="mb-0 text-muted">
+              <FormattedMessage
+                id="network.online_rebroadcasting"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      <FormattedNumber
+                        value={_.keys(this.rebroadcastableReps()).length}
+                        maximumFractionDigits={0}
+                      />
+                    </span>
+                  )
+                }}
+              />
             </h2>
             <p className="text-muted">
               <FormattedMessage
@@ -249,11 +288,21 @@ class NetworkStatus extends React.Component {
               />
             </p>
 
-            <h5 className="mb-0">
-              {accounting.formatNumber(this.onlineRebroadcastWeight())} NANO{" "}
-              <span className="text-muted">
-                <FormattedMessage id="network.rebroadcast_amt" />
-              </span>{" "}
+            <h5 className="mb-0 text-muted">
+              <FormattedMessage
+                id="network.rebroadcast_amt"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      <FormattedNumber
+                        value={this.onlineRebroadcastWeight()}
+                        maximumFractionDigits={0}
+                      />{" "}
+                      NANO
+                    </span>
+                  )
+                }}
+              />
             </h5>
             <p className="mb-0 text-muted">
               <FormattedMessage

@@ -7,18 +7,20 @@
   "explorer.form.help": "Enter a Nano address or block hash to get started.",
 
   "network.title": "Network Status",
-  "network.reps_online": "representatives online",
+  "network.reps_online": "{count} representatives online",
   "network.reps_online_desc":
     "Accounts that have at least 1 delegator, regardless of voting weight",
-  "network.online_voting_power": "voting power is online",
-  "network.total_voting_power": "of the total voting power",
-  "network.official_reps": "is delegated to official representatives",
+  "network.online_voting_power": "{count} voting power is online",
+  "network.total_voting_power": "{percent} of the total voting power",
+  "network.official_reps": "{count} is delegated to official representatives",
   "network.official_reps_stat":
     "{totalPower} of the total voting power and {onlinePower} of the online voting power",
-  "network.online_rebroadcasting": "online rebroadcasting representatives",
+  "network.online_rebroadcasting":
+    "{count} online rebroadcasting representatives",
   "network.online_rebroadcasting_desc":
     "A representative will only rebroadcast votes if it's delegated >0.1% of the total supply ({amount} NANO)",
-  "network.rebroadcast_amt": "is assigned to rebroadcasting representatives",
+  "network.rebroadcast_amt":
+    "{count} is assigned to rebroadcasting representatives",
   "network.rebroadcast_stat":
     "{totalPower} of the total voting power and {onlinePower} of the online voting power",
 
