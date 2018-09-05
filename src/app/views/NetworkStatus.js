@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import _ from "lodash";
 import accounting from "accounting";
 import injectClient from "../../lib/ClientComponent";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
@@ -101,7 +102,13 @@ class NetworkStatus extends React.Component {
 
   amountRepresented() {
     return (
-      <Fragment>{accounting.formatNumber(this.onlineWeight())} NANO</Fragment>
+      <Fragment>
+        <FormattedNumber
+          value={this.onlineWeight()}
+          maximumFractionDigits={0}
+        />{" "}
+        NANO
+      </Fragment>
     );
   }
 
@@ -118,7 +125,13 @@ class NetworkStatus extends React.Component {
 
   officialRepresented() {
     return (
-      <Fragment>{accounting.formatNumber(this.officialWeight())}</Fragment>
+      <Fragment>
+        <FormattedNumber
+          value={this.officialWeight()}
+          maximumFractionDigits={0}
+        />{" "}
+        NANO
+      </Fragment>
     );
   }
 
@@ -157,7 +170,9 @@ class NetworkStatus extends React.Component {
 
         <div className="row align-items-center">
           <div className="col-md">
-            <h1>Network Status</h1>
+            <h1>
+              <FormattedMessage id="network.title" />
+            </h1>
           </div>
         </div>
 
@@ -166,34 +181,48 @@ class NetworkStatus extends React.Component {
         <div className="row mt-5">
           <div className="col-md">
             <h2 className="mb-0">
-              {accounting.formatNumber(_.keys(representativesOnline).length)}{" "}
-              <span className="text-muted">representatives online</span>
+              <FormattedNumber value={_.keys(representativesOnline).length} />{" "}
+              <span className="text-muted">
+                <FormattedMessage id="network.reps_online" />
+              </span>
             </h2>
             <p className="text-muted">
-              Accounts that have at least 1 delegator, regardless of voting
-              weight
+              <FormattedMessage id="network.reps_online_desc" />
             </p>
 
             <h5 className="mb-0">
               {this.amountRepresented()}{" "}
-              <span className="text-muted">voting power is online</span>{" "}
+              <span className="text-muted">
+                <FormattedMessage id="network.online_voting_power" />
+              </span>{" "}
             </h5>
             <p>
               {this.percentRepresented()}{" "}
-              <span className="text-muted">of the total voting power</span>
+              <span className="text-muted">
+                <FormattedMessage id="network.total_voting_power" />
+              </span>
             </p>
 
             <h5 className="mb-0">
-              {this.officialRepresented()} NANO{" "}
+              {this.officialRepresented()}{" "}
               <span className="text-muted">
-                is delegated to official representatives
+                <FormattedMessage id="network.official_reps" />
               </span>
             </h5>
-            <p>
-              {this.officialPercent()}{" "}
-              <span className="text-muted">of the total voting power and</span>{" "}
-              {this.officialOnlinePercent()}{" "}
-              <span className="text-muted">of the online voting power</span>
+            <p className="text-muted">
+              <FormattedMessage
+                id="network.official_reps_stat"
+                values={{
+                  totalPower: (
+                    <span className="text-body">{this.officialPercent()}</span>
+                  ),
+                  onlinePower: (
+                    <span className="text-body">
+                      {this.officialOnlinePercent()}
+                    </span>
+                  )
+                }}
+              />
             </p>
           </div>
           <div className="col-md">

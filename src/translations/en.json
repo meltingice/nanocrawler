@@ -6,5 +6,15 @@
   "explorer.title": "Network Explorer",
   "explorer.form.help": "Enter a Nano address or block hash to get started.",
 
+  "network.title": "Network Status",
+  "network.reps_online": "representatives online",
+  "network.reps_online_desc":
+    "Accounts that have at least 1 delegator, regardless of voting weight",
+  "network.online_voting_power": "voting power is online",
+  "network.total_voting_power": "of the total voting power",
+  "network.official_reps": "is delegated to official representatives",
+  "network.official_reps_stat":
+    "{totalPower} of the total voting power and {onlinePower} of the online voting power",
+
   "search": "Search"
 }
