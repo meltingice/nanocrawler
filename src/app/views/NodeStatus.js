@@ -82,7 +82,7 @@ class NodeStatus extends React.Component {
             </p>
             <h2>
               <FormattedNumber
-                value={blockCount.count}
+                value={blockCount.count || 0}
                 maximumFractionDigits={0}
               />
             </h2>
@@ -93,7 +93,7 @@ class NodeStatus extends React.Component {
             </p>
             <h2>
               <FormattedNumber
-                value={blockCount.unchecked}
+                value={blockCount.unchecked || 0}
                 maximumFractionDigits={0}
               />
             </h2>
