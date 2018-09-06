@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { Redirect, NavLink } from "react-router-dom";
-import accounting from "accounting";
 import Clipboard from "react-clipboard.js";
+import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
 
 import injectClient from "../../../lib/ClientComponent";
 import NanoNodeNinja from "../../../lib/NanoNodeNinja";
@@ -97,12 +97,15 @@ class Account extends React.Component {
   }
 
   accountTitle() {
+    const { formatMessage } = this.props.intl;
     const { weight, unopened } = this.state;
 
-    if (weight >= 133248.289) return "Rebroadcasting Account";
-    if (weight > 0) return "Representative Account";
-    if (unopened) return "Unopened Account";
-    return "Account";
+    if (weight >= 133248.289)
+      return formatMessage({ id: "account.title.rebroadcasting" });
+    if (weight > 0)
+      return formatMessage({ id: "account.title.representative" });
+    if (unopened) return formatMessage({ id: "account.title.unopened" });
+    return formatMessage({ id: "account.title.normal" });
   }
 
   representativeOnline() {
@@ -111,14 +114,18 @@ class Account extends React.Component {
   }
 
   representativeOnlineStatus() {
+    const { formatMessage } = this.props.intl;
+
     return this.representativeOnline() ? (
-      <span className="badge badge-success mr-1">Representative online</span>
+      <span className="badge badge-success mr-1">
+        <FormattedMessage id="account.rep.online" />
+      </span>
     ) : (
       <span
         className="badge badge-danger mr-1 tooltipped tooltipped-e tooltipped-multiline"
-        aria-label="An offline representative means this account is no longer voting. It does not affect transactions in any way."
+        aria-label={formatMessage({ id: "account.rep_offline.desc" })}
       >
-        Representative offline
+        <FormattedMessage id="account.rep.offline" />
       </span>
     );
   }
@@ -130,12 +137,26 @@ class Account extends React.Component {
 
     return (
       <div className="alert alert-warning">
-        This representative account has a {this.state.uptime.toFixed(2)}%
-        uptime. If you are delegating your voting weight to it, you may want to
-        consider switching to a{" "}
-        <a href="https://mynano.ninja/" target="_blank" className="alert-link">
-          verified one with at least 95% uptime
-        </a>.
+        <FormattedMessage
+          id="account.rep_offline_warning"
+          values={{
+            uptime: (
+              <FormattedNumber
+                value={this.state.uptime}
+                maximumFractionDigits={2}
+              />
+            ),
+            link: (
+              <a
+                href="https://mynano.ninja/"
+                target="_blank"
+                className="alert-link"
+              >
+                <FormattedMessage id="account.rep_offline.warning_link" />
+              </a>
+            )
+          }}
+        />
       </div>
     );
   }
@@ -202,7 +223,11 @@ class Account extends React.Component {
                       {usd} / {btc}
                     </p>
                     <p className="text-muted mb-0">
-                      {accounting.formatNumber(pending, 6)} NANO pending
+                      <FormattedNumber
+                        value={pending}
+                        maximumFractionDigits={6}
+                      />{" "}
+                      NANO <FormattedMessage id="pending" />
                     </p>
                   </Fragment>
                 );
@@ -290,4 +315,4 @@ class Account extends React.Component {
   }
 }
 
-export default injectClient(Account);
+export default injectClient(injectIntl(Account));

@@ -33,5 +33,22 @@
   "status.memory": "Memory (used / total)",
   "status.database": "Database Size",
 
-  "search": "Search"
+  "account.title.rebroadcasting": "Rebroadcasting Account",
+  "account.title.representative": "Representative Account",
+  "account.title.unopened": "Unopened Account",
+  "account.title.normal": "Account",
+  "account.rep.online": "Representative online",
+  "account.rep.offline": "Representative offline",
+  "account.rep_offline_warning":
+    "This representative account has a {uptime} uptime. If you are delegating your voting weight to it, you may want to consider switching to a {link}",
+  "account.rep_offline.warning_link": "verified one with at least 95% uptime.",
+  "account.rep_offline.desc":
+    "An offline representative means this account is no longer voting. It does not affect transactions in any way.",
+
+  "error.not_found": "This page doesn't seem to exist",
+  "error.server_error":
+    "The server either encountered an error or is unable to fulfill your request",
+
+  "search": "Search",
+  "pending": "pending"
 }
