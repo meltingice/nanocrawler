@@ -23,6 +23,15 @@
     "{count} is assigned to rebroadcasting representatives",
   "network.rebroadcast_stat":
     "{totalPower} of the total voting power and {onlinePower} of the online voting power",
+  "network.aggregate.title": "Aggregate Network Stats",
+  "network.aggregate.desc":
+    "Stats are collected from discovered {link} and filtered to only include nodes with voting weight",
+  "network.tracking_nodes": "Tracking {count} nodes",
+  "network.avg_sync_status": "Average Sync Status",
+  "network.avg_block_count": "Average Block Count",
+  "network.median_block_count": "Median Block Count",
+  "network.minimum_block_count": "Minimum Block Count",
+  "network.maximum_block_count": "Maximum Block Count",
 
   "status.checked_blocks": "Checked Blocks",
   "status.unchecked_blocks": "Unchecked Blocks",

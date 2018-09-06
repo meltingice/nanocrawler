@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import _ from "lodash";
 import accounting from "accounting";
+import { FormattedMessage } from "react-intl";
 import injectClient from "../../lib/ClientComponent";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
@@ -80,21 +81,31 @@ class AggregateNetworkData extends React.Component {
       <Fragment>
         <div className="row mt-5 align-items-center">
           <div className="col-md">
-            <h1 className="mb-0">Aggregate Network Stats</h1>
+            <h1 className="mb-0">
+              <FormattedMessage id="network.aggregate.title" />
+            </h1>
             <p className="text-muted mb-0">
-              Stats are collected from discovered{" "}
-              <a
-                href="https://github.com/NanoTools/nanoNodeMonitor"
-                target="_blank"
-              >
-                nanoNodeMonitors
-              </a>{" "}
-              and filtered to only include nodes with voting weight
+              <FormattedMessage
+                id="network.aggregate.desc"
+                values={{
+                  link: (
+                    <a
+                      href="https://github.com/NanoTools/nanoNodeMonitor"
+                      target="_blank"
+                    >
+                      nanoNodeMonitors
+                    </a>
+                  )
+                }}
+              />
             </p>
           </div>
           <div className="col-auto">
             <h4 className="text-muted mb-0">
-              Tracking {this.representativePeers().length} nodes
+              <FormattedMessage
+                id="network.tracking_nodes"
+                values={{ count: this.representativePeers().length }}
+              />
             </h4>
           </div>
         </div>
@@ -103,30 +114,59 @@ class AggregateNetworkData extends React.Component {
 
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Average Sync Status</p>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.avg_sync_status" />
+            </p>
             <h3>
               {Math.round(
-                blockStats.currentBlocks.mean /
-                  blockStats.currentBlocks.max *
+                (blockStats.currentBlocks.mean / blockStats.currentBlocks.max) *
                   10000
               ) / 100}%
             </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Average Block Count</p>
-            <h3>{accounting.formatNumber(blockStats.currentBlocks.mean)}</h3>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.avg_block_count" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.currentBlocks.mean}
+                minimumFractionDigits={0}
+              />
+            </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Median Block Count</p>
-            <h3>{accounting.formatNumber(blockStats.currentBlocks.median)}</h3>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.median_block_count" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.currentBlocks.median}
+                minimumFractionDigits={0}
+              />
+            </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Minimum Block Count</p>
-            <h3>{accounting.formatNumber(blockStats.currentBlocks.min)}</h3>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.minimum_block_count" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.currentBlocks.min}
+                minimumFractionDigits={0}
+              />
+            </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Maximum Block Count</p>
-            <h3>{accounting.formatNumber(blockStats.currentBlocks.max)}</h3>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.maximum_block_count" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.currentBlocks.max}
+                minimumFractionDigits={0}
+              />
+            </h3>
           </div>
         </div>
 
@@ -135,9 +175,9 @@ class AggregateNetworkData extends React.Component {
             <p className="text-muted mb-2">Average Percent Unchecked</p>
             <h3>
               {Math.round(
-                blockStats.uncheckedBlocks.mean /
+                (blockStats.uncheckedBlocks.mean /
                   (blockStats.currentBlocks.mean +
-                    blockStats.uncheckedBlocks.mean) *
+                    blockStats.uncheckedBlocks.mean)) *
                   10000
               ) / 100}%
             </h3>
