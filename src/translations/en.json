@@ -44,6 +44,9 @@
   "account.rep_offline.warning_link": "verified one with at least 95% uptime.",
   "account.rep_offline.desc":
     "An offline representative means this account is no longer voting. It does not affect transactions in any way.",
+  "account.history": "History",
+  "account.delegators": "Delegators",
+  "account.represented_by": "Represented by {account}",
 
   "error.not_found": "This page doesn't seem to exist",
   "error.server_error":

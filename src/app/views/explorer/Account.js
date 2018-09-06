@@ -246,17 +246,17 @@ class Account extends React.Component {
               activeClassName="active"
               isActive={(m, l) => match.params.page === "history"}
             >
-              History
+              <FormattedMessage id="account.history" />
             </NavLink>
           </li>
           <li className="nav-item">
             <NavLink
               to={`/explorer/account/${match.params.account}/delegators`}
               className="nav-link nano"
-              activeClassName="active text-"
+              activeClassName="active"
               isActive={(m, l) => match.params.page === "delegators"}
             >
-              Delegators
+              <FormattedMessage id="account.delegators" />
             </NavLink>
           </li>
         </ul>
@@ -277,12 +277,18 @@ class Account extends React.Component {
     return (
       <p className="text-muted mb-0">
         {this.representativeOnlineStatus()}
-        Represented by{" "}
-        <AccountLink
-          account={representative}
-          short
-          ninja
-          className="text-muted"
+        <FormattedMessage
+          id="account.represented_by"
+          values={{
+            account: (
+              <AccountLink
+                account={representative}
+                short
+                ninja
+                className="text-muted"
+              />
+            )
+          }}
         />
       </p>
     );
