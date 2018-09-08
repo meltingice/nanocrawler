@@ -1,22 +1,31 @@
 import React from "react";
+import { FormattedMessage, FormattedNumber, injectIntl } from "react-intl";
 import _ from "lodash";
-import accounting from "accounting";
 
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "../../../../../lib/util";
 
-export default function HistoryReceiveBlock({ block }) {
+function HistoryReceiveBlock({ block, intl }) {
   return (
     <tr>
-      <td className="text-success">{_.capitalize(block.type)}</td>
+      <td className="text-success">
+        {_.capitalize(intl.formatMessage({ id: "block.subtype.receive" }))}
+      </td>
       <td>
-        <span className="text-muted">from</span>{" "}
+        <span className="text-muted">
+          <FormattedMessage id="block.from" />
+        </span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-success">
-        +{accounting.formatNumber(block.amount, 6)} NANO
+        +<FormattedNumber
+          value={block.amount}
+          maximumFractionDigits={6}
+          minimumFractionDigits={6}
+        />{" "}
+        NANO
       </td>
       <td>
         <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -27,3 +36,5 @@ export default function HistoryReceiveBlock({ block }) {
     </tr>
   );
 }
+
+export default injectIntl(HistoryReceiveBlock);

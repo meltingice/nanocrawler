@@ -72,6 +72,18 @@
   "account.delegators": "Delegators",
   "account.represented_by": "Represented by {account}",
 
+  "account.delegators.empty_state.title": "This account has no delegators",
+  "account.delegators.empty_state.desc":
+    "Although this account is valid, no one is currently lending their voting weight to it. If the account is usually offline, this is a good thing.",
+  "account.delegators.loading": "Loading delegators...",
+
+  "block.subtype.open": "open",
+  "block.subtype.change": "change",
+  "block.subtype.send": "send",
+  "block.subtype.receive": "receive",
+  "block.to": "to",
+  "block.from": "from",
+
   "error.not_found": "This page doesn't seem to exist",
   "error.server_error":
     "The server either encountered an error or is unable to fulfill your request",

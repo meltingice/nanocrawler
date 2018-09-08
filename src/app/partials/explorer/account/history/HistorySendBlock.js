@@ -1,21 +1,31 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedNumber, FormattedMessage, injectIntl } from "react-intl";
+import _ from "lodash";
 
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "../../../../../lib/util";
 
-export default function HistorySendBlock({ block }) {
+function HistorySendBlock({ block, intl }) {
   return (
     <tr>
-      <td className="text-danger">Send</td>
+      <td className="text-danger">
+        {_.capitalize(intl.formatMessage({ id: "block.subtype.send" }))}
+      </td>
       <td>
-        <span className="text-muted">to</span>{" "}
+        <span className="text-muted">
+          <FormattedMessage id="block.to" />
+        </span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-danger">
-        -{accounting.formatNumber(block.amount, 6)} NANO
+        -<FormattedNumber
+          value={block.amount}
+          minimumFractionDigits={6}
+          maximumFractionDigits={6}
+        />{" "}
+        NANO
       </td>
       <td>
         <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -26,3 +36,5 @@ export default function HistorySendBlock({ block }) {
     </tr>
   );
 }
+
+export default injectIntl(HistorySendBlock);

@@ -1,5 +1,5 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 
 import injectClient from "../../../../../lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
@@ -77,9 +77,9 @@ class HistoryStateBlock extends React.Component {
     switch (block.subtype) {
       case "open":
       case "receive":
-        return "from";
+        return <FormattedMessage id="block.from" />;
       case "send":
-        return "to";
+        return <FormattedMessage id="block.to" />;
       default:
         return "";
     }
@@ -90,7 +90,10 @@ class HistoryStateBlock extends React.Component {
     return (
       <tr>
         <td>
-          State <span className={this.statusClass()}>{block.subtype}</span>
+          State{" "}
+          <span className={this.statusClass()}>
+            <FormattedMessage id={`block.subtype.${block.subtype}`} />
+          </span>
         </td>
         <td>
           <span className="text-muted">{this.accountAction()}</span>{" "}
@@ -102,7 +105,12 @@ class HistoryStateBlock extends React.Component {
         </td>
         <td className={this.statusClass()}>
           {this.transactionSymbol()}
-          {accounting.formatNumber(block.amount, 6)} NANO
+          <FormattedNumber
+            value={block.amount}
+            minimumFractionDigits={6}
+            maximumFractionDigits={6}
+          />{" "}
+          NANO
         </td>
         <td>
           <OptionalField value={formatTimestamp(block.timestamp)} />
