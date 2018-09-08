@@ -1,4 +1,5 @@
 import React from "react";
+import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 
 class GlobalSearch extends React.PureComponent {
@@ -16,12 +17,13 @@ class GlobalSearch extends React.PureComponent {
   }
 
   render() {
+    const { formatMessage } = this.props.intl;
     return (
       <form className="ml-2" onSubmit={this.onSubmit.bind(this)}>
         <input
           type="text"
           className="form-control"
-          placeholder="Search for a Nano address or tx"
+          placeholder={formatMessage({ id: "search_help" })}
           value={this.state.search}
           onChange={e => this.setState({ search: e.target.value })}
         />
@@ -30,4 +32,4 @@ class GlobalSearch extends React.PureComponent {
   }
 }
 
-export default withRouter(GlobalSearch);
+export default withRouter(injectIntl(GlobalSearch));

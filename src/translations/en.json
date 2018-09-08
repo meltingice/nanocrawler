@@ -77,5 +77,6 @@
     "The server either encountered an error or is unable to fulfill your request",
 
   "search": "Search",
+  "search_help": "Search for a Nano address or hash",
   "pending": "pending"
 }
