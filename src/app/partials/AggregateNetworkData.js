@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import _ from "lodash";
 import accounting from "accounting";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import injectClient from "../../lib/ClientComponent";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
@@ -172,7 +172,9 @@ class AggregateNetworkData extends React.Component {
 
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Average Percent Unchecked</p>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.avg_percent_uncheckeed" />
+            </p>
             <h3>
               {Math.round(
                 (blockStats.uncheckedBlocks.mean /
@@ -183,38 +185,80 @@ class AggregateNetworkData extends React.Component {
             </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Average Unchecked Blocks</p>
-            <h3>{accounting.formatNumber(blockStats.uncheckedBlocks.mean)}</h3>
-          </div>
-          <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Median Unchecked Blocks</p>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.avg_unchecked" />
+            </p>
             <h3>
-              {accounting.formatNumber(blockStats.uncheckedBlocks.median)}
+              <FormattedNumber
+                value={blockStats.uncheckedBlocks.mean}
+                minimumFractionDigits={0}
+              />
             </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Minimum Unchecked Blocks</p>
-            <h3>{accounting.formatNumber(blockStats.uncheckedBlocks.min)}</h3>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.median_unchecked" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.uncheckedBlocks.median}
+                minimumFractionDigits={0}
+              />
+            </h3>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Maximum Unchecked Blocks</p>
-            <h3>{accounting.formatNumber(blockStats.uncheckedBlocks.max)}</h3>
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.min_unchecked" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.uncheckedBlocks.min}
+                minimumFractionDigits={0}
+              />
+            </h3>
+          </div>
+          <div className="col-sm text-sm-center">
+            <p className="text-muted mb-2">
+              <FormattedMessage id="network.max_unchecked" />
+            </p>
+            <h3>
+              <FormattedNumber
+                value={blockStats.uncheckedBlocks.max}
+                minimumFractionDigits={0}
+              />
+            </h3>
           </div>
         </div>
 
         <div className="row mt-5 align-items-center">
           <div className="col-sm">
-            <h3 className="mb-0">NANO Services</h3>
+            <h3 className="mb-0">
+              <FormattedMessage id="network.nano_services" />
+            </h3>
             <p className="text-muted mb-0">
-              The current status of known NANO services. Wallets, tip bots,
-              merchant tools, etc.
+              <FormattedMessage id="network.nano_services_desc" />
             </p>
             <p>
               <small>
-                Synced within:{" "}
-                <span className="text-success">1,000 blocks</span>{" "}
-                <span className="text-warning">10,000 blocks</span>{" "}
-                <span className="text-danger">greater than 10,000 blocks</span>
+                <FormattedMessage id="network.synced_within" />{" "}
+                <span className="text-success">
+                  <FormattedMessage
+                    id="network.synced_blocks"
+                    values={{ count: <FormattedNumber value={1000} /> }}
+                  />
+                </span>{" "}
+                <span className="text-warning">
+                  <FormattedMessage
+                    id="network.synced_blocks"
+                    values={{ count: <FormattedNumber value={10000} /> }}
+                  />
+                </span>{" "}
+                <span className="text-danger">
+                  <FormattedMessage
+                    id="network.synced_greater_than"
+                    values={{ count: <FormattedNumber value={10000} /> }}
+                  />
+                </span>
               </small>
             </p>
           </div>

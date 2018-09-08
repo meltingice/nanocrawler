@@ -32,6 +32,17 @@
   "network.median_block_count": "Median Block Count",
   "network.minimum_block_count": "Minimum Block Count",
   "network.maximum_block_count": "Maximum Block Count",
+  "network.avg_percent_unchecked": "Average Percent Unchecked",
+  "network.avg_unchecked": "Average Unchecked Blocks",
+  "network.median_unchecked": "Median Unchecked Blocks",
+  "network.min_unchecked": "Minimum Unchecked Blocks",
+  "network.max_unchecked": "Maximum Unchecked Blocks",
+  "network.nano_services": "NANO Services",
+  "network.nano_services_desc":
+    "The current status of known NANO services. Wallets, tip bots, merchant tools, etc.",
+  "network.synced_within": "Synced within:",
+  "network.synced_blocks": "{count} blocks",
+  "network.synced_greater_than": "greater than {count} blocks",
 
   "status.checked_blocks": "Checked Blocks",
   "status.unchecked_blocks": "Unchecked Blocks",
