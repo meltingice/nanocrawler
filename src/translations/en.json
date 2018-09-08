@@ -43,6 +43,10 @@
   "network.synced_within": "Synced within:",
   "network.synced_blocks": "{count} blocks",
   "network.synced_greater_than": "greater than {count} blocks",
+  "network.discovered_peers": "Discovered Peers",
+  "network.discovered_peers_desc":
+    "All discovered peers running nanoNodeMonitor, sorted by name.",
+  "network.monitor_count": "{count} monitors discovered",
 
   "status.checked_blocks": "Checked Blocks",
   "status.unchecked_blocks": "Unchecked Blocks",

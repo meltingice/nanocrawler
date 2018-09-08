@@ -238,29 +238,7 @@ class AggregateNetworkData extends React.Component {
             <p className="text-muted mb-0">
               <FormattedMessage id="network.nano_services_desc" />
             </p>
-            <p>
-              <small>
-                <FormattedMessage id="network.synced_within" />{" "}
-                <span className="text-success">
-                  <FormattedMessage
-                    id="network.synced_blocks"
-                    values={{ count: <FormattedNumber value={1000} /> }}
-                  />
-                </span>{" "}
-                <span className="text-warning">
-                  <FormattedMessage
-                    id="network.synced_blocks"
-                    values={{ count: <FormattedNumber value={10000} /> }}
-                  />
-                </span>{" "}
-                <span className="text-danger">
-                  <FormattedMessage
-                    id="network.synced_greater_than"
-                    values={{ count: <FormattedNumber value={10000} /> }}
-                  />
-                </span>
-              </small>
-            </p>
+            <SyncThresholds />
           </div>
         </div>
 
@@ -268,22 +246,20 @@ class AggregateNetworkData extends React.Component {
 
         <div className="row mt-5 align-items-center">
           <div className="col-sm">
-            <h3 className="mb-0">Discovered Peers</h3>
+            <h3 className="mb-0">
+              <FormattedMessage id="network.discovered_peers" />
+            </h3>
             <p className="text-muted mb-0">
-              All discovered peers running nanoNodeMonitor, sorted by name.
+              <FormattedMessage id="network.discovered_peers_desc" />
             </p>
-            <p>
-              <small>
-                Synced within:{" "}
-                <span className="text-success">1,000 blocks</span>{" "}
-                <span className="text-warning">10,000 blocks</span>{" "}
-                <span className="text-danger">greater than 10,000 blocks</span>
-              </small>
-            </p>
+            <SyncThresholds />
           </div>
           <div className="col-auto">
             <h4 className="text-muted mb-0">
-              {this.state.peers.length} monitors discovered
+              <FormattedMessage
+                id="network.monitor_count"
+                values={{ count: this.state.peers.length }}
+              />
             </h4>
           </div>
         </div>
@@ -306,5 +282,31 @@ class AggregateNetworkData extends React.Component {
     }
   }
 }
+
+const SyncThresholds = () => (
+  <p>
+    <small>
+      <FormattedMessage id="network.synced_within" />{" "}
+      <span className="text-success">
+        <FormattedMessage
+          id="network.synced_blocks"
+          values={{ count: <FormattedNumber value={1000} /> }}
+        />
+      </span>{" "}
+      <span className="text-warning">
+        <FormattedMessage
+          id="network.synced_blocks"
+          values={{ count: <FormattedNumber value={10000} /> }}
+        />
+      </span>{" "}
+      <span className="text-danger">
+        <FormattedMessage
+          id="network.synced_greater_than"
+          values={{ count: <FormattedNumber value={10000} /> }}
+        />
+      </span>
+    </small>
+  </p>
+);
 
 export default injectClient(AggregateNetworkData);
