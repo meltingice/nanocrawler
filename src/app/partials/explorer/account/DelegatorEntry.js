@@ -1,5 +1,5 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedNumber } from "react-intl";
 import AccountLink from "../../AccountLink";
 
 export default function DelegatorEntry({ account, balance }) {
@@ -8,7 +8,14 @@ export default function DelegatorEntry({ account, balance }) {
       <td>
         <AccountLink account={account} className="text-dark" delegators />
       </td>
-      <td>{accounting.formatNumber(balance, 6)} NANO</td>
+      <td>
+        <FormattedNumber
+          value={balance}
+          maximumFractionDigits={6}
+          minimumFractionDigits={6}
+        />{" "}
+        NANO
+      </td>
     </tr>
   );
 }

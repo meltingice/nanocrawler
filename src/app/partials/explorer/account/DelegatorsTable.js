@@ -1,9 +1,10 @@
 import React from "react";
+import { FormattedMessage, injectIntl } from "react-intl";
 import _ from "lodash";
 
 import DelegatorEntry from "./DelegatorEntry";
 
-export default function DelegatorsTable({ delegators }) {
+function DelegatorsTable({ delegators, intl }) {
   const sortedDelegators = _.toPairs(delegators)
     .filter(d => parseFloat(d[1], 10) >= 1)
     .sort((a, b) => {
@@ -19,8 +20,10 @@ export default function DelegatorsTable({ delegators }) {
       <table className="table">
         <thead>
           <tr>
-            <th>Account</th>
-            <th>Delegated Weight</th>
+            <th>{_.capitalize(intl.formatMessage({ id: "account" }))}</th>
+            <th>
+              <FormattedMessage id="account.delegators.weight" />
+            </th>
           </tr>
         </thead>
 
@@ -33,3 +36,5 @@ export default function DelegatorsTable({ delegators }) {
     </div>
   );
 }
+
+export default injectIntl(DelegatorsTable);

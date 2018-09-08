@@ -76,6 +76,18 @@
   "account.delegators.empty_state.desc":
     "Although this account is valid, no one is currently lending their voting weight to it. If the account is usually offline, this is a good thing.",
   "account.delegators.loading": "Loading delegators...",
+  "account.delegators.title": "Delegators",
+  "account.delegators.desc": "{count} delegators, sorted by weight",
+  "account.delegators.filter": "Only showing accounts with at least 1 NANO",
+  "account.delegators.weight": "Delegated Weight",
+
+  "account.pending.title": "Pending Transactions",
+  "account.pending.limit": "Only showing up to 20 pending deposits",
+  "account.pending.count": "pending transactions",
+
+  "account.transactions.title": "Transactions",
+  "account.transactions.total": "transactions total",
+  "account.transactions.load_more": "Load More Transactions",
 
   "block.subtype.open": "open",
   "block.subtype.change": "change",
@@ -84,11 +96,21 @@
   "block.to": "to",
   "block.from": "from",
 
+  "ninja.verified_by": "Verified by {link}",
+  "ninja.uptime": "Uptime {percent}",
+  "ninja.last_voted": "Last voted {date}",
+  "ninja.monitor_link": "Open Node Monitor",
+  "ninja.sync_status": "Sync status {status}",
+  "ninja.block_count": "Block count {count}",
+  "ninja.node_version": "Node version {version}",
+
   "error.not_found": "This page doesn't seem to exist",
   "error.server_error":
     "The server either encountered an error or is unable to fulfill your request",
 
   "search": "Search",
   "search_help": "Search for a Nano address or hash",
-  "pending": "pending"
+  "pending": "pending",
+  "weight": "weight",
+  "account": "account"
 }
