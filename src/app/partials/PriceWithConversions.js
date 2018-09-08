@@ -1,5 +1,5 @@
-import React from "react";
-import accounting from "accounting";
+import React, { Fragment } from "react";
+import { FormattedNumber } from "react-intl";
 import injectClient from "../../lib/ClientComponent";
 
 class PriceWithConversions extends React.PureComponent {
@@ -33,14 +33,28 @@ class PriceWithConversions extends React.PureComponent {
 
     switch (cur) {
       case "nano":
-        return `${accounting.formatNumber(
-          value,
-          this.props.precision.nano
-        )} NANO`;
+        return (
+          <Fragment>
+            <FormattedNumber
+              value={value}
+              maximumFractionDigits={this.props.precision.nano}
+            />{" "}
+            NANO
+          </Fragment>
+        );
       case "usd":
-        return accounting.formatMoney(value, "$", this.props.precision.usd);
+        return (
+          <FormattedNumber value={value} style="currency" currency="USD" />
+        );
       case "btc":
-        return accounting.formatMoney(value, "₿", this.props.precision.btc);
+        return (
+          <Fragment>
+            ₿<FormattedNumber
+              value={value}
+              maximumFractionDigits={this.props.precision.btc}
+            />
+          </Fragment>
+        );
       default:
         return null;
     }

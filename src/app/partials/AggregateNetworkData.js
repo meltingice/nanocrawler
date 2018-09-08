@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import _ from "lodash";
-import accounting from "accounting";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import injectClient from "../../lib/ClientComponent";
 
