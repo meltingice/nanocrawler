@@ -89,6 +89,10 @@
   "account.transactions.total": "transactions total",
   "account.transactions.load_more": "Load More Transactions",
 
+  "account.unopened.title": "This account hasn't been opened yet",
+  "account.unopened.desc":
+    "While the account address is valid, no blocks have been published to its chain yet. If NANO has been sent to this account, it still needs to publish a corresponding block to pocket the funds.",
+
   "block.subtype.open": "open",
   "block.subtype.change": "change",
   "block.subtype.send": "send",
@@ -112,5 +116,9 @@
   "search_help": "Search for a Nano address or hash",
   "pending": "pending",
   "weight": "weight",
-  "account": "account"
+  "account": "account",
+  "type": "type",
+  "amount": "amount",
+  "date": "date",
+  "block": "block"
 }
