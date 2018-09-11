@@ -99,6 +99,15 @@
   "block.subtype.receive": "receive",
   "block.to": "to",
   "block.from": "from",
+  "block.previous": "Previous Block",
+  "block.previous.desc": "The previous block in this account's chain",
+  "block.pow": "Proof of Work",
+  "block.signature": "Signature",
+  "block.timestamp.desc":
+    "The date and time this block was discovered (converted to your local time)",
+
+  "block.change.account": "The account that changed their representative",
+  "block.change.rep": "The account's new representative",
 
   "ninja.verified_by": "Verified by {link}",
   "ninja.uptime": "Uptime {percent}",
@@ -120,5 +129,6 @@
   "type": "type",
   "amount": "amount",
   "date": "date",
-  "block": "block"
+  "block": "block",
+  "representative": "representative"
 }

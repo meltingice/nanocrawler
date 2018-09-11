@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
@@ -9,7 +10,9 @@ export default function ChangeBlock({ block }) {
   return (
     <div className="Block">
       <h4 className="mb-0">
-        Account{" "}
+        <span className="text-capitalize">
+          <FormattedMessage id="account" />
+        </span>{" "}
         <small>
           <AccountLink
             account={block.block_account}
@@ -19,11 +22,15 @@ export default function ChangeBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The account that changed their representative</small>
+        <small>
+          <FormattedMessage id="block.change.account" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Representative{" "}
+        <span className="text-capitalize">
+          <FormattedMessage id="representative" />
+        </span>{" "}
         <small>
           <AccountLink
             account={block.contents.representative}
@@ -33,24 +40,27 @@ export default function ChangeBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The account's new representative</small>
+        <small>
+          <FormattedMessage id="block.change.rep" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Date{" "}
+        <span className="text-capitalize">
+          <FormattedMessage id="date" />
+        </span>{" "}
         <small className="text-muted">
           <OptionalField value={formatTimestamp(block.timestamp)} />
         </small>
       </h4>
       <p>
         <small>
-          The date and time this block was discovered converted to your local
-          time
+          <FormattedMessage id="block.timestamp.desc" />
         </small>
       </p>
 
       <h5 className="mb-0">
-        Previous Block{" "}
+        <FormattedMessage id="block.previous" />{" "}
         <small>
           <BlockLink
             hash={block.contents.previous}
@@ -59,15 +69,17 @@ export default function ChangeBlock({ block }) {
         </small>
       </h5>
       <p>
-        <small>The previous block in this account's chain</small>
+        <small>
+          <FormattedMessage id="block.previous.desc" />
+        </small>
       </p>
 
       <h5>
-        Proof of Work{" "}
+        <FormattedMessage id="block.pow" />{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>
       <h5>
-        Signature{" "}
+        <FormattedMessage id="block.signature" />{" "}
         <small className="text-muted break-word">
           {block.contents.signature}
         </small>
