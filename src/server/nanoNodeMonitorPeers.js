@@ -18,10 +18,7 @@ let KNOWN_MONITORS = [];
 async function updateKnownMonitors() {
   let monitors = _.keys((await nano.rpc("peers")).peers)
     .filter(
-      peer =>
-        !config.blacklistedPeers.includes(
-          peer.match(/\[::ffff:(\d+\.\d+\.\d+\.\d+)\]:\d+/)[1]
-        )
+      peer => !config.blacklistedPeers.includes(peer.match(/\[(.+)\]:\d+/)[1])
     )
     .map(peer => NodeMonitor.fromPeerAddress(peer));
 
