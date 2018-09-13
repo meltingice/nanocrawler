@@ -58,17 +58,6 @@ class Content extends React.PureComponent {
           <title>Nano Crawler</title>
         </Helmet>
 
-        <div className="row justify-content-center">
-          <div className="col-8 mt-5">
-            <div className="alert alert-info mb-5">
-              NanoCrawler has moved servers and is still in the process of
-              syncing. If transactions or accounts appear to be missing, it's
-              because of this. Keep an eye on the{" "}
-              <a href="/status">Node Status</a> page for more information.
-            </div>
-          </div>
-        </div>
-
         <Switch>
           <Route exact path="/" render={props => <Explorer {...props} />} />
           <Route
