@@ -64,10 +64,9 @@ class PriceWithConversions extends React.PureComponent {
     const { currencies, ticker } = this.props;
     if (!ticker) return null;
 
-    let conversions = currencies.map(cur =>
-      this.getDisplayValueForCurrency(cur)
-    );
-    return conversions.join(" / ");
+    return currencies
+      .map(cur => this.getDisplayValueForCurrency(cur))
+      .reduce((prev, cur) => [prev, " / ", cur]);
   }
 
   render() {
