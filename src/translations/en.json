@@ -105,9 +105,27 @@
   "block.signature": "Signature",
   "block.timestamp.desc":
     "The date and time this block was discovered (converted to your local time)",
+  "block.source.desc": "The corresponding send block for this transaction",
 
   "block.change.account": "The account that changed their representative",
   "block.change.rep": "The account's new representative",
+
+  "block.unknown": "Unknown Block",
+  "block.unknown.title": "This block hasn't been received yet",
+  "block.unknown.desc":
+    "NANO is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast througout the entire network.",
+  "block.unknown.desc2":
+    "If you're sure the block hash is correct, wait a little bit and refresh the page.",
+  "block.unknown.return": "Return to the Explorer",
+
+  "block.open.desc": "The account that this block created",
+  "block.open.opened_by": "Opened By",
+  "block.open.opened_by.desc":
+    "The account whose transaction opened this account",
+
+  "block.open.amount_desc":
+    "The amount of NANO sent to open this account, which can be 0",
+  "block.open.rep": "The representative assigned to this account",
 
   "ninja.verified_by": "Verified by {link}",
   "ninja.uptime": "Uptime {percent}",
@@ -130,5 +148,6 @@
   "amount": "amount",
   "date": "date",
   "block": "block",
-  "representative": "representative"
+  "representative": "representative",
+  "source": "source"
 }
