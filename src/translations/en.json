@@ -103,6 +103,8 @@
   "block.previous.desc": "The previous block in this account's chain",
   "block.pow": "Proof of Work",
   "block.signature": "Signature",
+  "block.amount_desc":
+    "The amount of NANO sent to open this account, which can be 0",
   "block.timestamp.desc":
     "The date and time this block was discovered (converted to your local time)",
   "block.source.desc": "The corresponding send block for this transaction",
@@ -122,10 +124,13 @@
   "block.open.opened_by": "Opened By",
   "block.open.opened_by.desc":
     "The account whose transaction opened this account",
-
-  "block.open.amount_desc":
-    "The amount of NANO sent to open this account, which can be 0",
   "block.open.rep": "The representative assigned to this account",
+
+  "block.receive.recipient": "Recipient",
+  "block.receive.recipient.desc":
+    "The account that is receiving the transaction",
+  "block.receive.sender": "Sender",
+  "block.receive.sender.desc": "The account that initiated the transaction",
 
   "ninja.verified_by": "Verified by {link}",
   "ninja.uptime": "Uptime {percent}",

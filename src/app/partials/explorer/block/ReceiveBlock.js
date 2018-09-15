@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
@@ -9,7 +10,7 @@ export default function ReceiveBlock({ block }) {
   return (
     <div className="Block">
       <h4 className="mb-0">
-        Recipient{" "}
+        <FormattedMessage id="block.receive.recipient" />{" "}
         <small>
           <AccountLink
             account={block.block_account}
@@ -19,11 +20,13 @@ export default function ReceiveBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The account that is receiving the transaction</small>
+        <small>
+          <FormattedMessage id="block.receive.recipient.desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Sender{" "}
+        <FormattedMessage id="block.receive.sender" />{" "}
         <small>
           <AccountLink
             account={block.source_account}
@@ -33,11 +36,15 @@ export default function ReceiveBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The account that initiated the transaction</small>
+        <small>
+          <FormattedMessage id="block.receive.sender.desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Amount{" "}
+        <span className="text-capitalize">
+          <FormattedMessage id="amount" />
+        </span>{" "}
         <small className="text-muted">
           <PriceWithConversions
             amount={block.amount}
@@ -46,11 +53,15 @@ export default function ReceiveBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The amount of NANO that was sent in this transaction</small>
+        <small>
+          <FormattedMessage id="block.amount_desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Source{" "}
+        <span className="text-capitalize">
+          <FormattedMessage id="source" />
+        </span>{" "}
         <small>
           <BlockLink
             hash={block.contents.source}
@@ -59,24 +70,27 @@ export default function ReceiveBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The corresponding send block for this transaction</small>
+        <small>
+          <FormattedMessage id="block.source.desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Date{" "}
+        <span id="text-capitalize">
+          <FormattedMessage id="date" />
+        </span>{" "}
         <small className="text-muted">
           <OptionalField value={formatTimestamp(block.timestamp)} />
         </small>
       </h4>
       <p>
         <small>
-          The date and time this block was discovered converted to your local
-          time
+          <FormattedMessage id="block.timestamp.desc" />
         </small>
       </p>
 
       <h5 className="mb-0">
-        Previous Block{" "}
+        <FormattedMessage id="block.previous" />{" "}
         <small>
           <BlockLink
             hash={block.contents.previous}
@@ -85,15 +99,17 @@ export default function ReceiveBlock({ block }) {
         </small>
       </h5>
       <p>
-        <small>The previous block in this account's chain</small>
+        <small>
+          <FormattedMessage id="block.previous.desc" />
+        </small>
       </p>
 
       <h5>
-        Proof of Work{" "}
+        <FormattedMessage id="block.pow" />{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>
       <h5>
-        Signature{" "}
+        <FormattedMessage id="block.signature" />{" "}
         <small className="text-muted break-word">
           {block.contents.signature}
         </small>
