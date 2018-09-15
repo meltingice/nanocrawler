@@ -1,4 +1,4 @@
-# Nano Node Dashboard
+# NanoCrawler
 
 A lightweight web UI for viewing realtime information about your Nano node and exploring the Nano network.
 
