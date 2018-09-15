@@ -108,6 +108,10 @@
   "block.timestamp.desc":
     "The date and time this block was discovered (converted to your local time)",
   "block.source.desc": "The corresponding send block for this transaction",
+  "block.sender": "Sender",
+  "block.sender.desc": "The account that initiated the transaction",
+  "block.recipient": "Recipient",
+  "block.recipient.desc": "The account that is receiving the transaction",
 
   "block.change.account": "The account that changed their representative",
   "block.change.rep": "The account's new representative",
@@ -126,11 +130,8 @@
     "The account whose transaction opened this account",
   "block.open.rep": "The representative assigned to this account",
 
-  "block.receive.recipient": "Recipient",
-  "block.receive.recipient.desc":
-    "The account that is receiving the transaction",
-  "block.receive.sender": "Sender",
-  "block.receive.sender.desc": "The account that initiated the transaction",
+  "block.send.amount_desc":
+    "The amount of NANO that was sent in this transaction",
 
   "ninja.verified_by": "Verified by {link}",
   "ninja.uptime": "Uptime {percent}",

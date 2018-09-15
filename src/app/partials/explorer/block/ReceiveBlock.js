@@ -10,7 +10,7 @@ export default function ReceiveBlock({ block }) {
   return (
     <div className="Block">
       <h4 className="mb-0">
-        <FormattedMessage id="block.receive.recipient" />{" "}
+        <FormattedMessage id="block.recipient" />{" "}
         <small>
           <AccountLink
             account={block.block_account}
@@ -21,12 +21,12 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.receive.recipient.desc" />
+          <FormattedMessage id="block.recipient.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
-        <FormattedMessage id="block.receive.sender" />{" "}
+        <FormattedMessage id="block.sender" />{" "}
         <small>
           <AccountLink
             account={block.source_account}
@@ -37,7 +37,7 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.receive.sender.desc" />
+          <FormattedMessage id="block.sender.desc" />
         </small>
       </p>
 
