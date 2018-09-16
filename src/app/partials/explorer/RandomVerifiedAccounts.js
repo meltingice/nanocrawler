@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { FormattedMessage } from "react-intl";
 import _ from "lodash";
 
 import AccountLink from "../AccountLink";
@@ -18,12 +19,24 @@ export default class RandomVerifiedAccounts extends React.Component {
   render() {
     return (
       <Fragment>
-        <h3 className="mb-0">Verified Accounts</h3>
+        <h3 className="mb-0">
+          <FormattedMessage id="ninja.verified_accounts" />
+        </h3>
         <p className="text-muted">
-          A random sampling of accounts verified with{" "}
-          <a href="https://mynano.ninja" target="_blank" className="text-muted">
-            My Nano Ninja
-          </a>
+          <FormattedMessage
+            id="ninja.verified_accounts.desc"
+            values={{
+              link: (
+                <a
+                  href="https://mynano.ninja"
+                  target="_blank"
+                  className="text-muted"
+                >
+                  My Nano Ninja
+                </a>
+              )
+            }}
+          />
         </p>
 
         <hr />

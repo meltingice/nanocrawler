@@ -156,6 +156,9 @@
   "ninja.sync_status": "Sync status {status}",
   "ninja.block_count": "Block count {count}",
   "ninja.node_version": "Node version {version}",
+  "ninja.verified_accounts": "Verified Accounts",
+  "ninja.verified_accounts.desc":
+    "A random sampling of accounts verified with {link}",
 
   "stream.change": "changed their representative to",
   "stream.open": "was created with {amount} NANO",
