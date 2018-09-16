@@ -1,5 +1,5 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
@@ -16,7 +16,17 @@ export default function SendBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-danger">
-            sent {accounting.formatNumber(block.amount, 6)} NANO
+            <FormattedMessage
+              id="stream.send"
+              values={{
+                amount: (
+                  <FormattedNumber
+                    value={block.amount}
+                    maximumFractionDigits={6}
+                  />
+                )
+              }}
+            />
           </span>
         </p>
         <p className="mb-0">

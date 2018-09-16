@@ -34,7 +34,7 @@ class PriceWithConversions extends React.PureComponent {
     switch (cur) {
       case "nano":
         return (
-          <Fragment>
+          <Fragment key="nano">
             <FormattedNumber
               value={value}
               maximumFractionDigits={this.props.precision.nano}
@@ -44,11 +44,16 @@ class PriceWithConversions extends React.PureComponent {
         );
       case "usd":
         return (
-          <FormattedNumber value={value} style="currency" currency="USD" />
+          <FormattedNumber
+            key="usd"
+            value={value}
+            style="currency"
+            currency="USD"
+          />
         );
       case "btc":
         return (
-          <Fragment>
+          <Fragment key="btc">
             ₿<FormattedNumber
               value={value}
               maximumFractionDigits={this.props.precision.btc}

@@ -157,6 +157,11 @@
   "ninja.block_count": "Block count {count}",
   "ninja.node_version": "Node version {version}",
 
+  "stream.change": "changed their representative to",
+  "stream.open": "was created with {amount} NANO",
+  "stream.receive": "received {amount} NANO",
+  "stream.send": "sent {amount} NANO",
+
   "error.not_found": "This page doesn't seem to exist",
   "error.server_error":
     "The server either encountered an error or is unable to fulfill your request",
