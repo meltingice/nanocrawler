@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import accounting from "accounting";
 import injectClient from "../../../lib/ClientComponent";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
 
@@ -63,14 +63,16 @@ class RecentBlockStream extends React.Component {
       <Fragment>
         <div className="row align-items-center">
           <div className="col-sm">
-            <h3 className="mb-0">Recent Transactions</h3>
+            <h3 className="mb-0">
+              <FormattedMessage id="stream.title" />
+            </h3>
             <p className="text-muted mb-0">
-              A real-time stream of transactions on the Nano network
+              <FormattedMessage id="stream.desc" />
             </p>
           </div>
           <div className="col-auto">
             <h5 className="mb-0">
-              {accounting.formatNumber(throughput, 1)}{" "}
+              <FormattedNumber value={throughput} maximumFractionDigits={2} />{" "}
               <span className="text-muted">tx / sec</span>
             </h5>
           </div>
@@ -100,7 +102,9 @@ class RecentBlockStream extends React.Component {
   emptyState() {
     return (
       <div className="my-5 text-center">
-        <h5 className="text-muted">Waiting for transactions...</h5>
+        <h5 className="text-muted">
+          <FormattedMessage id="stream.waiting" />
+        </h5>
       </div>
     );
   }
