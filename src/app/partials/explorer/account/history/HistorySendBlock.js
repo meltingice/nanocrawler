@@ -1,6 +1,5 @@
 import React from "react";
 import { FormattedNumber, FormattedMessage, injectIntl } from "react-intl";
-import _ from "lodash";
 
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
@@ -10,8 +9,8 @@ import { formatTimestamp } from "../../../../../lib/util";
 function HistorySendBlock({ block, intl }) {
   return (
     <tr>
-      <td className="text-danger">
-        {_.capitalize(intl.formatMessage({ id: "block.subtype.send" }))}
+      <td className="text-danger text-capitalize">
+        {intl.formatMessage({ id: "block.subtype.send" })}
       </td>
       <td>
         <span className="text-muted">

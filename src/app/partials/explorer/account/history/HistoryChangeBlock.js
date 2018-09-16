@@ -1,6 +1,5 @@
 import React from "react";
 import { injectIntl } from "react-intl";
-import _ from "lodash";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
@@ -9,8 +8,8 @@ import { formatTimestamp } from "../../../../../lib/util";
 function HistoryChangeBlock({ block, intl }) {
   return (
     <tr>
-      <td className="text-info">
-        {_.capitalize(intl.formatMessage({ id: "block.subtype.change" }))}
+      <td className="text-info text-capitalize">
+        {intl.formatMessage({ id: "block.subtype.change" })}
       </td>
       <td>
         <AccountLink
