@@ -77,9 +77,10 @@ export default class DiscoveredPeers extends React.PureComponent {
               value={this.state.sortVersion}
               onChange={e => this.setState({ sortVersion: e.target.value })}
             >
-              <option value="">
-                <FormattedMessage id="network.peers.filter" />
-              </option>
+              <FormattedMessage id="network.peers.filter">
+                {txt => <option value="">{txt}</option>}
+              </FormattedMessage>
+
               {this.versions().map(version => (
                 <option key={version} value={version}>
                   {version}
