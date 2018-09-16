@@ -47,6 +47,8 @@
   "network.discovered_peers_desc":
     "All discovered peers running nanoNodeMonitor, sorted by name.",
   "network.monitor_count": "{count} monitors discovered",
+  "network.peers.filter": "Filter by version",
+  "network.peers.rebroadcast_only": "Rebroadcasting representatives only",
 
   "status.checked_blocks": "Checked Blocks",
   "status.unchecked_blocks": "Unchecked Blocks",
@@ -183,5 +185,7 @@
   "block": "block",
   "representative": "representative",
   "source": "source",
-  "balance": "balance"
+  "balance": "balance",
+  "name": "name",
+  "version": "version"
 }

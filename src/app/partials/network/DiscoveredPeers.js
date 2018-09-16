@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
+import { FormattedMessage, FormattedNumber } from "react-intl";
 import _ from "lodash";
-import accounting from "accounting";
 import AccountLink from "../AccountLink";
 import OptionalField from "../OptionalField";
 
@@ -77,7 +77,9 @@ export default class DiscoveredPeers extends React.PureComponent {
               value={this.state.sortVersion}
               onChange={e => this.setState({ sortVersion: e.target.value })}
             >
-              <option value="">Filter by version</option>
+              <option value="">
+                <FormattedMessage id="network.peers.filter" />
+              </option>
               {this.versions().map(version => (
                 <option key={version} value={version}>
                   {version}
@@ -96,7 +98,7 @@ export default class DiscoveredPeers extends React.PureComponent {
                   onChange={e => this.setState({ repsOnly: e.target.checked })}
                   style={{ marginTop: "0.2rem" }}
                 />
-                Rebroadcasting representatives only
+                <FormattedMessage id="network.peers.rebroadcast_only" />
               </label>
             </div>
           </div>
@@ -106,13 +108,27 @@ export default class DiscoveredPeers extends React.PureComponent {
           <table className="table table-sm">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Checked Blocks</th>
-                <th>Unchecked Blocks</th>
-                <th>Voting Weight</th>
-                <th>Peers</th>
-                <th>Version</th>
-                <th>Account</th>
+                <th className="text-capitalize">
+                  <FormattedMessage id="name" />
+                </th>
+                <th>
+                  <FormattedMessage id="status.checked_blocks" />
+                </th>
+                <th>
+                  <FormattedMessage id="status.unchecked_blocks" />
+                </th>
+                <th>
+                  <FormattedMessage id="status.voting_weight" />
+                </th>
+                <th>
+                  <FormattedMessage id="status.peers" />
+                </th>
+                <th className="text-capitalize">
+                  <FormattedMessage id="version" />
+                </th>
+                <th className="text-capitalize">
+                  <FormattedMessage id="account" />
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -154,20 +170,24 @@ const PeerEntry = ({ peer, currentBlock }) => {
           <OptionalField value={data.nanoNodeName} />
         </a>
       </td>
-      <td>{accounting.formatNumber(data.currentBlock)}</td>
-      <td>{accounting.formatNumber(data.uncheckedBlocks)}</td>
+      <td>
+        <FormattedNumber value={data.currentBlock} />
+      </td>
+      <td>
+        <FormattedNumber value={data.uncheckedBlocks} />
+      </td>
       <td>
         <OptionalField value={data.votingWeight}>
           {value => (
             <Fragment>
-              {accounting.formatNumber(parseFloat(data.votingWeight, 10))} NANO
+              <FormattedNumber value={value} maximumFractionDigits={2} /> NANO
             </Fragment>
           )}
         </OptionalField>
       </td>
       <td>
         <OptionalField value={data.numPeers}>
-          {value => accounting.formatNumber(value)}
+          {value => <FormattedNumber value={value} />}
         </OptionalField>
       </td>
       <td>
