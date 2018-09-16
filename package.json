@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
-    "accounting": "^0.4.1",
     "async": "^2.6.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",

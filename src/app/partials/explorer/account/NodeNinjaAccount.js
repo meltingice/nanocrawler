@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import moment from "moment";
-import accounting from "accounting";
 import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
 
 export default class NodeNinjaAccount extends React.Component {
