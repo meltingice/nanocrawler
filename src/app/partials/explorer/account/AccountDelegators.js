@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { FormattedMessage, FormattedNumber } from "react-intl";
 import _ from "lodash";
 import DelegatorsTable from "./DelegatorsTable";
@@ -8,16 +8,12 @@ import injectClient from "../../../../lib/ClientComponent";
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";
 
-class AccountDelegators extends React.Component {
+class AccountDelegators extends React.PureComponent {
   state = {
     delegators: [],
     weight: 0,
     loading: true
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.fetchDelegators();

@@ -10,7 +10,7 @@ import ReceiveBlock from "./stream/ReceiveBlock";
 import SendBlock from "./stream/SendBlock";
 import StateBlock from "./stream/StateBlock";
 
-class RecentBlockStream extends React.Component {
+class RecentBlockStream extends React.PureComponent {
   constructor(props) {
     super(props);
 

@@ -17,7 +17,7 @@ import UnopenedAccount from "../../partials/explorer/account/UnopenedAccount";
 import AccountHistory from "../../partials/explorer/account/AccountHistory";
 import AccountDelegators from "../../partials/explorer/account/AccountDelegators";
 
-class Account extends React.Component {
+class Account extends React.PureComponent {
   constructor(props) {
     super(props);
 

@@ -6,7 +6,7 @@ import injectClient from "../../../lib/ClientComponent";
 import AccountLink from "../../partials/AccountLink";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 
-class RichList extends React.Component {
+class RichList extends React.PureComponent {
   constructor(props) {
     super(props);
 

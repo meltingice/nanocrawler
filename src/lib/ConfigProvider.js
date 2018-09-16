@@ -1,7 +1,7 @@
 import React from "react";
 import ConfigContext from "./ConfigContext";
 
-export default class ConfigProvider extends React.Component {
+export default class ConfigProvider extends React.PureComponent {
   state = { config: null };
 
   async componentDidMount() {

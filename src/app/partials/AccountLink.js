@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import NanoNodeNinja from "../../lib/NanoNodeNinja";
 
-export default class AccountLink extends React.Component {
+export default class AccountLink extends React.PureComponent {
   state = { ninjaData: null };
 
   componentDidUpdate(prevProps, prevState) {

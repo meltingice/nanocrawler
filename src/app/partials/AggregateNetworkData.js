@@ -5,7 +5,7 @@ import injectClient from "../../lib/ClientComponent";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
 
-class AggregateNetworkData extends React.Component {
+class AggregateNetworkData extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -172,7 +172,7 @@ class AggregateNetworkData extends React.Component {
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.avg_percent_uncheckeed" />
+              <FormattedMessage id="network.avg_percent_unchecked" />
             </p>
             <h3>
               {Math.round(

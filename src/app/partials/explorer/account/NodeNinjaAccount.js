@@ -3,7 +3,7 @@ import { FormattedMessage, FormattedNumber } from "react-intl";
 import moment from "moment";
 import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
 
-export default class NodeNinjaAccount extends React.Component {
+export default class NodeNinjaAccount extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     if (prevState.data && prevState.data.account !== nextProps.account) {
       return { data: null };

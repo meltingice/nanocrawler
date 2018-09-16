@@ -8,7 +8,7 @@ import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
 import PeerVersions from "../partials/PeerVersions";
 
-class NetworkStatus extends React.Component {
+class NetworkStatus extends React.PureComponent {
   constructor(props) {
     super(props);
 

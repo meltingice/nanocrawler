@@ -7,7 +7,7 @@ import injectClient from "../../lib/ClientComponent";
 
 import AccountLink from "../partials/AccountLink";
 
-class NodeStatus extends React.Component {
+class NodeStatus extends React.PureComponent {
   constructor(props) {
     super(props);
 

@@ -7,7 +7,7 @@ import BlockLink from "../../../BlockLink";
 import { keyToPublicAccountId, formatTimestamp } from "../../../../../lib/util";
 import OptionalField from "../../../OptionalField";
 
-class HistoryStateBlock extends React.Component {
+class HistoryStateBlock extends React.PureComponent {
   state = {
     sendBlock: null
   };
@@ -106,7 +106,7 @@ class HistoryStateBlock extends React.Component {
         <td className={this.statusClass()}>
           {this.transactionSymbol()}
           <FormattedNumber
-            value={block.amount}
+            value={block.amount || 0}
             minimumFractionDigits={6}
             maximumFractionDigits={6}
           />{" "}

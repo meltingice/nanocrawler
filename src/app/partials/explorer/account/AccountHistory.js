@@ -7,7 +7,7 @@ import UnopenedAccount from "./UnopenedAccount";
 import injectClient from "../../../../lib/ClientComponent";
 import AccountWebsocket from "../../../../lib/AccountWebsocket";
 
-class AccountHistory extends React.Component {
+class AccountHistory extends React.PureComponent {
   state = {
     history: [],
     nextPageHead: null,
