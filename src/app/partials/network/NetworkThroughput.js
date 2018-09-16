@@ -1,12 +1,15 @@
 import React, { Fragment } from "react";
+import { FormattedMessage } from "react-intl";
 import TpsCounter from "./TpsCounter";
 
 export default function NetworkThroughput() {
   return (
     <Fragment>
-      <h2 className="mb-0">Network Throughput</h2>
+      <h2 className="mb-0">
+        <FormattedMessage id="network.tps.title" />
+      </h2>
       <p className="text-muted">
-        Average checked blocks/sec over the given period
+        <FormattedMessage id="network.tps.desc" />
       </p>
 
       <div className="row">

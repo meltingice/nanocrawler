@@ -49,6 +49,8 @@
   "network.monitor_count": "{count} monitors discovered",
   "network.peers.filter": "Filter by version",
   "network.peers.rebroadcast_only": "Rebroadcasting representatives only",
+  "network.tps.title": "Network Throughput",
+  "network.tps.desc": "Average checked blocks/sec over the given period",
 
   "status.checked_blocks": "Checked Blocks",
   "status.unchecked_blocks": "Unchecked Blocks",
