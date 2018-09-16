@@ -54,7 +54,7 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.amount_desc" />
+          <FormattedMessage id="block.send.amount_desc" />
         </small>
       </p>
 

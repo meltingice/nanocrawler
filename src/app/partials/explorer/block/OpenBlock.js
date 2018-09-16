@@ -56,7 +56,7 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.amount_desc" />
+          <FormattedMessage id="block.open.amount_desc" />
         </small>
       </p>
 

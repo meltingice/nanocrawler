@@ -103,8 +103,8 @@
   "block.previous.desc": "The previous block in this account's chain",
   "block.pow": "Proof of Work",
   "block.signature": "Signature",
-  "block.amount_desc":
-    "The amount of NANO sent to open this account, which can be 0",
+  "block.link": "Link",
+  "block.balance.desc": "The balance of this account after this transaction",
   "block.timestamp.desc":
     "The date and time this block was discovered (converted to your local time)",
   "block.source.desc": "The corresponding send block for this transaction",
@@ -129,9 +129,25 @@
   "block.open.opened_by.desc":
     "The account whose transaction opened this account",
   "block.open.rep": "The representative assigned to this account",
+  "block.open.amount_desc":
+    "The amount of NANO sent to open this account, which can be 0",
 
   "block.send.amount_desc":
     "The amount of NANO that was sent in this transaction",
+
+  "block.state.subtype": "Block subtype",
+  "block.state.subtype.desc":
+    "The type of transaction that created this state block",
+  "block.state.account": "The account represented by this state block",
+  "block.state.rep.desc": "The account's representative",
+  "block.state.previous.none": "None (this block opened the account)",
+  "block.state.link.open":
+    "The corresponding block that started this transaction",
+  "block.state.link.change":
+    "Set to all 0's, which happens to be the burn address encoded in hex format",
+  "block.state.link.send": "The destination address encoded in hex format",
+  "block.state.link.receive":
+    "The corresponding block that started this transaction",
 
   "ninja.verified_by": "Verified by {link}",
   "ninja.uptime": "Uptime {percent}",
@@ -155,5 +171,6 @@
   "date": "date",
   "block": "block",
   "representative": "representative",
-  "source": "source"
+  "source": "source",
+  "balance": "balance"
 }

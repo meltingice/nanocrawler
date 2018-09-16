@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { FormattedMessage } from "react-intl";
 import injectClient from "../../../../lib/ClientComponent";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
@@ -21,15 +22,19 @@ class StateBlock extends React.PureComponent {
     return (
       <div className="Block">
         <h4 className="mb-0">
-          Block subtype{" "}
+          <FormattedMessage id="block.state.subtype" />{" "}
           <small className="text-muted">{this.inferBlockSubtype()}</small>
         </h4>
         <p>
-          <small>The type of transaction that created this state block</small>
+          <small>
+            <FormattedMessage id="block.state.subtype.desc" />
+          </small>
         </p>
 
         <h4 className="mb-0">
-          Account{" "}
+          <span className="text-capitalize">
+            <FormattedMessage id="account" />
+          </span>{" "}
           <small>
             <AccountLink
               account={block.contents.account}
@@ -39,11 +44,15 @@ class StateBlock extends React.PureComponent {
           </small>
         </h4>
         <p>
-          <small>The account represented by this state block</small>
+          <small>
+            <FormattedMessage id="block.state.account" />
+          </small>
         </p>
 
         <h4 className="mb-0">
-          Amount{" "}
+          <span className="text-capitalize">
+            <FormattedMessage id="amount" />
+          </span>{" "}
           <small className="text-muted">
             <PriceWithConversions
               amount={block.amount}
@@ -52,11 +61,15 @@ class StateBlock extends React.PureComponent {
           </small>
         </h4>
         <p>
-          <small>The amount of NANO that was sent in this transaction</small>
+          <small>
+            <FormattedMessage id="block.send.amount_desc" />
+          </small>
         </p>
 
         <h4 className="mb-0">
-          Balance{" "}
+          <span className="text-capitalize">
+            <FormattedMessage id="balance" />
+          </span>{" "}
           <small className="text-muted">
             <PriceWithConversions
               amount={block.contents.balance}
@@ -65,11 +78,15 @@ class StateBlock extends React.PureComponent {
           </small>
         </h4>
         <p>
-          <small>The balance of this account after this transaction</small>
+          <small>
+            <FormattedMessage id="block.balance.desc" />
+          </small>
         </p>
 
         <h4 className="mb-0">
-          Representative{" "}
+          <span className="text-capitalize">
+            <FormattedMessage id="representative" />
+          </span>{" "}
           <small>
             <AccountLink
               account={block.contents.representative}
@@ -79,37 +96,45 @@ class StateBlock extends React.PureComponent {
           </small>
         </h4>
         <p>
-          <small>The account's representative</small>
+          <small>
+            <FormattedMessage id="block.state.rep.desc" />
+          </small>
         </p>
 
         {this.getStateBlockExtraInfo()}
 
         <h4 className="mb-0">
-          Date{" "}
+          <span className="text-capitalize">
+            <FormattedMessage id="date" />
+          </span>{" "}
           <small className="text-muted">
             <OptionalField value={formatTimestamp(block.timestamp)} />
           </small>
         </h4>
         <p>
           <small>
-            The date and time this block was discovered converted to your local
-            time
+            <FormattedMessage id="block.timestamp.desc" />
           </small>
         </p>
 
-        <h5 className="mb-0">Previous Block {this.getPreviousBlock(block)}</h5>
+        <h5 className="mb-0">
+          <FormattedMessage id="block.previous" />{" "}
+          {this.getPreviousBlock(block)}
+        </h5>
         <p>
-          <small>The previous block in this account's chain</small>
+          <small>
+            <FormattedMessage id="block.previous.desc" />
+          </small>
         </p>
 
         {this.getLink()}
 
         <h5>
-          Proof of Work{" "}
+          <FormattedMessage id="block.pow" />{" "}
           <small className="text-muted break-word">{block.contents.work}</small>
         </h5>
         <h5>
-          Signature{" "}
+          <FormattedMessage id="block.signature" />{" "}
           <small className="text-muted break-word">
             {block.contents.signature}
           </small>
@@ -123,7 +148,7 @@ class StateBlock extends React.PureComponent {
     if (parseInt(block.contents.previous, 16) === 0) {
       return (
         <small className="text-muted">
-          None (this block opened the account)
+          <FormattedMessage id="block.state.previous.none" />
         </small>
       );
     }
@@ -147,7 +172,7 @@ class StateBlock extends React.PureComponent {
         return (
           <Fragment>
             <h4 className="mb-0">
-              Sender{" "}
+              <FormattedMessage id="block.sender" />{" "}
               <small>
                 <AccountLink
                   account={block.source_account}
@@ -157,7 +182,9 @@ class StateBlock extends React.PureComponent {
               </small>
             </h4>
             <p>
-              <small>The account that initiated this transaction</small>
+              <small>
+                <FormattedMessage id="block.sender.desc" />
+              </small>
             </p>
           </Fragment>
         );
@@ -165,7 +192,7 @@ class StateBlock extends React.PureComponent {
         return (
           <Fragment>
             <h4 className="mb-0">
-              Recipient{" "}
+              <FormattedMessage id="block.recipient" />{" "}
               <small>
                 <AccountLink
                   account={block.contents.link_as_account}
@@ -175,7 +202,9 @@ class StateBlock extends React.PureComponent {
               </small>
             </h4>
             <p>
-              <small>The account that will receive this transaction</small>
+              <small>
+                <FormattedMessage id="block.recipient.desc" />
+              </small>
             </p>
           </Fragment>
         );
@@ -197,16 +226,15 @@ class StateBlock extends React.PureComponent {
             className="text-muted break-word"
           />
         );
-        meaning = "The corresponding block that started this transaction";
+        meaning = <FormattedMessage id="block.state.link.open" />;
         break;
       case "change":
         link = block.contents.link;
-        meaning =
-          "Set to all 0's, which happens to be the burn address encoded in hex format";
+        meaning = <FormattedMessage id="block.state.link.change" />;
         break;
       case "send":
         link = block.contents.link;
-        meaning = "The destination address encoded in hex format";
+        meaning = <FormattedMessage id="block.state.link.send" />;
         break;
       case "receive":
         link = (
@@ -215,14 +243,15 @@ class StateBlock extends React.PureComponent {
             className="text-muted break-word"
           />
         );
-        meaning = "The corresponding block that started this transaction";
+        meaning = <FormattedMessage id="block.state.link.receive" />;
         break;
     }
 
     return (
       <Fragment>
         <h5 className="mb-0">
-          Link <small className="text-muted break-word">{link}</small>
+          <FormattedMessage id="block.link" />{" "}
+          <small className="text-muted break-word">{link}</small>
         </h5>
         <p>
           <small>{meaning}</small>
