@@ -6,10 +6,10 @@
     "nodeStatus": true,
     "supportedLanguages": {
       "en": "English",
-      "es": "Spanish",
-      "ko": "Korean",
-      "zh": "Chinese",
-      "de": "German"
+      "es": "Español",
+      "ko": "한국어",
+      "zh": "中文",
+      "de": "Deutsche"
     }
   },
   "serviceMonitors": []
