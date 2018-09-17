@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import RandomVerifiedAccounts from "../partials/explorer/RandomVerifiedAccounts";
 import RecentBlockStream from "../partials/explorer/RecentBlockStream";
@@ -37,14 +37,14 @@ class Explorer extends React.PureComponent {
 
         <div className="col col-md-8">
           <h1>
-            <FormattedMessage id="explorer.title" />
+            <TranslatedMessage id="explorer.title" />
           </h1>
 
           <hr />
 
           <form className="my-5" onSubmit={this.handleSubmit.bind(this)}>
             <label>
-              <FormattedMessage id="explorer.form.help" />
+              <TranslatedMessage id="explorer.form.help" />
             </label>
 
             <div className="form-row">
@@ -60,7 +60,7 @@ class Explorer extends React.PureComponent {
               </div>
               <div className="col-auto mt-2 mt-md-0">
                 <button className="btn btn-nano-primary btn-lg">
-                  <FormattedMessage id="search" />
+                  <TranslatedMessage id="search" />
                 </button>
               </div>
             </div>
