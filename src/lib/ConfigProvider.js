@@ -1,12 +1,29 @@
 import React from "react";
+import _ from "lodash";
+import Cookies from "js-cookie";
 import ConfigContext from "./ConfigContext";
 
-export default class ConfigProvider extends React.PureComponent {
+export default class ConfigProvider extends React.Component {
   state = { config: null };
+
+  constructor(props) {
+    super(props);
+
+    const language =
+      Cookies.get("nanocrawler.locale") ||
+      (navigator.languages && navigator.languages[0]) ||
+      navigator.language ||
+      navigator.userLanguage;
+
+    this.state = {
+      config: null,
+      language
+    };
+  }
 
   async componentDidMount() {
     const resp = await fetch("/client-config.json");
-    let config = await resp.json();
+    const config = await resp.json();
 
     try {
       config.ticker = await this.fetchTicker();
@@ -40,8 +57,23 @@ export default class ConfigProvider extends React.PureComponent {
     return (await resp.json())[0];
   }
 
+  setLanguage(language) {
+    this.setState({ language }, () => {
+      Cookies.set("nanocrawler.locale", language);
+    });
+  }
+
   render() {
-    const { config } = this.state;
+    let { config } = this.state;
+
+    if (config) {
+      config = _.merge({}, config, {
+        locale: {
+          language: this.state.language,
+          setLanguage: this.setLanguage.bind(this)
+        }
+      });
+    }
 
     return (
       <ConfigContext.Provider value={config}>

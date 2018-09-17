@@ -14,28 +14,17 @@ import { messages, localeData } from "./translations";
 addLocaleData(localeData);
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    const language =
-      (navigator.languages && navigator.languages[0]) ||
-      navigator.language ||
-      navigator.userLanguage;
-
-    this.state = {
-      account: null,
-      language
-    };
-  }
+  state = { account: null };
 
   get messages() {
-    const languageWithoutRegionCode = this.state.language
+    const { locale } = this.props;
+    const languageWithoutRegionCode = locale.language
       .toLowerCase()
       .split(/[_-]+/)[0];
 
     return (
       messages[languageWithoutRegionCode] ||
-      messages[this.state.language] ||
+      messages[locale.language] ||
       messages.en
     );
   }
@@ -45,8 +34,10 @@ class App extends Component {
   }
 
   render() {
+    const { locale } = this.props;
+
     return (
-      <IntlProvider locale={this.state.language} messages={this.messages}>
+      <IntlProvider locale={locale.language} messages={this.messages}>
         <div id="App" className="container-fluid p-0 h-100">
           <div className="row Header align-items-center mr-0">
             <div className="col">

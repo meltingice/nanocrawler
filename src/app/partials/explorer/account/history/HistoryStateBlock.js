@@ -90,7 +90,7 @@ class HistoryStateBlock extends React.PureComponent {
     return (
       <tr>
         <td>
-          State{" "}
+          <FormattedMessage id="block.state" />{" "}
           <span className={this.statusClass()}>
             <FormattedMessage id={`block.subtype.${block.subtype}`} />
           </span>

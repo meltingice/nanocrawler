@@ -6,6 +6,7 @@ import { FormattedMessage } from "react-intl";
 import "./Navigation.css";
 import Logo from "./images/logo.svg";
 import GlobalSearch from "./partials/GlobalSearch";
+import LanguageChooser from "./partials/LanguageChooser";
 import injectClient from "../lib/ClientComponent";
 
 const Navigation = ({ config }) => {
@@ -58,8 +59,15 @@ const Navigation = ({ config }) => {
         </ul>
       </div>
 
-      <div className="col-lg-3 mb-3 mb-lg-0">
-        <GlobalSearch />
+      <div className="col-lg-4 mb-3 mb-lg-0">
+        <div className="row">
+          <div className="col pr-1">
+            <GlobalSearch />
+          </div>
+          <div className="col-auto pl-1">
+            <LanguageChooser />
+          </div>
+        </div>
       </div>
     </div>
   );

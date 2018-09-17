@@ -23,7 +23,7 @@ class GlobalSearch extends React.PureComponent {
         <input
           type="text"
           className="form-control"
-          placeholder={formatMessage({ id: "search_help" })}
+          placeholder={formatMessage({ id: "search" })}
           value={this.state.search}
           onChange={e => this.setState({ search: e.target.value })}
         />

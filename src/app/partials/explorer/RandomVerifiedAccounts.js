@@ -4,7 +4,7 @@ import _ from "lodash";
 
 import AccountLink from "../AccountLink";
 
-export default class RandomVerifiedAccounts extends React.PureComponent {
+export default class RandomVerifiedAccounts extends React.Component {
   state = { accounts: [] };
 
   async componentDidMount() {

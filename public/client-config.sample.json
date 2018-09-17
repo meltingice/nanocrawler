@@ -3,7 +3,14 @@
   "websocketServer": "nano-ws.meltingice.net",
   "maxCoinSupply": 133248289,
   "features": {
-    "nodeStatus": true
+    "nodeStatus": true,
+    "supportedLanguages": {
+      "en": "English",
+      "es": "Spanish",
+      "ko": "Korean",
+      "zh": "Chinese",
+      "de": "German"
+    }
   },
   "serviceMonitors": []
 }
