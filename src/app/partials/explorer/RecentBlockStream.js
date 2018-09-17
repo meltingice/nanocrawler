@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import injectClient from "../../../lib/ClientComponent";
-import AccountWebsocket from "../../../lib/AccountWebsocket";
+import injectClient from "lib/ClientComponent";
+import AccountWebsocket from "lib/AccountWebsocket";
 
 import ChangeBlock from "./stream/ChangeBlock";
 import OpenBlock from "./stream/OpenBlock";

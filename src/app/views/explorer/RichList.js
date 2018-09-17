@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import _ from "lodash";
-import injectClient from "../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import AccountLink from "../../partials/AccountLink";
 import PriceWithConversions from "../../partials/PriceWithConversions";

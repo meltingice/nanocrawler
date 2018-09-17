@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
-import injectClient from "../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 class LanguageChooser extends React.PureComponent {
   constructor(props) {

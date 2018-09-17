@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import moment from "moment";
-import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
+import NanoNodeNinja from "lib/NanoNodeNinja";
 
 export default class NodeNinjaAccount extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {

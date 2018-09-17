@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
-import injectClient from "../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 class PriceWithConversions extends React.PureComponent {
   static defaultProps = {

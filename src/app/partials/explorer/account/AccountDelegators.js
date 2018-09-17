@@ -4,7 +4,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import DelegatorsTable from "./DelegatorsTable";
 
-import injectClient from "../../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";

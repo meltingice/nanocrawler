@@ -7,7 +7,7 @@ import "./Navigation.css";
 import Logo from "./images/logo.svg";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";
-import injectClient from "../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 const Navigation = ({ config }) => {
   const explorerActive = (match, location) => {

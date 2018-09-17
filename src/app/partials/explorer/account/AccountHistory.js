@@ -5,8 +5,8 @@ import _ from "lodash";
 import TransactionHistory from "./TransactionHistory";
 import UnopenedAccount from "./UnopenedAccount";
 
-import injectClient from "../../../../lib/ClientComponent";
-import AccountWebsocket from "../../../../lib/AccountWebsocket";
+import injectClient from "lib/ClientComponent";
+import AccountWebsocket from "lib/AccountWebsocket";
 
 class AccountHistory extends React.PureComponent {
   state = {

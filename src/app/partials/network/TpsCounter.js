@@ -1,6 +1,6 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
-import injectClient from "../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import "./TpsCounter.css";
 

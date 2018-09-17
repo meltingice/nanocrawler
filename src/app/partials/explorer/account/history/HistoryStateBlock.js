@@ -2,10 +2,10 @@ import React from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
-import injectClient from "../../../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
-import { keyToPublicAccountId, formatTimestamp } from "../../../../../lib/util";
+import { keyToPublicAccountId, formatTimestamp } from "lib/util";
 import OptionalField from "../../../OptionalField";
 
 class HistoryStateBlock extends React.PureComponent {

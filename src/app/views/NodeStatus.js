@@ -4,7 +4,7 @@ import moment from "moment";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
-import injectClient from "../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import AccountLink from "../partials/AccountLink";
 

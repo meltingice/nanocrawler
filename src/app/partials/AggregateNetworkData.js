@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import _ from "lodash";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import injectClient from "../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
 

@@ -4,7 +4,7 @@ import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
-import { formatTimestamp } from "../../../../lib/util";
+import { formatTimestamp } from "lib/util";
 
 export default function OpenBlock({ block }) {
   return (

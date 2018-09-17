@@ -4,7 +4,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import OptionalField from "../../OptionalField";
-import { formatTimestamp } from "../../../../lib/util";
+import { formatTimestamp } from "lib/util";
 
 export default function ChangeBlock({ block }) {
   return (

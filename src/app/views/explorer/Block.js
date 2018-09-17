@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 
-import injectClient from "../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import OpenBlock from "../../partials/explorer/block/OpenBlock";
 import SendBlock from "../../partials/explorer/block/SendBlock";
