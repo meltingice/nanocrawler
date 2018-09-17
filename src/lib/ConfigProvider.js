@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import Cookies from "js-cookie";
+import moment from "moment";
 import ConfigContext from "./ConfigContext";
 
 export default class ConfigProvider extends React.Component {
@@ -14,6 +15,8 @@ export default class ConfigProvider extends React.Component {
       (navigator.languages && navigator.languages[0]) ||
       navigator.language ||
       navigator.userLanguage;
+
+    moment.locale(language);
 
     this.state = {
       config: null,
@@ -58,6 +61,7 @@ export default class ConfigProvider extends React.Component {
   }
 
   setLanguage(language) {
+    moment.locale(language);
     this.setState({ language }, () => {
       Cookies.set("nanocrawler.locale", language);
     });

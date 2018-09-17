@@ -23,6 +23,7 @@
     "{count} ditugaskan untuk rebroadcasting representatives",
   "network.rebroadcast_stat":
     "{totalPower} dari total voting power and {onlinePower} dari online voting power",
+  "network.peer_versions": "Versi Peer",
   "network.aggregate.title": "Statistik Jaringan Agregat",
   "network.aggregate.desc":
     "Statistik dikumpulkan dari yang ditemukan {link} dan difilter untuk hanya menyertakan node dengan voting weight",
