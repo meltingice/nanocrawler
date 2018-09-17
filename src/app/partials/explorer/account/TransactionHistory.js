@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import HistorySendBlock from "./history/HistorySendBlock";
 import HistoryReceiveBlock from "./history/HistoryReceiveBlock";
@@ -33,19 +33,19 @@ export default function TransactionHistory({ history }) {
         <thead>
           <tr>
             <th className="text-capitalize">
-              <FormattedMessage id="type" />
+              <TranslatedMessage id="type" />
             </th>
             <th className="text-capitalize">
-              <FormattedMessage id="account" />
+              <TranslatedMessage id="account" />
             </th>
             <th className="text-capitalize">
-              <FormattedMessage id="amount" />
+              <TranslatedMessage id="amount" />
             </th>
             <th className="text-capitalize">
-              <FormattedMessage id="date" />
+              <TranslatedMessage id="date" />
             </th>
             <th className="text-capitalize">
-              <FormattedMessage id="block" />
+              <TranslatedMessage id="block" />
             </th>
           </tr>
         </thead>

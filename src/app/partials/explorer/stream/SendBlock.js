@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
@@ -16,7 +17,7 @@ export default function SendBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-danger">
-            <FormattedMessage
+            <TranslatedMessage
               id="stream.send"
               values={{
                 amount: (

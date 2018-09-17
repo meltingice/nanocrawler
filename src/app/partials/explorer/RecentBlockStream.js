@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import injectClient from "../../../lib/ClientComponent";
 import AccountWebsocket from "../../../lib/AccountWebsocket";
@@ -64,10 +65,10 @@ class RecentBlockStream extends React.PureComponent {
         <div className="row align-items-center">
           <div className="col-sm">
             <h3 className="mb-0">
-              <FormattedMessage id="stream.title" />
+              <TranslatedMessage id="stream.title" />
             </h3>
             <p className="text-muted mb-0">
-              <FormattedMessage id="stream.desc" />
+              <TranslatedMessage id="stream.desc" />
             </p>
           </div>
           <div className="col-auto">
@@ -103,7 +104,7 @@ class RecentBlockStream extends React.PureComponent {
     return (
       <div className="my-5 text-center">
         <h5 className="text-muted">
-          <FormattedMessage id="stream.waiting" />
+          <TranslatedMessage id="stream.waiting" />
         </h5>
       </div>
     );

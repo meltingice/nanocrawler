@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
@@ -11,7 +11,7 @@ export default function OpenBlock({ block }) {
     <div className="Block">
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="account" />
+          <TranslatedMessage id="account" />
         </span>{" "}
         <small>
           <AccountLink
@@ -23,12 +23,12 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.open.desc" />
+          <TranslatedMessage id="block.open.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
-        <FormattedMessage id="block.open.opened_by" />{" "}
+        <TranslatedMessage id="block.open.opened_by" />{" "}
         <small>
           <AccountLink
             className="text-muted break-word"
@@ -39,13 +39,13 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.open.opened_by.desc" />
+          <TranslatedMessage id="block.open.opened_by.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="amount" />
+          <TranslatedMessage id="amount" />
         </span>{" "}
         <small className="text-muted">
           <PriceWithConversions
@@ -56,13 +56,13 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.open.amount_desc" />
+          <TranslatedMessage id="block.open.amount_desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="representative" />
+          <TranslatedMessage id="representative" />
         </span>{" "}
         <small>
           <AccountLink
@@ -74,13 +74,13 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.open.rep" />
+          <TranslatedMessage id="block.open.rep" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="source" />
+          <TranslatedMessage id="source" />
         </span>{" "}
         <small>
           <BlockLink
@@ -91,13 +91,13 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.source.desc" />
+          <TranslatedMessage id="block.source.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="date" />
+          <TranslatedMessage id="date" />
         </span>{" "}
         <small className="text-muted">
           <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -105,17 +105,17 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.timestamp.desc" />
+          <TranslatedMessage id="block.timestamp.desc" />
         </small>
       </p>
 
       <h5>
-        <FormattedMessage id="block.pow" />{" "}
+        <TranslatedMessage id="block.pow" />{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>
 
       <h5>
-        <FormattedMessage id="block.signature" />{" "}
+        <TranslatedMessage id="block.signature" />{" "}
         <small className="text-muted break-word">
           {block.contents.signature}
         </small>

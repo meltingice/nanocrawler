@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
@@ -10,7 +10,7 @@ export default function ReceiveBlock({ block }) {
   return (
     <div className="Block">
       <h4 className="mb-0">
-        <FormattedMessage id="block.recipient" />{" "}
+        <TranslatedMessage id="block.recipient" />{" "}
         <small>
           <AccountLink
             account={block.block_account}
@@ -21,12 +21,12 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.recipient.desc" />
+          <TranslatedMessage id="block.recipient.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
-        <FormattedMessage id="block.sender" />{" "}
+        <TranslatedMessage id="block.sender" />{" "}
         <small>
           <AccountLink
             account={block.source_account}
@@ -37,13 +37,13 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.sender.desc" />
+          <TranslatedMessage id="block.sender.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="amount" />
+          <TranslatedMessage id="amount" />
         </span>{" "}
         <small className="text-muted">
           <PriceWithConversions
@@ -54,13 +54,13 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.send.amount_desc" />
+          <TranslatedMessage id="block.send.amount_desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="source" />
+          <TranslatedMessage id="source" />
         </span>{" "}
         <small>
           <BlockLink
@@ -71,13 +71,13 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.source.desc" />
+          <TranslatedMessage id="block.source.desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span id="text-capitalize">
-          <FormattedMessage id="date" />
+          <TranslatedMessage id="date" />
         </span>{" "}
         <small className="text-muted">
           <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -85,12 +85,12 @@ export default function ReceiveBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.timestamp.desc" />
+          <TranslatedMessage id="block.timestamp.desc" />
         </small>
       </p>
 
       <h5 className="mb-0">
-        <FormattedMessage id="block.previous" />{" "}
+        <TranslatedMessage id="block.previous" />{" "}
         <small>
           <BlockLink
             hash={block.contents.previous}
@@ -100,16 +100,16 @@ export default function ReceiveBlock({ block }) {
       </h5>
       <p>
         <small>
-          <FormattedMessage id="block.previous.desc" />
+          <TranslatedMessage id="block.previous.desc" />
         </small>
       </p>
 
       <h5>
-        <FormattedMessage id="block.pow" />{" "}
+        <TranslatedMessage id="block.pow" />{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>
       <h5>
-        <FormattedMessage id="block.signature" />{" "}
+        <TranslatedMessage id="block.signature" />{" "}
         <small className="text-muted break-word">
           {block.contents.signature}
         </small>

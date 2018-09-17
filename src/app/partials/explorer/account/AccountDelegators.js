@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import DelegatorsTable from "./DelegatorsTable";
 
@@ -54,10 +55,10 @@ class AccountDelegators extends React.PureComponent {
         <div className="row align-items-center">
           <div className="col">
             <h2 className="mb-0">
-              <FormattedMessage id="account.delegators.title" />
+              <TranslatedMessage id="account.delegators.title" />
             </h2>
             <p className="text-muted mb-0">
-              <FormattedMessage
+              <TranslatedMessage
                 id="account.delegators.desc"
                 values={{
                   count: <FormattedNumber value={this.delegatorsCount} />
@@ -65,14 +66,14 @@ class AccountDelegators extends React.PureComponent {
               />
             </p>
             <p className="text-muted">
-              <FormattedMessage id="account.delegators.filter" />
+              <TranslatedMessage id="account.delegators.filter" />
             </p>
           </div>
           <div className="col-auto">
             <h3 className="mb-0">
               <FormattedNumber value={weight} />{" "}
               <span className="text-muted">
-                NANO <FormattedMessage id="weight" />
+                NANO <TranslatedMessage id="weight" />
               </span>
             </h3>
           </div>

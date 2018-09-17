@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 
 import AccountLink from "../AccountLink";
@@ -20,10 +20,10 @@ export default class RandomVerifiedAccounts extends React.Component {
     return (
       <Fragment>
         <h3 className="mb-0">
-          <FormattedMessage id="ninja.verified_accounts" />
+          <TranslatedMessage id="ninja.verified_accounts" />
         </h3>
         <p className="text-muted">
-          <FormattedMessage
+          <TranslatedMessage
             id="ninja.verified_accounts.desc"
             values={{
               link: (

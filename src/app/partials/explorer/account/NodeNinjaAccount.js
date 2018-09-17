@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import moment from "moment";
 import NanoNodeNinja from "../../../../lib/NanoNodeNinja";
 
@@ -63,7 +64,7 @@ export default class NodeNinjaAccount extends React.Component {
         <div className="col-sm text-sm-right">
           <h2 className="mb-0">{data.alias}</h2>
           <p className="text-muted">
-            <FormattedMessage
+            <TranslatedMessage
               id="ninja.verified_by"
               values={{
                 link: (
@@ -83,7 +84,7 @@ export default class NodeNinjaAccount extends React.Component {
         </div>
         <div className="col-sm mt-3 mt-sm-0">
           <h4>
-            <FormattedMessage
+            <TranslatedMessage
               id="ninja.uptime"
               values={{
                 percent: (
@@ -98,7 +99,7 @@ export default class NodeNinjaAccount extends React.Component {
             />
           </h4>
           <h4>
-            <FormattedMessage
+            <TranslatedMessage
               id="ninja.last_voted"
               values={{
                 date: (
@@ -126,7 +127,7 @@ export default class NodeNinjaAccount extends React.Component {
         className="btn btn-nano-primary"
         target="_blank"
       >
-        <FormattedMessage id="ninja.monitor_link" />
+        <TranslatedMessage id="ninja.monitor_link" />
       </a>
     );
   }
@@ -138,7 +139,7 @@ export default class NodeNinjaAccount extends React.Component {
     return (
       <Fragment>
         <h4>
-          <FormattedMessage
+          <TranslatedMessage
             id="ninja.sync_status"
             values={{
               status: (
@@ -153,7 +154,7 @@ export default class NodeNinjaAccount extends React.Component {
           />
         </h4>
         <h4>
-          <FormattedMessage
+          <TranslatedMessage
             id="ninja.block_count"
             values={{
               count: (
@@ -166,7 +167,7 @@ export default class NodeNinjaAccount extends React.Component {
         </h4>
 
         <h4>
-          <FormattedMessage
+          <TranslatedMessage
             id="ninja.node_version"
             values={{
               version: (

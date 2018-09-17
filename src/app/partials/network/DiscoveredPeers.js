@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import AccountLink from "../AccountLink";
 import OptionalField from "../OptionalField";
@@ -77,9 +78,9 @@ export default class DiscoveredPeers extends React.PureComponent {
               value={this.state.sortVersion}
               onChange={e => this.setState({ sortVersion: e.target.value })}
             >
-              <FormattedMessage id="network.peers.filter">
+              <TranslatedMessage id="network.peers.filter">
                 {txt => <option value="">{txt}</option>}
-              </FormattedMessage>
+              </TranslatedMessage>
 
               {this.versions().map(version => (
                 <option key={version} value={version}>
@@ -99,7 +100,7 @@ export default class DiscoveredPeers extends React.PureComponent {
                   onChange={e => this.setState({ repsOnly: e.target.checked })}
                   style={{ marginTop: "0.2rem" }}
                 />
-                <FormattedMessage id="network.peers.rebroadcast_only" />
+                <TranslatedMessage id="network.peers.rebroadcast_only" />
               </label>
             </div>
           </div>
@@ -110,25 +111,25 @@ export default class DiscoveredPeers extends React.PureComponent {
             <thead>
               <tr>
                 <th className="text-capitalize">
-                  <FormattedMessage id="name" />
+                  <TranslatedMessage id="name" />
                 </th>
                 <th>
-                  <FormattedMessage id="status.checked_blocks" />
+                  <TranslatedMessage id="status.checked_blocks" />
                 </th>
                 <th>
-                  <FormattedMessage id="status.unchecked_blocks" />
+                  <TranslatedMessage id="status.unchecked_blocks" />
                 </th>
                 <th>
-                  <FormattedMessage id="status.voting_weight" />
+                  <TranslatedMessage id="status.voting_weight" />
                 </th>
                 <th>
-                  <FormattedMessage id="status.peers" />
+                  <TranslatedMessage id="status.peers" />
                 </th>
                 <th className="text-capitalize">
-                  <FormattedMessage id="version" />
+                  <TranslatedMessage id="version" />
                 </th>
                 <th className="text-capitalize">
-                  <FormattedMessage id="account" />
+                  <TranslatedMessage id="account" />
                 </th>
               </tr>
             </thead>

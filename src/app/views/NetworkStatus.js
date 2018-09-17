@@ -2,7 +2,8 @@ import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 import injectClient from "../../lib/ClientComponent";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
@@ -177,7 +178,7 @@ class NetworkStatus extends React.PureComponent {
         <div className="row align-items-center">
           <div className="col-md">
             <h1>
-              <FormattedMessage id="network.title" />
+              <TranslatedMessage id="network.title" />
             </h1>
           </div>
         </div>
@@ -187,7 +188,7 @@ class NetworkStatus extends React.PureComponent {
         <div className="row mt-5">
           <div className="col-md">
             <h2 className="mb-0 text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.reps_online"
                 values={{
                   count: (
@@ -201,11 +202,11 @@ class NetworkStatus extends React.PureComponent {
               />
             </h2>
             <p className="text-muted">
-              <FormattedMessage id="network.reps_online_desc" />
+              <TranslatedMessage id="network.reps_online_desc" />
             </p>
 
             <h5 className="mb-0 text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.online_voting_power"
                 values={{
                   count: (
@@ -217,7 +218,7 @@ class NetworkStatus extends React.PureComponent {
               />
             </h5>
             <p className="text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.total_voting_power"
                 values={{
                   percent: (
@@ -230,7 +231,7 @@ class NetworkStatus extends React.PureComponent {
             </p>
 
             <h5 className="mb-0 text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.official_reps"
                 values={{
                   count: (
@@ -242,7 +243,7 @@ class NetworkStatus extends React.PureComponent {
               />
             </h5>
             <p className="text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.official_reps_stat"
                 values={{
                   totalPower: (
@@ -259,7 +260,7 @@ class NetworkStatus extends React.PureComponent {
           </div>
           <div className="col-md">
             <h2 className="mb-0 text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.online_rebroadcasting"
                 values={{
                   count: (
@@ -274,7 +275,7 @@ class NetworkStatus extends React.PureComponent {
               />
             </h2>
             <p className="text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.online_rebroadcasting_desc"
                 values={{
                   amount: (
@@ -288,7 +289,7 @@ class NetworkStatus extends React.PureComponent {
             </p>
 
             <h5 className="mb-0 text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.rebroadcast_amt"
                 values={{
                   count: (
@@ -304,7 +305,7 @@ class NetworkStatus extends React.PureComponent {
               />
             </h5>
             <p className="mb-0 text-muted">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.rebroadcast_stat"
                 values={{
                   totalPower: (

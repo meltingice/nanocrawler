@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedNumber, FormattedMessage, injectIntl } from "react-intl";
+import { FormattedNumber, injectIntl } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
@@ -14,7 +15,7 @@ function HistorySendBlock({ block, intl }) {
       </td>
       <td>
         <span className="text-muted">
-          <FormattedMessage id="block.to" />
+          <TranslatedMessage id="block.to" />
         </span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>

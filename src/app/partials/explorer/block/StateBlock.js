@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import injectClient from "../../../../lib/ClientComponent";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
@@ -22,18 +22,18 @@ class StateBlock extends React.PureComponent {
     return (
       <div className="Block">
         <h4 className="mb-0">
-          <FormattedMessage id="block.state.subtype" />{" "}
+          <TranslatedMessage id="block.state.subtype" />{" "}
           <small className="text-muted">{this.inferBlockSubtype()}</small>
         </h4>
         <p>
           <small>
-            <FormattedMessage id="block.state.subtype.desc" />
+            <TranslatedMessage id="block.state.subtype.desc" />
           </small>
         </p>
 
         <h4 className="mb-0">
           <span className="text-capitalize">
-            <FormattedMessage id="account" />
+            <TranslatedMessage id="account" />
           </span>{" "}
           <small>
             <AccountLink
@@ -45,13 +45,13 @@ class StateBlock extends React.PureComponent {
         </h4>
         <p>
           <small>
-            <FormattedMessage id="block.state.account" />
+            <TranslatedMessage id="block.state.account" />
           </small>
         </p>
 
         <h4 className="mb-0">
           <span className="text-capitalize">
-            <FormattedMessage id="amount" />
+            <TranslatedMessage id="amount" />
           </span>{" "}
           <small className="text-muted">
             <PriceWithConversions
@@ -62,13 +62,13 @@ class StateBlock extends React.PureComponent {
         </h4>
         <p>
           <small>
-            <FormattedMessage id="block.send.amount_desc" />
+            <TranslatedMessage id="block.send.amount_desc" />
           </small>
         </p>
 
         <h4 className="mb-0">
           <span className="text-capitalize">
-            <FormattedMessage id="balance" />
+            <TranslatedMessage id="balance" />
           </span>{" "}
           <small className="text-muted">
             <PriceWithConversions
@@ -79,13 +79,13 @@ class StateBlock extends React.PureComponent {
         </h4>
         <p>
           <small>
-            <FormattedMessage id="block.balance.desc" />
+            <TranslatedMessage id="block.balance.desc" />
           </small>
         </p>
 
         <h4 className="mb-0">
           <span className="text-capitalize">
-            <FormattedMessage id="representative" />
+            <TranslatedMessage id="representative" />
           </span>{" "}
           <small>
             <AccountLink
@@ -97,7 +97,7 @@ class StateBlock extends React.PureComponent {
         </h4>
         <p>
           <small>
-            <FormattedMessage id="block.state.rep.desc" />
+            <TranslatedMessage id="block.state.rep.desc" />
           </small>
         </p>
 
@@ -105,7 +105,7 @@ class StateBlock extends React.PureComponent {
 
         <h4 className="mb-0">
           <span className="text-capitalize">
-            <FormattedMessage id="date" />
+            <TranslatedMessage id="date" />
           </span>{" "}
           <small className="text-muted">
             <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -113,28 +113,28 @@ class StateBlock extends React.PureComponent {
         </h4>
         <p>
           <small>
-            <FormattedMessage id="block.timestamp.desc" />
+            <TranslatedMessage id="block.timestamp.desc" />
           </small>
         </p>
 
         <h5 className="mb-0">
-          <FormattedMessage id="block.previous" />{" "}
+          <TranslatedMessage id="block.previous" />{" "}
           {this.getPreviousBlock(block)}
         </h5>
         <p>
           <small>
-            <FormattedMessage id="block.previous.desc" />
+            <TranslatedMessage id="block.previous.desc" />
           </small>
         </p>
 
         {this.getLink()}
 
         <h5>
-          <FormattedMessage id="block.pow" />{" "}
+          <TranslatedMessage id="block.pow" />{" "}
           <small className="text-muted break-word">{block.contents.work}</small>
         </h5>
         <h5>
-          <FormattedMessage id="block.signature" />{" "}
+          <TranslatedMessage id="block.signature" />{" "}
           <small className="text-muted break-word">
             {block.contents.signature}
           </small>
@@ -148,7 +148,7 @@ class StateBlock extends React.PureComponent {
     if (parseInt(block.contents.previous, 16) === 0) {
       return (
         <small className="text-muted">
-          <FormattedMessage id="block.state.previous.none" />
+          <TranslatedMessage id="block.state.previous.none" />
         </small>
       );
     }
@@ -172,7 +172,7 @@ class StateBlock extends React.PureComponent {
         return (
           <Fragment>
             <h4 className="mb-0">
-              <FormattedMessage id="block.sender" />{" "}
+              <TranslatedMessage id="block.sender" />{" "}
               <small>
                 <AccountLink
                   account={block.source_account}
@@ -183,7 +183,7 @@ class StateBlock extends React.PureComponent {
             </h4>
             <p>
               <small>
-                <FormattedMessage id="block.sender.desc" />
+                <TranslatedMessage id="block.sender.desc" />
               </small>
             </p>
           </Fragment>
@@ -192,7 +192,7 @@ class StateBlock extends React.PureComponent {
         return (
           <Fragment>
             <h4 className="mb-0">
-              <FormattedMessage id="block.recipient" />{" "}
+              <TranslatedMessage id="block.recipient" />{" "}
               <small>
                 <AccountLink
                   account={block.contents.link_as_account}
@@ -203,7 +203,7 @@ class StateBlock extends React.PureComponent {
             </h4>
             <p>
               <small>
-                <FormattedMessage id="block.recipient.desc" />
+                <TranslatedMessage id="block.recipient.desc" />
               </small>
             </p>
           </Fragment>
@@ -226,15 +226,15 @@ class StateBlock extends React.PureComponent {
             className="text-muted break-word"
           />
         );
-        meaning = <FormattedMessage id="block.state.link.open" />;
+        meaning = <TranslatedMessage id="block.state.link.open" />;
         break;
       case "change":
         link = block.contents.link;
-        meaning = <FormattedMessage id="block.state.link.change" />;
+        meaning = <TranslatedMessage id="block.state.link.change" />;
         break;
       case "send":
         link = block.contents.link;
-        meaning = <FormattedMessage id="block.state.link.send" />;
+        meaning = <TranslatedMessage id="block.state.link.send" />;
         break;
       case "receive":
         link = (
@@ -243,14 +243,14 @@ class StateBlock extends React.PureComponent {
             className="text-muted break-word"
           />
         );
-        meaning = <FormattedMessage id="block.state.link.receive" />;
+        meaning = <TranslatedMessage id="block.state.link.receive" />;
         break;
     }
 
     return (
       <Fragment>
         <h5 className="mb-0">
-          <FormattedMessage id="block.link" />{" "}
+          <TranslatedMessage id="block.link" />{" "}
           <small className="text-muted break-word">{link}</small>
         </h5>
         <p>

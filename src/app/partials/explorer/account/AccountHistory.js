@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import TransactionHistory from "./TransactionHistory";
 import UnopenedAccount from "./UnopenedAccount";
@@ -195,17 +196,17 @@ class AccountHistory extends React.PureComponent {
         <div className="row mt-5 align-items-center">
           <div className="col">
             <h2 className="mb-0">
-              <FormattedMessage id="account.pending.title" />
+              <TranslatedMessage id="account.pending.title" />
             </h2>
             <p className="text-muted">
-              <FormattedMessage id="account.pending.limit" />
+              <TranslatedMessage id="account.pending.limit" />
             </p>
           </div>
           <div className="col-auto">
             <h4>
               <FormattedNumber value={pendingTransactions.total} />{" "}
               <span className="text-muted">
-                <FormattedMessage id="account.pending.count" />
+                <TranslatedMessage id="account.pending.count" />
               </span>
             </h4>
           </div>
@@ -225,14 +226,14 @@ class AccountHistory extends React.PureComponent {
         <div className="row mt-5 align-items-center">
           <div className="col">
             <h2>
-              <FormattedMessage id="account.transactions.title" />
+              <TranslatedMessage id="account.transactions.title" />
             </h2>
           </div>
           <div className="col-auto">
             <h4>
               <FormattedNumber value={this.props.blockCount} />{" "}
               <span className="text-muted">
-                <FormattedMessage id="account.transactions.total" />
+                <TranslatedMessage id="account.transactions.total" />
               </span>
             </h4>
           </div>
@@ -251,7 +252,7 @@ class AccountHistory extends React.PureComponent {
           className="btn btn-nano-primary"
           onClick={this.loadMore.bind(this)}
         >
-          <FormattedMessage id="account.transactions.load_more" />
+          <TranslatedMessage id="account.transactions.load_more" />
         </button>
       </div>
     );

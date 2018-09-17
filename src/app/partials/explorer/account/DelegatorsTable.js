@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedMessage, injectIntl } from "react-intl";
+import { injectIntl } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 
 import DelegatorEntry from "./DelegatorEntry";
@@ -22,7 +23,7 @@ function DelegatorsTable({ delegators, intl }) {
           <tr>
             <th>{_.capitalize(intl.formatMessage({ id: "account" }))}</th>
             <th>
-              <FormattedMessage id="account.delegators.weight" />
+              <TranslatedMessage id="account.delegators.weight" />
             </th>
           </tr>
         </thead>

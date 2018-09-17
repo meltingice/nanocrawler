@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import injectClient from "../../../../../lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
@@ -77,9 +78,9 @@ class HistoryStateBlock extends React.PureComponent {
     switch (block.subtype) {
       case "open":
       case "receive":
-        return <FormattedMessage id="block.from" />;
+        return <TranslatedMessage id="block.from" />;
       case "send":
-        return <FormattedMessage id="block.to" />;
+        return <TranslatedMessage id="block.to" />;
       default:
         return "";
     }
@@ -90,9 +91,9 @@ class HistoryStateBlock extends React.PureComponent {
     return (
       <tr>
         <td>
-          <FormattedMessage id="block.state" />{" "}
+          <TranslatedMessage id="block.state" />{" "}
           <span className={this.statusClass()}>
-            <FormattedMessage id={`block.subtype.${block.subtype}`} />
+            <TranslatedMessage id={`block.subtype.${block.subtype}`} />
           </span>
         </td>
         <td>

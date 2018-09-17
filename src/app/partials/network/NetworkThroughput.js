@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import TpsCounter from "./TpsCounter";
 
 export default function NetworkThroughput() {
   return (
     <Fragment>
       <h2 className="mb-0">
-        <FormattedMessage id="network.tps.title" />
+        <TranslatedMessage id="network.tps.title" />
       </h2>
       <p className="text-muted">
-        <FormattedMessage id="network.tps.desc" />
+        <TranslatedMessage id="network.tps.desc" />
       </p>
 
       <div className="row">

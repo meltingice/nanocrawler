@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import carlos from "./404.gif";
 
 export default function NotFound() {
@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="col text-center">
         <h1 className="display-1">404</h1>
         <h3 className="mb-4">
-          <FormattedMessage id="error.not_found" />
+          <TranslatedMessage id="error.not_found" />
         </h3>
         <img src={carlos} className="mw-100" />
       </div>

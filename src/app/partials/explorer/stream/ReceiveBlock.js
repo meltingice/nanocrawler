@@ -1,5 +1,6 @@
 import React from "react";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
@@ -16,7 +17,7 @@ export default function ReceiveBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-success">
-            <FormattedMessage
+            <TranslatedMessage
               id="stream.receive"
               values={{
                 amount: (

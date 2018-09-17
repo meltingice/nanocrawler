@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { Redirect, NavLink } from "react-router-dom";
 import Clipboard from "react-clipboard.js";
-import { injectIntl, FormattedMessage, FormattedNumber } from "react-intl";
+import { injectIntl, FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import injectClient from "../../../lib/ClientComponent";
 import NanoNodeNinja from "../../../lib/NanoNodeNinja";
@@ -118,14 +119,14 @@ class Account extends React.PureComponent {
 
     return this.representativeOnline() ? (
       <span className="badge badge-success mr-1">
-        <FormattedMessage id="account.rep.online" />
+        <TranslatedMessage id="account.rep.online" />
       </span>
     ) : (
       <span
         className="badge badge-danger mr-1 tooltipped tooltipped-e tooltipped-multiline"
         aria-label={formatMessage({ id: "account.rep_offline.desc" })}
       >
-        <FormattedMessage id="account.rep.offline" />
+        <TranslatedMessage id="account.rep.offline" />
       </span>
     );
   }
@@ -137,7 +138,7 @@ class Account extends React.PureComponent {
 
     return (
       <div className="alert alert-warning">
-        <FormattedMessage
+        <TranslatedMessage
           id="account.rep_offline_warning"
           values={{
             uptime: (
@@ -152,7 +153,7 @@ class Account extends React.PureComponent {
                 target="_blank"
                 className="alert-link"
               >
-                <FormattedMessage id="account.rep_offline.warning_link" />
+                <TranslatedMessage id="account.rep_offline.warning_link" />
               </a>
             )
           }}
@@ -227,7 +228,7 @@ class Account extends React.PureComponent {
                         value={pending}
                         maximumFractionDigits={6}
                       />{" "}
-                      NANO <FormattedMessage id="pending" />
+                      NANO <TranslatedMessage id="pending" />
                     </p>
                   </Fragment>
                 );
@@ -246,7 +247,7 @@ class Account extends React.PureComponent {
               activeClassName="active"
               isActive={(m, l) => match.params.page === "history"}
             >
-              <FormattedMessage id="account.history" />
+              <TranslatedMessage id="account.history" />
             </NavLink>
           </li>
           <li className="nav-item">
@@ -256,7 +257,7 @@ class Account extends React.PureComponent {
               activeClassName="active"
               isActive={(m, l) => match.params.page === "delegators"}
             >
-              <FormattedMessage id="account.delegators" />
+              <TranslatedMessage id="account.delegators" />
             </NavLink>
           </li>
         </ul>
@@ -277,7 +278,7 @@ class Account extends React.PureComponent {
     return (
       <p className="text-muted mb-0">
         {this.representativeOnlineStatus()}
-        <FormattedMessage
+        <TranslatedMessage
           id="account.represented_by"
           values={{
             account: (

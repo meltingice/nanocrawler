@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
@@ -11,7 +11,7 @@ export default function ChangeBlock({ block }) {
     <div className="Block">
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="account" />
+          <TranslatedMessage id="account" />
         </span>{" "}
         <small>
           <AccountLink
@@ -23,13 +23,13 @@ export default function ChangeBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.change.account" />
+          <TranslatedMessage id="block.change.account" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="representative" />
+          <TranslatedMessage id="representative" />
         </span>{" "}
         <small>
           <AccountLink
@@ -41,13 +41,13 @@ export default function ChangeBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.change.rep" />
+          <TranslatedMessage id="block.change.rep" />
         </small>
       </p>
 
       <h4 className="mb-0">
         <span className="text-capitalize">
-          <FormattedMessage id="date" />
+          <TranslatedMessage id="date" />
         </span>{" "}
         <small className="text-muted">
           <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -55,12 +55,12 @@ export default function ChangeBlock({ block }) {
       </h4>
       <p>
         <small>
-          <FormattedMessage id="block.timestamp.desc" />
+          <TranslatedMessage id="block.timestamp.desc" />
         </small>
       </p>
 
       <h5 className="mb-0">
-        <FormattedMessage id="block.previous" />{" "}
+        <TranslatedMessage id="block.previous" />{" "}
         <small>
           <BlockLink
             hash={block.contents.previous}
@@ -70,16 +70,16 @@ export default function ChangeBlock({ block }) {
       </h5>
       <p>
         <small>
-          <FormattedMessage id="block.previous.desc" />
+          <TranslatedMessage id="block.previous.desc" />
         </small>
       </p>
 
       <h5>
-        <FormattedMessage id="block.pow" />{" "}
+        <TranslatedMessage id="block.pow" />{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>
       <h5>
-        <FormattedMessage id="block.signature" />{" "}
+        <TranslatedMessage id="block.signature" />{" "}
         <small className="text-muted break-word">
           {block.contents.signature}
         </small>

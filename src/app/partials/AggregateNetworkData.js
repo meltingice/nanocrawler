@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import _ from "lodash";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import injectClient from "../../lib/ClientComponent";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
@@ -81,10 +82,10 @@ class AggregateNetworkData extends React.PureComponent {
         <div className="row mt-5 align-items-center">
           <div className="col-md">
             <h1 className="mb-0">
-              <FormattedMessage id="network.aggregate.title" />
+              <TranslatedMessage id="network.aggregate.title" />
             </h1>
             <p className="text-muted mb-0">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.aggregate.desc"
                 values={{
                   link: (
@@ -101,7 +102,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-auto">
             <h4 className="text-muted mb-0">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.tracking_nodes"
                 values={{ count: this.representativePeers().length }}
               />
@@ -114,7 +115,7 @@ class AggregateNetworkData extends React.PureComponent {
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.avg_sync_status" />
+              <TranslatedMessage id="network.avg_sync_status" />
             </p>
             <h3>
               {Math.round(
@@ -125,7 +126,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.avg_block_count" />
+              <TranslatedMessage id="network.avg_block_count" />
             </p>
             <h3>
               <FormattedNumber
@@ -136,7 +137,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.median_block_count" />
+              <TranslatedMessage id="network.median_block_count" />
             </p>
             <h3>
               <FormattedNumber
@@ -147,7 +148,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.minimum_block_count" />
+              <TranslatedMessage id="network.minimum_block_count" />
             </p>
             <h3>
               <FormattedNumber
@@ -158,7 +159,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.maximum_block_count" />
+              <TranslatedMessage id="network.maximum_block_count" />
             </p>
             <h3>
               <FormattedNumber
@@ -172,7 +173,7 @@ class AggregateNetworkData extends React.PureComponent {
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.avg_percent_unchecked" />
+              <TranslatedMessage id="network.avg_percent_unchecked" />
             </p>
             <h3>
               {Math.round(
@@ -185,7 +186,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.avg_unchecked" />
+              <TranslatedMessage id="network.avg_unchecked" />
             </p>
             <h3>
               <FormattedNumber
@@ -196,7 +197,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.median_unchecked" />
+              <TranslatedMessage id="network.median_unchecked" />
             </p>
             <h3>
               <FormattedNumber
@@ -207,7 +208,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.min_unchecked" />
+              <TranslatedMessage id="network.min_unchecked" />
             </p>
             <h3>
               <FormattedNumber
@@ -218,7 +219,7 @@ class AggregateNetworkData extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="network.max_unchecked" />
+              <TranslatedMessage id="network.max_unchecked" />
             </p>
             <h3>
               <FormattedNumber
@@ -232,10 +233,10 @@ class AggregateNetworkData extends React.PureComponent {
         <div className="row mt-5 align-items-center">
           <div className="col-sm">
             <h3 className="mb-0">
-              <FormattedMessage id="network.nano_services" />
+              <TranslatedMessage id="network.nano_services" />
             </h3>
             <p className="text-muted mb-0">
-              <FormattedMessage id="network.nano_services_desc" />
+              <TranslatedMessage id="network.nano_services_desc" />
             </p>
             <SyncThresholds />
           </div>
@@ -246,16 +247,16 @@ class AggregateNetworkData extends React.PureComponent {
         <div className="row mt-5 align-items-center">
           <div className="col-sm">
             <h3 className="mb-0">
-              <FormattedMessage id="network.discovered_peers" />
+              <TranslatedMessage id="network.discovered_peers" />
             </h3>
             <p className="text-muted mb-0">
-              <FormattedMessage id="network.discovered_peers_desc" />
+              <TranslatedMessage id="network.discovered_peers_desc" />
             </p>
             <SyncThresholds />
           </div>
           <div className="col-auto">
             <h4 className="text-muted mb-0">
-              <FormattedMessage
+              <TranslatedMessage
                 id="network.monitor_count"
                 values={{ count: this.state.peers.length }}
               />
@@ -285,21 +286,21 @@ class AggregateNetworkData extends React.PureComponent {
 const SyncThresholds = () => (
   <p>
     <small>
-      <FormattedMessage id="network.synced_within" />{" "}
+      <TranslatedMessage id="network.synced_within" />{" "}
       <span className="text-success">
-        <FormattedMessage
+        <TranslatedMessage
           id="network.synced_blocks"
           values={{ count: <FormattedNumber value={1000} /> }}
         />
       </span>{" "}
       <span className="text-warning">
-        <FormattedMessage
+        <TranslatedMessage
           id="network.synced_blocks"
           values={{ count: <FormattedNumber value={10000} /> }}
         />
       </span>{" "}
       <span className="text-danger">
-        <FormattedMessage
+        <TranslatedMessage
           id="network.synced_greater_than"
           values={{ count: <FormattedNumber value={10000} /> }}
         />

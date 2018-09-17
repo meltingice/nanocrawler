@@ -1,5 +1,5 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
@@ -15,7 +15,7 @@ export default function ChangeBlock({ event }) {
           />
         </p>
         <p className="mb-0 text-info">
-          <FormattedMessage id="stream.change" />
+          <TranslatedMessage id="stream.change" />
         </p>
         <p className="mb-0">
           <AccountLink

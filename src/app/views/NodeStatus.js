@@ -1,7 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import moment from "moment";
-import { FormattedMessage, FormattedNumber } from "react-intl";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import injectClient from "../../lib/ClientComponent";
 
@@ -56,7 +57,7 @@ class NodeStatus extends React.PureComponent {
         <div className="row align-items-center">
           <div className="col-sm">
             <h1 className="mb-0">
-              <FormattedMessage id="nav.status" />
+              <TranslatedMessage id="nav.status" />
             </h1>
             <p className="text-muted break-word">
               <AccountLink
@@ -78,7 +79,7 @@ class NodeStatus extends React.PureComponent {
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.checked_blocks" />
+              <TranslatedMessage id="status.checked_blocks" />
             </p>
             <h2>
               <FormattedNumber
@@ -89,7 +90,7 @@ class NodeStatus extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.unchecked_blocks" />
+              <TranslatedMessage id="status.unchecked_blocks" />
             </p>
             <h2>
               <FormattedNumber
@@ -100,7 +101,7 @@ class NodeStatus extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.voting_weight" />
+              <TranslatedMessage id="status.voting_weight" />
             </p>
             <h2>
               <FormattedNumber value={weight} maximumFractionDigits={0} /> NANO
@@ -108,7 +109,7 @@ class NodeStatus extends React.PureComponent {
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.peers" />
+              <TranslatedMessage id="status.peers" />
             </p>
             <h2>
               <FormattedNumber value={peerCount} />
@@ -119,25 +120,25 @@ class NodeStatus extends React.PureComponent {
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.uptime" />
+              <TranslatedMessage id="status.uptime" />
             </p>
             <h2>{this.getUptime()}</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.cpu_usage" />
+              <TranslatedMessage id="status.cpu_usage" />
             </p>
             <h2>{this.getCpuUsage()}</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.memory" />
+              <TranslatedMessage id="status.memory" />
             </p>
             <h2>{this.getMemory()}</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              <FormattedMessage id="status.database" />
+              <TranslatedMessage id="status.database" />
             </p>
             <h2>{this.getDatabaseSize()}</h2>
           </div>
