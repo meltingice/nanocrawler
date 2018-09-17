@@ -6,4 +6,9 @@ function TranslatedMessage(props) {
   return <FormattedMessage {...props} defaultMessage={defaults[props.id]} />;
 }
 
-export { TranslatedMessage };
+function withDefault(opts) {
+  opts.defaultMessage = defaults[opts.id];
+  return opts;
+}
+
+export { TranslatedMessage, withDefault };

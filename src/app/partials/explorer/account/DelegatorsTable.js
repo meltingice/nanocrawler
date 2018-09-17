@@ -2,6 +2,7 @@ import React from "react";
 import { injectIntl } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
+import { withDefault } from "lib/TranslatedMessage";
 
 import DelegatorEntry from "./DelegatorEntry";
 
@@ -21,7 +22,9 @@ function DelegatorsTable({ delegators, intl }) {
       <table className="table">
         <thead>
           <tr>
-            <th>{_.capitalize(intl.formatMessage({ id: "account" }))}</th>
+            <th className="text-capitalize">
+              {intl.formatMessage(withDefault({ id: "account" }))}
+            </th>
             <th>
               <TranslatedMessage id="account.delegators.weight" />
             </th>

@@ -5,13 +5,14 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
-import { formatTimestamp } from "../../../../../lib/util";
+import { formatTimestamp } from "lib/util";
+import { withDefault } from "lib/TranslatedMessage";
 
 function HistoryOpenBlock({ block, intl }) {
   return (
     <tr>
       <td className="text-success text-capitalize">
-        {intl.formatMessage({ id: "block.subtype.open" })}
+        {intl.formatMessage(withDefault({ id: "block.subtype.open" }))}
       </td>
       <td>
         <span className="text-muted">

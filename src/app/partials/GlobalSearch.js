@@ -1,6 +1,7 @@
 import React from "react";
 import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
+import { withDefault } from "lib/TranslatedMessage";
 
 class GlobalSearch extends React.PureComponent {
   state = {
@@ -23,7 +24,7 @@ class GlobalSearch extends React.PureComponent {
         <input
           type="text"
           className="form-control"
-          placeholder={formatMessage({ id: "search" })}
+          placeholder={formatMessage(withDefault({ id: "search" }))}
           value={this.state.search}
           onChange={e => this.setState({ search: e.target.value })}
         />

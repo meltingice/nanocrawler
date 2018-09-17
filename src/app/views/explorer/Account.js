@@ -4,10 +4,10 @@ import _ from "lodash";
 import { Redirect, NavLink } from "react-router-dom";
 import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
-import { TranslatedMessage } from "lib/TranslatedMessage";
+import { TranslatedMessage, withDefault } from "lib/TranslatedMessage";
 
-import injectClient from "../../../lib/ClientComponent";
-import NanoNodeNinja from "../../../lib/NanoNodeNinja";
+import injectClient from "lib/ClientComponent";
+import NanoNodeNinja from "lib/NanoNodeNinja";
 
 import AccountLink from "../../partials/AccountLink";
 import AccountQR from "../../partials/AccountQR";
@@ -102,11 +102,12 @@ class Account extends React.PureComponent {
     const { weight, unopened } = this.state;
 
     if (weight >= 133248.289)
-      return formatMessage({ id: "account.title.rebroadcasting" });
+      return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (weight > 0)
-      return formatMessage({ id: "account.title.representative" });
-    if (unopened) return formatMessage({ id: "account.title.unopened" });
-    return formatMessage({ id: "account.title.normal" });
+      return formatMessage(withDefault({ id: "account.title.representative" }));
+    if (unopened)
+      return formatMessage(withDefault({ id: "account.title.unopened" }));
+    return formatMessage(withDefault({ id: "account.title.normal" }));
   }
 
   representativeOnline() {
@@ -124,7 +125,9 @@ class Account extends React.PureComponent {
     ) : (
       <span
         className="badge badge-danger mr-1 tooltipped tooltipped-e tooltipped-multiline"
-        aria-label={formatMessage({ id: "account.rep_offline.desc" })}
+        aria-label={formatMessage(
+          withDefault({ id: "account.rep_offline.desc" })
+        )}
       >
         <TranslatedMessage id="account.rep.offline" />
       </span>
