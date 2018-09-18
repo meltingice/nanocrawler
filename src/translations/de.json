@@ -4,7 +4,7 @@
   "nav.status": "Knotenstatus",
 
   "explorer.title": "Netzwerk-Explorer",
-  "explorer.form.help": "Um zu starten gib eine Nano-Adresse oder einen Transaktionshash ein.",
+  "explorer.form.help": "Gib eine Nano-Adresse oder einen Transaktionshash ein.",
 
   "network.title": "Netzwerkstatus",
   "network.reps_online": "{count} Vertreter online",
@@ -14,9 +14,9 @@
   "network.total_voting_power": "{percent} aller Stimmrechte",
   "network.official_reps": "{count} ist den offiziellen Vertretern zugewiesen",
   "network.official_reps_stat":
-    "{totalPower} aller Stimmrechte und {onlinePower} der online Stimmrechte",
+    "{totalPower} aller Stimmrechte und {onlinePower} der Stimmrechte online",
   "network.online_rebroadcasting":
-    "{count} online aktive Vertreter",
+    "{count} aktive Vertreter online",
   "network.online_rebroadcasting_desc":
     "Stimmen von Vertretern werden nur weitergeleitet wenn über 0.1% aller NANO ihnen zugewiesen sind ({amount} NANO)",
   "network.rebroadcast_amt":
@@ -69,7 +69,7 @@
   "account.rep.online": "Vertreter online",
   "account.rep.offline": "Vertreter offline",
   "account.rep_offline_warning":
-    "Das vertetende Konto hat eine geringe Verfügbarkeit von {uptime}. Falls du dein Stimmgewicht ihm zugewisen hast, solltest du zu {link} wechseln.",
+    "Das vertetende Konto hat eine geringe Verfügbarkeit von {uptime}. Falls du dein Stimmgewicht ihm zugewiesen hast, solltest du zu {link} wechseln.",
   "account.rep_offline.warning_link": "einem verifiziertem Vertreter mit mindestens 95% Verfügbarkeit",
   "account.rep_offline.desc":
     "Ein Vertreter der offline ist bedeutet, dass dieser nicht mehr an Abstimmungen teilnimmt. Dies beeinträchtigt Transaktionen in keinster Weise.",
@@ -105,14 +105,14 @@
   "block.subtype.receive": "receive",
   "block.to": "Nach",
   "block.from": "Von",
-  "block.previous": "Verheriger Block",
+  "block.previous": "Vorheriger Block",
   "block.previous.desc": "Der vorherige Block in dessen Blockchain",
   "block.pow": "Proof of Work",
   "block.signature": "Signatur",
   "block.link": "Link",
   "block.balance.desc": "Der Kontostand nach dieser Transaktion",
   "block.timestamp.desc":
-    "Der Zeitstempel als dieser Block das erste Mal gesehen wurde (in deiner Lokalzeit)",
+    "Zeitstempel dieses Blockes als er zum ersten Mal registriert wurde (in deiner Lokalzeit)",
   "block.source.desc": "Der dazugehörige Sendeblock dieser Transaktion",
   "block.sender": "Absender",
   "block.sender.desc": "Das Konto, welches die Transaktion initiiert hat",
@@ -136,10 +136,10 @@
     "Das Konto, dessen Transaktion dieses Konto geöffnet hat",
   "block.open.rep": "Der Vertreter für dieses Konto",
   "block.open.amount_desc":
-    "Die Menge an NANO, die an dieses Konto gesendet wurde (dies kann auch 0 sein)",
+    "Die Summe an NANO, die an dieses Konto gesendet wurde (dies kann auch 0 sein)",
 
   "block.send.amount_desc":
-    "Die Menge an NANO, die in dieser Transaktion gesendet wurde",
+    "Die Summe an NANO, die in dieser Transaktion gesendet wurde",
 
   "block.state.subtype": "Block Untertyp",
   "block.state.subtype.desc":
@@ -150,7 +150,7 @@
   "block.state.link.open":
     "Der dazugehörige Block, der diese Transaktion initiiert hat",
   "block.state.link.change":
-    "Wenn dies nur Nullen sind, ist dies das Vernichtende Konto im Hex Format",
+    "Wenn dies nur Nullen sind, wurde die Transaktion ins Nirwana geschickt (Burn Account)",
   "block.state.link.send": "Das Zielkonto im Hex Format",
   "block.state.link.receive":
     "Der dazugehörige Block, der diese Transaktion gestartet hat",
@@ -164,10 +164,10 @@
   "ninja.node_version": "Knotenversion {version}",
   "ninja.verified_accounts": "Verfizierte Konten",
   "ninja.verified_accounts.desc":
-    "Eine zufällige Auswahl an Konto die mit {link} verfiziert wurden",
+    "Eine zufällige Auswahl an Konten die mit {link} verfiziert wurden",
 
   "stream.title": "Letzte Transaktionen",
-  "stream.desc": "Echtzeit Transaktionen im Nano Netzwerk",
+  "stream.desc": "Transaktionen in Echtzeit des Nano Netzwerkes",
   "stream.waiting": "Warte auf Transaktionen...",
   "stream.change": "hat den Vertreter gewechselt:",
   "stream.open": "wurde mit {amount} NANO eröffnet",
