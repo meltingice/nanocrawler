@@ -14,6 +14,7 @@ export default function injectClient(WrappedComponent) {
                 config={config}
                 client={new Client(config)}
                 ticker={config.ticker}
+                locale={config.locale}
               />
             );
         }}

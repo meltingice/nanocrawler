@@ -1,23 +1,20 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
-import accounting from "accounting";
 import DelegatorsTable from "./DelegatorsTable";
 
-import injectClient from "../../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";
 
-class AccountDelegators extends React.Component {
+class AccountDelegators extends React.PureComponent {
   state = {
     delegators: [],
     weight: 0,
     loading: true
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.fetchDelegators();
@@ -43,28 +40,41 @@ class AccountDelegators extends React.Component {
     this.setState({ delegators, weight, loading: false });
   }
 
+  get delegatorsCount() {
+    return _.keys(this.state.delegators).length;
+  }
+
   render() {
     const { delegators, loading, state, weight } = this.state;
 
     if (loading) return <LoadingState />;
-    if (_.keys(delegators).length === 0) return <EmptyState />;
+    if (this.delegatorsCount === 0) return <EmptyState />;
 
     return (
       <div className="mt-5">
         <div className="row align-items-center">
           <div className="col">
-            <h2 className="mb-0">Delegators</h2>
+            <h2 className="mb-0">
+              <TranslatedMessage id="account.delegators.title" />
+            </h2>
             <p className="text-muted mb-0">
-              {_.keys(delegators).length} delegators, sorted by weight
+              <TranslatedMessage
+                id="account.delegators.desc"
+                values={{
+                  count: <FormattedNumber value={this.delegatorsCount} />
+                }}
+              />
             </p>
             <p className="text-muted">
-              Only showing accounts with at least 1 βNANO
+              <TranslatedMessage id="account.delegators.filter" />
             </p>
           </div>
           <div className="col-auto">
             <h3 className="mb-0">
-              {accounting.formatNumber(weight)}{" "}
-              <span className="text-muted">βNANO weight</span>
+              <FormattedNumber value={weight} />{" "}
+              <span className="text-muted">
+                {this.props.config.currency} <TranslatedMessage id="weight" />
+              </span>
             </h3>
           </div>
         </div>

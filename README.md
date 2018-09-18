@@ -1,4 +1,4 @@
-# Nano Node Dashboard
+# NanoCrawler
 
 A lightweight web UI for viewing realtime information about your Nano node and exploring the Nano network.
 
@@ -24,7 +24,7 @@ Redis support is optional, but recommended. If you wish to skip it, you can safe
 
 ### Client Config
 
-The web front-end needs to know where the API server can be reached. Copy `public/client-config.sample.json` to `public/client-config.json` and update the config file to fit your environment.
+The web front-end needs to know where the API server can be reached. Copy `src/client-config.sample.json` to `src/client-config.json` and update the config file to fit your environment.
 
 The [websocket server](https://github.com/meltingice/nanovault-ws) is optional, but you're welcome to use the hosted websocket server that's set as the default in the config. Depending on the sync status of your node, you may receive blocks from the websocket server before your node confirms them, which is why hosting one yourself is ideal. Remove the config entry to disable the websocket altogether.
 
@@ -63,13 +63,29 @@ While I highly recommend hosting via a proper webserver, as a last resort you ca
 
 ### Hosting the Server
 
-There are multiple options for hosting a NodeJS server. If you have experience with one option, feel free to use it. All you need to do is run `node server.js` to start the API server.
+The server-side components are broken up into multiple processes in order to separate the API server from some long-running reoccurring jobs. They're comprised of:
 
-I use and recommend [PM2](https://www.npmjs.com/package/pm2) for managing NodeJS servers. If you also want to use it, getting up and running is as simple as:
+- `server.api.js` - the API server
+- `server.peers.js` - reoccurring job for discovering and fetching data from other Nano monitors
+- `server.top-accounts.js` - reoccurring job for building the top accounts list
+- `server.tps.js` - reoccurring job for recording the current block count to calculate blocks/sec
 
-```
-npm i pm2 -g
-pm2 start server.js --name "nano-api"
-```
+There are multiple options for hosting a NodeJS server. If you have experience with one option, feel free to use it. All of the scripts can be run directly with `node` and they all use the same `server-config.json`.
 
-And if you want the API server to automatically start whenever the server reboots, you can run `pm2 startup`.
+I use and recommend [PM2](https://www.npmjs.com/package/pm2) for managing NodeJS servers. There is an `ecosystem.config.js` file included so all you have to do is run `pm2 start ecosystem.config.js` to start all the processes. The API server will start in cluster mode with 4 processes by default. Feel free to tweak this in the `ecosystem.config.js` file.
+
+## Localization
+
+NanoCrawler aims to be available in as many languages as possible. If you would like to contribute translations, please see the instructions below and send a Pull Request when ready.
+
+### Contributing Translations
+
+All strings that are used on the site are defined in the translations files in `src/translations/`. These translation files consist of a simple JSON object. The keys are the stable IDs for each of the strings, which are used in the site code. The values are the corresponding translation. If a string contains a value between two brackets, e.g. `{count}`, that is a dynamic value that is populated in the code. It should be present, as is, in all available translations.
+
+English is the fallback language for NanoCrawler if a particular translation is not present.
+
+To add a new translation:
+
+1.  Create a new JSON file in the `src/translations/` directory with the same name as the [language code](https://en.wikipedia.org/wiki/ISO_639-1) for the language you wish to translate.
+2.  For every ID that's present in other translation files, create the appropriate translation in your new translation file with the same ID.
+3.  In `src/client-config.json`, add your newly translated language to the `supportedLanguages` object.

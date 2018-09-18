@@ -1,18 +1,20 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import accounting from "accounting";
 import moment from "moment";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
-import injectClient from "../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import AccountLink from "../partials/AccountLink";
 
-class NodeStatus extends React.Component {
+class NodeStatus extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.statTimer = null;
     this.state = {
+      account: "",
       blockCount: {},
       version: {},
       weight: 0,
@@ -22,8 +24,13 @@ class NodeStatus extends React.Component {
   }
 
   async componentWillMount() {
-    this.setState({ version: await this.props.client.version() });
-    this.updateStats();
+    this.setState(
+      {
+        version: await this.props.client.version(),
+        account: await this.props.client.account()
+      },
+      () => this.updateStats()
+    );
   }
 
   componentWillUnmount() {
@@ -36,7 +43,7 @@ class NodeStatus extends React.Component {
   async updateStats() {
     this.setState({
       blockCount: await this.props.client.blockCount(),
-      weight: await this.props.client.weight(this.props.account),
+      weight: await this.props.client.weight(this.state.account),
       systemInfo: await this.props.client.systemInfo(),
       peerCount: await this.props.client.peerCount()
     });
@@ -55,10 +62,12 @@ class NodeStatus extends React.Component {
 
         <div className="row align-items-center">
           <div className="col-sm">
-            <h1 className="mb-0">Node Status</h1>
+            <h1 className="mb-0">
+              <TranslatedMessage id="nav.status" />
+            </h1>
             <p className="text-muted break-word">
               <AccountLink
-                account={this.props.account}
+                account={this.state.account}
                 className="text-muted"
               />
             </p>
@@ -75,40 +84,69 @@ class NodeStatus extends React.Component {
 
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Blocks in Ledger</p>
-            <h2>{accounting.formatNumber(blockCount.count)}</h2>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.checked_blocks" />
+            </p>
+            <h2>
+              <FormattedNumber
+                value={blockCount.count || 0}
+                maximumFractionDigits={0}
+              />
+            </h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Unchecked Blocks</p>
-            <h2>{accounting.formatNumber(blockCount.unchecked)}</h2>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.unchecked_blocks" />
+            </p>
+            <h2>
+              <FormattedNumber
+                value={blockCount.unchecked || 0}
+                maximumFractionDigits={0}
+              />
+            </h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Voting Weight</p>
-            <h2>{accounting.formatNumber(weight)} βNANO</h2>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.voting_weight" />
+            </p>
+            <h2>
+              <FormattedNumber value={weight} maximumFractionDigits={0} />{" "}
+              {this.props.config.currency}
+            </h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Peers</p>
-            <h2>{accounting.formatNumber(peerCount)}</h2>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.peers" />
+            </p>
+            <h2>
+              <FormattedNumber value={peerCount} />
+            </h2>
           </div>
         </div>
 
         <div className="row mt-5">
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Uptime</p>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.uptime" />
+            </p>
             <h2>{this.getUptime()}</h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">CPU Usage</p>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.cpu_usage" />
+            </p>
             <h2>{this.getCpuUsage()}</h2>
           </div>
           <div className="col-sm text-sm-center">
             <p className="text-muted mb-2">
-              Memory <small className="text-muted">(used / total)</small>
+              <TranslatedMessage id="status.memory" />
             </p>
             <h2>{this.getMemory()}</h2>
           </div>
           <div className="col-sm text-sm-center">
-            <p className="text-muted mb-2">Database Size</p>
+            <p className="text-muted mb-2">
+              <TranslatedMessage id="status.database" />
+            </p>
             <h2>{this.getDatabaseSize()}</h2>
           </div>
         </div>
@@ -154,8 +192,8 @@ class NodeStatus extends React.Component {
     if (!systemInfo.dbSize) return "Unknown";
     let size = systemInfo.dbSize / 1024.0 / 1024.0;
     return size > 1024
-      ? `${accounting.formatNumber(size / 1024, 2)}GB`
-      : `${accounting.formatNumber(size, 2)}MB`;
+      ? `${<FormattedNumber value={size / 1024} maximumFractionDigits={2} />}GB`
+      : `${<FormattedNumber value={size} maximumFractionDigits={2} />}MB`;
   }
 }
 

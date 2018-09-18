@@ -1,0 +1,17 @@
+{
+  "server": "http://127.0.0.1:3001",
+  "websocketServer": "nano-ws.meltingice.net",
+  "currency": "NANO",
+  "maxCoinSupply": 340272367,
+  "features": {
+    "nodeStatus": true,
+    "supportedLanguages": {
+      "en": "English",
+      "es": "Español",
+      "ko": "한국어",
+      "zh": "中文",
+      "de": "Deutsche"
+    }
+  },
+  "serviceMonitors": []
+}

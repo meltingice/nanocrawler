@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { withRouter } from "react-router-dom";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import RandomVerifiedAccounts from "../partials/explorer/RandomVerifiedAccounts";
 import RecentBlockStream from "../partials/explorer/RecentBlockStream";
@@ -31,28 +32,20 @@ class Explorer extends React.PureComponent {
     return (
       <div className="row justify-content-center my-5 mx-0">
         <Helmet>
-          <title>Explorer</title>
+          <title>Network Explorer</title>
         </Helmet>
 
         <div className="col col-md-8">
-          <div className="alert alert-info mb-5">
-            You're in the right place! The MeltingIce Explorer is now known as
-            the NanoCrawler. All old URLs will redirect to the new
-            beta.nanocrawler.cc domain. You can read more{" "}
-            <a
-              href="https://www.reddit.com/r/nanocurrency/comments/9cxvuf/nanomeltingicenet_is_now_known_as_the_nanocrawler/"
-              target="_blank"
-            >
-              here
-            </a>.
-          </div>
-
-          <h1>Beta Network Explorer</h1>
+          <h1>
+            <TranslatedMessage id="explorer.title" />
+          </h1>
 
           <hr />
 
           <form className="my-5" onSubmit={this.handleSubmit.bind(this)}>
-            <label>Enter a Nano address or block hash to get started.</label>
+            <label>
+              <TranslatedMessage id="explorer.form.help" />
+            </label>
 
             <div className="form-row">
               <div className="col-md">
@@ -66,7 +59,9 @@ class Explorer extends React.PureComponent {
                 />
               </div>
               <div className="col-auto mt-2 mt-md-0">
-                <button className="btn btn-nano-primary btn-lg">Search</button>
+                <button className="btn btn-nano-primary btn-lg">
+                  <TranslatedMessage id="search" />
+                </button>
               </div>
             </div>
           </form>

@@ -1,2 +1,5 @@
-require("babel-register");
+require("babel-register")({
+  presets: ["env", "react-app"]
+});
+
 require("./src/server.tps");

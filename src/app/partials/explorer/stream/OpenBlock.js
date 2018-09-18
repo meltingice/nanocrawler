@@ -1,5 +1,6 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
@@ -16,7 +17,17 @@ export default function OpenBlock({ event }) {
         </p>
         <p className="mb-0">
           <span className="text-success">
-            was created with {accounting.formatNumber(block.amount, 6)} βNANO
+            <TranslatedMessage
+              id="stream.open"
+              values={{
+                amount: (
+                  <FormattedNumber
+                    value={block.amount}
+                    maximumFractionDigits={6}
+                  />
+                )
+              }}
+            />
           </span>
         </p>
         <p className="mb-0">

@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
-import accounting from "accounting";
-import injectClient from "../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
@@ -10,7 +11,7 @@ import PeerVersions from "../partials/PeerVersions";
 
 import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 
-class NetworkStatus extends React.Component {
+class NetworkStatus extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -103,34 +104,50 @@ class NetworkStatus extends React.Component {
 
   amountRepresented() {
     return (
-      <Fragment>{accounting.formatNumber(this.onlineWeight())} βNANO</Fragment>
+      <Fragment>
+        <FormattedNumber
+          value={this.onlineWeight()}
+          maximumFractionDigits={0}
+        />{" "}
+        {this.props.config.currency}
+      </Fragment>
     );
   }
 
   percentRepresented() {
     return (
       <Fragment>
-        {(
-          (this.onlineWeight() / this.props.config.maxCoinSupply) *
-          100.0
-        ).toFixed(2)}%
+        <FormattedNumber
+          value={
+            (this.onlineWeight() / this.props.config.maxCoinSupply) * 100.0
+          }
+          maximumFractionDigits={2}
+        />%
       </Fragment>
     );
   }
 
   officialRepresented() {
     return (
-      <Fragment>{accounting.formatNumber(this.officialWeight())}</Fragment>
+      <Fragment>
+        <FormattedNumber
+          value={this.officialWeight()}
+          maximumFractionDigits={0}
+        />{" "}
+        {this.props.config.currency}
+      </Fragment>
     );
   }
 
   officialPercent() {
     return (
       <Fragment>
-        {(
-          (this.officialWeight() / this.props.config.maxCoinSupply) *
-          100
-        ).toFixed(2)}%
+        <FormattedNumber
+          value={
+            (this.officialWeight() / this.props.config.maxCoinSupply) * 100
+          }
+          maximumFractionDigits={2}
+        />%
       </Fragment>
     );
   }
@@ -138,7 +155,10 @@ class NetworkStatus extends React.Component {
   officialOnlinePercent() {
     return (
       <Fragment>
-        {((this.officialWeight() / this.onlineWeight()) * 100).toFixed(2)}%
+        <FormattedNumber
+          value={(this.officialWeight() / this.onlineWeight()) * 100}
+          maximumFractionDigits={2}
+        />%
       </Fragment>
     );
   }
@@ -168,7 +188,9 @@ class NetworkStatus extends React.Component {
 
         <div className="row align-items-center">
           <div className="col-md">
-            <h1>Network Status</h1>
+            <h1>
+              <TranslatedMessage id="network.title" />
+            </h1>
           </div>
         </div>
 
@@ -176,65 +198,139 @@ class NetworkStatus extends React.Component {
 
         <div className="row mt-5">
           <div className="col-md">
-            <h2 className="mb-0">
-              {accounting.formatNumber(_.keys(representativesOnline).length)}{" "}
-              <span className="text-muted">representatives online</span>
+            <h2 className="mb-0 text-muted">
+              <TranslatedMessage
+                id="network.reps_online"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      <FormattedNumber
+                        value={_.keys(representativesOnline).length}
+                      />
+                    </span>
+                  )
+                }}
+              />
             </h2>
             <p className="text-muted">
-              Accounts that have at least 1 delegator, regardless of voting
-              weight
+              <TranslatedMessage id="network.reps_online_desc" />
             </p>
 
-            <h5 className="mb-0">
-              {this.amountRepresented()}{" "}
-              <span className="text-muted">voting power is online</span>{" "}
+            <h5 className="mb-0 text-muted">
+              <TranslatedMessage
+                id="network.online_voting_power"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      {this.amountRepresented()}
+                    </span>
+                  )
+                }}
+              />
             </h5>
-            <p>
-              {this.percentRepresented()}{" "}
-              <span className="text-muted">of the total voting power</span>
+            <p className="text-muted">
+              <TranslatedMessage
+                id="network.total_voting_power"
+                values={{
+                  percent: (
+                    <span className="text-body">
+                      {this.percentRepresented()}
+                    </span>
+                  )
+                }}
+              />
             </p>
 
-            <h5 className="mb-0">
-              {this.officialRepresented()} βNANO{" "}
-              <span className="text-muted">
-                is delegated to official representatives
-              </span>
+            <h5 className="mb-0 text-muted">
+              <TranslatedMessage
+                id="network.official_reps"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      {this.officialRepresented()}
+                    </span>
+                  )
+                }}
+              />
             </h5>
-            <p>
-              {this.officialPercent()}{" "}
-              <span className="text-muted">of the total voting power and</span>{" "}
-              {this.officialOnlinePercent()}{" "}
-              <span className="text-muted">of the online voting power</span>
+            <p className="text-muted">
+              <TranslatedMessage
+                id="network.official_reps_stat"
+                values={{
+                  totalPower: (
+                    <span className="text-body">{this.officialPercent()}</span>
+                  ),
+                  onlinePower: (
+                    <span className="text-body">
+                      {this.officialOnlinePercent()}
+                    </span>
+                  )
+                }}
+              />
             </p>
           </div>
           <div className="col-md">
-            <h2 className="mb-0">
-              {accounting.formatNumber(
-                _.keys(this.rebroadcastableReps()).length
-              )}{" "}
-              <span className="text-muted">
-                online rebroadcasting representatives
-              </span>
+            <h2 className="mb-0 text-muted">
+              <TranslatedMessage
+                id="network.online_rebroadcasting"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      <FormattedNumber
+                        value={_.keys(this.rebroadcastableReps()).length}
+                        maximumFractionDigits={0}
+                      />
+                    </span>
+                  )
+                }}
+              />
             </h2>
             <p className="text-muted">
-              A representative will only rebroadcast votes if it's delegated >
-              0.1% of the total supply ({accounting.formatNumber(
-                this.rebroadcastThreshold()
-              )}{" "}
-              βNANO)
+              <TranslatedMessage
+                id="network.online_rebroadcasting_desc"
+                values={{
+                  amount: (
+                    <FormattedNumber
+                      value={this.rebroadcastThreshold()}
+                      maximumFractionDigits={0}
+                    />
+                  )
+                }}
+              />
             </p>
 
-            <h5 className="mb-0">
-              {accounting.formatNumber(this.onlineRebroadcastWeight())} βNANO{" "}
-              <span className="text-muted">
-                is assigned to rebroadcasting representatives
-              </span>{" "}
+            <h5 className="mb-0 text-muted">
+              <TranslatedMessage
+                id="network.rebroadcast_amt"
+                values={{
+                  count: (
+                    <span className="text-body">
+                      <FormattedNumber
+                        value={this.onlineRebroadcastWeight()}
+                        maximumFractionDigits={0}
+                      />{" "}
+                      {this.props.config.currency}
+                    </span>
+                  )
+                }}
+              />
             </h5>
-            <p className="mb-0">
-              {this.rebroadcastPercent()}{" "}
-              <span className="text-muted">of the total voting power and</span>{" "}
-              {this.onlineRebroadcastPercent()}{" "}
-              <span className="text-muted">of the online voting power</span>
+            <p className="mb-0 text-muted">
+              <TranslatedMessage
+                id="network.rebroadcast_stat"
+                values={{
+                  totalPower: (
+                    <span className="text-body">
+                      {this.rebroadcastPercent()}
+                    </span>
+                  ),
+                  onlinePower: (
+                    <span className="text-body">
+                      {this.onlineRebroadcastPercent()}
+                    </span>
+                  )
+                }}
+              />
             </p>
           </div>
         </div>

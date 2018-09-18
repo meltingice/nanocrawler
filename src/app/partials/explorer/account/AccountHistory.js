@@ -1,13 +1,14 @@
 import React, { Fragment } from "react";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
-import accounting from "accounting";
 import TransactionHistory from "./TransactionHistory";
 import UnopenedAccount from "./UnopenedAccount";
 
-import injectClient from "../../../../lib/ClientComponent";
-import AccountWebsocket from "../../../../lib/AccountWebsocket";
+import injectClient from "lib/ClientComponent";
+import AccountWebsocket from "lib/AccountWebsocket";
 
-class AccountHistory extends React.Component {
+class AccountHistory extends React.PureComponent {
   state = {
     history: [],
     nextPageHead: null,
@@ -194,13 +195,19 @@ class AccountHistory extends React.Component {
       <Fragment>
         <div className="row mt-5 align-items-center">
           <div className="col">
-            <h2 className="mb-0">Pending Transactions</h2>
-            <p className="text-muted">Only showing up to 20 pending deposits</p>
+            <h2 className="mb-0">
+              <TranslatedMessage id="account.pending.title" />
+            </h2>
+            <p className="text-muted">
+              <TranslatedMessage id="account.pending.limit" />
+            </p>
           </div>
           <div className="col-auto">
             <h4>
-              {accounting.formatNumber(pendingTransactions.total)}{" "}
-              <span className="text-muted">pending transactions</span>
+              <FormattedNumber value={pendingTransactions.total} />{" "}
+              <span className="text-muted">
+                <TranslatedMessage id="account.pending.count" />
+              </span>
             </h4>
           </div>
         </div>
@@ -218,12 +225,16 @@ class AccountHistory extends React.Component {
       <Fragment>
         <div className="row mt-5 align-items-center">
           <div className="col">
-            <h2>Transactions</h2>
+            <h2>
+              <TranslatedMessage id="account.transactions.title" />
+            </h2>
           </div>
           <div className="col-auto">
             <h4>
-              {accounting.formatNumber(this.props.blockCount)}{" "}
-              <span className="text-muted">transactions total</span>
+              <FormattedNumber value={this.props.blockCount} />{" "}
+              <span className="text-muted">
+                <TranslatedMessage id="account.transactions.total" />
+              </span>
             </h4>
           </div>
         </div>
@@ -241,7 +252,7 @@ class AccountHistory extends React.Component {
           className="btn btn-nano-primary"
           onClick={this.loadMore.bind(this)}
         >
-          Load More Transactions
+          <TranslatedMessage id="account.transactions.load_more" />
         </button>
       </div>
     );

@@ -1,6 +1,6 @@
 import React from "react";
-import accounting from "accounting";
-import injectClient from "../../../lib/ClientComponent";
+import { FormattedNumber } from "react-intl";
+import injectClient from "lib/ClientComponent";
 
 import "./TpsCounter.css";
 
@@ -50,7 +50,7 @@ class TpsCounter extends React.PureComponent {
     return (
       <h3 className="mb-0">
         <span className={`tps-counter intensity-${this.intensity}`}>
-          {accounting.formatNumber(value, 3)}
+          <FormattedNumber value={value} maximumFractionDigits={3} />
         </span>{" "}
         <small className="text-muted">{this.props.title}</small>
       </h3>

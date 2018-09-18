@@ -1,14 +1,24 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedNumber } from "react-intl";
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../AccountLink";
 
-export default function DelegatorEntry({ account, balance }) {
+function DelegatorEntry({ config, account, balance }) {
   return (
     <tr>
       <td>
         <AccountLink account={account} className="text-dark" delegators />
       </td>
-      <td>{accounting.formatNumber(balance, 6)} βNANO</td>
+      <td>
+        <FormattedNumber
+          value={balance}
+          maximumFractionDigits={6}
+          minimumFractionDigits={6}
+        />{" "}
+        {config.currency}
+      </td>
     </tr>
   );
 }
+
+export default injectClient(DelegatorEntry);

@@ -4,13 +4,13 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
 
-import NodeStatus from "./views/NodeStatus";
-import NetworkStatus from "./views/NetworkStatus";
+import NodeStatus from "./views/LoadableNodeStatus";
+import NetworkStatus from "./views/LoadableNetworkStatus";
 
 import Explorer from "./views/Explorer";
-import ExplorerAccount from "./views/explorer/Account";
-import ExplorerBlock from "./views/explorer/Block";
-import RichList from "./views/explorer/RichList";
+import ExplorerAccount from "./views/explorer/LoadableAccount";
+import ExplorerBlock from "./views/explorer/LoadableBlock";
+import RichList from "./views/explorer/LoadableRichList";
 
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
@@ -41,8 +41,6 @@ class Content extends React.PureComponent {
   }
 
   render() {
-    const { account } = this.props;
-
     if (this.state.hasError) {
       return <ServerError />;
     }
@@ -55,7 +53,7 @@ class Content extends React.PureComponent {
             name="description"
             content="Network data tracking and browsing for the NANO cryptocurrency"
           />
-          <title>Nano Node Dashboard</title>
+          <title>Nano Crawler</title>
         </Helmet>
 
         <Switch>
@@ -63,12 +61,12 @@ class Content extends React.PureComponent {
           <Route
             exact
             path="/network"
-            render={props => <NetworkStatus {...props} account={account} />}
+            render={props => <NetworkStatus {...props} />}
           />
           <Route
             exact
             path="/status"
-            render={props => <NodeStatus {...props} account={account} />}
+            render={props => <NodeStatus {...props} />}
           />
           <Route exact path="/explorer" render={props => <Redirect to="/" />} />
           <Route

@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import { IntlProvider } from "react-intl";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
@@ -9,21 +10,9 @@ import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      account: null
-    };
-  }
-
-  async componentWillMount() {
-    this.setState({ account: await this.props.client.account() });
-  }
-
-  render() {
-    return (
+function App({ locale }) {
+  return (
+    <IntlProvider locale={locale.language} messages={locale.messages}>
       <div id="App" className="container-fluid p-0 h-100">
         <div className="row Header align-items-center mr-0">
           <div className="col">
@@ -31,7 +20,7 @@ class App extends Component {
           </div>
         </div>
 
-        <Content account={this.state.account} />
+        <Content />
 
         <hr />
 
@@ -75,8 +64,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
-  }
+    </IntlProvider>
+  );
 }
 
 export default injectClient(App);

@@ -1,21 +1,33 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedNumber, injectIntl } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
-import { formatTimestamp } from "../../../../../lib/util";
+import { formatTimestamp } from "lib/util";
+import { withDefault } from "lib/TranslatedMessage";
 
-export default function HistoryOpenBlock({ block }) {
+function HistoryOpenBlock({ config, block, intl }) {
   return (
     <tr>
-      <td className="text-success">Open</td>
+      <td className="text-success text-capitalize">
+        {intl.formatMessage(withDefault({ id: "block.subtype.open" }))}
+      </td>
       <td>
-        <span className="text-muted">from</span>{" "}
+        <span className="text-muted">
+          <TranslatedMessage id="block.from" />
+        </span>{" "}
         <AccountLink account={block.account} className="text-dark" />
       </td>
       <td className="text-success">
-        +{accounting.formatNumber(block.amount, 6)} βNANO
+        +<FormattedNumber
+          value={block.amount}
+          maximumFractionDigits={6}
+          minimumFractionDigits={6}
+        />{" "}
+        {config.currency}
       </td>
       <td>
         <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -26,3 +38,5 @@ export default function HistoryOpenBlock({ block }) {
     </tr>
   );
 }
+
+export default injectIntl(injectClient(HistoryOpenBlock));
