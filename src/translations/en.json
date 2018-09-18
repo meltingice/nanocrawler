@@ -15,7 +15,7 @@
     "network.online_rebroadcasting_desc": "A representative will only rebroadcast votes if it's delegated >0.1% of the total supply ({amount} NANO)",
     "network.rebroadcast_amt": "{count} is assigned to rebroadcasting representatives",
     "network.rebroadcast_stat": "{totalPower} of the total voting power and {onlinePower} of the online voting power",
-    "network.peer_versions": "Peer Versions",
+    "network.peer_versions": "Protocol Versions",
     "network.aggregate.title": "Aggregate Network Stats",
     "network.aggregate.desc": "Stats are collected from discovered {link} and filtered to only include nodes with voting weight",
     "network.tracking_nodes": "Tracking {count} nodes",
