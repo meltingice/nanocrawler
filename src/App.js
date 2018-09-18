@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { IntlProvider } from "react-intl";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
@@ -9,25 +10,8 @@ import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
 
-import { addLocaleData, IntlProvider } from "react-intl";
-import { messages, localeData } from "./translations";
-addLocaleData(localeData);
-
 class App extends Component {
   state = { account: null };
-
-  get messages() {
-    const { locale } = this.props;
-    const languageWithoutRegionCode = locale.language
-      .toLowerCase()
-      .split(/[_-]+/)[0];
-
-    return (
-      messages[languageWithoutRegionCode] ||
-      messages[locale.language] ||
-      messages.en
-    );
-  }
 
   async componentWillMount() {
     this.setState({ account: await this.props.client.account() });
@@ -37,7 +21,7 @@ class App extends Component {
     const { locale } = this.props;
 
     return (
-      <IntlProvider locale={locale.language} messages={this.messages}>
+      <IntlProvider locale={locale.language} messages={locale.messages}>
         <div id="App" className="container-fluid p-0 h-100">
           <div className="row Header align-items-center mr-0">
             <div className="col">

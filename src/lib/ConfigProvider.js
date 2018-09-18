@@ -1,14 +1,30 @@
 import React from "react";
+import { addLocaleData } from "react-intl";
 import _ from "lodash";
 import Cookies from "js-cookie";
 import moment from "moment";
 import ConfigContext from "./ConfigContext";
+import config from "../client-config.json";
+import en from "../translations/en.json"; // English
 
 export default class ConfigProvider extends React.Component {
-  state = { config: null };
+  state = {
+    ticker: {
+      price_usd: 0,
+      price_btc: 0,
+      percent_change_1h: 0,
+      percent_change_24h: 0
+    }
+  };
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      config: null,
+      language: "en",
+      messages: en
+    };
 
     const language =
       Cookies.get("nanocrawler.locale") ||
@@ -16,38 +32,19 @@ export default class ConfigProvider extends React.Component {
       navigator.language ||
       navigator.userLanguage;
 
-    moment.locale(language);
-
-    this.state = {
-      config: null,
-      language
-    };
+    this.setLanguage(language);
   }
 
   async componentDidMount() {
-    const resp = await fetch("/client-config.json");
-    const config = await resp.json();
-
-    try {
-      config.ticker = await this.fetchTicker();
-    } catch (e) {
-      config.ticker = {
-        price_usd: 0,
-        price_btc: 0,
-        percent_change_1h: 0,
-        percent_change_24h: 0
-      };
-    }
-
-    this.setState({ config }, () =>
+    const ticker = await this.fetchTicker();
+    this.setState({ ticker }, () =>
       setTimeout(this.updateTicker.bind(this), 300000)
     );
   }
 
   async updateTicker() {
-    let { config } = this.state;
-    config.ticker = await this.fetchTicker();
-    this.setState({ config });
+    const ticker = await this.fetchTicker();
+    this.setState({ ticker });
 
     setTimeout(this.updateTicker.bind(this), 300000);
   }
@@ -60,27 +57,36 @@ export default class ConfigProvider extends React.Component {
     return (await resp.json())[0];
   }
 
-  setLanguage(language) {
+  async setLanguage(language) {
+    const messages = await import(`../translations/${language}.json`);
+    const locale = await import(`react-intl/locale-data/${language}`);
+
+    if (!/^en/.test(language)) {
+      await import(`moment/locale/${language}`);
+    }
+
+    addLocaleData([...locale]);
     moment.locale(language);
-    this.setState({ language }, () => {
+
+    this.setState({ language, messages }, () => {
       Cookies.set("nanocrawler.locale", language);
     });
   }
 
   render() {
-    let { config } = this.state;
+    let { ticker, messages, language } = this.state;
 
-    if (config) {
-      config = _.merge({}, config, {
-        locale: {
-          language: this.state.language,
-          setLanguage: this.setLanguage.bind(this)
-        }
-      });
-    }
+    const mergedConfig = _.merge({}, config, {
+      ticker,
+      locale: {
+        messages,
+        language,
+        setLanguage: this.setLanguage.bind(this)
+      }
+    });
 
     return (
-      <ConfigContext.Provider value={config}>
+      <ConfigContext.Provider value={mergedConfig}>
         {this.props.children}
       </ConfigContext.Provider>
     );
