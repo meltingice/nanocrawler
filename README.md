@@ -88,4 +88,5 @@ To add a new translation:
 
 1.  Create a new JSON file in the `src/translations/` directory with the same name as the [language code](https://en.wikipedia.org/wiki/ISO_639-1) for the language you wish to translate.
 2.  For every ID that's present in other translation files, create the appropriate translation in your new translation file with the same ID.
-3.  In `src/client-config.json`, add your newly translated language to the `supportedLanguages` object.
+3.  If the language you're supporting needs to be manually mapped to messages and it's locale, e.g. due to regional differences that aren't important, you can override the settings in `src/translations.js`.
+4.  In `src/client-config.json`, add your newly translated language to the `supportedLanguages` object.
