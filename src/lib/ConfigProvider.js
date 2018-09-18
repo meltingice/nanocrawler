@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import moment from "moment";
 import ConfigContext from "./ConfigContext";
 import config from "../client-config.json";
+
 import { translationMapping } from "../translations";
 import en from "../translations/en.json"; // English
 
@@ -59,22 +60,26 @@ export default class ConfigProvider extends React.Component {
   }
 
   async setLanguage(language) {
-    let messageFile = language;
-    let localeFile = language;
-    if (translationMapping[language]) {
-      messageFile = translationMapping[language].messages;
-      localeFile = translationMapping[language].locale;
-    }
+    const langConfig = translationMapping[language] || {
+      messages: language,
+      intlLocale: language,
+      momentLocale: language
+    };
 
-    const messages = await import(`../translations/${messageFile}.json`);
-    const locale = await import(`react-intl/locale-data/${localeFile}`);
+    const messages = await import(`../translations/${
+      langConfig.messages
+    }.json`);
 
-    if (!/^en/.test(language)) {
-      await import(`moment/locale/${language}`);
+    const locale = await import(`react-intl/locale-data/${
+      langConfig.intlLocale
+    }`);
+
+    if (!/^en/.test(langConfig.momentLocale)) {
+      await import(`moment/locale/${langConfig.momentLocale}`);
     }
 
     addLocaleData([...locale]);
-    moment.locale(language);
+    moment.locale(langConfig.momentLocale);
 
     this.setState({ language, messages }, () => {
       Cookies.set("nanocrawler.locale", language);
