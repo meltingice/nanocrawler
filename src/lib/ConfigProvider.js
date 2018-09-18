@@ -62,8 +62,8 @@ export default class ConfigProvider extends React.Component {
   async setLanguage(language) {
     const langConfig = translationMapping[language] || {
       messages: language,
-      intlLocale: language,
-      momentLocale: language
+      intlLocale: language.split("-")[0],
+      momentLocale: language.toLowerCase()
     };
 
     const messages = await import(`../translations/${
