@@ -41,8 +41,6 @@ class Content extends React.PureComponent {
   }
 
   render() {
-    const { account } = this.props;
-
     if (this.state.hasError) {
       return <ServerError />;
     }
@@ -63,12 +61,12 @@ class Content extends React.PureComponent {
           <Route
             exact
             path="/network"
-            render={props => <NetworkStatus {...props} account={account} />}
+            render={props => <NetworkStatus {...props} />}
           />
           <Route
             exact
             path="/status"
-            render={props => <NodeStatus {...props} account={account} />}
+            render={props => <NodeStatus {...props} />}
           />
           <Route exact path="/explorer" render={props => <Redirect to="/" />} />
           <Route

@@ -14,6 +14,7 @@ class NodeStatus extends React.PureComponent {
 
     this.statTimer = null;
     this.state = {
+      account: "",
       blockCount: {},
       version: {},
       weight: 0,
@@ -23,8 +24,13 @@ class NodeStatus extends React.PureComponent {
   }
 
   async componentWillMount() {
-    this.setState({ version: await this.props.client.version() });
-    this.updateStats();
+    this.setState(
+      {
+        version: await this.props.client.version(),
+        account: await this.props.client.account()
+      },
+      () => this.updateStats()
+    );
   }
 
   componentWillUnmount() {
@@ -37,7 +43,7 @@ class NodeStatus extends React.PureComponent {
   async updateStats() {
     this.setState({
       blockCount: await this.props.client.blockCount(),
-      weight: await this.props.client.weight(this.props.account),
+      weight: await this.props.client.weight(this.state.account),
       systemInfo: await this.props.client.systemInfo(),
       peerCount: await this.props.client.peerCount()
     });
@@ -61,7 +67,7 @@ class NodeStatus extends React.PureComponent {
             </h1>
             <p className="text-muted break-word">
               <AccountLink
-                account={this.props.account}
+                account={this.state.account}
                 className="text-muted"
               />
             </p>
