@@ -1,6 +1,7 @@
 {
   "server": "http://127.0.0.1:3001",
   "websocketServer": "nano-ws.meltingice.net",
+  "currency": "NANO",
   "maxCoinSupply": 133248289,
   "features": {
     "nodeStatus": true,
