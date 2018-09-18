@@ -1,11 +1,13 @@
 const translationMapping = {
   "en-US": {
     messages: "en",
-    locale: "en"
+    intlLocale: "en",
+    momentLocale: "en"
   },
   "en-GB": {
     messages: "en",
-    locale: "en"
+    intlLocale: "en",
+    momentLocale: "en-gb"
   }
 };
 
