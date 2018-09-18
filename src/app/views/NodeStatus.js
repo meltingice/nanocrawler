@@ -110,7 +110,8 @@ class NodeStatus extends React.PureComponent {
               <TranslatedMessage id="status.voting_weight" />
             </p>
             <h2>
-              <FormattedNumber value={weight} maximumFractionDigits={0} /> NANO
+              <FormattedNumber value={weight} maximumFractionDigits={0} />{" "}
+              {this.props.config.currency}
             </h2>
           </div>
           <div className="col-sm text-sm-center">

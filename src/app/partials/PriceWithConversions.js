@@ -39,7 +39,7 @@ class PriceWithConversions extends React.PureComponent {
               value={value}
               maximumFractionDigits={this.props.precision.nano}
             />{" "}
-            NANO
+            {this.props.config.currency}
           </Fragment>
         );
       case "usd":

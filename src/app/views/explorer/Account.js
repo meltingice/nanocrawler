@@ -231,7 +231,8 @@ class Account extends React.PureComponent {
                         value={pending}
                         maximumFractionDigits={6}
                       />{" "}
-                      NANO <TranslatedMessage id="pending" />
+                      {this.props.config.currency}{" "}
+                      <TranslatedMessage id="pending" />
                     </p>
                   </Fragment>
                 );

@@ -2,13 +2,14 @@ import React from "react";
 import { FormattedNumber, injectIntl } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
 import { withDefault } from "lib/TranslatedMessage";
 
-function HistoryReceiveBlock({ block, intl }) {
+function HistoryReceiveBlock({ config, block, intl }) {
   return (
     <tr>
       <td className="text-success text-capitalize">
@@ -26,7 +27,7 @@ function HistoryReceiveBlock({ block, intl }) {
           maximumFractionDigits={6}
           minimumFractionDigits={6}
         />{" "}
-        NANO
+        {config.currency}
       </td>
       <td>
         <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -38,4 +39,4 @@ function HistoryReceiveBlock({ block, intl }) {
   );
 }
 
-export default injectIntl(HistoryReceiveBlock);
+export default injectIntl(injectClient(HistoryReceiveBlock));

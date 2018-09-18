@@ -2,13 +2,14 @@ import React from "react";
 import { FormattedNumber, injectIntl } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
 import { withDefault } from "lib/TranslatedMessage";
 
-function HistorySendBlock({ block, intl }) {
+function HistorySendBlock({ config, block, intl }) {
   return (
     <tr>
       <td className="text-danger text-capitalize">
@@ -26,7 +27,7 @@ function HistorySendBlock({ block, intl }) {
           minimumFractionDigits={6}
           maximumFractionDigits={6}
         />{" "}
-        NANO
+        {config.currency}
       </td>
       <td>
         <OptionalField value={formatTimestamp(block.timestamp)} />
@@ -38,4 +39,4 @@ function HistorySendBlock({ block, intl }) {
   );
 }
 
-export default injectIntl(HistorySendBlock);
+export default injectIntl(injectClient(HistorySendBlock));

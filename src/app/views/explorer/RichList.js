@@ -77,12 +77,12 @@ class RichList extends React.PureComponent {
                 value={this.top100Balance()}
                 maximumFractionDigits={0}
               />{" "}
-              NANO out of the{" "}
+              {this.props.config.currency} out of the{" "}
               <FormattedNumber
                 value={this.props.config.maxCoinSupply}
                 maximumFractionDigits={0}
               />{" "}
-              NANO circulating supply
+              {this.props.config.currency} circulating supply
             </p>
 
             <h4>

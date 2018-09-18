@@ -87,7 +87,7 @@ class HistoryStateBlock extends React.PureComponent {
   }
 
   render() {
-    const { block } = this.props;
+    const { block, config } = this.props;
     return (
       <tr>
         <td>
@@ -111,7 +111,7 @@ class HistoryStateBlock extends React.PureComponent {
             minimumFractionDigits={6}
             maximumFractionDigits={6}
           />{" "}
-          NANO
+          {config.currency}
         </td>
         <td>
           <OptionalField value={formatTimestamp(block.timestamp)} />

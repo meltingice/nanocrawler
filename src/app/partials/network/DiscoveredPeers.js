@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
+
+import injectClient from "lib/ClientComponent";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import AccountLink from "../AccountLink";
@@ -149,7 +151,7 @@ export default class DiscoveredPeers extends React.PureComponent {
   }
 }
 
-const PeerEntry = ({ peer, currentBlock }) => {
+const PeerEntry = injectClient(({ config, peer, currentBlock }) => {
   const { url, data } = peer;
   const rootUrl = url.replace("api.php", "");
 
@@ -182,7 +184,8 @@ const PeerEntry = ({ peer, currentBlock }) => {
         <OptionalField value={data.votingWeight}>
           {value => (
             <Fragment>
-              <FormattedNumber value={value} maximumFractionDigits={2} /> NANO
+              <FormattedNumber value={value} maximumFractionDigits={2} />{" "}
+              {config.currency}
             </Fragment>
           )}
         </OptionalField>
@@ -200,4 +203,4 @@ const PeerEntry = ({ peer, currentBlock }) => {
       </td>
     </tr>
   );
-};
+});

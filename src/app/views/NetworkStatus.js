@@ -107,7 +107,7 @@ class NetworkStatus extends React.PureComponent {
           value={this.onlineWeight()}
           maximumFractionDigits={0}
         />{" "}
-        NANO
+        {this.props.config.currency}
       </Fragment>
     );
   }
@@ -132,7 +132,7 @@ class NetworkStatus extends React.PureComponent {
           value={this.officialWeight()}
           maximumFractionDigits={0}
         />{" "}
-        NANO
+        {this.props.config.currency}
       </Fragment>
     );
   }
@@ -298,7 +298,7 @@ class NetworkStatus extends React.PureComponent {
                         value={this.onlineRebroadcastWeight()}
                         maximumFractionDigits={0}
                       />{" "}
-                      NANO
+                      {this.props.config.currency}
                     </span>
                   )
                 }}

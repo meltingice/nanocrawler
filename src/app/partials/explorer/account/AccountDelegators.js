@@ -73,7 +73,7 @@ class AccountDelegators extends React.PureComponent {
             <h3 className="mb-0">
               <FormattedNumber value={weight} />{" "}
               <span className="text-muted">
-                NANO <TranslatedMessage id="weight" />
+                {this.props.config.currency} <TranslatedMessage id="weight" />
               </span>
             </h3>
           </div>
