@@ -4,13 +4,13 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
 
-import NodeStatus from "./views/NodeStatus";
-import NetworkStatus from "./views/NetworkStatus";
+import NodeStatus from "./views/LoadableNodeStatus";
+import NetworkStatus from "./views/LoadableNetworkStatus";
 
 import Explorer from "./views/Explorer";
-import ExplorerAccount from "./views/explorer/Account";
-import ExplorerBlock from "./views/explorer/Block";
-import RichList from "./views/explorer/RichList";
+import ExplorerAccount from "./views/explorer/LoadableAccount";
+import ExplorerBlock from "./views/explorer/LoadableBlock";
+import RichList from "./views/explorer/LoadableRichList";
 
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
