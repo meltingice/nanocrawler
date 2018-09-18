@@ -24,7 +24,7 @@ Redis support is optional, but recommended. If you wish to skip it, you can safe
 
 ### Client Config
 
-The web front-end needs to know where the API server can be reached. Copy `public/client-config.sample.json` to `public/client-config.json` and update the config file to fit your environment.
+The web front-end needs to know where the API server can be reached. Copy `src/client-config.sample.json` to `src/client-config.json` and update the config file to fit your environment.
 
 The [websocket server](https://github.com/meltingice/nanovault-ws) is optional, but you're welcome to use the hosted websocket server that's set as the default in the config. Depending on the sync status of your node, you may receive blocks from the websocket server before your node confirms them, which is why hosting one yourself is ideal. Remove the config entry to disable the websocket altogether.
 
@@ -88,5 +88,4 @@ To add a new translation:
 
 1.  Create a new JSON file in the `src/translations/` directory with the same name as the [language code](https://en.wikipedia.org/wiki/ISO_639-1) for the language you wish to translate.
 2.  For every ID that's present in other translation files, create the appropriate translation in your new translation file with the same ID.
-3.  In `app/translations.js`, import the new translation JSON file and the corresponding `locale-data` file, and export them like the other already present languages.
-4.  In `public/client-config.json`, add your newly translated language to the `supportedLanguages` object.
+3.  In `src/client-config.json`, add your newly translated language to the `supportedLanguages` object.
