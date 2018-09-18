@@ -1,13 +1,14 @@
 import React from "react";
-import accounting from "accounting";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
-import injectClient from "../../../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
-import { keyToPublicAccountId, formatTimestamp } from "../../../../../lib/util";
+import { keyToPublicAccountId, formatTimestamp } from "lib/util";
 import OptionalField from "../../../OptionalField";
 
-class HistoryStateBlock extends React.Component {
+class HistoryStateBlock extends React.PureComponent {
   state = {
     sendBlock: null
   };
@@ -77,20 +78,23 @@ class HistoryStateBlock extends React.Component {
     switch (block.subtype) {
       case "open":
       case "receive":
-        return "from";
+        return <TranslatedMessage id="block.from" />;
       case "send":
-        return "to";
+        return <TranslatedMessage id="block.to" />;
       default:
         return "";
     }
   }
 
   render() {
-    const { block } = this.props;
+    const { block, config } = this.props;
     return (
       <tr>
         <td>
-          State <span className={this.statusClass()}>{block.subtype}</span>
+          <TranslatedMessage id="block.state" />{" "}
+          <span className={this.statusClass()}>
+            <TranslatedMessage id={`block.subtype.${block.subtype}`} />
+          </span>
         </td>
         <td>
           <span className="text-muted">{this.accountAction()}</span>{" "}
@@ -102,7 +106,12 @@ class HistoryStateBlock extends React.Component {
         </td>
         <td className={this.statusClass()}>
           {this.transactionSymbol()}
-          {accounting.formatNumber(block.amount, 6)} NANO
+          <FormattedNumber
+            value={block.amount || 0}
+            minimumFractionDigits={6}
+            maximumFractionDigits={6}
+          />{" "}
+          {config.currency}
         </td>
         <td>
           <OptionalField value={formatTimestamp(block.timestamp)} />

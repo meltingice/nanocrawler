@@ -1,11 +1,13 @@
 import React from "react";
 import ReactSVG from "react-svg";
 import { NavLink } from "react-router-dom";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import "./Navigation.css";
 import Logo from "./images/logo.svg";
 import GlobalSearch from "./partials/GlobalSearch";
-import injectClient from "../lib/ClientComponent";
+import LanguageChooser from "./partials/LanguageChooser";
+import injectClient from "lib/ClientComponent";
 
 const Navigation = ({ config }) => {
   const explorerActive = (match, location) => {
@@ -29,7 +31,7 @@ const Navigation = ({ config }) => {
               activeClassName="active"
               isActive={explorerActive}
             >
-              Explorer
+              <TranslatedMessage id="nav.explorer" />
             </NavLink>
           </li>
           <li className="nav-item">
@@ -39,7 +41,7 @@ const Navigation = ({ config }) => {
               className="nav-link"
               activeClassName="active"
             >
-              Network Status
+              <TranslatedMessage id="nav.network" />
             </NavLink>
           </li>
           {config.features.nodeStatus && (
@@ -50,15 +52,22 @@ const Navigation = ({ config }) => {
                 className="nav-link"
                 activeClassName="active"
               >
-                Node Status
+                <TranslatedMessage id="nav.status" />
               </NavLink>
             </li>
           )}
         </ul>
       </div>
 
-      <div className="col-lg-3 mb-3 mb-lg-0">
-        <GlobalSearch />
+      <div className="col-lg-4 mb-3 mb-lg-0">
+        <div className="row">
+          <div className="col pr-1">
+            <GlobalSearch />
+          </div>
+          <div className="col-auto pl-1">
+            <LanguageChooser />
+          </div>
+        </div>
       </div>
     </div>
   );

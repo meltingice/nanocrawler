@@ -1,15 +1,18 @@
 import React from "react";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
-import { formatTimestamp } from "../../../../lib/util";
+import { formatTimestamp } from "lib/util";
 
 export default function OpenBlock({ block }) {
   return (
     <div className="Block">
       <h4 className="mb-0">
-        Account{" "}
+        <span className="text-capitalize">
+          <TranslatedMessage id="account" />
+        </span>{" "}
         <small>
           <AccountLink
             account={block.contents.account}
@@ -19,11 +22,13 @@ export default function OpenBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The account that this block created</small>
+        <small>
+          <TranslatedMessage id="block.open.desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Opened By{" "}
+        <TranslatedMessage id="block.open.opened_by" />{" "}
         <small>
           <AccountLink
             className="text-muted break-word"
@@ -33,11 +38,15 @@ export default function OpenBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The account whose transaction opened this account</small>
+        <small>
+          <TranslatedMessage id="block.open.opened_by.desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Amount{" "}
+        <span className="text-capitalize">
+          <TranslatedMessage id="amount" />
+        </span>{" "}
         <small className="text-muted">
           <PriceWithConversions
             amount={block.amount}
@@ -47,12 +56,14 @@ export default function OpenBlock({ block }) {
       </h4>
       <p>
         <small>
-          The amount of NANO sent to open this account, which can be 0
+          <TranslatedMessage id="block.open.amount_desc" />
         </small>
       </p>
 
       <h4 className="mb-0">
-        Representative{" "}
+        <span className="text-capitalize">
+          <TranslatedMessage id="representative" />
+        </span>{" "}
         <small>
           <AccountLink
             className="text-muted break-word"
@@ -62,11 +73,15 @@ export default function OpenBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The representative assigned to this account</small>
+        <small>
+          <TranslatedMessage id="block.open.rep" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Source{" "}
+        <span className="text-capitalize">
+          <TranslatedMessage id="source" />
+        </span>{" "}
         <small>
           <BlockLink
             hash={block.contents.source}
@@ -75,29 +90,32 @@ export default function OpenBlock({ block }) {
         </small>
       </h4>
       <p>
-        <small>The corresponding send block for this transaction</small>
+        <small>
+          <TranslatedMessage id="block.source.desc" />
+        </small>
       </p>
 
       <h4 className="mb-0">
-        Date{" "}
+        <span className="text-capitalize">
+          <TranslatedMessage id="date" />
+        </span>{" "}
         <small className="text-muted">
           <OptionalField value={formatTimestamp(block.timestamp)} />
         </small>
       </h4>
       <p>
         <small>
-          The date and time this block was discovered converted to your local
-          time
+          <TranslatedMessage id="block.timestamp.desc" />
         </small>
       </p>
 
       <h5>
-        Proof of Work{" "}
+        <TranslatedMessage id="block.pow" />{" "}
         <small className="text-muted break-word">{block.contents.work}</small>
       </h5>
 
       <h5>
-        Signature{" "}
+        <TranslatedMessage id="block.signature" />{" "}
         <small className="text-muted break-word">
           {block.contents.signature}
         </small>

@@ -1,5 +1,5 @@
 import React from "react";
-import accounting from "accounting";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 
@@ -14,7 +14,9 @@ export default function ChangeBlock({ event }) {
             className="text-dark break-word"
           />
         </p>
-        <p className="mb-0 text-info">changed their representative to</p>
+        <p className="mb-0 text-info">
+          <TranslatedMessage id="stream.change" />
+        </p>
         <p className="mb-0">
           <AccountLink
             account={block.representative}

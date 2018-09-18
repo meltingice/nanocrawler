@@ -1,0 +1,194 @@
+{
+  "nav.explorer": "Explorer",
+  "nav.network": "Network Status",
+  "nav.status": "Node Status",
+
+  "explorer.title": "Network Explorer",
+  "explorer.form.help": "Enter a Nano address or block hash to get started.",
+
+  "network.title": "Network Status",
+  "network.reps_online": "{count} representatives online",
+  "network.reps_online_desc":
+    "Accounts that have at least 1 delegator, regardless of voting weight",
+  "network.online_voting_power": "{count} voting power is online",
+  "network.total_voting_power": "{percent} of the total voting power",
+  "network.official_reps": "{count} is delegated to official representatives",
+  "network.official_reps_stat":
+    "{totalPower} of the total voting power and {onlinePower} of the online voting power",
+  "network.online_rebroadcasting":
+    "{count} online rebroadcasting representatives",
+  "network.online_rebroadcasting_desc":
+    "A representative will only rebroadcast votes if it's delegated >0.1% of the total supply ({amount} NANO)",
+  "network.rebroadcast_amt":
+    "{count} is assigned to rebroadcasting representatives",
+  "network.rebroadcast_stat":
+    "{totalPower} of the total voting power and {onlinePower} of the online voting power",
+  "network.peer_versions": "Peer Versions",
+  "network.aggregate.title": "Aggregate Network Stats",
+  "network.aggregate.desc":
+    "Stats are collected from discovered {link} and filtered to only include nodes with voting weight",
+  "network.tracking_nodes": "Tracking {count} nodes",
+  "network.avg_sync_status": "Average Sync Status",
+  "network.avg_block_count": "Average Block Count",
+  "network.median_block_count": "Median Block Count",
+  "network.minimum_block_count": "Minimum Block Count",
+  "network.maximum_block_count": "Maximum Block Count",
+  "network.avg_percent_unchecked": "Average Percent Unchecked",
+  "network.avg_unchecked": "Average Unchecked Blocks",
+  "network.median_unchecked": "Median Unchecked Blocks",
+  "network.min_unchecked": "Minimum Unchecked Blocks",
+  "network.max_unchecked": "Maximum Unchecked Blocks",
+  "network.nano_services": "NANO Services",
+  "network.nano_services_desc":
+    "The current status of known NANO services. Wallets, tip bots, merchant tools, etc.",
+  "network.synced_within": "Synced within:",
+  "network.synced_blocks": "{count} blocks",
+  "network.synced_greater_than": "greater than {count} blocks",
+  "network.discovered_peers": "Discovered Peers",
+  "network.discovered_peers_desc":
+    "All discovered peers running nanoNodeMonitor, sorted by name.",
+  "network.monitor_count": "{count} monitors discovered",
+  "network.peers.filter": "Filter by version",
+  "network.peers.rebroadcast_only": "Rebroadcasting representatives only",
+  "network.tps.title": "Network Throughput",
+  "network.tps.desc": "Average checked blocks/sec over the given period",
+
+  "status.checked_blocks": "Checked Blocks",
+  "status.unchecked_blocks": "Unchecked Blocks",
+  "status.voting_weight": "Voting Weight",
+  "status.peers": "Peers",
+  "status.uptime": "Uptime",
+  "status.cpu_usage": "CPU Usage",
+  "status.memory": "Memory (used / total)",
+  "status.database": "Database Size",
+
+  "account.title.rebroadcasting": "Rebroadcasting Account",
+  "account.title.representative": "Representative Account",
+  "account.title.unopened": "Unopened Account",
+  "account.title.normal": "Account",
+  "account.rep.online": "Representative online",
+  "account.rep.offline": "Representative offline",
+  "account.rep_offline_warning":
+    "This representative account has a {uptime} uptime. If you are delegating your voting weight to it, you may want to consider switching to a {link}",
+  "account.rep_offline.warning_link": "verified one with at least 95% uptime.",
+  "account.rep_offline.desc":
+    "An offline representative means this account is no longer voting. It does not affect transactions in any way.",
+  "account.history": "History",
+  "account.delegators": "Delegators",
+  "account.represented_by": "Represented by {account}",
+
+  "account.delegators.empty_state.title": "This account has no delegators",
+  "account.delegators.empty_state.desc":
+    "Although this account is valid, no one is currently lending their voting weight to it. If the account is usually offline, this is a good thing.",
+  "account.delegators.loading": "Loading delegators...",
+  "account.delegators.title": "Delegators",
+  "account.delegators.desc": "{count} delegators, sorted by weight",
+  "account.delegators.filter": "Only showing accounts with at least 1 NANO",
+  "account.delegators.weight": "Delegated Weight",
+
+  "account.pending.title": "Pending Transactions",
+  "account.pending.limit": "Only showing up to 20 pending deposits",
+  "account.pending.count": "pending transactions",
+
+  "account.transactions.title": "Transactions",
+  "account.transactions.total": "transactions total",
+  "account.transactions.load_more": "Load More Transactions",
+
+  "account.unopened.title": "This account hasn't been opened yet",
+  "account.unopened.desc":
+    "While the account address is valid, no blocks have been published to its chain yet. If NANO has been sent to this account, it still needs to publish a corresponding block to pocket the funds.",
+
+  "block.state": "State",
+  "block.subtype.open": "open",
+  "block.subtype.change": "change",
+  "block.subtype.send": "send",
+  "block.subtype.receive": "receive",
+  "block.to": "to",
+  "block.from": "from",
+  "block.previous": "Previous Block",
+  "block.previous.desc": "The previous block in this account's chain",
+  "block.pow": "Proof of Work",
+  "block.signature": "Signature",
+  "block.link": "Link",
+  "block.balance.desc": "The balance of this account after this transaction",
+  "block.timestamp.desc":
+    "The date and time this block was discovered (converted to your local time)",
+  "block.source.desc": "The corresponding send block for this transaction",
+  "block.sender": "Sender",
+  "block.sender.desc": "The account that initiated the transaction",
+  "block.recipient": "Recipient",
+  "block.recipient.desc": "The account that is receiving the transaction",
+
+  "block.change.account": "The account that changed their representative",
+  "block.change.rep": "The account's new representative",
+
+  "block.unknown": "Unknown Block",
+  "block.unknown.title": "This block hasn't been received yet",
+  "block.unknown.desc":
+    "NANO is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast througout the entire network.",
+  "block.unknown.desc2":
+    "If you're sure the block hash is correct, wait a little bit and refresh the page.",
+  "block.unknown.return": "Return to the Explorer",
+
+  "block.open.desc": "The account that this block created",
+  "block.open.opened_by": "Opened By",
+  "block.open.opened_by.desc":
+    "The account whose transaction opened this account",
+  "block.open.rep": "The representative assigned to this account",
+  "block.open.amount_desc":
+    "The amount of NANO sent to open this account, which can be 0",
+
+  "block.send.amount_desc":
+    "The amount of NANO that was sent in this transaction",
+
+  "block.state.subtype": "Block subtype",
+  "block.state.subtype.desc":
+    "The type of transaction that created this state block",
+  "block.state.account": "The account represented by this state block",
+  "block.state.rep.desc": "The account's representative",
+  "block.state.previous.none": "None (this block opened the account)",
+  "block.state.link.open":
+    "The corresponding block that started this transaction",
+  "block.state.link.change":
+    "Set to all 0's, which happens to be the burn address encoded in hex format",
+  "block.state.link.send": "The destination address encoded in hex format",
+  "block.state.link.receive":
+    "The corresponding block that started this transaction",
+
+  "ninja.verified_by": "Verified by {link}",
+  "ninja.uptime": "Uptime {percent}",
+  "ninja.last_voted": "Last voted {date}",
+  "ninja.monitor_link": "Open Node Monitor",
+  "ninja.sync_status": "Sync status {status}",
+  "ninja.block_count": "Block count {count}",
+  "ninja.node_version": "Node version {version}",
+  "ninja.verified_accounts": "Verified Accounts",
+  "ninja.verified_accounts.desc":
+    "A random sampling of accounts verified with {link}",
+
+  "stream.title": "Recent Transactions",
+  "stream.desc": "A real-time stream of transactions on the Nano network",
+  "stream.waiting": "Waiting for transactions...",
+  "stream.change": "changed their representative to",
+  "stream.open": "was created with {amount} NANO",
+  "stream.receive": "received {amount} NANO",
+  "stream.send": "sent {amount} NANO",
+
+  "error.not_found": "This page doesn't seem to exist",
+  "error.server_error":
+    "The server either encountered an error or is unable to fulfill your request",
+
+  "search": "Search",
+  "pending": "pending",
+  "weight": "weight",
+  "account": "account",
+  "type": "type",
+  "amount": "amount",
+  "date": "date",
+  "block": "block",
+  "representative": "representative",
+  "source": "source",
+  "balance": "balance",
+  "name": "name",
+  "version": "version"
+}

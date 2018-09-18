@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
+import { FormattedNumber } from "react-intl";
 import _ from "lodash";
-import accounting from "accounting";
-import injectClient from "../../../lib/ClientComponent";
+import injectClient from "lib/ClientComponent";
 
 import AccountLink from "../../partials/AccountLink";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 
-class RichList extends React.Component {
+class RichList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -32,7 +32,7 @@ class RichList extends React.Component {
   top100Percentage() {
     return (
       Math.round(
-        this.top100Balance() / this.props.config.maxCoinSupply * 10000
+        (this.top100Balance() / this.props.config.maxCoinSupply) * 10000
       ) / 100
     );
   }
@@ -72,10 +72,17 @@ class RichList extends React.Component {
               is held by the top 100 accounts
             </h3>
             <p className="text-muted">
-              That's {accounting.formatNumber(this.top100Balance(), 0)} NANO out
-              of the{" "}
-              {accounting.formatNumber(this.props.config.maxCoinSupply, 0)} NANO{" "}
-              circulating supply
+              That's{" "}
+              <FormattedNumber
+                value={this.top100Balance()}
+                maximumFractionDigits={0}
+              />{" "}
+              {this.props.config.currency} out of the{" "}
+              <FormattedNumber
+                value={this.props.config.maxCoinSupply}
+                maximumFractionDigits={0}
+              />{" "}
+              {this.props.config.currency} circulating supply
             </p>
 
             <h4>

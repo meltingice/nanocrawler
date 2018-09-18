@@ -1,4 +1,5 @@
 import React from "react";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 export default function ServerError() {
   return (
@@ -6,8 +7,7 @@ export default function ServerError() {
       <div className="col-6 text-center">
         <h1 className="display-1">500</h1>
         <h3>
-          The server either encountered an error or is unable to fulfill your
-          request
+          <TranslatedMessage id="error.server_error" />
         </h3>
       </div>
     </div>

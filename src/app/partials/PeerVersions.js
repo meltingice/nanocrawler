@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 
 import "./PeerVersions.css";
@@ -8,13 +9,13 @@ const Version = ({ version, count, total }) => {
     <dd className="position-relative p-3">
       <div
         className="PercentBar"
-        style={{ width: `${count / total * 100}%` }}
+        style={{ width: `${(count / total) * 100}%` }}
       />
 
       <div className="VersionName">Version {version} </div>
 
       <div className="VersionStats">
-        {(count / total * 100).toFixed(2)}% / {count} peers
+        {((count / total) * 100).toFixed(2)}% / {count} peers
       </div>
     </dd>
   );
@@ -39,7 +40,9 @@ export default function PeerVersions({ peers }) {
 
   return (
     <Fragment>
-      <h2>Peer Versions</h2>
+      <h2>
+        <TranslatedMessage id="network.peer_versions" />
+      </h2>
 
       <dl className="PeerVersions">
         {_.map(sortedVersions, data => (

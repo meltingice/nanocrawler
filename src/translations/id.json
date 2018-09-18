@@ -1,0 +1,192 @@
+{
+  "nav.explorer": "Penjelajah",
+  "nav.network": "Status jaringan",
+  "nav.status": "Status Node",
+
+  "explorer.title": "Penjelajah Jaringan",
+  "explorer.form.help": "Masukkan alamat Nano atau blok hash untuk memulai.",
+
+  "network.title": "Status jaringan",
+  "network.reps_online": "{count} representative online",
+  "network.reps_online_desc":
+    "Akun yang memiliki setidaknya 1 delegator, tanpa memperhatikan voting weight",
+  "network.online_voting_power": "{count} voting power yang online",
+  "network.total_voting_power": "{percent} dari total voting power",
+  "network.official_reps": "{count} didelegasikan kepada representative resmi",
+  "network.official_reps_stat":
+    "{totalPower} dari total voting power dan {onlinePower} dari online voting power",
+  "network.online_rebroadcasting":
+    "{count} online rebroadcasting representative",
+  "network.online_rebroadcasting_desc":
+    "Seorang representative hanya akan rebroadcast votes jika didelegasikan> 0,1% dari total pasokan ({amount} NANO)",
+  "network.rebroadcast_amt":
+    "{count} ditugaskan untuk rebroadcasting representatives",
+  "network.rebroadcast_stat":
+    "{totalPower} dari total voting power and {onlinePower} dari online voting power",
+  "network.peer_versions": "Versi Peer",
+  "network.aggregate.title": "Statistik Jaringan Agregat",
+  "network.aggregate.desc":
+    "Statistik dikumpulkan dari yang ditemukan {link} dan difilter untuk hanya menyertakan node dengan voting weight",
+  "network.tracking_nodes": "Melacak {count} node",
+  "network.avg_sync_status": "Status Sinkronisasi Rata-Rata",
+  "network.avg_block_count": "Jumlah Blok Rata-Rata",
+  "network.median_block_count": "Jumlah Blok Median",
+  "network.minimum_block_count": "Jumlah Blok Minimum",
+  "network.maximum_block_count": "Jumlah Blok Maksimum",
+  "network.avg_percent_unchecked": "Persentase Rata-Rata Tidak Dicentang",
+  "network.avg_unchecked": "Blok Rata-Rata Tidak Dicentang",
+  "network.median_unchecked": "Blok Median Tidak Dicentang",
+  "network.min_unchecked": "Blok Minimum Tidak Dicentang",
+  "network.max_unchecked": "Blok Maksimal Tidak Dicentang",
+  "network.nano_services": "Layanan NANO",
+  "network.nano_services_desc":
+    "Status layanan NANO yang diketahui saat ini. Wallet, tip bot, alat merchant, dll.",
+  "network.synced_within": "Disinkronkan dalam:",
+  "network.synced_blocks": "{count} blok",
+  "network.synced_greater_than": "lebih besar dari {count} blok",
+  "network.discovered_peers": "Peers yang ditemukan",
+  "network.discovered_peers_desc":
+    "Semua peers yang ditemukan menjalankan nanoNodeMonitor, diurutkan berdasarkan nama.",
+  "network.monitor_count": "{count} monitor ditemukan",
+  "network.peers.filter": "Filter berdasarkan versi",
+  "network.peers.rebroadcast_only": "Hanya Rebroadcasting representatives",
+  "network.tps.title": "Throughput Jaringan",
+  "network.tps.desc":
+    "Rata-rata blok dicentang / detik selama periode tertentu",
+
+  "status.checked_blocks": "Blok Dicentang",
+  "status.unchecked_blocks": "Blok Tidak Dicentang",
+  "status.voting_weight": "Voting Weight",
+  "status.peers": "Peers",
+  "status.uptime": "Uptime",
+  "status.cpu_usage": "Penggunaan CPU",
+  "status.memory": "Memori (digunakan / total)",
+  "status.database": "Ukuran Database",
+
+  "account.title.rebroadcasting": "Rebroadcasting Akun",
+  "account.title.representative": "Representative Akun",
+  "account.title.unopened": "Akun yang belum dibuka",
+  "account.title.normal": "Akun",
+  "account.rep.online": "Representative online",
+  "account.rep.offline": "Representative offline",
+  "account.rep_offline_warning":
+    "Akun representatif ini memiliki {uptime} uptime. Jika Anda mendelegasikan voting weight anda untuk itu, Anda mungkin ingin mempertimbangkan untuk beralih ke {link}",
+  "account.rep_offline.warning_link":
+    "diverifikasi satu dengan uptime setidaknya 95%.",
+  "account.rep_offline.desc":
+    "offline representative berarti akun ini tidak lagi voting. Itu tidak mempengaruhi transaksi dengan cara apa pun.",
+  "account.history": "Riwayat",
+  "account.delegators": "Delegator",
+  "account.represented_by": "Diwakili oleh {account}",
+
+  "account.delegators.empty_state.title": "Akun ini tidak memiliki delegator",
+  "account.delegators.empty_state.desc":
+    "Meskipun akun ini valid, saat ini tidak ada yang meminjamkan voting weight mereka untuk itu. Jika akun biasanya offline, ini hal yang bagus.",
+  "account.delegators.loading": "Memuat delegator...",
+  "account.delegators.title": "Delegator",
+  "account.delegators.desc": "{count} delegator, diurutkan berdasarkan weight",
+  "account.delegators.filter":
+    "Hanya menampilkan akun dengan setidaknya 1 NANO",
+  "account.delegators.weight": "Delegated Weight",
+
+  "account.pending.title": "Transaksi Pending",
+  "account.pending.limit": "Hanya menampilkan hingga 20 deposit pending",
+  "account.pending.count": "transaksi pending",
+
+  "account.transactions.title": "Transaksi",
+  "account.transactions.total": "total transaksi",
+  "account.transactions.load_more": "Muat Lebih Banyak Transaksi",
+
+  "account.unopened.title": "Akun ini belum dibuka",
+  "account.unopened.desc":
+    "Ketika alamat akun valid, belum ada blok yang dipublikasikan ke chainnya. Jika NANO telah dikirim ke akun ini, masih perlu mempublikasikan blok yang sesuai untuk mengantongi dana.",
+
+  "block.state": "State",
+  "block.subtype.open": "membuka",
+  "block.subtype.change": "mengubah",
+  "block.subtype.send": "mengirim",
+  "block.subtype.receive": "menerima",
+  "block.to": "untuk",
+  "block.from": "dari",
+  "block.previous": "blok sebelumnya",
+  "block.previous.desc": "Blok sebelumnya di akun chain ini",
+  "block.pow": "Proof of Work",
+  "block.signature": "Signature",
+  "block.link": "Link",
+  "block.balance.desc": "Saldo akun ini setelah transaksi ini",
+  "block.timestamp.desc":
+    "Tanggal dan waktu blok ini ditemukan (dikonversi ke waktu lokal Anda)",
+  "block.source.desc": "Blok kirim yang sesuai untuk transaksi ini",
+  "block.sender": "Pengirim",
+  "block.sender.desc": "Akun yang memulai transaksi",
+  "block.recipient": "Penerima",
+  "block.recipient.desc": "Akun yang menerima transaksi",
+
+  "block.change.account": "Akun yang mengubah representativenya",
+  "block.change.rep": "Akun baru representative",
+
+  "block.unknown": "Blok Tidak Dikenal",
+  "block.unknown.title": "Blok ini belum diterima",
+  "block.unknown.desc":
+    "NANO adalah cryptocurrency sepenuhnya asynchronous. Karena ini, terkadang transaksi dapat membutuhkan beberapa detik tambahan untuk broadcast througout ke seluruh jaringan.",
+  "block.unknown.desc2":
+    "Jika anda yakin blok hash benar, tunggu sebentar dan refresh halamannya.",
+  "block.unknown.return": "Kembali ke Penjelajah",
+
+  "block.open.desc": "Akun yang dibuat blok ini",
+  "block.open.opened_by": "Dibuka Oleh",
+  "block.open.opened_by.desc": "Akun yang transaksinya membuka akun ini",
+  "block.open.rep": "Representative yang ditugaskan untuk akun ini",
+  "block.open.amount_desc":
+    "Jumlah NANO yang dikirim untuk membuka akun ini, yang bias 0",
+
+  "block.send.amount_desc": "Jumlah NANO yang dikirim dalam transaksi ini",
+
+  "block.state.subtype": "Blok subtipe",
+  "block.state.subtype.desc": "Jenis transaksi yang membuat state blok ini",
+  "block.state.account": "Akun yang representasi oleh state blok ini",
+  "block.state.rep.desc": "Akun representative",
+  "block.state.previous.none": "Tidak ada (blok ini yang membuka akun)",
+  "block.state.link.open": "Blok terkait yang memulai transaksi ini",
+  "block.state.link.change":
+    "Setel ke semua 0, yang terjadi menjadi alamat burn yang dikodekan dalam format hex",
+  "block.state.link.send": "Alamat tujuan dikodekan dalam format hex",
+  "block.state.link.receive": "Blok terkait yang memulai transaksi ini",
+
+  "ninja.verified_by": "Diverifikasi oleh {link}",
+  "ninja.uptime": "Uptime {percent}",
+  "ninja.last_voted": "Voted terakhir {date}",
+  "ninja.monitor_link": "Buka Monitor Node",
+  "ninja.sync_status": "Status sinkronisasi {status}",
+  "ninja.block_count": "Jumlah blok {count}",
+  "ninja.node_version": "Node versi {version}",
+  "ninja.verified_accounts": "Akun Terverifikasi",
+  "ninja.verified_accounts.desc":
+    "Sampel acak dari akun yang diverifikasi dengan {link}",
+
+  "stream.title": "Transaksi Terkini",
+  "stream.desc": "Aliran transaksi real-time di jaringan Nano",
+  "stream.waiting": "Menunggu transaksi...",
+  "stream.change": "mengubah representativenya menjadi",
+  "stream.open": "dibuat dengan {amount} NANO",
+  "stream.receive": "menerima {amount} NANO",
+  "stream.send": "mengirim {amount} NANO",
+
+  "error.not_found": "Halaman ini sepertinya tidak ada",
+  "error.server_error":
+    "Server mengalami kesalahan atau tidak dapat memenuhi permintaan Anda",
+
+  "search": "Pencarian",
+  "pending": "pending",
+  "weight": "weight",
+  "account": "akun",
+  "type": "tipe",
+  "amount": "jumlah",
+  "date": "tanggal",
+  "block": "blok",
+  "representative": "representative",
+  "source": "sumber",
+  "balance": "saldo",
+  "name": "nama",
+  "version": "versi"
+}
