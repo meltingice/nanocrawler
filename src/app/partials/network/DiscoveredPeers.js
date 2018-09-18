@@ -49,8 +49,8 @@ export default class DiscoveredPeers extends React.PureComponent {
     return this.filteredPeers().sort((a, b) => {
       if (!a.data.nanoNodeName) return 1;
       if (!b.data.nanoNodeName) return -1;
-      if (a.data.nanoNodeName < b.data.nanoNodeName) return -1;
-      if (a.data.nanoNodeName > b.data.nanoNodeName) return 1;
+      if (a.data.nanoNodeName.toLowerCase() < b.data.nanoNodeName.toLowerCase()) return -1;
+      if (a.data.nanoNodeName.toLowerCase() > b.data.nanoNodeName.toLowerCase()) return 1;
       return 0;
     });
   }
