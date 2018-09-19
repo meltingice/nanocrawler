@@ -127,7 +127,7 @@
     "ninja.verified_accounts": "Verfizierte Konten",
     "ninja.verified_accounts.desc": "Eine zufällige Auswahl an Konten die mit {link} verfiziert wurden",
     "stream.title": "Letzte Transaktionen",
-    "stream.desc": "Transaktionen des Nano Netzwerkes in Echtzeit",
+    "stream.desc": "Transaktionen des Nano-Netzwerkes in Echtzeit",
     "stream.waiting": "Warte auf Transaktionen...",
     "stream.change": "hat den Vertreter gewechselt:",
     "stream.open": "wurde mit {amount} NANO eröffnet",
