@@ -36,9 +36,9 @@
   "network.median_unchecked": "Median Unchecked Blocks",
   "network.min_unchecked": "Minimum Unchecked Blocks",
   "network.max_unchecked": "Maximum Unchecked Blocks",
-  "network.nano_services": "NANO Services",
+  "network.nano_services": "Nano Services",
   "network.nano_services_desc":
-    "The current status of known NANO services. Wallets, tip bots, merchant tools, etc.",
+    "The current status of known Nano services. Wallets, tip bots, merchant tools, etc.",
   "network.synced_within": "Synced within:",
   "network.synced_blocks": "{count} blocks",
   "network.synced_greater_than": "greater than {count} blocks",
@@ -114,7 +114,7 @@
   "block.unknown": "Unknown Block",
   "block.unknown.title": "This block hasn't been received yet",
   "block.unknown.desc":
-    "NANO is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast througout the entire network.",
+    "Nano is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast througout the entire network.",
   "block.unknown.desc2":
     "If you're sure the block hash is correct, wait a little bit and refresh the page.",
   "block.unknown.return": "Return to the Explorer",
