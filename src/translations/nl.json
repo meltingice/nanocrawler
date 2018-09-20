@@ -18,7 +18,7 @@
     "network.peer_versions": "Protocol versies",
     "network.aggregate.title": "Verzamelde netwerkstatistieken",
     "network.aggregate.desc": "Statistieken worden verzameld uit gevonden nodes {link} en gefilterd op nodes die stemgewicht bevatten",
-    "network.tracking_nodes": "{Count} nodes volgen",
+    "network.tracking_nodes": "{count} nodes volgen",
     "network.avg_sync_status": "Gemiddelde synchronisatiestatus",
     "network.avg_block_count": "Gemiddeld aantal blokken",
     "network.median_block_count": "Mediaan van het aantal blokken",
