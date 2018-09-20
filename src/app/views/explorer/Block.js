@@ -1,4 +1,5 @@
 import React from "react";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 
@@ -42,6 +43,15 @@ class Block extends React.PureComponent {
     }
   }
 
+  get blockType() {
+    const { block } = this.state;
+    if (block.contents.type === "state") {
+      return <TranslatedMessage id="block.state" />;
+    }
+
+    return <TranslatedMessage id={`block.subtype.${block.contents.type}`} />;
+  }
+
   render() {
     const { match } = this.props;
     const { block, failed } = this.state;
@@ -57,7 +67,12 @@ class Block extends React.PureComponent {
 
         <div className="row align-items-center">
           <div className="col">
-            <h1 className="mb-0">{_.capitalize(block.contents.type)} Block</h1>
+            <h1 className="mb-0">
+              <span className="text-capitalize">{this.blockType}</span>{" "}
+              <span className="text-capitalize">
+                <TranslatedMessage id="block" />
+              </span>
+            </h1>
             <p className="text-muted break-word">{match.params.block}</p>
           </div>
         </div>
