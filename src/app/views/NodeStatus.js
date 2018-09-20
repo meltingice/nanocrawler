@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import moment from "moment";
 import { FormattedNumber } from "react-intl";
@@ -191,9 +191,15 @@ class NodeStatus extends React.PureComponent {
     const { systemInfo } = this.state;
     if (!systemInfo.dbSize) return "Unknown";
     let size = systemInfo.dbSize / 1024.0 / 1024.0;
-    return size > 1024
-      ? `${<FormattedNumber value={size / 1024} maximumFractionDigits={2} />}GB`
-      : `${<FormattedNumber value={size} maximumFractionDigits={2} />}MB`;
+    return size > 1024 ? (
+      <Fragment>
+        <FormattedNumber value={size / 1024} maximumFractionDigits={2} />GB
+      </Fragment>
+    ) : (
+      <Fragment>
+        <FormattedNumber value={size} maximumFractionDigits={2} />MB
+      </Fragment>
+    );
   }
 }
 
