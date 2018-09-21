@@ -194,7 +194,8 @@ export default function(app, nano) {
         10000: await wealthDistribution(1000, 10000),
         100000: await wealthDistribution(10000, 100000),
         1000000: await wealthDistribution(100000, 1000000),
-        10000000: await wealthDistribution(10000000, 100000000)
+        10000000: await wealthDistribution(1000000, 10000000),
+        100000000: await wealthDistribution(10000000, 100000000)
       };
 
       res.json({ distribution });
