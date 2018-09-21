@@ -99,7 +99,7 @@
     "block.change.rep": "The account's new representative",
     "block.unknown": "Unknown Block",
     "block.unknown.title": "This block hasn't been received yet",
-    "block.unknown.desc": "Nano is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast througout the entire network.",
+    "block.unknown.desc": "Nano is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast throughout the entire network.",
     "block.unknown.desc2": "If you're sure the block hash is correct, wait a little bit and refresh the page.",
     "block.unknown.return": "Return to the Explorer",
     "block.open.desc": "The account that this block created",
