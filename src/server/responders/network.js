@@ -1,6 +1,7 @@
 import _ from "lodash";
 import redisFetch from "../helpers/redisFetch";
 import tpsCalculator from "../helpers/tpsCalculator";
+import { wealthDistribution } from "../helpers/frontiers";
 
 export default function(app, nano) {
   // nanoNodeMonitor network data
@@ -18,33 +19,20 @@ export default function(app, nano) {
 
   app.get("/rich_list", async (req, res) => {
     try {
-      const richList = await redisFetch(
-        "richListWithAccountData",
-        3600,
-        async () => {
-          const data = await redisFetch("richList", 10, async () => {
-            return [];
-          });
+      const distribution = {
+        1: await wealthDistribution(0, 1),
+        10: await wealthDistribution(1, 10),
+        100: await wealthDistribution(10, 100),
+        1000: await wealthDistribution(100, 1000),
+        10000: await wealthDistribution(1000, 10000),
+        100000: await wealthDistribution(10000, 100000),
+        1000000: await wealthDistribution(100000, 1000000),
+        10000000: await wealthDistribution(10000000, 100000000)
+      };
 
-          const hydratedData = await Promise.all(
-            _.map(data, (balance, account) => {
-              return new Promise((resolve, reject) => {
-                nano.rpc("account_representative", { account }).then(resp => {
-                  resolve({
-                    account,
-                    balance,
-                    representative: resp.representative
-                  });
-                });
-              });
-            })
-          );
-
-          return hydratedData;
-        }
-      );
-
-      res.json({ richList });
+      res.json({
+        distribution
+      });
     } catch (e) {
       res.status(500).send({ error: e.message });
     }

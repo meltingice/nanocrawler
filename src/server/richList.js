@@ -33,7 +33,10 @@ async function calculateRichList() {
   for (let i = 0; i < accountChunks.length; i++) {
     const resp = await nano.accounts.balances(accountChunks[i]);
     _.forEach(resp.balances, (balances, account) => {
-      const balance = nano.convert.fromRaw(balances.balance, "mrai");
+      const balance =
+        parseFloat(nano.convert.fromRaw(balances.balance, "mrai"), 10) +
+        parseFloat(nano.convert.fromRaw(balances.pending, "mrai"), 10);
+
       if (parseFloat(balance, 10) === 0) {
         accountsToRemove.push(account);
       } else {
