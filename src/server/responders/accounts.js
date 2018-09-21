@@ -2,6 +2,7 @@ import _ from "lodash";
 import config from "../../../server-config.json";
 import redisFetch from "../helpers/redisFetch";
 import { accountIsValid, getTimestampForHash } from "../helpers/util";
+import { wealthDistribution } from "../helpers/frontiers";
 
 export default function(app, nano) {
   app.get("/account", async (req, res) => {
@@ -169,6 +170,25 @@ export default function(app, nano) {
       );
 
       res.json(data);
+    } catch (e) {
+      res.status(500).send({ error: e.message });
+    }
+  });
+
+  app.get("/accounts/distribution", async (req, res) => {
+    try {
+      const distribution = {
+        1: await wealthDistribution(0, 1),
+        10: await wealthDistribution(1, 10),
+        100: await wealthDistribution(10, 100),
+        1000: await wealthDistribution(100, 1000),
+        10000: await wealthDistribution(1000, 10000),
+        100000: await wealthDistribution(10000, 100000),
+        1000000: await wealthDistribution(100000, 1000000),
+        10000000: await wealthDistribution(10000000, 100000000)
+      };
+
+      res.json({ distribution });
     } catch (e) {
       res.status(500).send({ error: e.message });
     }
