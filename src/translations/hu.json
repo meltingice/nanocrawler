@@ -12,7 +12,7 @@
     "network.official_reps": "{count} van hivatalos képviselőknek reprezentálva",
     "network.official_reps_stat": "a teljes szavazóképesség {totalPower}-a és az online szavazóképesség {onlinePower}-a",
     "network.online_rebroadcasting": "{count} online továbbító képviselő",
-    "network.online_rebroadcasting_desc": "Egy képviselő akkor továbbít szavazatokat, ha a teljes NANO készlet ({amount} NANO) kevesebb, mint 0.1%-a van rá delegálva.",
+    "network.online_rebroadcasting_desc": "Egy képviselő akkor továbbíthat szavazatokat, ha a teljes NANO készletnek ({amount} NANO) több, mint 0.1%-a van rá delegálva.",
     "network.rebroadcast_amt": "{count} van továbbító képviselőkre delegálva",
     "network.rebroadcast_stat": "{totalPower} a teljes szavazati súlyból és {onlinePower} az online szavazati súlyból",
     "network.peer_versions": "Protokol Verziók",

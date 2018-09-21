@@ -12,7 +12,7 @@
     "network.official_reps": "{count} is delegated to official representatives",
     "network.official_reps_stat": "{totalPower} of the total voting power and {onlinePower} of the online voting power",
     "network.online_rebroadcasting": "{count} online rebroadcasting representatives",
-    "network.online_rebroadcasting_desc": "A representative will only rebroadcast votes if it's delegated >0.1% of the total supply ({amount} NANO)",
+    "network.online_rebroadcasting_desc": "A representative will only rebroadcast votes if it's delegated at least 0.1% of the total supply ({amount} NANO)",
     "network.rebroadcast_amt": "{count} is assigned to rebroadcasting representatives",
     "network.rebroadcast_stat": "{totalPower} of the total voting power and {onlinePower} of the online voting power",
     "network.peer_versions": "Protocol Versions",
