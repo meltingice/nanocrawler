@@ -123,7 +123,7 @@
     "ninja.monitor_link": "Nodefigyelő Megnyitása",
     "ninja.sync_status": "Szinkronizációs státusz {status}",
     "ninja.block_count": "Blokkszám {count}",
-    "ninja.node_version": "Node verzió {verzió}",
+    "ninja.node_version": "Node verzió {version}",
     "ninja.verified_accounts": "Ellenőrzött Számlák",
     "ninja.verified_accounts.desc": "Véletlenszerűen kiválasztott számlák ellenőrizve {link} által",
     "stream.title": "Legutóbbi Tranzakciók",
