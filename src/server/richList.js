@@ -1,7 +1,6 @@
 import _ from "lodash";
 import { Nano } from "nanode";
 import redis from "redis";
-import parallelLimit from "async/parallelLimit";
 import config from "../../server-config.json";
 
 const redisClient = redis.createClient(config.redis);
