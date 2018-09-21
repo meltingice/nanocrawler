@@ -28,37 +28,39 @@ async function calculateRichList() {
   const accounts = _.keys(data);
   console.log(accounts.length, "accounts");
 
-  parallelLimit(
-    accounts.map(account => {
-      return callback => {
-        return nano.accounts.nanoBalance(account).then(balance => {
-          accountChecked();
-          callback(null, [account, parseFloat(balance, 10)]);
-        });
-      };
-    }),
-    500,
-    (err, accountsWithBalance) => {
-      if (err) console.error(err);
+  const accountChunks = _.chunk(accounts, 5000);
+  const accountsWithBalance = [];
+  const accountsToRemove = [];
+  for (let i = 0; i < accountChunks.length; i++) {
+    const resp = await nano.accounts.balances(accountChunks[i]);
+    _.forEach(resp.balances, (balances, account) => {
+      const balance = nano.convert.fromRaw(balances.balance, "mrai");
+      if (parseFloat(balance, 10) === 0) {
+        accountsToRemove.push(account);
+      } else {
+        accountsWithBalance.push([balance, account]);
+      }
+    });
+  }
 
-      accountsWithBalance.sort((a, b) => {
-        if (a[1] > b[1]) return -1;
-        if (a[1] < b[1]) return 1;
-        return 0;
-      });
+  const sortedAccounts = accountsWithBalance.sort((a, b) => {
+    if (a[0] > b[0]) return -1;
+    if (a[0] < b[0]) return 1;
+    return 0;
+  });
 
-      updateRichList(_.fromPairs(accountsWithBalance.slice(0, 100)));
-      setTimeout(calculateRichList, 3600000); // every hour
-    }
-  );
+  updateRichList(_.flatten(sortedAccounts), accountsToRemove);
+  setTimeout(calculateRichList, 3600000); // every hour
 }
 
-function updateRichList(accounts) {
-  console.log(accounts);
-  redisClient.set(
-    `nano-control-panel/${config.redisNamespace || "default"}/richList`,
-    JSON.stringify(accounts)
-  );
+function updateRichList(accountsWithBalance, accountsToRemove) {
+  const redisKey = `nano-control-panel/${config.redisNamespace ||
+    "default"}/sortedAccounts`;
+  accountsWithBalance.unshift(redisKey);
+  accountsToRemove.unshift(redisKey);
+  redisClient.zrem(accountsToRemove, (err, resp) => {
+    redisClient.zadd(accountsWithBalance);
+  });
 }
 
 export default function startRichListUpdate() {
