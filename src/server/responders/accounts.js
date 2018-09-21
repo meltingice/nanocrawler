@@ -2,7 +2,7 @@ import _ from "lodash";
 import config from "../../../server-config.json";
 import redisFetch from "../helpers/redisFetch";
 import { accountIsValid, getTimestampForHash } from "../helpers/util";
-import { wealthDistribution } from "../helpers/frontiers";
+import { frontiers, wealthDistribution } from "../helpers/frontiers";
 
 export default function(app, nano) {
   app.get("/account", async (req, res) => {
@@ -169,6 +169,15 @@ export default function(app, nano) {
         }
       );
 
+      res.json(data);
+    } catch (e) {
+      res.status(500).send({ error: e.message });
+    }
+  });
+
+  app.get("/accounts/:page(\\d+)", async (req, res) => {
+    try {
+      const data = await frontiers(req.params.page);
       res.json(data);
     } catch (e) {
       res.status(500).send({ error: e.message });
