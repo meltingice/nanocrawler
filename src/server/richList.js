@@ -52,7 +52,7 @@ async function calculateRichList() {
   });
 
   updateRichList(_.flatten(sortedAccounts), accountsToRemove);
-  setTimeout(calculateRichList, 3600000); // every hour
+  setTimeout(calculateRichList, 900000); // every 15 minutes
 }
 
 function updateRichList(accountsWithBalance, accountsToRemove) {
