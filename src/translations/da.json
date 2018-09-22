@@ -12,7 +12,7 @@
     "network.official_reps": "{count} er delegeret til officielle repræsentanter",
     "network.official_reps_stat": "{totalPower} af den samlede stemmeindflydelse og {onlinePower} af online stemmeindflydelse",
     "network.online_rebroadcasting": "{count} online genudsendende repræsentanter",
-    "network.online_rebroadcasting_desc": "En repræsentatnt vil kun genudsende stemmer hvis den er blevet tildelt >0,1% af det totale antal NANO ({amount} NANO)",
+    "network.online_rebroadcasting_desc": "En repræsentant vil kun genudsende stemmer hvis den er delegeret mindst 0,1% af det totale antal NANO ({amount} NANO)",
     "network.rebroadcast_amt": "{count} er tildelt til genudsendende repræsentanter",
     "network.rebroadcast_stat": "{totalPower} af den samlede stemmeindflydelse og {onlinePower} af online stemmeindflydelse",
     "network.peer_versions": "Protokolversioner",
