@@ -34,6 +34,11 @@ async function calculateRichList() {
         accountsWithBalance.push([balance, account]);
       }
     });
+
+    console.log(
+      `Accounts with balance: ${accountsWithBalance.length}`,
+      `Empty accounts: ${accountsToRemove.length}`
+    );
   }
 
   const sortedAccounts = accountsWithBalance.sort((a, b) => {
