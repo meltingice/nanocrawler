@@ -9,15 +9,6 @@ const nano = new Nano({ url: config.nodeHost });
 async function calculateRichList() {
   console.log("Starting rich list update");
 
-  let accountsChecked = 0;
-  function accountChecked() {
-    accountsChecked++;
-
-    if (accountsChecked % 500 === 0) {
-      console.log("Accounts checked:", accountsChecked);
-    }
-  }
-
   const frontierCount = (await nano.rpc("frontier_count")).count;
   const data = (await nano.rpc("frontiers", {
     account: "xrb_1111111111111111111111111111111111111111111111111111hifc8npp",
@@ -61,7 +52,9 @@ function updateRichList(accountsWithBalance, accountsToRemove) {
   accountsWithBalance.unshift(redisKey);
   accountsToRemove.unshift(redisKey);
   redisClient.zrem(accountsToRemove, (err, resp) => {
-    redisClient.zadd(accountsWithBalance);
+    redisClient.zadd(accountsWithBalance, (err, resp) => {
+      console.log("Rich list update complete");
+    });
   });
 }
 
