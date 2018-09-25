@@ -42,7 +42,7 @@ class RichList extends React.PureComponent {
 
   render() {
     return (
-      <div className="p-4">
+      <div id="FrontierList" className="p-4">
         <Helmet>
           <title>All Accounts</title>
         </Helmet>
@@ -51,7 +51,10 @@ class RichList extends React.PureComponent {
           <div className="col">
             <h1>Wealth Distribution</h1>
             <hr />
-            <DistributionGraph distribution={this.state.distribution} />
+
+            <div className="m-auto d-none d-md-block">
+              <DistributionGraph distribution={this.state.distribution} />
+            </div>
           </div>
         </div>
       </div>

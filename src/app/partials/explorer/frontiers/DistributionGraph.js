@@ -1,6 +1,7 @@
 import React from "react";
+import ReactResizeDetector from "react-resize-detector";
 import _ from "lodash";
-import { ResponsiveBar } from "@nivo/bar";
+import { Bar } from "@nivo/bar";
 
 /*
  data = [
@@ -15,45 +16,50 @@ export default function DistributionGraph({ distribution }) {
   if (!distribution) return null;
 
   return (
-    <ResponsiveBar
-      data={graphData(distribution)}
-      indexBy="range"
-      height={500}
-      margin={{
-        top: 50,
-        right: 50,
-        bottom: 50,
-        left: 120
-      }}
-      padding={0.3}
-      colors="paired"
-      colorBy="id"
-      borderColor="inherit:darker(1.6)"
-      axisBottom={{
-        orient: "bottom",
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "Balance (NANO)",
-        legendPosition: "middle",
-        legendOffset: 36
-      }}
-      axisLeft={{
-        orient: "left",
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "No. of Accounts",
-        legendPosition: "middle",
-        legendOffset: -80
-      }}
-      labelSkipWidth={12}
-      labelSkipHeight={12}
-      labelTextColor="inherit:darker(1.6)"
-      animate={true}
-      motionStiffness={90}
-      motionDamping={15}
-    />
+    <ReactResizeDetector handleWidth>
+      {width => (
+        <Bar
+          data={graphData(distribution)}
+          indexBy="range"
+          width={width}
+          height={500}
+          margin={{
+            top: 50,
+            right: 50,
+            bottom: 50,
+            left: 120
+          }}
+          padding={0.3}
+          colors="paired"
+          colorBy="id"
+          borderColor="inherit:darker(1.6)"
+          axisBottom={{
+            orient: "bottom",
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Balance (NANO)",
+            legendPosition: "middle",
+            legendOffset: 36
+          }}
+          axisLeft={{
+            orient: "left",
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "No. of Accounts",
+            legendPosition: "middle",
+            legendOffset: -80
+          }}
+          labelSkipWidth={12}
+          labelSkipHeight={12}
+          labelTextColor="inherit:darker(1.6)"
+          animate={true}
+          motionStiffness={90}
+          motionDamping={15}
+        />
+      )}
+    </ReactResizeDetector>
   );
 }
 
