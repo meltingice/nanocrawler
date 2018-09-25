@@ -22,13 +22,13 @@ export default function DistributionGraph({ distribution }) {
           data={graphData(distribution)}
           indexBy="range"
           width={width}
-          height={500}
-          layout={width < 768 ? "horizontal" : "vertical"}
+          height={width < 768 ? 350 : 500}
+          layout="vertical"
           margin={{
             top: 50,
-            right: 50,
-            bottom: 50,
-            left: 120
+            right: 30,
+            bottom: width < 768 ? 80 : 50,
+            left: 80
           }}
           padding={0.3}
           colors="paired"
@@ -38,10 +38,10 @@ export default function DistributionGraph({ distribution }) {
             orient: "bottom",
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
+            tickRotation: width < 768 ? 45 : 0,
             legend: "Balance (NANO)",
             legendPosition: "middle",
-            legendOffset: 36
+            legendOffset: width < 768 ? 60 : 36
           }}
           axisLeft={{
             orient: "left",
@@ -50,7 +50,7 @@ export default function DistributionGraph({ distribution }) {
             tickRotation: 0,
             legend: "No. of Accounts",
             legendPosition: "middle",
-            legendOffset: -80
+            legendOffset: -70
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}
