@@ -50,7 +50,7 @@ class RichList extends React.PureComponent {
 
         <div className="row">
           <div className="col">
-            <h1>Wealth Distribution</h1>
+            <h1>NANO Distribution</h1>
             <hr />
 
             <DistributionGraph distribution={this.state.distribution} />

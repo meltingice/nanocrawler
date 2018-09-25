@@ -76,11 +76,15 @@ const graphData = distribution => {
 
   const shortName = value => nameSub[value] || value;
 
-  let lowerLimit = 0;
+  let lowerLimit = 1;
 
-  return _.map(distribution, (value, upperLimit) => {
-    const range = `${shortName(lowerLimit)} - ${shortName(upperLimit)}`;
-    lowerLimit = upperLimit;
-    return { range, value };
-  });
+  return _.toPairs(distribution)
+    .filter(d => d[0] > 1)
+    .sort((a, b) => parseFloat(a[0], 10) > parseFloat(b[0], 10))
+    .map(d => {
+      const [upperLimit, value] = d;
+      const range = `${shortName(lowerLimit)} - ${shortName(upperLimit)}`;
+      lowerLimit = upperLimit;
+      return { range, value };
+    });
 };
