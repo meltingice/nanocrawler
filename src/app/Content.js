@@ -10,7 +10,7 @@ import NetworkStatus from "./views/LoadableNetworkStatus";
 import Explorer from "./views/Explorer";
 import ExplorerAccount from "./views/explorer/LoadableAccount";
 import ExplorerBlock from "./views/explorer/LoadableBlock";
-import RichList from "./views/explorer/LoadableRichList";
+import RichList from "./views/explorer/RichList";
 
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";

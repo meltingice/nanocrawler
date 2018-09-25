@@ -1,189 +1,62 @@
 import React, { Fragment } from "react";
+import { Helmet } from "react-helmet";
 import { FormattedNumber } from "react-intl";
-import _ from "lodash";
 import injectClient from "lib/ClientComponent";
 
 import AccountLink from "../../partials/AccountLink";
 import PriceWithConversions from "../../partials/PriceWithConversions";
+import DistributionGraph from "../../partials/explorer/frontiers/DistributionGraph";
 
 class RichList extends React.PureComponent {
+  state = {
+    accounts: [],
+    distribution: null,
+    page: 1
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
+      page: 1,
+      totalAccounts: 0,
       accounts: [],
-      officialRepresentatives: {},
-      representativesOnline: {}
+      distribution: {}
     };
   }
 
   async componentDidMount() {
-    const accounts = await this.props.client.richList();
-    const officialRepresentatives = await this.props.client.officialRepresentatives();
-    const representativesOnline = await this.props.client.representativesOnline();
+    const { total, accounts } = this.loadAccounts();
+    const distribution = await this.props.client.wealthDistribution();
 
-    this.setState({ accounts, officialRepresentatives, representativesOnline });
+    this.setState({
+      totalAccounts: total,
+      accounts,
+      distribution
+    });
   }
 
-  top100Balance() {
-    return _.sum(this.state.accounts.map(account => account.balance));
-  }
-
-  top100Percentage() {
-    return (
-      Math.round(
-        (this.top100Balance() / this.props.config.maxCoinSupply) * 10000
-      ) / 100
-    );
-  }
-
-  officialRepAccounts() {
-    const officialReps = _.keys(this.state.officialRepresentatives);
-    return this.state.accounts.filter(account =>
-      officialReps.includes(account.representative)
-    );
-  }
-
-  topAccountsOnline() {
-    const { accounts, representativesOnline } = this.state;
-    const repAccounts = _.keys(representativesOnline);
-    return accounts.filter(account => repAccounts.includes(account.account));
-  }
-
-  accountsWithOfflineRep() {
-    const { accounts, representativesOnline } = this.state;
-    const repAccounts = _.keys(representativesOnline);
-    return accounts.filter(
-      account => !repAccounts.includes(account.representative)
-    );
+  async loadAccounts() {
+    return await this.props.client.frontierList(this.state.page);
   }
 
   render() {
-    const { officialRepresentatives, representativesOnline } = this.state;
-
     return (
       <div className="p-4">
-        <div className="row justify-content-center my-5 mx-0">
-          <div className="col col-md-10">
-            <h3 className="text-muted mb-0">
-              <span className="text-dark">
-                {this.top100Percentage()}% of the total supply
-              </span>{" "}
-              is held by the top 100 accounts
-            </h3>
-            <p className="text-muted">
-              That's{" "}
-              <FormattedNumber
-                value={this.top100Balance()}
-                maximumFractionDigits={0}
-              />{" "}
-              {this.props.config.currency} out of the{" "}
-              <FormattedNumber
-                value={this.props.config.maxCoinSupply}
-                maximumFractionDigits={0}
-              />{" "}
-              {this.props.config.currency} circulating supply
-            </p>
+        <Helmet>
+          <title>All Accounts</title>
+        </Helmet>
 
-            <h4>
-              {this.officialRepAccounts().length}% are delegating their weight
-              to official representatives
-            </h4>
-            <h4>
-              {this.accountsWithOfflineRep().length}% are delegating their
-              weight to offline representatives
-            </h4>
-            <h4>
-              {this.topAccountsOnline().length} accounts are currently online
-            </h4>
-          </div>
-        </div>
-
-        <div className="row justify-content-center my-5 mx-0">
-          <div className="col col-md-10">
-            <h1 className="mb-0">Top 100 Accounts</h1>
-            <p className="text-muted">Sorted by balance</p>
-
+        <div className="row">
+          <div className="col">
+            <h1>Wealth Distribution</h1>
             <hr />
-
-            {this.state.accounts.map(account => (
-              <TopAccount
-                key={account.account}
-                account={account}
-                officialRep={_.keys(officialRepresentatives).includes(
-                  account.representative
-                )}
-                online={_.keys(representativesOnline).includes(account.account)}
-                repOnline={_.keys(representativesOnline).includes(
-                  account.representative
-                )}
-              />
-            ))}
+            <DistributionGraph distribution={this.state.distribution} />
           </div>
         </div>
       </div>
     );
   }
 }
-
-const TopAccount = ({ account, officialRep, online, repOnline }) => {
-  const repStatus = officialRep ? "text-danger" : "text-muted";
-  const onlineBadge = online ? (
-    <span className="badge badge-info mr-1">Online</span>
-  ) : (
-    ""
-  );
-  const repOnlineBadge = repOnline ? (
-    <span className="badge badge-success mr-1">Representative online</span>
-  ) : (
-    <span className="badge badge-danger mr-1">Representative offline</span>
-  );
-
-  return (
-    <Fragment>
-      <div className="row">
-        <div className="col col-md-9">
-          <h5 className="mb-0">
-            <AccountLink
-              account={account.account}
-              className="text-dark break-word"
-              ninja
-            />
-          </h5>
-          <p className={repStatus}>
-            {onlineBadge}
-            {repOnlineBadge}
-            Represented by{" "}
-            <AccountLink
-              account={account.representative}
-              className={`${repStatus} break-word`}
-              ninja
-              short
-            />
-          </p>
-        </div>
-        <div className="col col-md-3 text-right">
-          <PriceWithConversions
-            amount={account.balance}
-            currencies={["nano", "usd", "btc"]}
-            precision={{ nano: 0, usd: 2, btc: 2 }}
-          >
-            {(nano, usd, btc) => (
-              <Fragment>
-                <h5 className="mb-0">{nano}</h5>
-
-                <p className="text-muted mb-0">
-                  {usd} / {btc}
-                </p>
-              </Fragment>
-            )}
-          </PriceWithConversions>
-        </div>
-      </div>
-
-      <hr />
-    </Fragment>
-  );
-};
 
 export default injectClient(RichList);
