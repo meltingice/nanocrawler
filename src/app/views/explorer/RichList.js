@@ -6,6 +6,7 @@ import injectClient from "lib/ClientComponent";
 import AccountLink from "../../partials/AccountLink";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 import DistributionGraph from "../../partials/explorer/frontiers/DistributionGraph";
+import DistributionStats from "../../partials/explorer/frontiers/DistributionStats";
 
 class RichList extends React.PureComponent {
   state = {
@@ -52,9 +53,9 @@ class RichList extends React.PureComponent {
             <h1>Wealth Distribution</h1>
             <hr />
 
-            <div className="m-auto d-none d-md-block">
-              <DistributionGraph distribution={this.state.distribution} />
-            </div>
+            <DistributionGraph distribution={this.state.distribution} />
+
+            <DistributionStats distribution={this.state.distribution} />
           </div>
         </div>
       </div>

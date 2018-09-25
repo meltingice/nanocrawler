@@ -23,6 +23,7 @@ export default function DistributionGraph({ distribution }) {
           indexBy="range"
           width={width}
           height={500}
+          layout={width < 768 ? "horizontal" : "vertical"}
           margin={{
             top: 50,
             right: 50,
