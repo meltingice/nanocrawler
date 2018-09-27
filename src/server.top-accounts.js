@@ -1,4 +1,4 @@
 import config from "../server-config.json";
-import startRichListUpdates from "./server/richList";
+import startAccountUpdates from "./server/accounts";
 
-if (config.calculateRichList) startRichListUpdates();
+startAccountUpdates();

@@ -21,7 +21,7 @@ export default function DistributionGraph({ distribution }) {
         <Bar
           data={graphData(distribution)}
           indexBy="range"
-          width={width}
+          width={width || 0}
           height={width < 768 ? 350 : 500}
           layout="vertical"
           margin={{
