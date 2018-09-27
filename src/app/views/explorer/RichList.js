@@ -54,7 +54,6 @@ class RichList extends React.PureComponent {
             <hr />
 
             <DistributionGraph distribution={this.state.distribution} />
-
             <DistributionStats distribution={this.state.distribution} />
           </div>
         </div>
