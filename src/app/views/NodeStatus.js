@@ -4,12 +4,11 @@ import moment from "moment";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
+
 import AccountLink from "../partials/AccountLink";
 
-import { apiClient } from "lib/Client";
-import config from "client-config.json";
-
-export default class NodeStatus extends React.PureComponent {
+class NodeStatus extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -27,8 +26,8 @@ export default class NodeStatus extends React.PureComponent {
   async componentWillMount() {
     this.setState(
       {
-        version: await apiClient.version(),
-        account: await apiClient.account()
+        version: await this.props.client.version(),
+        account: await this.props.client.account()
       },
       () => this.updateStats()
     );
@@ -43,10 +42,10 @@ export default class NodeStatus extends React.PureComponent {
 
   async updateStats() {
     this.setState({
-      blockCount: await apiClient.blockCount(),
-      weight: await apiClient.weight(this.state.account),
-      systemInfo: await apiClient.systemInfo(),
-      peerCount: await apiClient.peerCount()
+      blockCount: await this.props.client.blockCount(),
+      weight: await this.props.client.weight(this.state.account),
+      systemInfo: await this.props.client.systemInfo(),
+      peerCount: await this.props.client.peerCount()
     });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
@@ -112,7 +111,7 @@ export default class NodeStatus extends React.PureComponent {
             </p>
             <h2>
               <FormattedNumber value={weight} maximumFractionDigits={0} />{" "}
-              {config.currency}
+              {this.props.config.currency}
             </h2>
           </div>
           <div className="col-sm text-sm-center">
@@ -203,3 +202,5 @@ export default class NodeStatus extends React.PureComponent {
     );
   }
 }
+
+export default injectClient(NodeStatus);

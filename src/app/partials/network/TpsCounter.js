@@ -1,10 +1,10 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
-import { apiClient } from "lib/Client";
+import injectClient from "lib/ClientComponent";
 
 import "./TpsCounter.css";
 
-export default class TpsCounter extends React.PureComponent {
+class TpsCounter extends React.PureComponent {
   state = {
     value: 0.0,
     dir: "up"
@@ -21,7 +21,7 @@ export default class TpsCounter extends React.PureComponent {
   }
 
   async fetch() {
-    const tps = await apiClient.networkTps(this.props.period);
+    const tps = await this.props.client.networkTps(this.props.period);
     this.setState(
       {
         value: tps,
@@ -57,3 +57,5 @@ export default class TpsCounter extends React.PureComponent {
     );
   }
 }
+
+export default injectClient(TpsCounter);

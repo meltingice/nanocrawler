@@ -5,12 +5,10 @@ import _ from "lodash";
 import TransactionHistory from "./TransactionHistory";
 import UnopenedAccount from "./UnopenedAccount";
 
-import config from "client-config.json";
-import { apiClient } from "lib/Client";
-
+import injectClient from "lib/ClientComponent";
 import AccountWebsocket from "lib/AccountWebsocket";
 
-export default class AccountHistory extends React.PureComponent {
+class AccountHistory extends React.PureComponent {
   state = {
     history: [],
     nextPageHead: null,
@@ -20,7 +18,7 @@ export default class AccountHistory extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.websocket = new AccountWebsocket(config.websocketServer);
+    this.websocket = new AccountWebsocket(this.props.config.websocketServer);
     this.pendingTimeout = null;
   }
 
@@ -78,7 +76,10 @@ export default class AccountHistory extends React.PureComponent {
     let { history, nextPageHead } = this.state;
 
     try {
-      let resp = await apiClient.history(account, this.state.nextPageHead);
+      let resp = await this.props.client.history(
+        account,
+        this.state.nextPageHead
+      );
 
       if (nextPageHead) {
         resp = resp.slice(1);
@@ -96,7 +97,9 @@ export default class AccountHistory extends React.PureComponent {
     const { account } = this.props;
 
     try {
-      const pendingTransactions = await apiClient.pendingTransactions(account);
+      const pendingTransactions = await this.props.client.pendingTransactions(
+        account
+      );
       this.setState({ pendingTransactions });
 
       this.pendingTimeout = setTimeout(this.fetchPending.bind(this), 10000);
@@ -117,7 +120,7 @@ export default class AccountHistory extends React.PureComponent {
         balance += parseFloat(event.block.amount, 10);
 
         // Need to fetch the source block to get the sender
-        const sendBlock = await apiClient.block(event.block.source);
+        const sendBlock = await this.props.client.block(event.block.source);
         event.block.account = sendBlock.block_account;
         break;
       case "send":
@@ -255,3 +258,5 @@ export default class AccountHistory extends React.PureComponent {
     );
   }
 }
+
+export default injectClient(AccountHistory);

@@ -1,7 +1,5 @@
-import config from "../client-config.json";
-
-class Client {
-  constructor() {
+export default class Client {
+  constructor(config) {
     this.host = config.server;
   }
 
@@ -99,6 +97,3 @@ class Client {
     throw new Error(data.error);
   }
 }
-
-const apiClient = new Client();
-export { apiClient };

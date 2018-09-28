@@ -3,12 +3,13 @@ import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import DelegatorsTable from "./DelegatorsTable";
-import { apiClient } from "lib/Client";
+
+import injectClient from "lib/ClientComponent";
 
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";
 
-export default class AccountDelegators extends React.PureComponent {
+class AccountDelegators extends React.PureComponent {
   state = {
     delegators: [],
     weight: 0,
@@ -30,10 +31,10 @@ export default class AccountDelegators extends React.PureComponent {
     let weight;
     const { account } = this.props;
 
-    const delegators = await apiClient.delegators(account);
+    const delegators = await this.props.client.delegators(account);
 
     if (_.keys(delegators).length > 0) {
-      weight = await apiClient.weight(account);
+      weight = await this.props.client.weight(account);
     }
 
     this.setState({ delegators, weight, loading: false });
@@ -82,3 +83,5 @@ export default class AccountDelegators extends React.PureComponent {
     );
   }
 }
+
+export default injectClient(AccountDelegators);

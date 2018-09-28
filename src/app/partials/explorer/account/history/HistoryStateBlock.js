@@ -2,14 +2,13 @@ import React from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import { keyToPublicAccountId, formatTimestamp } from "lib/util";
 import OptionalField from "../../../OptionalField";
-import { apiClient } from "lib/Client";
-import config from "client-config.json";
 
-export default class HistoryStateBlock extends React.PureComponent {
+class HistoryStateBlock extends React.PureComponent {
   state = {
     sendBlock: null
   };
@@ -28,7 +27,7 @@ export default class HistoryStateBlock extends React.PureComponent {
     if (!["receive", "open"].includes(this.props.block.subtype)) return;
 
     const { block } = this.props;
-    const sendBlock = await apiClient.block(block.link);
+    const sendBlock = await this.props.client.block(block.link);
     this.setState({ sendBlock });
   }
 
@@ -88,7 +87,7 @@ export default class HistoryStateBlock extends React.PureComponent {
   }
 
   render() {
-    const { block } = this.props;
+    const { block, config } = this.props;
     return (
       <tr>
         <td>
@@ -124,3 +123,5 @@ export default class HistoryStateBlock extends React.PureComponent {
     );
   }
 }
+
+export default injectClient(HistoryStateBlock);

@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
 import { formatTimestamp } from "lib/util";
 
-export default class StateBlock extends React.PureComponent {
+class StateBlock extends React.PureComponent {
   inferBlockSubtype() {
     const { block } = this.props;
     if (parseInt(block.contents.previous, 16) === 0) return "open";
@@ -259,3 +260,5 @@ export default class StateBlock extends React.PureComponent {
     );
   }
 }
+
+export default injectClient(StateBlock);

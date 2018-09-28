@@ -4,7 +4,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
 
-import { withTranslations } from "./lib/TranslationContext";
+import injectClient from "./lib/ClientComponent";
 import Navigation from "./app/Navigation";
 import Content from "./app/Content";
 
@@ -63,4 +63,4 @@ function App({ locale }) {
   );
 }
 
-export default withTranslations(App);
+export default injectClient(App);

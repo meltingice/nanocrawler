@@ -4,19 +4,16 @@ import "whatwg-fetch";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { TickerProvider } from "lib/TickerContext";
-import { TranslationProvider } from "lib/TranslationContext";
+import ConfigProvider from "./lib/ConfigProvider";
 import App from "./App";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <TranslationProvider>
-    <TickerProvider>
-      <Router>
-        <App />
-      </Router>
-    </TickerProvider>
-  </TranslationProvider>,
+  <ConfigProvider>
+    <Router>
+      <App />
+    </Router>
+  </ConfigProvider>,
   document.getElementById("root")
 );

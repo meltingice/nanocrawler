@@ -2,14 +2,14 @@ import React from "react";
 import { FormattedNumber, injectIntl } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
 import { withDefault } from "lib/TranslatedMessage";
-import config from "client-config.json";
 
-function HistoryReceiveBlock({ block, intl }) {
+function HistoryReceiveBlock({ config, block, intl }) {
   return (
     <tr>
       <td className="text-success text-capitalize">
@@ -39,4 +39,4 @@ function HistoryReceiveBlock({ block, intl }) {
   );
 }
 
-export default injectIntl(HistoryReceiveBlock);
+export default injectIntl(injectClient(HistoryReceiveBlock));

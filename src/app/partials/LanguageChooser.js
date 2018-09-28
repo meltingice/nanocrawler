@@ -7,9 +7,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
-
-import config from "../../client-config.json";
-import { withTranslations } from "lib/TranslationContext";
+import injectClient from "lib/ClientComponent";
 
 class LanguageChooser extends React.PureComponent {
   constructor(props) {
@@ -27,6 +25,7 @@ class LanguageChooser extends React.PureComponent {
   }
 
   languageToName(lang) {
+    const { config } = this.props;
     const { supportedLanguages } = config.features;
     const languageWithoutRegionCode = lang.toLowerCase().split(/[_-]+/)[0];
 
@@ -36,7 +35,7 @@ class LanguageChooser extends React.PureComponent {
   }
 
   render() {
-    const { locale } = this.props;
+    const { locale, config } = this.props;
     const { supportedLanguages } = config.features;
 
     return (
@@ -60,4 +59,4 @@ class LanguageChooser extends React.PureComponent {
   }
 }
 
-export default withTranslations(LanguageChooser);
+export default injectClient(LanguageChooser);

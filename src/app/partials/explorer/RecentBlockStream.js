@@ -2,10 +2,8 @@ import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import injectClient from "lib/ClientComponent";
 import AccountWebsocket from "lib/AccountWebsocket";
-
-import { apiClient } from "lib/Client";
-import config from "client-config.json";
 
 import ChangeBlock from "./stream/ChangeBlock";
 import OpenBlock from "./stream/OpenBlock";
@@ -13,7 +11,7 @@ import ReceiveBlock from "./stream/ReceiveBlock";
 import SendBlock from "./stream/SendBlock";
 import StateBlock from "./stream/StateBlock";
 
-export default class RecentBlockStream extends React.PureComponent {
+class RecentBlockStream extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -22,7 +20,7 @@ export default class RecentBlockStream extends React.PureComponent {
       throughput: 0
     };
 
-    this.websocket = new AccountWebsocket(config.websocketServer);
+    this.websocket = new AccountWebsocket(this.props.config.websocketServer);
     this.tpsInterval = null;
   }
 
@@ -53,14 +51,14 @@ export default class RecentBlockStream extends React.PureComponent {
   }
 
   async calculateThroughput() {
-    const tps = await apiClient.networkTps("1m");
+    const tps = await this.props.client.networkTps("1m");
     this.setState({ throughput: tps });
   }
 
   render() {
     const { throughput } = this.state;
 
-    if (!config.websocketServer) return null;
+    if (!this.props.config.websocketServer) return null;
 
     return (
       <Fragment>
@@ -139,3 +137,5 @@ const RecentBlock = ({ event }) => {
     </Fragment>
   );
 };
+
+export default injectClient(RecentBlockStream);

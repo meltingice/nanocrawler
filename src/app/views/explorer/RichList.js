@@ -1,14 +1,12 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import _ from "lodash";
+import injectClient from "lib/ClientComponent";
 
 import AccountLink from "../../partials/AccountLink";
 import PriceWithConversions from "../../partials/PriceWithConversions";
 
-import { apiClient } from "lib/Client";
-import config from "client-config.json";
-
-export default class RichList extends React.PureComponent {
+class RichList extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -20,9 +18,9 @@ export default class RichList extends React.PureComponent {
   }
 
   async componentDidMount() {
-    const accounts = await apiClient.richList();
-    const officialRepresentatives = await apiClient.officialRepresentatives();
-    const representativesOnline = await apiClient.representativesOnline();
+    const accounts = await this.props.client.richList();
+    const officialRepresentatives = await this.props.client.officialRepresentatives();
+    const representativesOnline = await this.props.client.representativesOnline();
 
     this.setState({ accounts, officialRepresentatives, representativesOnline });
   }
@@ -33,7 +31,9 @@ export default class RichList extends React.PureComponent {
 
   top100Percentage() {
     return (
-      Math.round((this.top100Balance() / config.maxCoinSupply) * 10000) / 100
+      Math.round(
+        (this.top100Balance() / this.props.config.maxCoinSupply) * 10000
+      ) / 100
     );
   }
 
@@ -77,12 +77,12 @@ export default class RichList extends React.PureComponent {
                 value={this.top100Balance()}
                 maximumFractionDigits={0}
               />{" "}
-              {config.currency} out of the{" "}
+              {this.props.config.currency} out of the{" "}
               <FormattedNumber
-                value={config.maxCoinSupply}
+                value={this.props.config.maxCoinSupply}
                 maximumFractionDigits={0}
               />{" "}
-              {config.currency} circulating supply
+              {this.props.config.currency} circulating supply
             </p>
 
             <h4>
@@ -185,3 +185,5 @@ const TopAccount = ({ account, officialRep, online, repOnline }) => {
     </Fragment>
   );
 };
+
+export default injectClient(RichList);

@@ -6,6 +6,7 @@ import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
 import { TranslatedMessage, withDefault } from "lib/TranslatedMessage";
 
+import injectClient from "lib/ClientComponent";
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
 import AccountLink from "../../partials/AccountLink";
@@ -16,9 +17,6 @@ import UnopenedAccount from "../../partials/explorer/account/UnopenedAccount";
 
 import AccountHistory from "../../partials/explorer/account/AccountHistory";
 import AccountDelegators from "../../partials/explorer/account/AccountDelegators";
-
-import { apiClient } from "lib/Client";
-import config from "client-config.json";
 
 class Account extends React.PureComponent {
   constructor(props) {
@@ -67,7 +65,7 @@ class Account extends React.PureComponent {
   async fetchAccount() {
     const { match } = this.props;
     try {
-      const account = await apiClient.account(match.params.account);
+      const account = await this.props.client.account(match.params.account);
       account.block_count = parseInt(account.block_count, 10);
       this.setState({ ...account, failed: false });
 
@@ -78,7 +76,7 @@ class Account extends React.PureComponent {
   }
 
   async fetchOnlineReps() {
-    const representativesOnline = await apiClient.representativesOnline();
+    const representativesOnline = await this.props.client.representativesOnline();
     this.setState({ representativesOnline });
   }
 
@@ -233,7 +231,8 @@ class Account extends React.PureComponent {
                         value={pending}
                         maximumFractionDigits={6}
                       />{" "}
-                      {config.currency} <TranslatedMessage id="pending" />
+                      {this.props.config.currency}{" "}
+                      <TranslatedMessage id="pending" />
                     </p>
                   </Fragment>
                 );
@@ -327,4 +326,4 @@ class Account extends React.PureComponent {
   }
 }
 
-export default injectIntl(Account);
+export default injectClient(injectIntl(Account));
