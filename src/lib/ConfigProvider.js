@@ -10,22 +10,19 @@ import { translationMapping } from "../translations";
 import en from "../translations/en.json"; // English
 
 export default class ConfigProvider extends React.Component {
-  state = {
-    ticker: {
-      price_usd: 0,
-      price_btc: 0,
-      percent_change_1h: 0,
-      percent_change_24h: 0
-    }
-  };
-
   constructor(props) {
     super(props);
 
     this.state = {
       config: null,
       language: "en",
-      messages: en
+      messages: en,
+      ticker: {
+        price_usd: 0,
+        price_btc: 0,
+        percent_change_1h: 0,
+        percent_change_24h: 0
+      }
     };
 
     const language =

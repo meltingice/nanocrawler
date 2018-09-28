@@ -20,7 +20,7 @@ const DistributionRange = ({ range, value }) => (
   <div className="col text-center">
     <p className="text-muted">{range} NANO</p>
     <h4>
-      <FormattedNumber value={value} />
+      <FormattedNumber value={value || 0} />
     </h4>
   </div>
 );

@@ -27,7 +27,7 @@ class Accounts extends React.PureComponent {
   }
 
   async componentDidMount() {
-    const { total, accounts } = this.loadAccounts();
+    const { total, accounts } = await this.loadAccounts();
     const distribution = await this.props.client.wealthDistribution();
 
     this.setState({
@@ -57,6 +57,22 @@ class Accounts extends React.PureComponent {
             <DistributionStats distribution={this.state.distribution} />
           </div>
         </div>
+
+        <div className="row mt-5 align-items-center">
+          <div className="col">
+            <h1 className="mb-0">All Accounts</h1>
+            <p className="text-muted">
+              Only accounts with a balance, sorted by balance
+            </p>
+          </div>
+          <div className="col-auto">
+            <h4 className="text-muted">
+              <FormattedNumber value={this.state.totalAccounts} /> accounts
+            </h4>
+          </div>
+        </div>
+
+        <hr />
       </div>
     );
   }
