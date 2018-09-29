@@ -9,7 +9,7 @@ import config from "client-config.json";
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";
 
-export default class AccountDelegators extends React.PureComponent {
+export default class AccountDelegators extends React.Component {
   state = {
     delegators: [],
     weight: 0,
