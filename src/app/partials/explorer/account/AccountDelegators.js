@@ -4,11 +4,12 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import DelegatorsTable from "./DelegatorsTable";
 import { apiClient } from "lib/Client";
+import config from "client-config.json";
 
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";
 
-export default class AccountDelegators extends React.PureComponent {
+export default class AccountDelegators extends React.Component {
   state = {
     delegators: [],
     weight: 0,
@@ -72,7 +73,7 @@ export default class AccountDelegators extends React.PureComponent {
             <h3 className="mb-0">
               <FormattedNumber value={weight} />{" "}
               <span className="text-muted">
-                {this.props.config.currency} <TranslatedMessage id="weight" />
+                {config.currency} <TranslatedMessage id="weight" />
               </span>
             </h3>
           </div>

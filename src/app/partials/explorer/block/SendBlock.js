@@ -42,7 +42,9 @@ export default function SendBlock({ block }) {
       </p>
 
       <h4 className="mb-0">
-        <TranslatedMessage id="amount" />{" "}
+        <span className="text-capitalize">
+          <TranslatedMessage id="amount" />
+        </span>{" "}
         <small className="text-muted">
           <PriceWithConversions
             amount={block.amount}

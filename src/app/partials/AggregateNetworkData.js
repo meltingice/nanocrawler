@@ -7,7 +7,7 @@ import { apiClient } from "lib/Client";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
 
-export default class AggregateNetworkData extends React.PureComponent {
+export default class AggregateNetworkData extends React.Component {
   constructor(props) {
     super(props);
 

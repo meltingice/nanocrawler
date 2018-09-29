@@ -9,7 +9,7 @@ import OptionalField from "../../../OptionalField";
 import { apiClient } from "lib/Client";
 import config from "client-config.json";
 
-export default class HistoryStateBlock extends React.PureComponent {
+export default class HistoryStateBlock extends React.Component {
   state = {
     sendBlock: null
   };

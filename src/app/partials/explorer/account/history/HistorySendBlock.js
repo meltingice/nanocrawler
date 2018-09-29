@@ -1,19 +1,18 @@
 import React from "react";
-import { FormattedNumber, injectIntl } from "react-intl";
+import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
-import { withDefault } from "lib/TranslatedMessage";
 import config from "client-config.json";
 
-function HistorySendBlock({ block, intl }) {
+export default function HistorySendBlock({ block }) {
   return (
     <tr>
       <td className="text-danger text-capitalize">
-        {intl.formatMessage(withDefault({ id: "block.subtype.send" }))}
+        <TranslatedMessage id="block.subtype.send" />
       </td>
       <td>
         <span className="text-muted">
@@ -38,5 +37,3 @@ function HistorySendBlock({ block, intl }) {
     </tr>
   );
 }
-
-export default injectIntl(HistorySendBlock);

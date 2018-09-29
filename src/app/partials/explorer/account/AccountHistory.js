@@ -10,7 +10,7 @@ import { apiClient } from "lib/Client";
 
 import AccountWebsocket from "lib/AccountWebsocket";
 
-export default class AccountHistory extends React.PureComponent {
+export default class AccountHistory extends React.Component {
   state = {
     history: [],
     nextPageHead: null,

@@ -12,7 +12,7 @@ const STATUSES = {
   warning: 10000
 };
 
-export default class DiscoveredPeers extends React.PureComponent {
+export default class DiscoveredPeers extends React.Component {
   constructor(props) {
     super(props);
 
