@@ -7,9 +7,9 @@ import "./Navigation.css";
 import Logo from "./images/logo.svg";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";
-import injectClient from "lib/ClientComponent";
+import config from "client-config.json";
 
-const Navigation = ({ config }) => {
+const Navigation = () => {
   const explorerActive = (match, location) => {
     return location.pathname === "/" || /^\/explorer\//.test(location.pathname);
   };
@@ -73,4 +73,4 @@ const Navigation = ({ config }) => {
   );
 };
 
-export default injectClient(Navigation);
+export default Navigation;

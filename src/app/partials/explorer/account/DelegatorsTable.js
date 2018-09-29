@@ -1,12 +1,10 @@
 import React from "react";
-import { injectIntl } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
-import { withDefault } from "lib/TranslatedMessage";
 
 import DelegatorEntry from "./DelegatorEntry";
 
-function DelegatorsTable({ delegators, intl }) {
+export default function DelegatorsTable({ delegators }) {
   const sortedDelegators = _.toPairs(delegators)
     .filter(d => parseFloat(d[1], 10) >= 1)
     .sort((a, b) => {
@@ -23,7 +21,7 @@ function DelegatorsTable({ delegators, intl }) {
         <thead>
           <tr>
             <th className="text-capitalize">
-              {intl.formatMessage(withDefault({ id: "account" }))}
+              <TranslatedMessage id="account" />
             </th>
             <th>
               <TranslatedMessage id="account.delegators.weight" />
@@ -40,5 +38,3 @@ function DelegatorsTable({ delegators, intl }) {
     </div>
   );
 }
-
-export default injectIntl(DelegatorsTable);

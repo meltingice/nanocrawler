@@ -76,7 +76,7 @@ export default function ReceiveBlock({ block }) {
       </p>
 
       <h4 className="mb-0">
-        <span id="text-capitalize">
+        <span className="text-capitalize">
           <TranslatedMessage id="date" />
         </span>{" "}
         <small className="text-muted">

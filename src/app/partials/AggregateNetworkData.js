@@ -2,11 +2,12 @@ import React, { Fragment } from "react";
 import _ from "lodash";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import injectClient from "lib/ClientComponent";
+import config from "client-config.json";
+import { apiClient } from "lib/Client";
 
 import DiscoveredPeers from "./network/DiscoveredPeers";
 
-class AggregateNetworkData extends React.PureComponent {
+export default class AggregateNetworkData extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +27,7 @@ class AggregateNetworkData extends React.PureComponent {
   }
 
   async updateStats() {
-    const peers = await this.props.client.networkData();
+    const peers = await apiClient.networkData();
     this.setState({ peers });
     this.timeout = setTimeout(this.updateStats.bind(this), 10000);
   }
@@ -67,7 +68,6 @@ class AggregateNetworkData extends React.PureComponent {
   }
 
   servicePeers() {
-    const { config } = this.props;
     const { peers } = this.state;
 
     return peers.filter(peer => config.serviceMonitors.includes(peer.url));
@@ -308,5 +308,3 @@ const SyncThresholds = () => (
     </small>
   </p>
 );
-
-export default injectClient(AggregateNetworkData);

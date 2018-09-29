@@ -1,9 +1,9 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
-import injectClient from "lib/ClientComponent";
 import AccountLink from "../../AccountLink";
+import config from "client-config.json";
 
-function DelegatorEntry({ config, account, balance }) {
+export default function DelegatorEntry({ account, balance }) {
   return (
     <tr>
       <td>
@@ -20,5 +20,3 @@ function DelegatorEntry({ config, account, balance }) {
     </tr>
   );
 }
-
-export default injectClient(DelegatorEntry);

@@ -1,16 +1,15 @@
 import React from "react";
-import { injectIntl } from "react-intl";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
-import { withDefault } from "lib/TranslatedMessage";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
-function HistoryChangeBlock({ block, intl }) {
+export default function HistoryChangeBlock({ block }) {
   return (
     <tr>
       <td className="text-info text-capitalize">
-        {intl.formatMessage(withDefault({ id: "block.subtype.change" }))}
+        <TranslatedMessage id="block.subtype.change" />
       </td>
       <td>
         <AccountLink
@@ -31,5 +30,3 @@ function HistoryChangeBlock({ block, intl }) {
     </tr>
   );
 }
-
-export default injectIntl(HistoryChangeBlock);

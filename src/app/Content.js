@@ -15,7 +15,7 @@ import Accounts from "./views/explorer/LoadableAccounts";
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
 
-class Content extends React.PureComponent {
+class Content extends React.Component {
   state = {
     hasError: false
   };
