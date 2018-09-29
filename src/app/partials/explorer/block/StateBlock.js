@@ -6,7 +6,7 @@ import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
 import { formatTimestamp } from "lib/util";
 
-export default class StateBlock extends React.PureComponent {
+export default class StateBlock extends React.Component {
   inferBlockSubtype() {
     const { block } = this.props;
     if (parseInt(block.contents.previous, 16) === 0) return "open";
