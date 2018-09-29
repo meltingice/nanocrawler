@@ -4,7 +4,8 @@ import "whatwg-fetch";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import ConfigProvider from "./lib/ConfigProvider";
+import { TickerProvider } from "lib/TickerContext";
+import { TranslationProvider } from "lib/TranslationContext";
 import App from "./App";
 
 import { createBrowserHistory } from "history";
@@ -22,10 +23,12 @@ history.listen(location => {
 });
 
 ReactDOM.render(
-  <ConfigProvider>
-    <Router history={history}>
-      <App />
-    </Router>
-  </ConfigProvider>,
+  <TranslationProvider>
+    <TickerProvider>
+      <Router history={history}>
+        <App />
+      </Router>
+    </TickerProvider>
+  </TranslationProvider>,
   document.getElementById("root")
 );
