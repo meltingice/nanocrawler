@@ -3,13 +3,13 @@ import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import DelegatorsTable from "./DelegatorsTable";
-
-import injectClient from "lib/ClientComponent";
+import { apiClient } from "lib/Client";
+import config from "client-config.json";
 
 import LoadingState from "./delegators/LoadingState";
 import EmptyState from "./delegators/EmptyState";
 
-class AccountDelegators extends React.PureComponent {
+export default class AccountDelegators extends React.Component {
   state = {
     delegators: [],
     weight: 0,
@@ -31,10 +31,10 @@ class AccountDelegators extends React.PureComponent {
     let weight;
     const { account } = this.props;
 
-    const delegators = await this.props.client.delegators(account);
+    const delegators = await apiClient.delegators(account);
 
     if (_.keys(delegators).length > 0) {
-      weight = await this.props.client.weight(account);
+      weight = await apiClient.weight(account);
     }
 
     this.setState({ delegators, weight, loading: false });
@@ -73,7 +73,7 @@ class AccountDelegators extends React.PureComponent {
             <h3 className="mb-0">
               <FormattedNumber value={weight} />{" "}
               <span className="text-muted">
-                {this.props.config.currency} <TranslatedMessage id="weight" />
+                {config.currency} <TranslatedMessage id="weight" />
               </span>
             </h3>
           </div>
@@ -83,5 +83,3 @@ class AccountDelegators extends React.PureComponent {
     );
   }
 }
-
-export default injectClient(AccountDelegators);

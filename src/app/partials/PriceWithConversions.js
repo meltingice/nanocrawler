@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
-import injectClient from "lib/ClientComponent";
+import { withTicker } from "lib/TickerContext";
+import config from "client-config.json";
 
 class PriceWithConversions extends React.PureComponent {
   static defaultProps = {
@@ -39,7 +40,7 @@ class PriceWithConversions extends React.PureComponent {
               value={value}
               maximumFractionDigits={this.props.precision.nano}
             />{" "}
-            {this.props.config.currency}
+            {config.currency}
           </Fragment>
         );
       case "usd":
@@ -87,4 +88,4 @@ class PriceWithConversions extends React.PureComponent {
   }
 }
 
-export default injectClient(PriceWithConversions);
+export default withTicker(PriceWithConversions);

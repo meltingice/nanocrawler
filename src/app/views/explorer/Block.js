@@ -3,8 +3,6 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 
-import injectClient from "lib/ClientComponent";
-
 import OpenBlock from "../../partials/explorer/block/OpenBlock";
 import SendBlock from "../../partials/explorer/block/SendBlock";
 import ReceiveBlock from "../../partials/explorer/block/ReceiveBlock";
@@ -12,7 +10,9 @@ import ChangeBlock from "../../partials/explorer/block/ChangeBlock";
 import StateBlock from "../../partials/explorer/block/StateBlock";
 import NotFoundBlock from "../../partials/explorer/block/NotFoundBlock";
 
-class Block extends React.PureComponent {
+import { apiClient } from "lib/Client";
+
+export default class Block extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -36,7 +36,7 @@ class Block extends React.PureComponent {
     const { match } = this.props;
 
     try {
-      const block = await this.props.client.block(match.params.block);
+      const block = await apiClient.block(match.params.block);
       this.setState({ block });
     } catch (e) {
       this.setState({ failed: true });
@@ -102,5 +102,3 @@ class Block extends React.PureComponent {
     }
   }
 }
-
-export default injectClient(Block);

@@ -1,18 +1,18 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 
-import injectClient from "lib/ClientComponent";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 import AccountLink from "../AccountLink";
 import OptionalField from "../OptionalField";
+import config from "client-config.json";
 
 const STATUSES = {
   ok: 1000,
   warning: 10000
 };
 
-export default class DiscoveredPeers extends React.PureComponent {
+export default class DiscoveredPeers extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,8 +49,10 @@ export default class DiscoveredPeers extends React.PureComponent {
     return this.filteredPeers().sort((a, b) => {
       if (!a.data.nanoNodeName) return 1;
       if (!b.data.nanoNodeName) return -1;
-      if (a.data.nanoNodeName.toLowerCase() < b.data.nanoNodeName.toLowerCase()) return -1;
-      if (a.data.nanoNodeName.toLowerCase() > b.data.nanoNodeName.toLowerCase()) return 1;
+      if (a.data.nanoNodeName.toLowerCase() < b.data.nanoNodeName.toLowerCase())
+        return -1;
+      if (a.data.nanoNodeName.toLowerCase() > b.data.nanoNodeName.toLowerCase())
+        return 1;
       return 0;
     });
   }
@@ -151,7 +153,7 @@ export default class DiscoveredPeers extends React.PureComponent {
   }
 }
 
-const PeerEntry = injectClient(({ config, peer, currentBlock }) => {
+const PeerEntry = ({ peer, currentBlock }) => {
   const { url, data } = peer;
   const rootUrl = url.replace("api.php", "");
 
@@ -203,4 +205,4 @@ const PeerEntry = injectClient(({ config, peer, currentBlock }) => {
       </td>
     </tr>
   );
-});
+};

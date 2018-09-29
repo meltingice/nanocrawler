@@ -1,17 +1,18 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
-import injectClient from "lib/ClientComponent";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
 import PeerVersions from "../partials/PeerVersions";
-
 import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 
-class NetworkStatus extends React.PureComponent {
+import { apiClient } from "lib/Client";
+import config from "client-config.json";
+
+export default class NetworkStatus extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -35,17 +36,17 @@ class NetworkStatus extends React.PureComponent {
 
   async updateStats() {
     this.setState({
-      blocksByType: await this.props.client.blockCountByType(),
-      peers: await this.props.client.peers(),
-      representativesOnline: await this.props.client.representativesOnline(),
-      officialRepresentatives: await this.props.client.officialRepresentatives()
+      blocksByType: await apiClient.blockCountByType(),
+      peers: await apiClient.peers(),
+      representativesOnline: await apiClient.representativesOnline(),
+      officialRepresentatives: await apiClient.officialRepresentatives()
     });
 
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
   rebroadcastThreshold() {
-    return this.props.config.maxCoinSupply * 0.001;
+    return config.maxCoinSupply * 0.001;
   }
 
   rebroadcastableReps() {
@@ -77,7 +78,7 @@ class NetworkStatus extends React.PureComponent {
     return (
       <Fragment>
         {(
-          (this.onlineRebroadcastWeight() / this.props.config.maxCoinSupply) *
+          (this.onlineRebroadcastWeight() / config.maxCoinSupply) *
           100.0
         ).toFixed(2)}%
       </Fragment>
@@ -109,7 +110,7 @@ class NetworkStatus extends React.PureComponent {
           value={this.onlineWeight()}
           maximumFractionDigits={0}
         />{" "}
-        {this.props.config.currency}
+        {config.currency}
       </Fragment>
     );
   }
@@ -118,9 +119,7 @@ class NetworkStatus extends React.PureComponent {
     return (
       <Fragment>
         <FormattedNumber
-          value={
-            (this.onlineWeight() / this.props.config.maxCoinSupply) * 100.0
-          }
+          value={(this.onlineWeight() / config.maxCoinSupply) * 100.0}
           maximumFractionDigits={2}
         />%
       </Fragment>
@@ -134,7 +133,7 @@ class NetworkStatus extends React.PureComponent {
           value={this.officialWeight()}
           maximumFractionDigits={0}
         />{" "}
-        {this.props.config.currency}
+        {config.currency}
       </Fragment>
     );
   }
@@ -143,9 +142,7 @@ class NetworkStatus extends React.PureComponent {
     return (
       <Fragment>
         <FormattedNumber
-          value={
-            (this.officialWeight() / this.props.config.maxCoinSupply) * 100
-          }
+          value={(this.officialWeight() / config.maxCoinSupply) * 100}
           maximumFractionDigits={2}
         />%
       </Fragment>
@@ -309,7 +306,7 @@ class NetworkStatus extends React.PureComponent {
                         value={this.onlineRebroadcastWeight()}
                         maximumFractionDigits={0}
                       />{" "}
-                      {this.props.config.currency}
+                      {config.currency}
                     </span>
                   )
                 }}
@@ -360,5 +357,3 @@ class NetworkStatus extends React.PureComponent {
     );
   }
 }
-
-export default injectClient(NetworkStatus);
