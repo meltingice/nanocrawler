@@ -17,8 +17,8 @@ export default function DistributionStats({ distribution }) {
 }
 
 const DistributionRange = ({ range, value }) => (
-  <div className="col text-center">
-    <p className="text-muted">{range} NANO</p>
+  <div className="col-md col-6 text-center mb-1">
+    <p className="text-muted mb-1">{range} NANO</p>
     <h4>
       <FormattedNumber value={value || 0} />
     </h4>
