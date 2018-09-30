@@ -7,20 +7,16 @@ import AccountLink from "app/partials/AccountLink";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 import DistributionGraph from "app/partials/explorer/frontiers/DistributionGraph";
 import DistributionStats from "app/partials/explorer/frontiers/DistributionStats";
+import Pagination from "app/partials/Pagination";
 import AccountList from "app/partials/explorer/frontiers/AccountList";
 
 export default class Accounts extends React.Component {
-  state = {
-    accounts: [],
-    distribution: null,
-    page: 1
-  };
-
   constructor(props) {
     super(props);
 
     this.state = {
-      page: 1,
+      page: parseInt(this.props.match.params.page, 10),
+      perPage: 50,
       totalAccounts: 0,
       accounts: [],
       distribution: {}
@@ -28,11 +24,12 @@ export default class Accounts extends React.Component {
   }
 
   async componentDidMount() {
-    const { total, accounts } = await this.loadAccounts();
+    const { total, perPage, accounts } = await this.loadAccounts();
     const distribution = await apiClient.wealthDistribution();
 
     this.setState({
       totalAccounts: total,
+      perPage,
       accounts,
       distribution
     });
@@ -43,8 +40,10 @@ export default class Accounts extends React.Component {
   }
 
   async setPage(page) {
-    const accounts = await this.loadAccounts(page);
-    this.setState({ page, accounts });
+    const { total, accounts } = await this.loadAccounts(page);
+    this.setState({ page, accounts, totalAccounts: total }, () => {
+      this.props.history.push(`/explorer/accounts/${page}`);
+    });
   }
 
   render() {
@@ -80,11 +79,33 @@ export default class Accounts extends React.Component {
 
         <hr />
 
+        <div className="row justify-content-center my-2">
+          <div className="col-auto">
+            <Pagination
+              page={this.state.page}
+              totalCount={this.state.totalAccounts}
+              perPage={this.state.perPage}
+              onPageSelected={this.setPage.bind(this)}
+            />
+          </div>
+        </div>
+
         <AccountList
           page={this.state.page}
           accounts={this.state.accounts}
           setPage={this.setPage.bind(this)}
         />
+
+        <div className="row justify-content-center my-2">
+          <div className="col-auto">
+            <Pagination
+              page={this.state.page}
+              totalCount={this.state.totalAccounts}
+              perPage={this.state.perPage}
+              onPageSelected={this.setPage.bind(this)}
+            />
+          </div>
+        </div>
       </div>
     );
   }

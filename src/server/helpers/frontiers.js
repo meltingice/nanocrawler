@@ -7,7 +7,7 @@ const redisClient = redis.createClient(config.redis);
 const zcount = promisify(redisClient.zcount.bind(redisClient));
 const zrevrange = promisify(redisClient.zrevrange.bind(redisClient));
 
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 50;
 const frontiersKey = `nano-control-panel/${config.redisNamespace ||
   "default"}/sortedAccounts`;
 
@@ -24,6 +24,7 @@ export async function frontiers(page = 1) {
 
   return {
     total,
+    perPage: PAGE_SIZE,
     accounts: _.chunk(data, 2).map(d => ({ account: d[0], balance: d[1] }))
   };
 }

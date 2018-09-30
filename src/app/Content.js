@@ -72,6 +72,10 @@ class Content extends React.Component {
           <Route
             exact
             path="/explorer/accounts"
+            render={props => <Redirect to="/explorer/accounts/1" />}
+          />
+          <Route
+            path="/explorer/accounts/:page"
             render={props => <Accounts {...props} />}
           />
           <Route

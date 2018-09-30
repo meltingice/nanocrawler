@@ -5,7 +5,7 @@ import PriceWithConversions from "app/partials/PriceWithConversions";
 const Account = ({ account }) => {
   return (
     <div className="row align-items-center">
-      <div className="col-md mb-2 mb-lg-0">
+      <div className="col-md-9 mb-2 mb-lg-0">
         <p className="mb-0">
           <AccountLink
             account={account.account}
@@ -14,22 +14,20 @@ const Account = ({ account }) => {
           />
         </p>
       </div>
-      <div className="col-auto">
-        <p className="mb-0">
-          <PriceWithConversions
-            amount={account.balance}
-            currencies={["nano", "btc", "usd"]}
-          >
-            {(nano, btc, usd) => (
-              <Fragment>
-                <h5 className="mb-0">{nano}</h5>
-                <p className="text-muted mb-0">
-                  {btc} / {usd}
-                </p>
-              </Fragment>
-            )}
-          </PriceWithConversions>
-        </p>
+      <div className="col text-left text-md-right">
+        <PriceWithConversions
+          amount={account.balance}
+          currencies={["nano", "btc", "usd"]}
+        >
+          {(nano, btc, usd) => (
+            <Fragment>
+              <h5 className="mb-0">{nano}</h5>
+              <p className="text-muted mb-0">
+                {btc} / {usd}
+              </p>
+            </Fragment>
+          )}
+        </PriceWithConversions>
       </div>
     </div>
   );
