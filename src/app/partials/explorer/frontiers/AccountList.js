@@ -43,7 +43,7 @@ const Account = ({ account, rank }) => {
   );
 };
 
-export default function AccountList({ perPage, page, accounts, setPage }) {
+export default function AccountList({ perPage, page, accounts }) {
   return (
     <div className="row">
       <div className="col">

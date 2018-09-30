@@ -3,8 +3,6 @@ import { Helmet } from "react-helmet";
 import { FormattedNumber } from "react-intl";
 import { apiClient } from "lib/Client";
 
-import AccountLink from "app/partials/AccountLink";
-import PriceWithConversions from "app/partials/PriceWithConversions";
 import DistributionGraph from "app/partials/explorer/frontiers/DistributionGraph";
 import DistributionStats from "app/partials/explorer/frontiers/DistributionStats";
 import Pagination from "app/partials/Pagination";
@@ -97,7 +95,6 @@ export default class Accounts extends React.Component {
           perPage={this.state.perPage}
           page={this.state.page}
           accounts={this.state.accounts}
-          setPage={this.setPage.bind(this)}
         />
 
         <div className="row justify-content-center mt-4">
