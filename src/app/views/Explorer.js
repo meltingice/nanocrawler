@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import RandomVerifiedAccounts from "../partials/explorer/RandomVerifiedAccounts";
@@ -57,6 +57,11 @@ class Explorer extends React.PureComponent {
                   value={search}
                   onChange={e => this.setState({ search: e.target.value })}
                 />
+                <p className="mt-2">
+                  <Link to="/explorer/accounts" className="text-muted">
+                    All Accounts
+                  </Link>
+                </p>
               </div>
               <div className="col-auto mt-2 mt-md-0">
                 <button className="btn btn-nano-primary btn-lg">

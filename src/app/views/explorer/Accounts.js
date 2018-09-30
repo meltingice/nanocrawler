@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import { FormattedNumber } from "react-intl";
-import injectClient from "lib/ClientComponent";
+import { apiClient } from "lib/Client";
 
-import AccountLink from "../../partials/AccountLink";
-import PriceWithConversions from "../../partials/PriceWithConversions";
-import DistributionGraph from "../../partials/explorer/frontiers/DistributionGraph";
-import DistributionStats from "../../partials/explorer/frontiers/DistributionStats";
+import AccountLink from "app/partials/AccountLink";
+import PriceWithConversions from "app/partials/PriceWithConversions";
+import DistributionGraph from "app/partials/explorer/frontiers/DistributionGraph";
+import DistributionStats from "app/partials/explorer/frontiers/DistributionStats";
+import AccountList from "app/partials/explorer/frontiers/AccountList";
 
-class Accounts extends React.PureComponent {
+export default class Accounts extends React.Component {
   state = {
     accounts: [],
     distribution: null,
@@ -28,7 +29,7 @@ class Accounts extends React.PureComponent {
 
   async componentDidMount() {
     const { total, accounts } = await this.loadAccounts();
-    const distribution = await this.props.client.wealthDistribution();
+    const distribution = await apiClient.wealthDistribution();
 
     this.setState({
       totalAccounts: total,
@@ -37,8 +38,13 @@ class Accounts extends React.PureComponent {
     });
   }
 
-  async loadAccounts() {
-    return await this.props.client.frontierList(this.state.page);
+  async loadAccounts(page = this.state.page) {
+    return await apiClient.frontierList(page);
+  }
+
+  async setPage(page) {
+    const accounts = await this.loadAccounts(page);
+    this.setState({ page, accounts });
   }
 
   render() {
@@ -73,9 +79,13 @@ class Accounts extends React.PureComponent {
         </div>
 
         <hr />
+
+        <AccountList
+          page={this.state.page}
+          accounts={this.state.accounts}
+          setPage={this.setPage.bind(this)}
+        />
       </div>
     );
   }
 }
-
-export default injectClient(Accounts);
