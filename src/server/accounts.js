@@ -28,7 +28,7 @@ async function calculateAccountList() {
         parseFloat(nano.convert.fromRaw(balances.balance, "mrai"), 10) +
         parseFloat(nano.convert.fromRaw(balances.pending, "mrai"), 10);
 
-      if (parseFloat(balance, 10) === 0) {
+      if (parseFloat(balance, 10) < 0.000001) {
         accountsToRemove.push(account);
       } else {
         accountsWithBalance.push([balance, account]);
@@ -48,7 +48,7 @@ async function calculateAccountList() {
   });
 
   updateAccountList(_.flatten(sortedAccounts), accountsToRemove);
-  setTimeout(calculateRichList, 900000); // every 15 minutes
+  setTimeout(calculateAccountList, 900000); // every 15 minutes
 }
 
 function updateAccountList(accountsWithBalance, accountsToRemove) {

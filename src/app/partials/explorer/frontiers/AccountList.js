@@ -1,18 +1,28 @@
 import React, { Fragment } from "react";
+import { FormattedNumber } from "react-intl";
 import AccountLink from "app/partials/AccountLink";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 
-const Account = ({ account }) => {
+const Account = ({ account, rank }) => {
   return (
     <div className="row align-items-center">
-      <div className="col-md-9 mb-2 mb-lg-0">
-        <p className="mb-0">
-          <AccountLink
-            account={account.account}
-            ninja
-            className="text-dark break-word"
-          />
-        </p>
+      <div className="col-md-8 mb-2 mb-lg-0">
+        <div className="row">
+          <div className="col-auto">
+            <h4>
+              #<FormattedNumber value={rank} />
+            </h4>
+          </div>
+          <div className="col-lg">
+            <p className="mb-0">
+              <AccountLink
+                account={account.account}
+                ninja
+                className="text-dark break-word"
+              />
+            </p>
+          </div>
+        </div>
       </div>
       <div className="col text-left text-md-right">
         <PriceWithConversions
@@ -33,13 +43,13 @@ const Account = ({ account }) => {
   );
 };
 
-export default function AccountList({ page, accounts, setPage }) {
+export default function AccountList({ perPage, page, accounts, setPage }) {
   return (
     <div className="row">
       <div className="col">
-        {accounts.map(account => (
+        {accounts.map((account, i) => (
           <Fragment key={account.account}>
-            <Account account={account} />
+            <Account account={account} rank={perPage * (page - 1) + i + 1} />
             <hr />
           </Fragment>
         ))}

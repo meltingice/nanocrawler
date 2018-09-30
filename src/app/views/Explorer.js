@@ -57,11 +57,6 @@ class Explorer extends React.PureComponent {
                   value={search}
                   onChange={e => this.setState({ search: e.target.value })}
                 />
-                <p className="mt-2">
-                  <Link to="/explorer/accounts" className="text-muted">
-                    All Accounts
-                  </Link>
-                </p>
               </div>
               <div className="col-auto mt-2 mt-md-0">
                 <button className="btn btn-nano-primary btn-lg">

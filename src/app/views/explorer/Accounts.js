@@ -67,7 +67,7 @@ export default class Accounts extends React.Component {
           <div className="col">
             <h1 className="mb-0">All Accounts</h1>
             <p className="text-muted mb-0">
-              Sorted by balance; does not include accounts with 0 NANO
+              Only accounts with at least 0.000001 NANO, sorted by balance
             </p>
             <p className="text-muted mb-0">
               Balance includes all pending transactions
@@ -82,7 +82,7 @@ export default class Accounts extends React.Component {
 
         <hr />
 
-        <div className="row justify-content-center my-2">
+        <div className="row justify-content-center mt-4 mb-3">
           <div className="col-auto">
             <Pagination
               page={this.state.page}
@@ -94,12 +94,13 @@ export default class Accounts extends React.Component {
         </div>
 
         <AccountList
+          perPage={this.state.perPage}
           page={this.state.page}
           accounts={this.state.accounts}
           setPage={this.setPage.bind(this)}
         />
 
-        <div className="row justify-content-center my-2">
+        <div className="row justify-content-center mt-4">
           <div className="col-auto">
             <Pagination
               page={this.state.page}
