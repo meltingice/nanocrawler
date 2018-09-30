@@ -66,8 +66,11 @@ export default class Accounts extends React.Component {
         <div className="row mt-5 align-items-center">
           <div className="col">
             <h1 className="mb-0">All Accounts</h1>
-            <p className="text-muted">
-              Only accounts with a balance, sorted by balance
+            <p className="text-muted mb-0">
+              Sorted by balance; does not include accounts with 0 NANO
+            </p>
+            <p className="text-muted mb-0">
+              Balance includes all pending transactions
             </p>
           </div>
           <div className="col-auto">
