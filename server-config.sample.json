@@ -7,7 +7,6 @@
   "redis": "redis://127.0.0.1:6379",
   "redisNamespace": "production",
   "serverPort": 3001,
-  "networkUpdatesEnabled": false,
   "knownMonitors": [],
   "blacklistedPeers": []
 }
