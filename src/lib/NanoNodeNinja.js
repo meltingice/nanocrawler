@@ -9,12 +9,11 @@ export default class NanoNodeNinja {
     if (!this.account) return;
 
     try {
-      const data = await fetch(
-        `https://mynano.ninja/api/accounts/${this.account}`,
-        { mode: "cors" }
-      );
-
-      this.data = await data.json();
+      // const data = await fetch(
+      //   `https://mynano.ninja/api/accounts/${this.account}`,
+      //   { mode: "cors" }
+      // );
+      // this.data = await data.json();
     } catch (e) {
       console.log(e);
     } finally {
