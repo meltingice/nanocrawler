@@ -30,7 +30,7 @@ class Account extends React.PureComponent {
 
     if (!loading && weight > 0) {
       return (
-        <p>
+        <p className="mb-0">
           <span className="badge badge-info">Representative</span>{" "}
           <span className="text-muted">
             <FormattedNumber value={weight} maximumFractionDigits={6} /> NANO
