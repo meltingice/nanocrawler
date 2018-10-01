@@ -21,6 +21,17 @@
   color: #fff;
 }
 
+.pagination .page-item .page-link {
+  color: var(--nano-blue);
+  background-color: white;
+}
+
+.pagination .page-item.active .page-link {
+  color: white;
+  background-color: var(--nano-blue);
+  border-color: var(--nano-blue);
+}
+
 .break-word {
   word-wrap: break-word;
 }

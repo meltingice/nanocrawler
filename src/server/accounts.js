@@ -6,17 +6,8 @@ import config from "../../server-config.json";
 const redisClient = redis.createClient(config.redis);
 const nano = new Nano({ url: config.nodeHost });
 
-async function calculateRichList() {
+async function calculateAccountList() {
   console.log("Starting rich list update");
-
-  let accountsChecked = 0;
-  function accountChecked() {
-    accountsChecked++;
-
-    if (accountsChecked % 500 === 0) {
-      console.log("Accounts checked:", accountsChecked);
-    }
-  }
 
   const frontierCount = (await nano.rpc("frontier_count")).count;
   const data = (await nano.rpc("frontiers", {
@@ -37,12 +28,17 @@ async function calculateRichList() {
         parseFloat(nano.convert.fromRaw(balances.balance, "mrai"), 10) +
         parseFloat(nano.convert.fromRaw(balances.pending, "mrai"), 10);
 
-      if (parseFloat(balance, 10) === 0) {
+      if (parseFloat(balance, 10) < 0.000001) {
         accountsToRemove.push(account);
       } else {
         accountsWithBalance.push([balance, account]);
       }
     });
+
+    console.log(
+      `Accounts with balance: ${accountsWithBalance.length}`,
+      `Empty accounts: ${accountsToRemove.length}`
+    );
   }
 
   const sortedAccounts = accountsWithBalance.sort((a, b) => {
@@ -51,20 +47,22 @@ async function calculateRichList() {
     return 0;
   });
 
-  updateRichList(_.flatten(sortedAccounts), accountsToRemove);
-  setTimeout(calculateRichList, 900000); // every 15 minutes
+  updateAccountList(_.flatten(sortedAccounts), accountsToRemove);
+  setTimeout(calculateAccountList, 900000); // every 15 minutes
 }
 
-function updateRichList(accountsWithBalance, accountsToRemove) {
+function updateAccountList(accountsWithBalance, accountsToRemove) {
   const redisKey = `nano-control-panel/${config.redisNamespace ||
     "default"}/sortedAccounts`;
   accountsWithBalance.unshift(redisKey);
   accountsToRemove.unshift(redisKey);
   redisClient.zrem(accountsToRemove, (err, resp) => {
-    redisClient.zadd(accountsWithBalance);
+    redisClient.zadd(accountsWithBalance, (err, resp) => {
+      console.log("Rich list update complete");
+    });
   });
 }
 
-export default function startRichListUpdate() {
-  calculateRichList();
+export default function startAccountUpdates() {
+  calculateAccountList();
 }

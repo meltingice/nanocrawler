@@ -18,7 +18,7 @@ export default function HistoryReceiveBlock({ block, intl }) {
         <span className="text-muted">
           <TranslatedMessage id="block.from" />
         </span>{" "}
-        <AccountLink account={block.account} className="text-dark" />
+        <AccountLink account={block.account} className="text-dark" ninja />
       </td>
       <td className="text-success">
         +<FormattedNumber
