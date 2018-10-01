@@ -1,28 +1,26 @@
 import React, { Fragment } from "react";
+import VisibilitySensor from "react-visibility-sensor";
 import { Link } from "react-router-dom";
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
 export default class AccountLink extends React.PureComponent {
-  state = { ninjaData: null };
+  state = { ninjaData: null, loading: false };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.account !== this.props.account && this.props.ninja) {
-      this.fetchNinjaData();
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.ninja) {
-      this.fetchNinjaData();
+      this.setState({ ninjaData: null, loading: false });
     }
   }
 
   async fetchNinjaData() {
-    const ninja = new NanoNodeNinja(this.props.account);
-    await ninja.fetch();
-    if (ninja.hasAccount()) {
-      this.setState({ ninjaData: ninja.data });
-    }
+    this.setState({ loading: true }, async () => {
+      const ninja = new NanoNodeNinja(this.props.account);
+      await ninja.fetch();
+      this.setState({
+        loading: false,
+        ninjaData: ninja.hasAccount() ? ninja.data : false
+      });
+    });
   }
 
   accountName() {
@@ -45,6 +43,17 @@ export default class AccountLink extends React.PureComponent {
     return accountName;
   }
 
+  visibilityChanged(visible) {
+    const { ninja } = this.props;
+    if (!ninja) return;
+
+    const { loading, ninjaData } = this.state;
+
+    if (visible && !loading && ninjaData === null) {
+      this.fetchNinjaData();
+    }
+  }
+
   render() {
     const {
       account,
@@ -57,15 +66,17 @@ export default class AccountLink extends React.PureComponent {
     if (!account) return null;
 
     return (
-      <Link
-        className="break-word"
-        to={`/explorer/account/${account}/${
-          delegators ? "delegators" : "history"
-        }`}
-        {...otherProps}
-      >
-        {this.accountName()}
-      </Link>
+      <VisibilitySensor onChange={this.visibilityChanged.bind(this)}>
+        <Link
+          className="break-word"
+          to={`/explorer/account/${account}/${
+            delegators ? "delegators" : "history"
+          }`}
+          {...otherProps}
+        >
+          {this.accountName()}
+        </Link>
+      </VisibilitySensor>
     );
   }
 }

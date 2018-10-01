@@ -87,9 +87,14 @@ class Client {
     return (await resp.json()).network;
   }
 
-  async richList() {
-    const resp = await this.fetch("rich_list");
-    return (await resp.json()).richList;
+  async wealthDistribution() {
+    const resp = await this.fetch("accounts/distribution");
+    return (await resp.json()).distribution;
+  }
+
+  async frontierList(page = 1) {
+    const resp = await this.fetch(`accounts/${page}`);
+    return await resp.json();
   }
 
   async fetch(endpoint) {
