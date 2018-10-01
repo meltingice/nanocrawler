@@ -18,7 +18,7 @@ export default function HistorySendBlock({ block }) {
         <span className="text-muted">
           <TranslatedMessage id="block.to" />
         </span>{" "}
-        <AccountLink account={block.account} className="text-dark" />
+        <AccountLink account={block.account} className="text-dark" ninja />
       </td>
       <td className="text-danger">
         -<FormattedNumber
