@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AccountLink from "app/partials/AccountLink";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 import { apiClient } from "lib/Client";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 const Account = ({ account, balance, rank }) => {
   return (
@@ -54,13 +55,20 @@ export default class ExplorerTopAccounts extends React.Component {
   }
 
   render() {
+    const { count } = this.props;
+
     return (
       <Fragment>
         <div className="row align-items-center">
           <div className="col-md">
-            <h3 className="mb-0">Top {this.props.count} Accounts</h3>
+            <h3 className="mb-0">
+              <TranslatedMessage
+                id="explorer.top_accounts"
+                values={{ count }}
+              />
+            </h3>
             <p className="mb-0 text-muted">
-              Accounts with the highest balance, including pending transactions
+              <TranslatedMessage id="explorer.top_accounts_desc" />
             </p>
           </div>
           <div className="col-auto mt-2 mt-md-0">
@@ -68,7 +76,7 @@ export default class ExplorerTopAccounts extends React.Component {
               to="/explorer/accounts/1"
               className="btn btn-sm btn-nano-primary"
             >
-              Accounts and Distribution
+              <TranslatedMessage id="explorer.top_accounts_link" />
             </Link>
           </div>
         </div>
