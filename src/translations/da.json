@@ -147,5 +147,14 @@
     "source": "kilde",
     "balance": "balance",
     "name": "navn",
-    "version": "version"
+    "version": "version",
+    "block.subtype.epoch": "epoch",
+    "block.state.link.epoch": "Alle epoch blokke bruger den samme værdi for dette felt, som er \"epoch v1 block\" kodet i hex format.",
+    "explorer.top_accounts": "Top {count} Konti",
+    "explorer.top_accounts_desc": "Konti med den største balance, inkluderet afventende transaktioner",
+    "explorer.top_accounts_link": "Konti og Distribution",
+    "accounts.nano_distribution": "NANO Distribution",
+    "accounts.all_accounts": "Alle Konti",
+    "accounts.desc1": "Kun konti med mindst 0,000001 NANO, sorteret efter balance",
+    "accounts.desc2": "Balance inkluderer alle afventende transaktioner"
 }
