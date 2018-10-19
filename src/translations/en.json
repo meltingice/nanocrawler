@@ -147,5 +147,7 @@
     "source": "source",
     "balance": "balance",
     "name": "name",
-    "version": "version"
+    "version": "version",
+    "block.subtype.epoch": "epoch",
+    "block.state.link.epoch": "All epoch blocks use the same value for this field, which is \"epoch v1 block\" encoded in hex format."
 }
