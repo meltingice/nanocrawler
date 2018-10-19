@@ -147,5 +147,14 @@
     "source": "källa",
     "balance": "saldo",
     "name": "namn",
-    "version": "version"
+    "version": "version",
+    "block.subtype.epoch": "Epok",
+    "block.state.link.epoch": "Alla epokblock använder samma värde för detta fält, vilket är \"epoch v1 block\" kodat i hexformat",
+    "explorer.top_accounts": "Topp {count} konton",
+    "explorer.top_accounts_desc": "Konton med högst saldo, inkluderar väntande transaktioner",
+    "explorer.top_accounts_link": "Konton och fördelning",
+    "accounts.nano_distribution": "NANO-fördelning",
+    "accounts.all_accounts": "Alla konton",
+    "accounts.desc1": "Konton med åtminstone 0.000001 NANO, sorterat efter saldo",
+    "accounts.desc2": "Saldo inkluderar alla väntande transaktioner"
 }
