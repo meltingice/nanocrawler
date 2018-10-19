@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 import { apiClient } from "lib/Client";
 
 import DistributionGraph from "app/partials/explorer/frontiers/DistributionGraph";
@@ -53,7 +54,9 @@ export default class Accounts extends React.Component {
 
         <div className="row">
           <div className="col">
-            <h1>NANO Distribution</h1>
+            <h1>
+              <TranslatedMessage id="accounts.nano_distribution" />
+            </h1>
             <hr />
 
             <DistributionGraph distribution={this.state.distribution} />
@@ -63,12 +66,14 @@ export default class Accounts extends React.Component {
 
         <div className="row mt-5 align-items-center">
           <div className="col">
-            <h1 className="mb-0">All Accounts</h1>
+            <h1 className="mb-0">
+              <TranslatedMessage id="accounts.all_accounts" />
+            </h1>
             <p className="text-muted mb-0">
-              Only accounts with at least 0.000001 NANO, sorted by balance
+              <TranslatedMessage id="accounts.desc1" />
             </p>
             <p className="text-muted mb-0">
-              Balance includes all pending transactions
+              <TranslatedMessage id="accounts.desc2" />
             </p>
           </div>
           <div className="col-auto">
