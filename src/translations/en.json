@@ -4,6 +4,10 @@
     "nav.status": "Node Status",
     "explorer.title": "Network Explorer",
     "explorer.form.help": "Enter a Nano address or block hash to get started.",
+    "explorer.top_accounts": "Top {count} Accounts",
+    "explorer.top_accounts_desc":
+        "Accounts with the highest balance, including pending transactions",
+    "explorer.top_accounts_link": "Accounts and Distribution",
     "network.title": "Network Status",
     "network.reps_online": "{count} representatives online",
     "network.reps_online_desc":
