@@ -147,5 +147,14 @@
     "source": "origine",
     "balance": "balance",
     "name": "nom",
-    "version": "version"
+    "version": "version",
+    "block.subtype.epoch": "Epoch",
+    "block.state.link.epoch": "Tous les blocs Epoch utilisent la même valeur \"epoch V1 block\" pour ce champ, encodée en format hex",
+    "explorer.top_accounts": "Top {count} comptes",
+    "explorer.top_accounts_desc": "Compte avec le solde le plus élevé, incluant les transactions en attente",
+    "explorer.top_accounts_link": "Comptes et Distribution",
+    "accounts.nano_distribution": "NANO distribution",
+    "accounts.all_accounts": "Tous les comptes",
+    "accounts.desc1": "Tous les comptes avec au moins 0.000001 NANO, triés par solde",
+    "accounts.desc2": "Le solde inclus toutes les transactions en attente "
 }

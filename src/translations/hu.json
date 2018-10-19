@@ -147,5 +147,14 @@
     "source": "forrás",
     "balance": "számlaegyenleg",
     "name": "név",
-    "version": "verzió"
+    "version": "verzió",
+    "block.subtype.epoch": "korszak",
+    "block.state.link.epoch": "Az összes korszakblokk ugyanazt az értéket használja ebben a mezőben, ami az \"epoch v1 block\" hexadecimális formátuma.",
+    "explorer.top_accounts": "Legtöbb NANO-val Rendelkező {count} Számla ",
+    "explorer.top_accounts_desc": "A legnagyobb egyenleggel rendelkező számlák, beleértve a folyamatban lévő tranzakciókat is",
+    "explorer.top_accounts_link": "Számlák és Eloszlás",
+    "accounts.nano_distribution": "NANO Eloszlás",
+    "accounts.all_accounts": "Összes Számla",
+    "accounts.desc1": "Csak a számlák, amiken több, mint 0.000001 NANO van, egyenleg alapján szortírozva",
+    "accounts.desc2": "Egyenleg tartalmazza a folyamatban lévő tranzakciókat"
 }

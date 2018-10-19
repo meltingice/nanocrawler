@@ -147,5 +147,14 @@
     "source": "источник",
     "balance": "баланс",
     "name": "имя",
-    "version": "версия"
+    "version": "версия",
+    "block.subtype.epoch": "epoch",
+    "block.state.link.epoch": "Все блоки epoch используют одно и то же значение для этого поля, которое является \"блоком epoch v1\", закодированным в шестнадцатеричном формате.",
+    "explorer.top_accounts": "Топ {count} Аккаунтов",
+    "explorer.top_accounts_desc": "Аккаунты с наибольшим балансом, включая отложенные транзакции",
+    "explorer.top_accounts_link": "Аккаунты и распределение",
+    "accounts.nano_distribution": "NANO распределение",
+    "accounts.all_accounts": "Все аккаунты",
+    "accounts.desc1": "Только аккаунты с не менее 0.000001 NANO, отсортированные по балансу",
+    "accounts.desc2": "Баланс включающий все в ожидании транзакции"
 }

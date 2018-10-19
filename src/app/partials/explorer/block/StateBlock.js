@@ -11,6 +11,11 @@ export default class StateBlock extends React.Component {
     const { block } = this.props;
     if (parseInt(block.contents.previous, 16) === 0) return "open";
     if (parseInt(block.contents.link, 16) === 0) return "change";
+    if (
+      block.contents.link ===
+      "65706F636820763120626C6F636B000000000000000000000000000000000000"
+    )
+      return "epoch";
     if (block.source_account === "0") return "send";
     return "receive";
   }
@@ -243,6 +248,10 @@ export default class StateBlock extends React.Component {
           />
         );
         meaning = <TranslatedMessage id="block.state.link.receive" />;
+        break;
+      case "epoch":
+        link = block.contents.link;
+        meaning = <TranslatedMessage id="block.state.link.epoch" />;
         break;
     }
 
