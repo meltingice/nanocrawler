@@ -147,5 +147,14 @@
     "source": "sursa",
     "balance": "sold",
     "name": "denumire",
-    "version": "versiune"
+    "version": "versiune",
+    "block.subtype.epoch": "epoch",
+    "block.state.link.epoch": "Toate block-urile epoch folosesc aceeași valoare pentru acest domeniu, și anume \"block epoch v1\" codificată în format hex.",
+    "explorer.top_accounts": "Top {count} conturi",
+    "explorer.top_accounts_desc": "Conturile cu cel mai mare sold, incluzând tranzacțiile în așteptare",
+    "explorer.top_accounts_link": "Conturi și distribuire",
+    "accounts.nano_distribution": "Distribuirea NANO",
+    "accounts.all_accounts": "Toate conturile",
+    "accounts.desc1": "Doar conturile cu minim 0.000001 NANO, sortate după sold",
+    "accounts.desc2": "Soldul include toate tranzacțiile în așteptare"
 }
