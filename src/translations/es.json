@@ -147,5 +147,14 @@
     "source": "fuente",
     "balance": "balance",
     "name": "nombre",
-    "version": "versión"
+    "version": "versión",
+    "block.subtype.epoch": "Epoch",
+    "block.state.link.epoch": "Todos los bloques epoch usan el mismo valor en este campo, \"bloque epoch v1\" encodeado en formato hex.",
+    "explorer.top_accounts": "Top {count} Cuentas",
+    "explorer.top_accounts_desc": "Cuentas con el mayor balance, incluyendo transacciones pendientes",
+    "explorer.top_accounts_link": "Cuentas y Distribución",
+    "accounts.nano_distribution": "Distrubución de NANO",
+    "accounts.all_accounts": "Todas las Cuentas",
+    "accounts.desc1": "Solo cuentas con, al menos, 0.000001 NANO, mostradas según balance",
+    "accounts.desc2": "El balance incluye las transacciones pendientes"
 }
