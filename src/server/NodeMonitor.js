@@ -8,16 +8,18 @@ const TIMEOUT = 5;
 export default class NodeMonitor {
   static fromPeerAddress(peer) {
     const match = peer.match(/\[(.+)\]:\d+/);
-    if (match) return new NodeMonitor(`http://${match[1]}/api.php`);
+    if (match)
+      return new NodeMonitor(`http://${match[1]}/api.php`, "discovered");
     return null;
   }
 
-  constructor(apiUrl) {
+  constructor(apiUrl, source = "") {
     this.apiUrl = apiUrl;
+    this.source = source;
   }
 
   fetch() {
-    console.log("Checking", this.apiUrl);
+    console.log("Checking", `(${this.source})`, this.apiUrl);
 
     return new Promise((resolve, reject) => {
       return request({
@@ -31,7 +33,7 @@ export default class NodeMonitor {
         .then(resp => {
           const data = JSON.parse(resp);
           if (data.nanoNodeAccount) {
-            console.log("OK", this.apiUrl);
+            console.log("OK", `(${this.source})`, this.apiUrl);
             resolve({ url: this.apiUrl, data: this.formatData(data) });
           } else {
             reject("Missing nanoNodeAccount data");
