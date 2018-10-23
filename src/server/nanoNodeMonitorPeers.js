@@ -66,12 +66,14 @@ async function fetchNanoNodeNinjaMonitors() {
       const accountData = await accountResp.json();
 
       if (accountData.monitor && accountData.monitor.url) {
-        console.log("OK", accountData.monitor.url);
-        monitors.push(
-          new NodeMonitor(
-            `${accountData.monitor.url.replace(/(\/$)/, "")}/api.php`
-          )
-        );
+        // Some servies, like Brainblocks, gave their monitor URL as a direct link to
+        // the API response. This attempts to fix those instances.
+        let apiUrl = /\.php$/.test(accountData.monitor.url)
+          ? accountData.monitor.url
+          : `${accountData.monitor.url.replace(/(\/$)/, "")}/api.php`;
+
+        console.log("mynano.ninja - OK", apiUrl);
+        monitors.push(new NodeMonitor(apiUrl, "mynano.ninja"));
       }
     } catch (e) {}
   }
@@ -85,7 +87,9 @@ async function checkKnownMonitors() {
   const data = _.compact(
     await Promise.all(
       KNOWN_MONITORS.map(url =>
-        new NodeMonitor(url).fetch().catch(e => console.error(e.message))
+        new NodeMonitor(url, "known")
+          .fetch()
+          .catch(e => console.error(e.message))
       )
     )
   );
