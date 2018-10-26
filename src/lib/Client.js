@@ -97,6 +97,11 @@ class Client {
     return await resp.json();
   }
 
+  async confirmationQuorum() {
+    const resp = await this.fetch("confirmation_quorum");
+    return await resp.json();
+  }
+
   async fetch(endpoint) {
     const resp = await fetch(`${this.host}/${endpoint}`);
     if (resp.ok) return resp;
