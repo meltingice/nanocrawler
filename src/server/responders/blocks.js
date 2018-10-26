@@ -6,7 +6,7 @@ export default function(app, nano) {
   app.get("/block/:hash", async (req, res) => {
     try {
       const block = await redisFetch(
-        `block/v3/${req.params.hash}`,
+        `block/v4/${req.params.hash}`,
         2592000,
         async () => {
           const blocks = (await nano.rpc("blocks_info", {
