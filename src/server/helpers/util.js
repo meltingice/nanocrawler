@@ -19,9 +19,18 @@ export async function getTimestampForHash(hash) {
   return null;
 }
 
-export async function processBlock(block) {
+export async function processBlock(hash, block) {
   block.amount = nano.convert.fromRaw(block.amount, "mrai");
   block.contents = JSON.parse(block.contents);
+
+  const resp = await nano.rpc("account_history", {
+    account: block.block_account,
+    head: hash,
+    raw: true,
+    count: 1
+  });
+
+  block.contents.subtype = resp.history[0].subtype;
 
   switch (block.contents.type) {
     case "send":
