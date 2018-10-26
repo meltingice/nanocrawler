@@ -6,6 +6,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
+import NetworkConfirmationQuorum from "../partials/network/NetworkConfirmationQuorum";
 import PeerVersions from "../partials/PeerVersions";
 import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 
@@ -335,6 +336,7 @@ export default class NetworkStatus extends React.PureComponent {
         <div className="row mt-5">
           <div className="col-md">
             <NetworkThroughput />
+            <NetworkConfirmationQuorum />
           </div>
           <div className="col-md mt-3 mt-md-0">
             <PeerVersions peers={this.state.peers} />
