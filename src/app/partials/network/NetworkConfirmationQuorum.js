@@ -91,7 +91,8 @@ export default class NetworkConfirmationQuorum extends React.Component {
               <span className="text-muted">quorum delta</span>
             </h5>
             <p className="text-muted">
-              The vote tally required to rollback a block in the event of a fork
+              The vote tally required to confirm blocks and rollback a block in
+              the event of a fork
             </p>
           </div>
         )}
