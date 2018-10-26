@@ -6,7 +6,7 @@ export default function(app, nano) {
   app.get("/block/:hash", async (req, res) => {
     try {
       const block = await redisFetch(
-        `block/v2/${req.params.hash}`,
+        `block/v3/${req.params.hash}`,
         2592000,
         async () => {
           const blocks = (await nano.rpc("blocks_info", {
@@ -15,9 +15,9 @@ export default function(app, nano) {
             source: true
           })).blocks;
 
-          let block = blocks[_.keys(blocks)[0]];
+          let block = blocks[req.params.hash];
           block.timestamp = await getTimestampForHash(req.params.hash);
-          return await processBlock(block);
+          return await processBlock(req.params.hash, block);
         }
       );
 
