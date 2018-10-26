@@ -7,19 +7,6 @@ import OptionalField from "../../OptionalField";
 import { formatTimestamp } from "lib/util";
 
 export default class StateBlock extends React.Component {
-  inferBlockSubtype() {
-    const { block } = this.props;
-    if (parseInt(block.contents.previous, 16) === 0) return "open";
-    if (parseInt(block.contents.link, 16) === 0) return "change";
-    if (
-      block.contents.link ===
-      "65706F636820763120626C6F636B000000000000000000000000000000000000"
-    )
-      return "epoch";
-    if (block.source_account === "0") return "send";
-    return "receive";
-  }
-
   render() {
     const { block } = this.props;
 
@@ -27,7 +14,7 @@ export default class StateBlock extends React.Component {
       <div className="Block">
         <h4 className="mb-0">
           <TranslatedMessage id="block.state.subtype" />{" "}
-          <small className="text-muted">{this.inferBlockSubtype()}</small>
+          <small className="text-muted">{block.contents.subtype}</small>
         </h4>
         <p>
           <small>
@@ -169,8 +156,7 @@ export default class StateBlock extends React.Component {
 
   getStateBlockExtraInfo() {
     const { block } = this.props;
-    const type = this.inferBlockSubtype();
-    switch (type) {
+    switch (block.contents.subtype) {
       case "open":
       case "receive":
         return (
@@ -219,10 +205,9 @@ export default class StateBlock extends React.Component {
 
   getLink() {
     const { block } = this.props;
-    const type = this.inferBlockSubtype();
     let link, meaning;
 
-    switch (type) {
+    switch (block.contents.subtype) {
       case "open":
         link = (
           <BlockLink
