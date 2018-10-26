@@ -155,7 +155,7 @@ export default class DiscoveredPeers extends React.Component {
 
 const PeerEntry = ({ peer, currentBlock }) => {
   const { url, data } = peer;
-  const rootUrl = url.replace("api.php", "");
+  const rootUrl = url.replace(/\/[a-z_\-]+\.php$/, "");
 
   const peerBlock = parseInt(data.currentBlock, 10);
   const peerLag = currentBlock - peerBlock;
