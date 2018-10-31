@@ -54,6 +54,17 @@
     "network.peers.rebroadcast_only": "Rebroadcasting representatives only",
     "network.tps.title": "Network Throughput",
     "network.tps.desc": "Average checked blocks/sec over the given period",
+    "network.quorum.title": "Network Quorum",
+    "network.quorum.desc":
+        "Important information regarding the current network voting state",
+    "network.quorum.peers_total_weight": "direct peer total weight",
+    "network.quorum.peers_total_weight_desc":
+        "The total voting weight of the peers this node is directly connected to. This must remain above the minimum configured quorum.",
+    "network.quorum.peers_total_weight_danger":
+        "The voting weight of our peers is below the currently configured minimum. Blocks will not confirm until it rises above {weight} NANO.",
+    "network.quorum.delta": "quorum delta",
+    "network.quorum.delta_desc":
+        "The vote tally required for a block to be rolled back. This is directly related to the total online voting weight.",
     "status.checked_blocks": "Checked Blocks",
     "status.unchecked_blocks": "Unchecked Blocks",
     "status.voting_weight": "Voting Weight",
