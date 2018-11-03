@@ -1,6 +1,7 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
 import { apiClient } from "lib/Client";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 export default class NetworkConfirmationQuorum extends React.Component {
   constructor(props) {
@@ -43,9 +44,11 @@ export default class NetworkConfirmationQuorum extends React.Component {
 
     return (
       <div className="mt-3">
-        <h2 className="mb-0">Network Quorum</h2>
+        <h2 className="mb-0">
+          <TranslatedMessage id="network.quorum.title" />
+        </h2>
         <p className="text-muted">
-          Important information regarding the current network voting state
+          <TranslatedMessage id="network.quorum.desc" />
         </p>
 
         {quorum_delta_mnano === null ? (
@@ -63,7 +66,7 @@ export default class NetworkConfirmationQuorum extends React.Component {
                   this.stakeBelowMinumum() ? "text-danger" : "text-muted"
                 }
               >
-                peers total weight
+                <TranslatedMessage id="network.quorum.peers_total_weight" />
               </span>
             </h5>
             {!this.stakeBelowMinumum() && (
@@ -72,26 +75,31 @@ export default class NetworkConfirmationQuorum extends React.Component {
                   this.stakeBelowMinumum() ? "text-danger mb-0" : "text-muted"
                 }
               >
-                The total voting weight of the peers you are directly connected
-                to
+                <TranslatedMessage id="network.quorum.peers_total_weight_desc" />
               </p>
             )}
 
             {this.stakeBelowMinumum() && (
               <p className="text-danger">
-                The voting weight of your peers is below the currently
-                configured minimum required quorum. Blocks will not confirm
-                until it rises above{" "}
-                <FormattedNumber value={online_weight_minimum_mnano} /> NANO.
+                <TranslatedMessage
+                  id="network.quorum.peers_total_weight_danger"
+                  values={{
+                    weight: (
+                      <FormattedNumber value={online_weight_minimum_mnano} />
+                    )
+                  }}
+                />
               </p>
             )}
 
             <h5 className="mb-0">
               <FormattedNumber value={quorum_delta_mnano} /> NANO{" "}
-              <span className="text-muted">quorum delta</span>
+              <span className="text-muted">
+                <TranslatedMessage id="network.quorum.delta" />
+              </span>
             </h5>
             <p className="text-muted">
-              The vote tally required to rollback a block in the event of a fork
+              <TranslatedMessage id="network.quorum.delta_desc" />
             </p>
           </div>
         )}

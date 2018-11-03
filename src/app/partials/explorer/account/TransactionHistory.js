@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
@@ -28,37 +28,40 @@ export default function TransactionHistory({ history }) {
   });
 
   return (
-    <div className="table-responsive">
-      <table className="table">
-        <thead>
-          <tr>
-            <th className="text-capitalize">
-              <TranslatedMessage id="type" />
-            </th>
-            <th className="text-capitalize">
-              <TranslatedMessage id="account" />
-            </th>
-            <th className="text-capitalize">
-              <TranslatedMessage id="amount" />
-            </th>
-            <th className="text-capitalize">
-              <TranslatedMessage id="date" />
-            </th>
-            <th className="text-capitalize">
-              <TranslatedMessage id="block" />
-            </th>
-          </tr>
-        </thead>
+    <Fragment>
+      <div className="row d-none d-lg-flex">
+        <div className="col-1">
+          <h6 className="text-capitalize mb-0">
+            <TranslatedMessage id="type" />
+          </h6>
+        </div>
+        <div className="col-7">
+          <h6 className="text-capitalize mb-0">
+            <TranslatedMessage id="account" /> /{" "}
+            <TranslatedMessage id="block" />
+          </h6>
+        </div>
+        <div className="col">
+          <h6 className="text-capitalize mb-0">
+            <TranslatedMessage id="amount" />
+          </h6>
+        </div>
+        <div className="col text-right">
+          <h6 className="text-capitalize mb-0">
+            <TranslatedMessage id="date" />
+          </h6>
+        </div>
+      </div>
 
-        <ReactCSSTransitionGroup
-          component="tbody"
-          transitionName="Transaction"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          {blocks}
-        </ReactCSSTransitionGroup>
-      </table>
-    </div>
+      <hr />
+
+      <ReactCSSTransitionGroup
+        transitionName="Transaction"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
+      >
+        {blocks}
+      </ReactCSSTransitionGroup>
+    </Fragment>
   );
 }
