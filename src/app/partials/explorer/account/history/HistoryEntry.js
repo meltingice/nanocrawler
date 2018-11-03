@@ -15,8 +15,8 @@ export default function HistoryEntry({ type, account, amount, date, block }) {
         </div>
         <div className="col mt-1 mt-lg-0">{amount}</div>
         <div className="col-auto mt-1 mt-lg-0 text-right">
-          <small className="d-sm-none">Oct 30, 2018 01:31:05</small>
-          <span className="d-none d-sm-inline">Oct 30, 2018 01:31:05</span>
+          <small className="d-sm-none">{date}</small>
+          <span className="d-none d-sm-inline">{date}</span>
         </div>
       </div>
       <hr />
