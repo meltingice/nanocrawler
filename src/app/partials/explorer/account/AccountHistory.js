@@ -220,7 +220,7 @@ export default class AccountHistory extends React.Component {
 
     return (
       <Fragment>
-        <div className="row mt-5 align-items-center">
+        <div className="row mt-5 mb-2 align-items-center">
           <div className="col">
             <h2>
               <TranslatedMessage id="account.transactions.title" />
