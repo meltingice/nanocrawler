@@ -51,6 +51,7 @@ export default function OpenBlock({ block }) {
           <PriceWithConversions
             amount={block.amount}
             currencies={["nano", "usd", "btc"]}
+            precision={{ nano: 30, btc: 6, usd: 4 }}
           />
         </small>
       </h4>

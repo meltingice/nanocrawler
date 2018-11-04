@@ -19,7 +19,7 @@ class PriceWithConversions extends React.PureComponent {
 
     switch (cur) {
       case "nano":
-        return amount;
+        return parseFloat(amount, 10);
       case "usd":
         return amount * parseFloat(ticker.price_usd, 10);
       case "btc":
