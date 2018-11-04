@@ -16,7 +16,7 @@ export default function HistoryEntry({ type, account, amount, date, block }) {
         <div className="col mt-1 mt-lg-0">
           <div className="row">
             <div className="col">{amount}</div>
-            <div className="col-auto mt-1 mt-lg-0 text-right">
+            <div className="col-auto text-right">
               <small className="d-sm-none">{date}</small>
               <span className="d-none d-sm-inline">{date}</span>
             </div>
