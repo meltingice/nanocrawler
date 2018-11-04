@@ -38,6 +38,7 @@ class PriceWithConversions extends React.PureComponent {
           <Fragment key="nano">
             <FormattedNumber
               value={value}
+              minimumFractionDigits={Math.min(2, this.props.precision.nano)}
               maximumFractionDigits={this.props.precision.nano}
             />{" "}
             {config.currency}
