@@ -34,7 +34,7 @@ export default function HistorySendBlock({ block }) {
           -<FormattedNumber
             value={block.amount}
             minimumFractionDigits={6}
-            maximumFractionDigits={6}
+            maximumFractionDigits={2}
           />{" "}
           {config.currency}
         </span>

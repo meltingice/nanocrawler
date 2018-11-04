@@ -34,7 +34,7 @@ export default function HistoryOpenBlock({ block, intl }) {
           +<FormattedNumber
             value={block.amount}
             maximumFractionDigits={6}
-            minimumFractionDigits={6}
+            minimumFractionDigits={2}
           />{" "}
           {config.currency}
         </span>
