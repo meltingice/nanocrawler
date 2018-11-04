@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import HistoryEntry from "./HistoryEntry";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import { keyToPublicAccountId, formatTimestamp } from "lib/util";
@@ -90,37 +91,45 @@ export default class HistoryStateBlock extends React.Component {
   render() {
     const { block } = this.props;
     return (
-      <tr>
-        <td>
-          <TranslatedMessage id="block.state" />{" "}
+      <HistoryEntry
+        type={
+          <Fragment>
+            <TranslatedMessage id="block.state" />{" "}
+            <span className={this.statusClass()}>
+              <TranslatedMessage id={`block.subtype.${block.subtype}`} />
+            </span>
+          </Fragment>
+        }
+        account={
+          <Fragment>
+            <span className="text-muted">{this.accountAction()}</span>{" "}
+            <AccountLink
+              account={this.transactionAccount()}
+              ninja
+              className="text-dark break-word"
+            />
+          </Fragment>
+        }
+        amount={
           <span className={this.statusClass()}>
-            <TranslatedMessage id={`block.subtype.${block.subtype}`} />
+            {this.transactionSymbol()}
+            <FormattedNumber
+              value={block.amount || 0}
+              minimumFractionDigits={2}
+              maximumFractionDigits={6}
+            />{" "}
+            {config.currency}
           </span>
-        </td>
-        <td>
-          <span className="text-muted">{this.accountAction()}</span>{" "}
-          <AccountLink
-            account={this.transactionAccount()}
-            ninja
-            className="text-dark"
-          />
-        </td>
-        <td className={this.statusClass()}>
-          {this.transactionSymbol()}
-          <FormattedNumber
-            value={block.amount || 0}
-            minimumFractionDigits={6}
-            maximumFractionDigits={6}
-          />{" "}
-          {config.currency}
-        </td>
-        <td>
-          <OptionalField value={formatTimestamp(block.timestamp)} />
-        </td>
-        <td>
-          <BlockLink hash={block.hash} short className="text-muted" />
-        </td>
-      </tr>
+        }
+        date={<OptionalField value={formatTimestamp(block.timestamp)} />}
+        block={
+          <div className="text-truncate">
+            <small>
+              <BlockLink hash={block.hash} className="text-muted" />
+            </small>
+          </div>
+        }
+      />
     );
   }
 }

@@ -1,5 +1,7 @@
 #Navigation {
   color: #fff;
+  max-width: 1680px;
+  margin: 0 auto;
 }
 
 #Navigation .LogoWrap {

@@ -187,8 +187,8 @@ class Account extends React.PureComponent {
           </title>
         </Helmet>
 
-        <div className="row align-items-center">
-          <div className="col">
+        <div className="row align-items-center" style={{ overflow: "scroll" }}>
+          <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
               {match.params.account}
@@ -209,36 +209,41 @@ class Account extends React.PureComponent {
 
             {this.getRepresentative()}
           </div>
-          <div className="col-auto pr-0">
-            <AccountQR
-              account={match.params.account}
-              style={{ width: "80px" }}
-            />
-          </div>
           <div className="col-auto">
-            <PriceWithConversions
-              amount={balance}
-              currencies={["nano", "usd", "btc"]}
-            >
-              {(nano, usd, btc) => {
-                return (
-                  <Fragment>
-                    <h3 className="mb-0">{nano}</h3>
+            <div className="row">
+              <div className="col-auto pr-0">
+                <AccountQR
+                  account={match.params.account}
+                  style={{ width: "80px" }}
+                />
+              </div>
+              <div className="col">
+                <PriceWithConversions
+                  amount={balance}
+                  currencies={["nano", "usd", "btc"]}
+                >
+                  {(nano, usd, btc) => {
+                    return (
+                      <Fragment>
+                        <h3 className="mb-0">{nano}</h3>
 
-                    <p className="text-muted mb-0">
-                      {usd} / {btc}
-                    </p>
-                    <p className="text-muted mb-0">
-                      <FormattedNumber
-                        value={pending}
-                        maximumFractionDigits={6}
-                      />{" "}
-                      {config.currency} <TranslatedMessage id="pending" />
-                    </p>
-                  </Fragment>
-                );
-              }}
-            </PriceWithConversions>
+                        <p className="text-muted mb-0">
+                          {usd} / {btc}
+                        </p>
+                        <p className="text-muted mb-0">
+                          <FormattedNumber
+                            value={pending}
+                            minimumFractionDigits={2}
+                            maximumFractionDigits={6}
+                          />{" "}
+                          {config.currency} <TranslatedMessage id="pending" />
+                        </p>
+                      </Fragment>
+                    );
+                  }}
+                </PriceWithConversions>
+              </div>
+            </div>
           </div>
         </div>
 

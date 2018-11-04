@@ -19,7 +19,7 @@ class PriceWithConversions extends React.PureComponent {
 
     switch (cur) {
       case "nano":
-        return amount;
+        return parseFloat(amount, 10);
       case "usd":
         return amount * parseFloat(ticker.price_usd, 10);
       case "btc":
@@ -38,6 +38,7 @@ class PriceWithConversions extends React.PureComponent {
           <Fragment key="nano">
             <FormattedNumber
               value={value}
+              minimumFractionDigits={Math.min(2, this.props.precision.nano)}
               maximumFractionDigits={this.props.precision.nano}
             />{" "}
             {config.currency}
