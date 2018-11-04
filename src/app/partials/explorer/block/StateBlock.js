@@ -48,7 +48,7 @@ export default class StateBlock extends React.Component {
             <PriceWithConversions
               amount={block.amount}
               currencies={["nano", "usd", "btc"]}
-              precision={{ nano: 30, btc: 6, usd: 4 }}
+              precision={{ nano: 20, btc: 6, usd: 4 }}
             />
           </small>
         </h4>
