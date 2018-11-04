@@ -187,7 +187,7 @@ class Account extends React.PureComponent {
           </title>
         </Helmet>
 
-        <div className="row align-items-center">
+        <div className="row align-items-center" style={{ overflow: "scroll" }}>
           <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
