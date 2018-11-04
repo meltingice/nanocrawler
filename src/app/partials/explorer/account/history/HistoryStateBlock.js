@@ -115,7 +115,7 @@ export default class HistoryStateBlock extends React.Component {
             {this.transactionSymbol()}
             <FormattedNumber
               value={block.amount || 0}
-              minimumFractionDigits={6}
+              minimumFractionDigits={2}
               maximumFractionDigits={6}
             />{" "}
             {config.currency}
