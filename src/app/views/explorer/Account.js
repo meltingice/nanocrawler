@@ -188,7 +188,7 @@ class Account extends React.PureComponent {
         </Helmet>
 
         <div className="row align-items-center">
-          <div className="col-lg">
+          <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
               {match.params.account}
@@ -209,7 +209,7 @@ class Account extends React.PureComponent {
 
             {this.getRepresentative()}
           </div>
-          <div className="col-auto mt-2 mt-lg-0">
+          <div className="col-auto">
             <div className="row">
               <div className="col-auto pr-0">
                 <AccountQR
