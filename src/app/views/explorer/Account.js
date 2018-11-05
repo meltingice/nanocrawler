@@ -77,6 +77,23 @@ class Account extends React.Component {
     );
   }
 
+  accountVersionBadge() {
+    const { version } = this.props;
+    const { formatMessage } = this.props.intl;
+
+    return (
+      <span
+        className="badge badge-info mr-1 tooltipped tooltipped-n tooltipped-multiline"
+        aria-label={formatMessage(
+          withDefault({ id: `account.version.${version}` })
+        )}
+        style={{ cursor: "help" }}
+      >
+        Version {version} <i className="fa fa-question-circle" />
+      </span>
+    );
+  }
+
   representativeOfflineWarning() {
     const { representativesOnline } = this.props.network;
     if (_.isEmpty(representativesOnline)) return;
@@ -141,6 +158,11 @@ class Account extends React.Component {
             </p>
 
             {this.getRepresentative()}
+
+            <p className="mb-0">
+              {this.representativeOnlineStatus()}
+              {this.accountVersionBadge()}
+            </p>
           </div>
           <div className="col-auto">
             <div className="row">
@@ -217,7 +239,6 @@ class Account extends React.Component {
 
     return (
       <p className="text-muted mb-0">
-        {this.representativeOnlineStatus()}
         <TranslatedMessage
           id="account.represented_by"
           values={{
