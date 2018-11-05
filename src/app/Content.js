@@ -100,6 +100,7 @@ class Content extends React.Component {
             path="/explorer/account/:account/:page"
             render={({ match, history, ...props }) => (
               <ExplorerAccount
+                key={match.params.account}
                 account={match.params.account}
                 match={match}
                 browserHistory={history}

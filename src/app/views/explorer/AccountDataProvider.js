@@ -186,7 +186,8 @@ export default function withAccountData(WrappedComponent) {
 
       this.setState({
         history: [event.block].concat(history),
-        blockCount: blockCount + 1
+        blockCount: blockCount + 1,
+        balance
       });
     }
 
