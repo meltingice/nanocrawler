@@ -213,6 +213,7 @@ export default function withAccountData(WrappedComponent) {
         {
           history: [event.block].concat(history),
           blockCount: blockCount + 1,
+          unopened: false,
           representative,
           pendingTransactions,
           balance
