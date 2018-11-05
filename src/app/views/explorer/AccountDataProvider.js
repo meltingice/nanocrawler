@@ -17,7 +17,6 @@ export default function withAccountData(WrappedComponent) {
     };
 
     state = {
-      _isMounted: true,
       balance: 0,
       pending: 0,
       representative: null,
@@ -25,6 +24,7 @@ export default function withAccountData(WrappedComponent) {
       blockCount: 0,
       version: "1",
       unopened: false,
+      loading: true,
 
       history: [],
       nextPageHead: null,
@@ -75,7 +75,7 @@ export default function withAccountData(WrappedComponent) {
           }
         );
       } catch (e) {
-        this.setState({ unopened: true });
+        this.setState({ unopened: true, loading: false });
       }
     }
 
@@ -94,10 +94,13 @@ export default function withAccountData(WrappedComponent) {
         const updatedHistory = history.concat(resp);
 
         this.setState({
+          loading: false,
           history: updatedHistory,
           nextPageHead: _.last(updatedHistory).hash
         });
-      } catch (e) {}
+      } catch (e) {
+        this.setState({ loading: false });
+      }
     }
 
     async fetchPending() {
