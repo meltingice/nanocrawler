@@ -8,6 +8,8 @@ import { apiClient } from "lib/Client";
 
 import AccountWebsocket from "lib/AccountWebsocket";
 
+const PENDING_INTERVAL = 60 * 1000;
+
 export default function withAccountData(WrappedComponent) {
   return class AccountDataProvider extends React.Component {
     static propTypes = {
@@ -112,7 +114,10 @@ export default function withAccountData(WrappedComponent) {
         });
 
         this.setState({ pendingTransactions });
-        this.pendingTimeout = setTimeout(this.fetchPending.bind(this), 10000);
+        this.pendingTimeout = setTimeout(
+          this.fetchPending.bind(this),
+          PENDING_INTERVAL
+        );
       } catch (e) {
         // We don't have to fail hard if this doesn't work
       }
@@ -210,7 +215,10 @@ export default function withAccountData(WrappedComponent) {
           balance
         },
         () => {
-          this.pendingTimeout = setTimeout(this.fetchPending.bind(this), 10000);
+          this.pendingTimeout = setTimeout(
+            this.fetchPending.bind(this),
+            PENDING_INTERVAL
+          );
         }
       );
     }
