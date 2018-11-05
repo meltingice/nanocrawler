@@ -117,12 +117,13 @@ export default function withAccountData(WrappedComponent) {
         });
 
         this.setState({ pendingTransactions });
+      } catch (e) {
+        // We don't have to fail hard if this doesn't work
+      } finally {
         this.pendingTimeout = setTimeout(
           this.fetchPending.bind(this),
           PENDING_INTERVAL
         );
-      } catch (e) {
-        // We don't have to fail hard if this doesn't work
       }
     }
 
@@ -209,9 +210,11 @@ export default function withAccountData(WrappedComponent) {
           break;
       }
 
+      history.unshift(event.block);
+
       this.setState(
         {
-          history: [event.block].concat(history),
+          history,
           blockCount: blockCount + 1,
           unopened: false,
           representative,
