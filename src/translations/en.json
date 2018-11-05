@@ -85,6 +85,10 @@
         "verified one with at least 95% uptime.",
     "account.rep_offline.desc":
         "An offline representative means this account is no longer voting. It does not affect transactions in any way.",
+    "account.version.0":
+        "This account has not been upgraded with an epoch block yet. This only means that this account can still accept non-state blocks.",
+    "account.version.1":
+        "This account has been upgraded with an epoch v1 block and can only accept state blocks.",
     "account.history": "History",
     "account.delegators": "Delegators",
     "account.represented_by": "Represented by {account}",
