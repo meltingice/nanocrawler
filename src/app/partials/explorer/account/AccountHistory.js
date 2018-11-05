@@ -11,6 +11,7 @@ import { apiClient } from "lib/Client";
 import AccountWebsocket from "lib/AccountWebsocket";
 
 export default function AccountHistory({
+  unopened,
   history,
   pendingTransactions,
   blockCount,
@@ -25,6 +26,7 @@ export default function AccountHistory({
     <Fragment>
       <PendingTransactions pendingTransactions={pendingTransactions} />
       <ReceivedTransactions history={history} blockCount={blockCount} />
+      {unopened && <UnopenedAccount />}
       <LoadMore loadMore={loadMore} hasMore={hasMore} />
     </Fragment>
   );

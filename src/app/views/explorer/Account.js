@@ -13,7 +13,6 @@ import AccountLink from "app/partials/AccountLink";
 import AccountQR from "app/partials/AccountQR";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 import NodeNinjaAccount from "app/partials/explorer/account/NodeNinjaAccount";
-import UnopenedAccount from "app/partials/explorer/account/UnopenedAccount";
 
 import AccountHistory from "app/partials/explorer/account/AccountHistory";
 import AccountDelegators from "app/partials/explorer/account/AccountDelegators";
@@ -112,10 +111,6 @@ class Account extends React.Component {
 
   render() {
     const { account, match, balance, pending, representative } = this.props;
-
-    if (this.props.unopened) {
-      return <UnopenedAccount account={account} />;
-    }
 
     return (
       <div className="p-4">
@@ -243,6 +238,7 @@ class Account extends React.Component {
   getAccountContent() {
     const {
       match,
+      unopened,
       account,
       history,
       pendingTransactions,
@@ -254,8 +250,11 @@ class Account extends React.Component {
 
     switch (match.params.page) {
       case "history":
-        return (
+        return this.props.loading ? (
+          <Loading />
+        ) : (
           <AccountHistory
+            unopened={unopened}
             history={history}
             pendingTransactions={pendingTransactions}
             blockCount={blockCount}
@@ -268,5 +267,11 @@ class Account extends React.Component {
     }
   }
 }
+
+const Loading = () => (
+  <div className="my-5 text-center">
+    <h2 className="text-muted">Loading transactions...</h2>
+  </div>
+);
 
 export default withAccountData(withNetworkData(injectIntl(Account)));
