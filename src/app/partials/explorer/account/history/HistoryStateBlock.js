@@ -10,36 +10,13 @@ import OptionalField from "../../../OptionalField";
 import { apiClient } from "lib/Client";
 import config from "client-config.json";
 
-export default class HistoryStateBlock extends React.Component {
-  state = {
-    sendBlock: null
-  };
-
-  componentDidMount() {
-    this.fetchSendBlock();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.block.hash !== this.props.block.hash) {
-      this.fetchSendBlock();
-    }
-  }
-
-  async fetchSendBlock() {
-    if (!["receive", "open"].includes(this.props.block.subtype)) return;
-
-    const { block } = this.props;
-    const sendBlock = await apiClient.block(block.link);
-    this.setState({ sendBlock });
-  }
-
+export default class HistoryStateBlock extends React.PureComponent {
   transactionAccount() {
     const { block } = this.props;
     switch (block.subtype) {
       case "receive":
       case "open":
-        const { sendBlock } = this.state;
-        return sendBlock ? sendBlock.block_account : null;
+        return block.account;
       case "send":
         return keyToPublicAccountId(block.link);
       case "change":
