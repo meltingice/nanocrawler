@@ -1,109 +1,51 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
 import _ from "lodash";
-import { Redirect, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
 import { TranslatedMessage, withDefault } from "lib/TranslatedMessage";
+import { withNetworkData } from "lib/NetworkContext";
 
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
-import AccountLink from "../../partials/AccountLink";
-import AccountQR from "../../partials/AccountQR";
-import PriceWithConversions from "../../partials/PriceWithConversions";
-import NodeNinjaAccount from "../../partials/explorer/account/NodeNinjaAccount";
-import UnopenedAccount from "../../partials/explorer/account/UnopenedAccount";
+import AccountLink from "app/partials/AccountLink";
+import AccountQR from "app/partials/AccountQR";
+import PriceWithConversions from "app/partials/PriceWithConversions";
+import NodeNinjaAccount from "app/partials/explorer/account/NodeNinjaAccount";
+import UnopenedAccount from "app/partials/explorer/account/UnopenedAccount";
 
-import AccountHistory from "../../partials/explorer/account/AccountHistory";
-import AccountDelegators from "../../partials/explorer/account/AccountDelegators";
+import AccountHistory from "app/partials/explorer/account/AccountHistory";
+import AccountDelegators from "app/partials/explorer/account/AccountDelegators";
 
-import { apiClient } from "lib/Client";
 import config from "client-config.json";
+import withAccountData from "./AccountDataProvider";
 
-class Account extends React.PureComponent {
-  constructor(props) {
-    super(props);
+class Account extends React.Component {
+  state = { uptime: null };
 
-    this.state = {
-      balance: 0,
-      pending: 0,
-      representative: null,
-      representativesOnline: {},
-      weight: 0,
-      block_count: 0,
-      failed: false,
-      unopened: false,
-      uptime: 0
-    };
-
-    this.accountTimeout = null;
-  }
-
-  async componentDidMount() {
-    this.fetchData();
-  }
-
-  componentWillUnmount() {
-    this.clearTimers();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params.account !== this.props.match.params.account) {
-      this.clearTimers();
-      this.fetchData();
-    }
-  }
-
-  async fetchData() {
-    await this.fetchAccount();
-    this.fetchOnlineReps();
+  componentDidMount() {
     this.fetchUptime();
   }
 
-  clearTimers() {
-    if (this.accountTimeout) clearTimeout(this.accountTimeout);
-  }
-
-  async fetchAccount() {
-    const { match } = this.props;
-    try {
-      const account = await apiClient.account(match.params.account);
-      account.block_count = parseInt(account.block_count, 10);
-      this.setState({ ...account, failed: false });
-
-      this.accountTimeout = setTimeout(this.fetchAccount.bind(this), 60000);
-    } catch (e) {
-      this.setState({ unopened: true });
-    }
-  }
-
-  async fetchOnlineReps() {
-    const representativesOnline = await apiClient.representativesOnline();
-    this.setState({ representativesOnline });
-  }
-
   async fetchUptime() {
-    const { match } = this.props;
-    const ninja = new NanoNodeNinja(match.params.account);
+    return;
+    const { account } = this.props;
+    const ninja = new NanoNodeNinja(account);
     await ninja.fetch();
     this.setState({ uptime: ninja.data.uptime });
   }
 
-  accountIsValid() {
-    const { match } = this.props;
-    return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(match.params.account);
-  }
-
   hasDelegatedWeight() {
-    const { weight } = this.state;
+    const { weight } = this.props;
     return weight > 0;
   }
 
   accountTitle() {
     const { formatMessage } = this.props.intl;
-    const { weight, unopened } = this.state;
+    const { weight, unopened } = this.props;
 
-    if (weight >= 133248.289)
+    if (weight >= config.maxCoinSupply * 0.001)
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (weight > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));
@@ -113,8 +55,8 @@ class Account extends React.PureComponent {
   }
 
   representativeOnline() {
-    const { representative } = this.state;
-    return _.keys(this.state.representativesOnline).includes(representative);
+    const { representative, network } = this.props;
+    return _.keys(network.representativesOnline).includes(representative);
   }
 
   representativeOnlineStatus() {
@@ -137,7 +79,8 @@ class Account extends React.PureComponent {
   }
 
   representativeOfflineWarning() {
-    if (_.isEmpty(this.state.representativesOnline)) return;
+    const { representativesOnline } = this.props.network;
+    if (_.isEmpty(representativesOnline)) return;
     if (!this.hasDelegatedWeight()) return;
     if (!this.state.uptime || this.state.uptime > 95) return;
 
@@ -168,22 +111,17 @@ class Account extends React.PureComponent {
   }
 
   render() {
-    const { match } = this.props;
-    const { balance, pending, representative } = this.state;
+    const { account, match, balance, pending, representative } = this.props;
 
-    if (!this.accountIsValid()) {
-      return this.redirect();
-    }
-
-    if (this.state.failed) {
-      return <UnopenedAccount account={match.params.account} />;
+    if (this.props.unopened) {
+      return <UnopenedAccount account={account} />;
     }
 
     return (
       <div className="p-4">
         <Helmet>
           <title>
-            {this.accountTitle()} - {match.params.account}
+            {this.accountTitle()} - {account}
           </title>
         </Helmet>
 
@@ -191,7 +129,7 @@ class Account extends React.PureComponent {
           <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
-              {match.params.account}
+              {account}
 
               <span
                 className="tooltipped tooltipped-e ml-1"
@@ -200,7 +138,7 @@ class Account extends React.PureComponent {
                 <Clipboard
                   component="span"
                   style={{ cursor: "pointer" }}
-                  data-clipboard-text={match.params.account}
+                  data-clipboard-text={account}
                 >
                   <i className="fa fa-clipboard" />
                 </Clipboard>
@@ -212,10 +150,7 @@ class Account extends React.PureComponent {
           <div className="col-auto">
             <div className="row">
               <div className="col-auto pr-0">
-                <AccountQR
-                  account={match.params.account}
-                  style={{ width: "80px" }}
-                />
+                <AccountQR account={account} style={{ width: "80px" }} />
               </div>
               <div className="col">
                 <PriceWithConversions
@@ -252,7 +187,7 @@ class Account extends React.PureComponent {
         <ul className="nav nav-pills justify-content-center my-3">
           <li className="nav-item">
             <NavLink
-              to={`/explorer/account/${match.params.account}/history`}
+              to={`/explorer/account/${account}/history`}
               className="nav-link nano"
               activeClassName="active"
               isActive={(m, l) => match.params.page === "history"}
@@ -262,7 +197,7 @@ class Account extends React.PureComponent {
           </li>
           <li className="nav-item">
             <NavLink
-              to={`/explorer/account/${match.params.account}/delegators`}
+              to={`/explorer/account/${account}/delegators`}
               className="nav-link nano"
               activeClassName="active"
               isActive={(m, l) => match.params.page === "delegators"}
@@ -274,7 +209,7 @@ class Account extends React.PureComponent {
 
         {this.representativeOfflineWarning()}
 
-        <NodeNinjaAccount account={match.params.account} />
+        <NodeNinjaAccount account={account} />
 
         {this.getAccountContent()}
       </div>
@@ -282,7 +217,7 @@ class Account extends React.PureComponent {
   }
 
   getRepresentative() {
-    const { representative } = this.state;
+    const { representative } = this.props;
     if (!representative) return;
 
     return (
@@ -306,30 +241,32 @@ class Account extends React.PureComponent {
   }
 
   getAccountContent() {
-    const { match } = this.props;
+    const {
+      match,
+      account,
+      history,
+      pendingTransactions,
+      blockCount,
+      loadMore,
+      hasMore,
+      weight
+    } = this.props;
 
     switch (match.params.page) {
       case "history":
         return (
           <AccountHistory
-            account={match.params.account}
-            blockCount={this.state.block_count}
-            balance={this.state.balance}
+            history={history}
+            pendingTransactions={pendingTransactions}
+            blockCount={blockCount}
+            loadMore={loadMore}
+            hasMore={hasMore}
           />
         );
       case "delegators":
-        return (
-          <AccountDelegators
-            account={match.params.account}
-            weight={this.state.weight}
-          />
-        );
+        return <AccountDelegators account={account} weight={weight} />;
     }
-  }
-
-  redirect() {
-    return <Redirect to="/explorer" />;
   }
 }
 
-export default injectIntl(Account);
+export default withAccountData(withNetworkData(injectIntl(Account)));

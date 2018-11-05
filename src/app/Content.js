@@ -8,7 +8,7 @@ import NodeStatus from "./views/LoadableNodeStatus";
 import NetworkStatus from "./views/LoadableNetworkStatus";
 
 import Explorer from "./views/Explorer";
-import ExplorerAccount from "./views/explorer/LoadableAccount";
+import ExplorerAccount from "./views/explorer/Account";
 import ExplorerBlock from "./views/explorer/LoadableBlock";
 import Accounts from "./views/explorer/LoadableAccounts";
 
@@ -98,7 +98,14 @@ class Content extends React.Component {
           />
           <Route
             path="/explorer/account/:account/:page"
-            component={ExplorerAccount}
+            render={({ match, history, ...props }) => (
+              <ExplorerAccount
+                account={match.params.account}
+                match={match}
+                browserHistory={history}
+                {...props}
+              />
+            )}
           />
 
           <Route path="/explorer/block/:block" component={ExplorerBlock} />

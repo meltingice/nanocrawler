@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import _ from "lodash";
 
 import config from "client-config.json";
@@ -14,13 +15,14 @@ export default function withAccountData(WrappedComponent) {
     };
 
     state = {
+      _isMounted: true,
       balance: 0,
       pending: 0,
       representative: null,
       weight: 0,
       blockCount: 0,
       version: "1",
-      opened: true,
+      unopened: false,
 
       history: [],
       nextPageHead: null,
@@ -30,6 +32,11 @@ export default function withAccountData(WrappedComponent) {
     accountTimeout = null;
     pendingTimeout = null;
     websocket = null;
+
+    accountIsValid() {
+      const { account } = this.props;
+      return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(account);
+    }
 
     async componentDidMount() {
       await this.fetchAccount();
@@ -56,7 +63,7 @@ export default function withAccountData(WrappedComponent) {
             weight: parseFloat(data.weight, 10),
             blockCount: parseFloat(data.block_count, 10),
             version: data.account_version,
-            opened: true
+            unopened: false
           },
           () => {
             this.accountTimeout = setTimeout(
@@ -66,7 +73,7 @@ export default function withAccountData(WrappedComponent) {
           }
         );
       } catch (e) {
-        this.setState({ opened: false });
+        this.setState({ unopened: true });
       }
     }
 
@@ -131,7 +138,7 @@ export default function withAccountData(WrappedComponent) {
     }
 
     async onWebsocketEvent(event) {
-      let { history, balance } = this.state;
+      let { history, balance, blockCount } = this.state;
       let representative;
 
       event.block.hash = event.hash;
@@ -184,13 +191,22 @@ export default function withAccountData(WrappedComponent) {
     }
 
     render() {
+      if (!this.accountIsValid()) {
+        return this.redirect();
+      }
+
       return (
         <WrappedComponent
           {...this.state}
+          {...this.props}
           loadMore={this.fetchHistory.bind(this)}
           hasMore={this.state.blockCount > this.state.history.length}
         />
       );
+    }
+
+    redirect() {
+      return <Redirect to="/explorer" />;
     }
   };
 }
