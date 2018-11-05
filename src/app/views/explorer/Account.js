@@ -120,7 +120,7 @@ class Account extends React.Component {
           </title>
         </Helmet>
 
-        <div className="row align-items-center" style={{ overflow: "scroll" }}>
+        <div className="row align-items-center" style={{ overflow: "auto" }}>
           <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
