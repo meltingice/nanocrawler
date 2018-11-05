@@ -138,8 +138,27 @@ export default function withAccountData(WrappedComponent) {
     }
 
     async onWebsocketEvent(event) {
-      let { history, balance, blockCount } = this.state;
-      let representative;
+      let {
+        history,
+        balance,
+        blockCount,
+        pendingTransactions,
+        representative
+      } = this.state;
+
+      if (this.pendingTimeout) clearTimeout(this.pendingTimeout);
+
+      const removeBlockFromPending = () => {
+        // Remove the transaction from pending transactions
+        const pendingIndex = pendingTransactions.blocks.findIndex(
+          block => block.hash === event.block.link
+        );
+
+        if (pendingIndex >= 0) {
+          pendingTransactions.blocks.splice(pendingIndex, 1);
+          pendingTransactions.total -= 1;
+        }
+      };
 
       event.block.hash = event.hash;
       event.block.timestamp = event.timestamp;
@@ -150,6 +169,9 @@ export default function withAccountData(WrappedComponent) {
           // Need to fetch the source block to get the sender
           const sendBlock = await apiClient.block(event.block.source);
           event.block.account = sendBlock.block_account;
+
+          removeBlockFromPending();
+
           break;
         case "send":
           event.block.account = event.block.destination;
@@ -167,28 +189,30 @@ export default function withAccountData(WrappedComponent) {
             balance += parseFloat(event.block.amount, 10);
             if (parseInt(event.block.previous, 16) === 0) {
               event.block.subtype = "open";
+              removeBlockFromPending();
             } else if (parseInt(event.block.link, 16) === 0) {
               event.block.subtype = "change";
             } else {
               event.block.subtype = "receive";
+              removeBlockFromPending();
             }
           }
 
           break;
       }
 
-      const updatedHistory = [event.block].concat(history);
-
-      // TODO - improve this so that we remove the new block from pending
-      // without requiring another network request.
-      clearTimeout(this.pendingTimeout);
-      this.fetchPending();
-
-      this.setState({
-        history: [event.block].concat(history),
-        blockCount: blockCount + 1,
-        balance
-      });
+      this.setState(
+        {
+          history: [event.block].concat(history),
+          blockCount: blockCount + 1,
+          representative,
+          pendingTransactions,
+          balance
+        },
+        () => {
+          this.pendingTimeout = setTimeout(this.fetchPending.bind(this), 10000);
+        }
+      );
     }
 
     render() {
