@@ -98,7 +98,15 @@ class Content extends React.Component {
           />
           <Route
             path="/explorer/account/:account/:page"
-            component={ExplorerAccount}
+            render={({ match, history, ...props }) => (
+              <ExplorerAccount
+                key={match.params.account}
+                account={match.params.account}
+                match={match}
+                browserHistory={history}
+                {...props}
+              />
+            )}
           />
 
           <Route path="/explorer/block/:block" component={ExplorerBlock} />

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import { withNetworkData } from "lib/NetworkContext";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
@@ -13,14 +14,13 @@ import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 import { apiClient } from "lib/Client";
 import config from "client-config.json";
 
-export default class NetworkStatus extends React.PureComponent {
+class NetworkStatus extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       blocksByType: {},
       peers: {},
-      representativesOnline: {},
       officialRepresentatives: {}
     };
 
@@ -39,7 +39,6 @@ export default class NetworkStatus extends React.PureComponent {
     this.setState({
       blocksByType: await apiClient.blockCountByType(),
       peers: await apiClient.peers(),
-      representativesOnline: await apiClient.representativesOnline(),
       officialRepresentatives: await apiClient.officialRepresentatives()
     });
 
@@ -51,7 +50,7 @@ export default class NetworkStatus extends React.PureComponent {
   }
 
   rebroadcastableReps() {
-    const { representativesOnline } = this.state;
+    const { representativesOnline } = this.props.network;
     return _.fromPairs(
       _.toPairs(representativesOnline).filter(rep => {
         return parseFloat(rep[1], 10) >= this.rebroadcastThreshold();
@@ -60,14 +59,14 @@ export default class NetworkStatus extends React.PureComponent {
   }
 
   onlineWeight() {
-    const { representativesOnline } = this.state;
+    const { representativesOnline } = this.props.network;
     return _.sum(
       _.values(representativesOnline).map(amt => parseFloat(amt, 10))
     );
   }
 
   onlineRebroadcastWeight() {
-    const { representativesOnline } = this.state;
+    const { representativesOnline } = this.props.network;
     return _.sum(
       _.values(representativesOnline)
         .map(amt => parseFloat(amt, 10))
@@ -176,7 +175,7 @@ export default class NetworkStatus extends React.PureComponent {
   }
 
   render() {
-    const { representativesOnline } = this.state;
+    const { representativesOnline } = this.props.network;
 
     return (
       <div className="p-4">
@@ -359,3 +358,5 @@ export default class NetworkStatus extends React.PureComponent {
     );
   }
 }
+
+export default withNetworkData(NetworkStatus);

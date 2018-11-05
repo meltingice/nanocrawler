@@ -32,7 +32,7 @@ export default function HistorySendBlock({ block }) {
       amount={
         <span className="text-danger">
           -<FormattedNumber
-            value={block.amount}
+            value={parseFloat(block.amount, 10)}
             minimumFractionDigits={6}
             maximumFractionDigits={2}
           />{" "}

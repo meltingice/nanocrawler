@@ -32,7 +32,7 @@ export default function HistoryReceiveBlock({ block, intl }) {
       amount={
         <span className="text-success">
           +<FormattedNumber
-            value={block.amount}
+            value={parseFloat(block.amount, 10)}
             maximumFractionDigits={6}
             minimumFractionDigits={2}
           />{" "}
