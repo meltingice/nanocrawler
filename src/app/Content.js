@@ -8,7 +8,7 @@ import NodeStatus from "./views/LoadableNodeStatus";
 import NetworkStatus from "./views/LoadableNetworkStatus";
 
 import Explorer from "./views/Explorer";
-import ExplorerAccount from "./views/explorer/Account";
+import ExplorerAccount from "./views/explorer/LoadableAccount";
 import ExplorerBlock from "./views/explorer/LoadableBlock";
 import Accounts from "./views/explorer/LoadableAccounts";
 

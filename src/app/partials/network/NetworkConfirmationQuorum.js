@@ -60,7 +60,7 @@ export default class NetworkConfirmationQuorum extends React.Component {
                 this.stakeBelowMinumum() ? "text-danger" : ""
               }`}
             >
-              <FormattedNumber value={peers_stake_total_mnano} /> NANO{" "}
+              <FormattedNumber value={peers_stake_total_mnano || 0} /> NANO{" "}
               <span
                 className={
                   this.stakeBelowMinumum() ? "text-danger" : "text-muted"
@@ -85,7 +85,9 @@ export default class NetworkConfirmationQuorum extends React.Component {
                   id="network.quorum.peers_total_weight_danger"
                   values={{
                     weight: (
-                      <FormattedNumber value={online_weight_minimum_mnano} />
+                      <FormattedNumber
+                        value={online_weight_minimum_mnano || 0}
+                      />
                     )
                   }}
                 />
@@ -93,7 +95,7 @@ export default class NetworkConfirmationQuorum extends React.Component {
             )}
 
             <h5 className="mb-0">
-              <FormattedNumber value={quorum_delta_mnano} /> NANO{" "}
+              <FormattedNumber value={quorum_delta_mnano || 0} /> NANO{" "}
               <span className="text-muted">
                 <TranslatedMessage id="network.quorum.delta" />
               </span>
