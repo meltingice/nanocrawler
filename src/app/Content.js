@@ -1,19 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
 
-import NodeStatus from "./views/LoadableNodeStatus";
-import NetworkStatus from "./views/LoadableNetworkStatus";
-
 import Explorer from "./views/Explorer";
-import ExplorerAccount from "./views/explorer/LoadableAccount";
-import ExplorerBlock from "./views/explorer/LoadableBlock";
-import Accounts from "./views/explorer/LoadableAccounts";
-
+import Loading from "./views/Loading";
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
+
+const NodeStatus = React.lazy(() => import("./views/NodeStatus"));
+const NetworkStatus = React.lazy(() => import("./views/NetworkStatus"));
+const ExplorerAccount = React.lazy(() => import("./views/explorer/Account"));
+const ExplorerBlock = React.lazy(() => import("./views/explorer/Block"));
+const Accounts = React.lazy(() => import("./views/explorer/Accounts"));
 
 class Content extends React.Component {
   state = {
@@ -56,62 +56,71 @@ class Content extends React.Component {
           <title>Nano Crawler</title>
         </Helmet>
 
-        <Switch>
-          <Route exact path="/" render={props => <Explorer {...props} />} />
-          <Route
-            exact
-            path="/network"
-            render={props => <NetworkStatus {...props} />}
-          />
-          <Route
-            exact
-            path="/status"
-            render={props => <NodeStatus {...props} />}
-          />
-          <Route exact path="/explorer" render={props => <Redirect to="/" />} />
-          <Route
-            exact
-            path="/explorer/accounts"
-            render={props => <Redirect to="/explorer/accounts/1" />}
-          />
-          <Route
-            path="/explorer/accounts/:page"
-            render={props => <Accounts {...props} />}
-          />
-          <Route
-            path="/explorer/auto/:query"
-            render={props => (
-              <Redirect
-                to={this.determineQueryDestination(props.match.params.query)}
-              />
-            )}
-          />
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <Route exact path="/" render={props => <Explorer {...props} />} />
+            <Route
+              exact
+              path="/network"
+              render={props => <NetworkStatus {...props} />}
+            />
+            <Route
+              exact
+              path="/status"
+              render={props => <NodeStatus {...props} />}
+            />
+            <Route
+              exact
+              path="/explorer"
+              render={props => <Redirect to="/" />}
+            />
+            <Route
+              exact
+              path="/explorer/accounts"
+              render={props => <Redirect to="/explorer/accounts/1" />}
+            />
+            <Route
+              path="/explorer/accounts/:page"
+              render={props => <Accounts {...props} />}
+            />
+            <Route
+              path="/explorer/auto/:query"
+              render={props => (
+                <Redirect
+                  to={this.determineQueryDestination(props.match.params.query)}
+                />
+              )}
+            />
 
-          <Route
-            exact
-            path="/explorer/account/:account"
-            render={props => (
-              <Redirect
-                to={`/explorer/account/${props.match.params.account}/history`}
-              />
-            )}
-          />
-          <Route
-            path="/explorer/account/:account/:page"
-            render={({ match, history, ...props }) => (
-              <ExplorerAccount
-                key={match.params.account}
-                account={match.params.account}
-                match={match}
-                browserHistory={history}
-                {...props}
-              />
-            )}
-          />
+            <Route
+              exact
+              path="/explorer/account/:account"
+              render={props => (
+                <Redirect
+                  to={`/explorer/account/${props.match.params.account}/history`}
+                />
+              )}
+            />
+            <Route
+              path="/explorer/account/:account/:page"
+              render={({ match, history, ...props }) => (
+                <ExplorerAccount
+                  key={match.params.account}
+                  account={match.params.account}
+                  match={match}
+                  browserHistory={history}
+                  {...props}
+                />
+              )}
+            />
 
-          <Route path="/explorer/block/:block" component={ExplorerBlock} />
-          <Route component={NotFound} />
-        </Switch>
+            <Route
+              path="/explorer/block/:block"
+              render={props => <ExplorerBlock {...props} />}
+            />
+            <Route component={NotFound} />
+          </Switch>
+        </Suspense>
       </div>
     );
   }
