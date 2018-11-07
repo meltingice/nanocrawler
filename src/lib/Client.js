@@ -78,7 +78,7 @@ class Client {
   }
 
   async representativesOnline() {
-    const resp = await this.fetch("representatives_online");
+    const resp = await this.fetch("v2/representatives/online");
     return (await resp.json()).representatives;
   }
 

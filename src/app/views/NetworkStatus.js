@@ -11,6 +11,7 @@ import NetworkConfirmationQuorum from "../partials/network/NetworkConfirmationQu
 import PeerVersions from "../partials/PeerVersions";
 
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 class NetworkStatus extends React.Component {
@@ -52,7 +53,7 @@ class NetworkStatus extends React.Component {
     const { representativesOnline } = this.props.network;
     return _.fromPairs(
       _.toPairs(representativesOnline).filter(rep => {
-        return parseFloat(rep[1], 10) >= this.rebroadcastThreshold();
+        return Currency.fromRaw(rep[1]) >= this.rebroadcastThreshold();
       })
     );
   }
@@ -60,7 +61,7 @@ class NetworkStatus extends React.Component {
   onlineWeight() {
     const { representativesOnline } = this.props.network;
     return _.sum(
-      _.values(representativesOnline).map(amt => parseFloat(amt, 10))
+      _.values(representativesOnline).map(amt => Currency.fromRaw(amt))
     );
   }
 
@@ -68,7 +69,7 @@ class NetworkStatus extends React.Component {
     const { representativesOnline } = this.props.network;
     return _.sum(
       _.values(representativesOnline)
-        .map(amt => parseFloat(amt, 10))
+        .map(amt => Currency.fromRaw(amt))
         .filter(amt => amt >= this.rebroadcastThreshold())
     );
   }
