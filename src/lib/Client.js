@@ -16,8 +16,8 @@ class Client {
   }
 
   async weight(account) {
-    const resp = await this.fetch(`account/${account}/weight`);
-    return parseFloat((await resp.json()).weight, 10);
+    const resp = await this.fetch(`v2/accounts/${account}/weight`);
+    return (await resp.json()).weight;
   }
 
   async blockCount() {
