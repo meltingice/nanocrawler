@@ -15,12 +15,14 @@ export default {
   addRaw: (...values) => {
     return values
       .map(v => BigNumber(v.toString()))
-      .reduce((acc, v) => acc.plus(v));
+      .reduce((acc, v) => acc.plus(v))
+      .toString();
   },
 
   subtractRaw: (...values) => {
     return values
       .map(v => BigNumber(v.toString()))
-      .reduce((acc, v) => acc.minus(v));
+      .reduce((acc, v) => acc.minus(v))
+      .toString();
   }
 };
