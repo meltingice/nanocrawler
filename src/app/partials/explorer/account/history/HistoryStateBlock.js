@@ -8,6 +8,7 @@ import BlockLink from "../../../BlockLink";
 import { keyToPublicAccountId, formatTimestamp } from "lib/util";
 import OptionalField from "../../../OptionalField";
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 export default class HistoryStateBlock extends React.PureComponent {
@@ -90,12 +91,18 @@ export default class HistoryStateBlock extends React.PureComponent {
         amount={
           <span className={this.statusClass()}>
             {this.transactionSymbol()}
-            <FormattedNumber
-              value={parseFloat(block.amount || 0, 10)}
-              minimumFractionDigits={2}
-              maximumFractionDigits={6}
-            />{" "}
-            {config.currency}
+            {block.amount ? (
+              <Fragment>
+                <FormattedNumber
+                  value={Currency.fromRaw(block.amount)}
+                  minimumFractionDigits={2}
+                  maximumFractionDigits={6}
+                />{" "}
+                {config.currency}
+              </Fragment>
+            ) : (
+              "N/A"
+            )}
           </span>
         }
         date={<OptionalField value={formatTimestamp(block.timestamp)} />}

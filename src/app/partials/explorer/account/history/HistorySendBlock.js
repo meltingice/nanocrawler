@@ -7,6 +7,7 @@ import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 export default function HistorySendBlock({ block }) {
@@ -32,7 +33,7 @@ export default function HistorySendBlock({ block }) {
       amount={
         <span className="text-danger">
           -<FormattedNumber
-            value={parseFloat(block.amount, 10)}
+            value={Currency.fromRaw(block.amount)}
             minimumFractionDigits={6}
             maximumFractionDigits={2}
           />{" "}
