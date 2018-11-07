@@ -59,10 +59,10 @@ export default function withAccountData(WrappedComponent) {
         const data = await apiClient.account(account);
         this.setState(
           {
-            balance: parseFloat(data.balance, 10),
-            pending: parseFloat(data.pending, 10),
+            balance: data.balance,
+            pending: data.pending,
             representative: data.representative,
-            weight: parseFloat(data.weight, 10),
+            weight: data.weight,
             blockCount: parseFloat(data.block_count, 10),
             version: data.account_version,
             unopened: false

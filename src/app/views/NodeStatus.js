@@ -28,7 +28,7 @@ export default class NodeStatus extends React.PureComponent {
     this.setState(
       {
         version: await apiClient.version(),
-        account: await apiClient.account()
+        account: await apiClient.nodeAccount()
       },
       () => this.updateStats()
     );

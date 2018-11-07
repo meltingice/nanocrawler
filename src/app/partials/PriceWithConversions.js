@@ -1,29 +1,38 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { withTicker } from "lib/TickerContext";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 class PriceWithConversions extends React.PureComponent {
   static defaultProps = {
-    nano: true,
+    currencies: ["base"],
     precision: {
-      nano: 6,
+      base: 6,
       btc: 6,
       usd: 2
     }
   };
 
+  get amount() {
+    if (this.props.raw) {
+      return Currency.fromRaw(this.props.amount);
+    }
+
+    return parseFloat(this.props.amount, 10);
+  }
+
   getValueForCurrency(cur) {
-    const { amount, ticker } = this.props;
+    const { ticker } = this.props;
     if (!ticker) return 0;
 
     switch (cur) {
-      case "nano":
-        return parseFloat(amount, 10);
+      case "base":
+        return this.amount;
       case "usd":
-        return amount * parseFloat(ticker.price_usd, 10);
+        return this.amount * parseFloat(ticker.price_usd, 10);
       case "btc":
-        return amount * parseFloat(ticker.price_btc, 10);
+        return this.amount * parseFloat(ticker.price_btc, 10);
       default:
         return new Error(`${cur} is not currently supported`);
     }
@@ -33,13 +42,13 @@ class PriceWithConversions extends React.PureComponent {
     const value = this.getValueForCurrency(cur);
 
     switch (cur) {
-      case "nano":
+      case "base":
         return (
-          <Fragment key="nano">
+          <Fragment>
             <FormattedNumber
               value={value}
-              minimumFractionDigits={Math.min(2, this.props.precision.nano)}
-              maximumFractionDigits={this.props.precision.nano}
+              minimumFractionDigits={Math.min(2, this.props.precision.base)}
+              maximumFractionDigits={this.props.precision.base}
             />{" "}
             {config.currency}
           </Fragment>

@@ -5,8 +5,13 @@ class Client {
     this.host = config.server;
   }
 
-  async account(account = "") {
-    const resp = await this.fetch(`account/${account}`);
+  async nodeAccount() {
+    const resp = await this.fetch("account");
+    return (await resp.json()).account;
+  }
+
+  async account(account) {
+    const resp = await this.fetch(`v2/accounts/${account}`);
     return (await resp.json()).account;
   }
 
