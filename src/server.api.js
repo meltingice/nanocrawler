@@ -16,13 +16,8 @@ app.use(function(err, req, res, next) {
   res.status(500).send({ error: err.message });
 });
 
-require("./server/responders/accounts").default(app, nano);
-require("./server/responders/api").default(app, nano);
-require("./server/responders/blocks").default(app, nano);
-require("./server/responders/network").default(app, nano);
-require("./server/responders/peers").default(app, nano);
-require("./server/responders/representatives").default(app, nano);
-require("./server/responders/system").default(app, nano);
+import apiV1 from "./server/responders/v1";
+app.use(apiV1(nano));
 
 app.get("/", (req, res) => {
   res.redirect(config.clientUrl);

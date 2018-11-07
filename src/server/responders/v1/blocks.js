@@ -1,6 +1,6 @@
 import _ from "lodash";
-import redisFetch from "../helpers/redisFetch";
-import { processBlock, getTimestampForHash } from "../helpers/util";
+import redisFetch from "../../helpers/redisFetch";
+import { processBlock, getTimestampForHash } from "../../helpers/util";
 
 export default function(app, nano) {
   app.get("/block/:hash", async (req, res) => {

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import redisFetch from "../helpers/redisFetch";
+import redisFetch from "../../helpers/redisFetch";
 
 export default function(app, nano) {
   app.get("/peer_count", async (req, res) => {
