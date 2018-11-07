@@ -83,7 +83,7 @@ class Client {
   }
 
   async officialRepresentatives() {
-    const resp = await this.fetch("official_representatives");
+    const resp = await this.fetch("v2/representatives/official");
     return (await resp.json()).representatives;
   }
 

@@ -99,7 +99,7 @@ class NetworkStatus extends React.Component {
   officialWeight() {
     const { officialRepresentatives } = this.state;
     return _.sum(
-      _.values(officialRepresentatives).map(amt => parseFloat(amt, 10))
+      _.values(officialRepresentatives).map(amt => Currency.fromRaw(amt))
     );
   }
 
