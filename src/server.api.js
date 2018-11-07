@@ -3,6 +3,9 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
+import apiV1 from "./server/responders/v1";
+import apiV2 from "./server/responders/v2";
+
 import config from "../server-config.json";
 
 const app = express();
@@ -16,8 +19,8 @@ app.use(function(err, req, res, next) {
   res.status(500).send({ error: err.message });
 });
 
-import apiV1 from "./server/responders/v1";
 app.use(apiV1(nano));
+app.use("/v2", apiV2(nano));
 
 app.get("/", (req, res) => {
   res.redirect(config.clientUrl);
