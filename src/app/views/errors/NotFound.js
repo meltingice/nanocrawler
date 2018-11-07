@@ -1,6 +1,5 @@
 import React from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import carlos from "./404.gif";
 
 export default function NotFound() {
   return (
@@ -10,7 +9,6 @@ export default function NotFound() {
         <h3 className="mb-4">
           <TranslatedMessage id="error.not_found" />
         </h3>
-        <img src={carlos} className="mw-100" />
       </div>
     </div>
   );
