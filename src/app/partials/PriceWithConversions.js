@@ -44,7 +44,7 @@ class PriceWithConversions extends React.PureComponent {
     switch (cur) {
       case "base":
         return (
-          <Fragment>
+          <Fragment key="base">
             <FormattedNumber
               value={value}
               minimumFractionDigits={Math.min(2, this.props.precision.base)}

@@ -5,6 +5,7 @@ import _ from "lodash";
 
 import config from "client-config.json";
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 
 import AccountWebsocket from "lib/AccountWebsocket";
 
@@ -171,9 +172,11 @@ export default function withAccountData(WrappedComponent) {
 
       event.block.hash = event.hash;
       event.block.timestamp = event.timestamp;
+      event.block.amount = Currency.toRaw(event.block.amount);
+
       switch (event.block.type) {
         case "receive":
-          balance += parseFloat(event.block.amount, 10);
+          balance = Currency.addRaw(balance, event.block.amount);
 
           // Need to fetch the source block to get the sender
           const sendBlock = await apiClient.block(event.block.source);
@@ -184,7 +187,8 @@ export default function withAccountData(WrappedComponent) {
           break;
         case "send":
           event.block.account = event.block.destination;
-          balance -= parseFloat(event.block.amount, 10);
+          balance = Currency.subtractRaw(balance, event.block.amount);
+
           break;
         case "change":
           representative = event.block.representative;
@@ -192,10 +196,12 @@ export default function withAccountData(WrappedComponent) {
         case "state":
           representative = event.block.representative;
           if (event.is_send === "true") {
-            balance -= parseFloat(event.block.amount, 10);
+            balance = Currency.subtractRaw(balance, event.block.amount);
+
             event.block.subtype = "send";
           } else {
-            balance += parseFloat(event.block.amount, 10);
+            balance = Currency.addRaw(balance, event.block.amount);
+
             if (parseInt(event.block.previous, 16) === 0) {
               event.block.subtype = "open";
               removeBlockFromPending();

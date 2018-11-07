@@ -68,7 +68,7 @@ class Client {
   }
 
   async block(hash) {
-    const resp = await this.fetch(`block/${hash}`);
+    const resp = await this.fetch(`v2/blocks/${hash}`);
     return await resp.json();
   }
 

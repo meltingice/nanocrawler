@@ -5,5 +5,22 @@ export default {
   fromRaw: raw => {
     const value = BigNumber(raw.toString());
     return value.shiftedBy((config.currencyRawPrecision || 30) * -1).toNumber();
+  },
+
+  toRaw: mvalue => {
+    const value = BigNumber(mvalue.toString());
+    return value.shiftedBy(30).toString();
+  },
+
+  addRaw: (...values) => {
+    return values
+      .map(v => BigNumber(v.toString()))
+      .reduce((acc, v) => acc.plus(v));
+  },
+
+  subtractRaw: (...values) => {
+    return values
+      .map(v => BigNumber(v.toString()))
+      .reduce((acc, v) => acc.minus(v));
   }
 };
