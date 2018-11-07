@@ -69,9 +69,7 @@ export default class AccountLink extends React.PureComponent {
       <VisibilitySensor onChange={this.visibilityChanged.bind(this)}>
         <Link
           className="break-word"
-          to={`/explorer/account/${account}/${
-            delegators ? "delegators" : "history"
-          }`}
+          to={`/account/${account}/${delegators ? "delegators" : "history"}`}
           {...otherProps}
         >
           {this.accountName()}

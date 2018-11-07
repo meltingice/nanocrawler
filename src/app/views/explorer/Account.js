@@ -204,7 +204,7 @@ class Account extends React.Component {
         <ul className="nav nav-pills justify-content-center my-3">
           <li className="nav-item">
             <NavLink
-              to={`/explorer/account/${account}/history`}
+              to={`/account/${account}/history`}
               className="nav-link nano"
               activeClassName="active"
               isActive={(m, l) => match.params.page === "history"}
@@ -214,7 +214,7 @@ class Account extends React.Component {
           </li>
           <li className="nav-item">
             <NavLink
-              to={`/explorer/account/${account}/delegators`}
+              to={`/account/${account}/delegators`}
               className="nav-link nano"
               activeClassName="active"
               isActive={(m, l) => match.params.page === "delegators"}

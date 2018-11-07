@@ -28,9 +28,9 @@ class Content extends React.Component {
 
   determineQueryDestination(search) {
     if (/^(xrb_|nano_)\w+/.test(search)) {
-      return `/explorer/account/${search}`;
+      return `/account/${search}`;
     } else if (/[A-F0-9]{64}/.test(search)) {
-      return `/explorer/block/${search}`;
+      return `/block/${search}`;
     } else {
       return "/not_found";
     }
@@ -54,9 +54,8 @@ class Content extends React.Component {
 
         <Switch>
           <Route exact path="/" render={props => <Explorer {...props} />} />
-          <Route exact path="/explorer" render={props => <Redirect to="/" />} />
           <Route
-            path="/explorer/auto/:query"
+            path="/auto/:query"
             render={props => (
               <Redirect
                 to={this.determineQueryDestination(props.match.params.query)}
@@ -66,15 +65,13 @@ class Content extends React.Component {
 
           <Route
             exact
-            path="/explorer/account/:account"
+            path="/account/:account"
             render={props => (
-              <Redirect
-                to={`/explorer/account/${props.match.params.account}/history`}
-              />
+              <Redirect to={`/account/${props.match.params.account}/history`} />
             )}
           />
           <Route
-            path="/explorer/account/:account/:page"
+            path="/account/:account/:page"
             render={({ match, history, ...props }) => (
               <ExplorerAccount
                 key={match.params.account}
@@ -86,7 +83,7 @@ class Content extends React.Component {
             )}
           />
 
-          <Route path="/explorer/block/:block" component={ExplorerBlock} />
+          <Route path="/block/:block" component={ExplorerBlock} />
           <Route component={NotFound} />
         </Switch>
       </div>

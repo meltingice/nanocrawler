@@ -8,6 +8,7 @@ import { withTranslations } from "./lib/TranslationContext";
 import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
+import LanguageChooser from "./app/partials/LanguageChooser";
 
 function App({ locale }) {
   return (
@@ -27,6 +28,9 @@ function App({ locale }) {
                 </a>
               </p>
             </div>
+          </div>
+          <div className="col-auto">
+            <LanguageChooser />
           </div>
         </div>
       </div>

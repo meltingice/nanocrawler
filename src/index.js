@@ -15,7 +15,7 @@ ReactDOM.render(
   <TranslationProvider>
     <TickerProvider>
       <NetworkProvider>
-        <Router>
+        <Router basename="/explore">
           <App />
         </Router>
       </NetworkProvider>

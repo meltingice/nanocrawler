@@ -246,7 +246,7 @@ export default function withAccountData(WrappedComponent) {
     }
 
     redirect() {
-      return <Redirect to="/explorer" />;
+      return <Redirect to="/" />;
     }
   };
 }

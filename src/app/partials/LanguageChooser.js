@@ -11,6 +11,8 @@ import {
 import config from "../../client-config.json";
 import { withTranslations } from "lib/TranslationContext";
 
+import "./LanguageChooser.css";
+
 class LanguageChooser extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -43,12 +45,13 @@ class LanguageChooser extends React.PureComponent {
       <Dropdown
         isOpen={this.state.menuOpen}
         toggle={this.toggle.bind(this)}
+        direction="up"
         inNavbar
       >
         <DropdownToggle caret>
           <i className="fa fa-globe" /> {this.languageToName(locale.language)}
         </DropdownToggle>
-        <DropdownMenu right>
+        <DropdownMenu right className="dropdown-menu-constrained">
           {_.map(supportedLanguages, (name, code) => (
             <DropdownItem key={code} onClick={() => locale.setLanguage(code)}>
               {name}
