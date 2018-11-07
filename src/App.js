@@ -19,9 +19,9 @@ function App({ locale }) {
         <hr />
 
         <div className="row mr-0 align-items-center">
-          <div className="col-md">
+          <div className="col">
             <div className="py-2 px-4">
-              <p>
+              <p className="mb-0">
                 Powered by{" "}
                 <a href="https://nanocrawler.cc" target="_blank">
                   NanoCrawler
