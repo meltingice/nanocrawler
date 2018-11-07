@@ -31,7 +31,7 @@ class Content extends React.Component {
   }
 
   determineQueryDestination(search) {
-    if (/^(xrb_|nano_)\w+/.test(search)) {
+    if (/^\w+_[A-Za-z0-9]{59,60}$/.test(search)) {
       return `/explorer/account/${search}`;
     } else if (/[A-F0-9]{64}/.test(search)) {
       return `/explorer/block/${search}`;

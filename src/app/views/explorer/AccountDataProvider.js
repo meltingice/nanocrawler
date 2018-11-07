@@ -38,7 +38,7 @@ export default function withAccountData(WrappedComponent) {
 
     accountIsValid() {
       const { account } = this.props;
-      return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(account);
+      return /^\w+_[A-Za-z0-9]{59,60}$/.test(account);
     }
 
     async componentDidMount() {

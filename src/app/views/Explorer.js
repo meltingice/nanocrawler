@@ -18,7 +18,7 @@ class Explorer extends React.PureComponent {
     const { history } = this.props;
     const { search } = this.state;
 
-    if (/^(xrb_|nano_)\w+/.test(search)) {
+    if (/^\w+_[A-Za-z0-9]{59,60}$/.test(search)) {
       history.push(`/explorer/account/${search}`);
     } else if (/[A-F0-9]{64}/.test(search)) {
       history.push(`/explorer/block/${search}`);

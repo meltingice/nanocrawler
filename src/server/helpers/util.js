@@ -5,7 +5,7 @@ import config from "../../../server-config.json";
 const nano = new Nano({ url: config.nodeHost });
 
 export function accountIsValid(account) {
-  return /^(xrb_|nano_)/.test(account);
+  return /^\w+_[A-Za-z0-9]{59,60}$/.test(account);
 }
 
 export async function getTimestampForHash(hash) {
