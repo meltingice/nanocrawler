@@ -73,8 +73,8 @@ class Client {
   }
 
   async delegators(account) {
-    const resp = await this.fetch(`account/${account}/delegators`);
-    return await resp.json();
+    const resp = await this.fetch(`v2/accounts/${account}/delegators`);
+    return (await resp.json()).delegators;
   }
 
   async representativesOnline() {
