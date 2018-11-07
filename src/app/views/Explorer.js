@@ -3,10 +3,6 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
-import RandomVerifiedAccounts from "app/partials/explorer/RandomVerifiedAccounts";
-import ExplorerTopAccounts from "app/partials/explorer/ExplorerTopAccounts";
-import RecentBlockStream from "app/partials/explorer/RecentBlockStream";
-
 class Explorer extends React.PureComponent {
   state = {
     search: "",
@@ -66,16 +62,6 @@ class Explorer extends React.PureComponent {
               </div>
             </div>
           </form>
-
-          <RandomVerifiedAccounts count={5} />
-
-          <div className="mt-5">
-            <ExplorerTopAccounts count={5} />
-          </div>
-
-          <div className="mt-5">
-            <RecentBlockStream count={10} />
-          </div>
         </div>
       </div>
     );

@@ -4,13 +4,9 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
 
-import NodeStatus from "./views/LoadableNodeStatus";
-import NetworkStatus from "./views/LoadableNetworkStatus";
-
 import Explorer from "./views/Explorer";
 import ExplorerAccount from "./views/explorer/LoadableAccount";
 import ExplorerBlock from "./views/explorer/LoadableBlock";
-import Accounts from "./views/explorer/LoadableAccounts";
 
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
@@ -58,26 +54,7 @@ class Content extends React.Component {
 
         <Switch>
           <Route exact path="/" render={props => <Explorer {...props} />} />
-          <Route
-            exact
-            path="/network"
-            render={props => <NetworkStatus {...props} />}
-          />
-          <Route
-            exact
-            path="/status"
-            render={props => <NodeStatus {...props} />}
-          />
           <Route exact path="/explorer" render={props => <Redirect to="/" />} />
-          <Route
-            exact
-            path="/explorer/accounts"
-            render={props => <Redirect to="/explorer/accounts/1" />}
-          />
-          <Route
-            path="/explorer/accounts/:page"
-            render={props => <Accounts {...props} />}
-          />
           <Route
             path="/explorer/auto/:query"
             render={props => (
