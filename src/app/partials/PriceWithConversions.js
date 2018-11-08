@@ -50,7 +50,7 @@ class PriceWithConversions extends React.PureComponent {
               minimumFractionDigits={Math.min(2, this.props.precision.base)}
               maximumFractionDigits={this.props.precision.base}
             />{" "}
-            {config.currency}
+            {config.currency.shortName}
           </Fragment>
         );
       case "usd":

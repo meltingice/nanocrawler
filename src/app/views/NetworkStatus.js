@@ -46,7 +46,7 @@ class NetworkStatus extends React.Component {
   }
 
   rebroadcastThreshold() {
-    return config.maxCoinSupply * 0.001;
+    return config.currency.maxSupply * 0.001;
   }
 
   rebroadcastableReps() {
@@ -78,7 +78,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         {(
-          (this.onlineRebroadcastWeight() / config.maxCoinSupply) *
+          (this.onlineRebroadcastWeight() / config.currency.maxSupply) *
           100.0
         ).toFixed(2)}%
       </Fragment>
@@ -110,7 +110,7 @@ class NetworkStatus extends React.Component {
           value={this.onlineWeight()}
           maximumFractionDigits={0}
         />{" "}
-        {config.currency}
+        {config.currency.shortName}
       </Fragment>
     );
   }
@@ -119,7 +119,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         <FormattedNumber
-          value={(this.onlineWeight() / config.maxCoinSupply) * 100.0}
+          value={(this.onlineWeight() / config.currency.maxSupply) * 100.0}
           maximumFractionDigits={2}
         />%
       </Fragment>
@@ -133,7 +133,7 @@ class NetworkStatus extends React.Component {
           value={this.officialWeight()}
           maximumFractionDigits={0}
         />{" "}
-        {config.currency}
+        {config.currency.shortName}
       </Fragment>
     );
   }
@@ -142,7 +142,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         <FormattedNumber
-          value={(this.officialWeight() / config.maxCoinSupply) * 100}
+          value={(this.officialWeight() / config.currency.maxSupply) * 100}
           maximumFractionDigits={2}
         />%
       </Fragment>
@@ -297,7 +297,7 @@ class NetworkStatus extends React.Component {
                         value={this.onlineRebroadcastWeight()}
                         maximumFractionDigits={0}
                       />{" "}
-                      {config.currency}
+                      {config.currency.shortName}
                     </span>
                   )
                 }}

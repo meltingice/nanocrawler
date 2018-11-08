@@ -1,3 +1,5 @@
+import config from "client-config.json";
+
 export default class NanoNodeNinja {
   constructor(account) {
     this.account = account;
@@ -6,6 +8,7 @@ export default class NanoNodeNinja {
   }
 
   async fetch() {
+    if (!config.currency.supportsMyNanoNinja) return;
     if (!this.account) return;
 
     try {

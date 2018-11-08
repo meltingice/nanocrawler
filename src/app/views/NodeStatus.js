@@ -116,7 +116,7 @@ export default class NodeStatus extends React.PureComponent {
                 value={Currency.fromRaw(weight)}
                 maximumFractionDigits={0}
               />{" "}
-              {config.currency}
+              {config.currency.shortName}
             </h2>
           </div>
           <div className="col-sm text-sm-center">

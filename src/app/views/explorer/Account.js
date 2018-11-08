@@ -45,7 +45,7 @@ class Account extends React.Component {
     const { formatMessage } = this.props.intl;
     const { weight, unopened } = this.props;
 
-    if (weight >= config.maxCoinSupply * 0.001)
+    if (weight >= config.currency.maxSupply * 0.001)
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (weight > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));
@@ -190,7 +190,8 @@ class Account extends React.Component {
                             minimumFractionDigits={2}
                             maximumFractionDigits={6}
                           />{" "}
-                          {config.currency} <TranslatedMessage id="pending" />
+                          {config.currency.shortName}{" "}
+                          <TranslatedMessage id="pending" />
                         </p>
                       </Fragment>
                     );

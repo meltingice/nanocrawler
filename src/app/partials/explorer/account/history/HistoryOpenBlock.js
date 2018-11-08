@@ -37,7 +37,7 @@ export default function HistoryOpenBlock({ block, intl }) {
             maximumFractionDigits={6}
             minimumFractionDigits={2}
           />{" "}
-          {config.currency}
+          {config.currency.shortName}
         </span>
       }
       date={<OptionalField value={formatTimestamp(block.timestamp)} />}

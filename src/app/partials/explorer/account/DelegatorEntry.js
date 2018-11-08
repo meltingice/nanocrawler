@@ -15,7 +15,7 @@ export default function DelegatorEntry({ account, balance }) {
           value={Currency.fromRaw(balance)}
           maximumFractionDigits={6}
         />{" "}
-        {config.currency}
+        {config.currency.shortName}
       </td>
     </tr>
   );

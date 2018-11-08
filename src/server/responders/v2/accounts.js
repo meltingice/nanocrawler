@@ -104,7 +104,6 @@ export default function(app, nano) {
         `v2/history/${req.params.account}/${req.query.head}`,
         10,
         async () => {
-          // const resp = await nano.accounts.history(req.params.account, 20);
           const resp = (await nano.rpc("account_history", {
             account: req.params.account,
             count: 50,

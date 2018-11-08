@@ -187,7 +187,7 @@ const PeerEntry = ({ peer, currentBlock }) => {
           {value => (
             <Fragment>
               <FormattedNumber value={value} maximumFractionDigits={2} />{" "}
-              {config.currency}
+              {config.currency.shortName}
             </Fragment>
           )}
         </OptionalField>

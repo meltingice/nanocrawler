@@ -37,7 +37,7 @@ export default function HistorySendBlock({ block }) {
             minimumFractionDigits={6}
             maximumFractionDigits={2}
           />{" "}
-          {config.currency}
+          {config.currency.shortName}
         </span>
       }
       date={<OptionalField value={formatTimestamp(block.timestamp)} />}

@@ -97,7 +97,7 @@ export default class HistoryStateBlock extends React.PureComponent {
                   minimumFractionDigits={2}
                   maximumFractionDigits={6}
                 />{" "}
-                {config.currency}
+                {config.currency.shortName}
               </Fragment>
             ) : (
               "N/A"
