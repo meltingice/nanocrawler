@@ -11,7 +11,7 @@ async function calculateAccountList() {
 
   const frontierCount = (await nano.rpc("frontier_count")).count;
   const data = (await nano.rpc("frontiers", {
-    account: "xrb_1111111111111111111111111111111111111111111111111111hifc8npp",
+    account: "ban_1111111111111111111111111111111111111111111111111111hifc8npp",
     count: frontierCount
   })).frontiers;
 
@@ -25,8 +25,8 @@ async function calculateAccountList() {
     const resp = await nano.accounts.balances(accountChunks[i]);
     _.forEach(resp.balances, (balances, account) => {
       const balance =
-        parseFloat(nano.convert.fromRaw(balances.balance, "mrai"), 10) +
-        parseFloat(nano.convert.fromRaw(balances.pending, "mrai"), 10);
+        parseFloat(nano.convert.fromRaw(balances.balance, "mrai"), 10) * 10 +
+        parseFloat(nano.convert.fromRaw(balances.pending, "mrai"), 10) * 10;
 
       if (parseFloat(balance, 10) < 0.000001) {
         accountsToRemove.push(account);
