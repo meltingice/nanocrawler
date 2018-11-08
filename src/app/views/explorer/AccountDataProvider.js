@@ -215,6 +215,11 @@ export default function withAccountData(WrappedComponent) {
               event.block.subtype = "change";
             } else {
               event.block.subtype = "receive";
+
+              // Need to fetch the source block to get the sender
+              const sendBlock = await apiClient.block(event.block.link);
+              event.block.account = sendBlock.block_account;
+
               removeBlockFromPending();
             }
           }
