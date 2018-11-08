@@ -5,6 +5,7 @@ import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
 import { formatTimestamp } from "lib/util";
+import config from "client-config.json";
 
 export default class StateBlock extends React.Component {
   render() {
@@ -58,7 +59,10 @@ export default class StateBlock extends React.Component {
         </p>
         <p>
           <small>
-            <TranslatedMessage id="block.send.amount_desc" />
+            <TranslatedMessage
+              id="block.send.amount_desc"
+              values={{ currencyShortName: config.currency.shortName }}
+            />
           </small>
         </p>
 

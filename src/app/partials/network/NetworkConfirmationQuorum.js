@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedNumber } from "react-intl";
 import { apiClient } from "lib/Client";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import config from "client-config.json";
 
 export default class NetworkConfirmationQuorum extends React.Component {
   constructor(props) {
@@ -84,6 +85,7 @@ export default class NetworkConfirmationQuorum extends React.Component {
                 <TranslatedMessage
                   id="network.quorum.peers_total_weight_danger"
                   values={{
+                    currencyShortName: config.currency.shortName,
                     weight: (
                       <FormattedNumber
                         value={online_weight_minimum_mnano || 0}

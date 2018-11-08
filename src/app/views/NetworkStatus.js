@@ -277,6 +277,7 @@ class NetworkStatus extends React.Component {
               <TranslatedMessage
                 id="network.online_rebroadcasting_desc"
                 values={{
+                  currencyShortName: config.currency.shortName,
                   amount: (
                     <FormattedNumber
                       value={this.rebroadcastThreshold()}
