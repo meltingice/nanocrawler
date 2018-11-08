@@ -24,7 +24,7 @@ export default function HistoryEntry({
           </div>
         </div>
         <div className="d-none d-lg-block col-lg-1 px-0 text-center">
-          <MonKey account={transactionAccount} style={{ maxWidth: "100%" }} />
+          <MonKey account={transactionAccount} style={{ maxWidth: "100px" }} />
         </div>
         <div className="col-12 col-lg-6 mt-1 mt-lg-0">
           {account}
