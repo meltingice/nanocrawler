@@ -140,7 +140,10 @@ class Account extends React.Component {
         </Helmet>
 
         <div className="row align-items-center" style={{ overflow: "auto" }}>
-          <div className="col-lg mb-2">
+          <div className="col col-lg-auto px-0 text-center">
+            <MonKey account={account} style={{ width: "128px" }} />
+          </div>
+          <div className="col-lg mb-2 pl-lg-0">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
               {account}
@@ -230,10 +233,6 @@ class Account extends React.Component {
 
         {this.representativeOfflineWarning()}
 
-        <div className="mt-3">
-          <AccountMonKey account={account} size={250} />
-        </div>
-
         <NodeNinjaAccount account={account} />
 
         {this.getAccountContent()}
@@ -302,11 +301,5 @@ const Loading = () => (
     <h2 className="text-muted">Loading transactions...</h2>
   </div>
 );
-
-const AccountMonKey = React.memo(({ account, size }) => (
-  <div className="text-center" style={{ height: size }}>
-    <MonKey account={account} style={{ width: size }} />
-  </div>
-));
 
 export default withAccountData(withNetworkData(injectIntl(Account)));
