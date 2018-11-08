@@ -15,5 +15,5 @@ export function validateAddress(address) {
 }
 
 export function validateBlockHash(hash) {
-  return /[A-F0-9]{64}/.test(hash);
+  return /^[A-F0-9]{64}$/.test(hash);
 }
