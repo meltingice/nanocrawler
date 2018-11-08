@@ -179,7 +179,10 @@ class Account extends React.Component {
                   {(base, usd, btc) => {
                     return (
                       <Fragment>
-                        <h3 className="mb-0">{base}</h3>
+                        <ScaledAccountBalance
+                          balance={balance}
+                          displayValue={base}
+                        />
 
                         <p className="text-muted mb-0">
                           {usd} / {btc}
@@ -291,6 +294,12 @@ class Account extends React.Component {
     }
   }
 }
+
+const ScaledAccountBalance = ({ balance, displayValue }) => {
+  const mbalance = Currency.fromRaw(balance).toString();
+  if (mbalance.length > 12) return <h5 className="mb-0">{displayValue}</h5>;
+  return <h3 className="mb-0">{displayValue}</h3>;
+};
 
 const Loading = () => (
   <div className="my-5 text-center">
