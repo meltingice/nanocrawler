@@ -33,5 +33,6 @@
       "zh-CN": "汉语",
       "zh-TW": "漢語"
     }
-  }
+  },
+  "serviceMonitors": []
 }

@@ -2,6 +2,7 @@ import React from "react";
 import ReactResizeDetector from "react-resize-detector";
 import _ from "lodash";
 import { Bar } from "@nivo/bar";
+import config from "client-config.json";
 
 /*
  data = [
@@ -39,7 +40,7 @@ export default function DistributionGraph({ distribution }) {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: width < 768 ? 45 : 0,
-            legend: "Balance (NANO)",
+            legend: `Balance (${config.currency.shortName})`,
             legendPosition: "middle",
             legendOffset: width < 768 ? 60 : 36
           }}
