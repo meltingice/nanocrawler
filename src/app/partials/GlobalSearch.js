@@ -27,7 +27,7 @@ class GlobalSearch extends React.PureComponent {
   render() {
     const { formatMessage } = this.props.intl;
     return (
-      <form className="ml-2" onSubmit={this.onSubmit.bind(this)}>
+      <form onSubmit={this.onSubmit.bind(this)}>
         <ValidatedSearch
           clearOnEnter
           className="form-control"
