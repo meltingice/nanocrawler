@@ -5,7 +5,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import HistoryEntry from "./HistoryEntry";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
-import { keyToPublicAccountId, formatTimestamp } from "lib/util";
+import { formatTimestamp } from "lib/util";
 import OptionalField from "../../../OptionalField";
 import { apiClient } from "lib/Client";
 import Currency from "lib/Currency";
@@ -17,9 +17,8 @@ export default class HistoryStateBlock extends React.PureComponent {
     switch (block.subtype) {
       case "receive":
       case "open":
-        return block.account;
       case "send":
-        return keyToPublicAccountId(block.link);
+        return block.account;
       case "change":
         return block.representative;
     }
