@@ -72,9 +72,11 @@ class Explorer extends React.PureComponent {
             </div>
           </form>
 
-          <h3 className="mb-0">Known Accounts</h3>
+          <h3 className="mb-0">
+            <TranslatedMessage id="explorer.known_accounts" />
+          </h3>
           <p className="text-muted">
-            Some places to start your safari through the jungle
+            <TranslatedMessage id="explorer.known_accounts.desc" />
           </p>
 
           <hr />

@@ -5,6 +5,9 @@
     "explorer.title": "Network Explorer",
     "explorer.form.help":
         "Enter a {currency} address or block hash to get started.",
+    "explorer.known_accounts": "Known Accounts",
+    "explorer.known_accounts.desc":
+        "Some places to start your safari through the jungle",
     "explorer.top_accounts": "Top {count} Accounts",
     "explorer.top_accounts_desc":
         "Accounts with the highest balance, including pending transactions",
