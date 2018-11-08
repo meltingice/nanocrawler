@@ -34,8 +34,8 @@ export default function HistorySendBlock({ block }) {
         <span className="text-danger">
           -<FormattedNumber
             value={Currency.fromRaw(block.amount)}
-            minimumFractionDigits={6}
-            maximumFractionDigits={2}
+            maximumFractionDigits={6}
+            minimumFractionDigits={2}
           />{" "}
           {config.currency.shortName}
         </span>
