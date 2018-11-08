@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import "./Navigation.css";
-import Logo from "./images/logo.svg";
+import Logo from "./images/banano.svg";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";
 import config from "client-config.json";

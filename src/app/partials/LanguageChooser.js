@@ -45,7 +45,7 @@ class LanguageChooser extends React.PureComponent {
         toggle={this.toggle.bind(this)}
         inNavbar
       >
-        <DropdownToggle caret>
+        <DropdownToggle caret color="light">
           <i className="fa fa-globe" /> {this.languageToName(locale.language)}
         </DropdownToggle>
         <DropdownMenu right>
