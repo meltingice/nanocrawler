@@ -9,6 +9,7 @@ import { withNetworkData } from "lib/NetworkContext";
 import Currency from "lib/Currency";
 
 import NanoNodeNinja from "lib/NanoNodeNinja";
+import MonKey from "app/partials/MonKey";
 
 import AccountLink from "app/partials/AccountLink";
 import AccountQR from "app/partials/AccountQR";
@@ -229,6 +230,7 @@ class Account extends React.Component {
 
         {this.representativeOfflineWarning()}
 
+        <AccountMonKey account={account} size={250} />
         <NodeNinjaAccount account={account} />
 
         {this.getAccountContent()}
@@ -297,5 +299,11 @@ const Loading = () => (
     <h2 className="text-muted">Loading transactions...</h2>
   </div>
 );
+
+const AccountMonKey = React.memo(({ account, size }) => (
+  <div className="text-center" style={{ height: size }}>
+    <MonKey account={account} style={{ width: size }} />
+  </div>
+));
 
 export default withAccountData(withNetworkData(injectIntl(Account)));

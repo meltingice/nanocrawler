@@ -37,7 +37,7 @@ const PendingTransactions = ({ pendingTransactions }) => {
 
   return (
     <Fragment>
-      <div className="row mt-5 align-items-center">
+      <div className="row align-items-center">
         <div className="col">
           <h2 className="mb-0">
             <TranslatedMessage id="account.pending.title" />
