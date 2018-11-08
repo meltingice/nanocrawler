@@ -63,6 +63,11 @@ class Explorer extends React.PureComponent {
                     this.setState({ search, type, valid })
                   }
                 />
+                <p className="mt-1">
+                  <Link className="text-muted" to="/explorer/exchange_rates">
+                    Exchange Rates
+                  </Link>
+                </p>
               </div>
               <div className="col-auto mt-2 mt-md-0">
                 <button className="btn btn-nano-primary btn-lg">
