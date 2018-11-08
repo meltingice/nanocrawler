@@ -6,6 +6,7 @@ import _ from "lodash";
 import config from "client-config.json";
 import { apiClient } from "lib/Client";
 import Currency from "lib/Currency";
+import { validateAddress } from "lib/util";
 
 import AccountWebsocket from "lib/AccountWebsocket";
 
@@ -38,7 +39,7 @@ export default function withAccountData(WrappedComponent) {
 
     accountIsValid() {
       const { account } = this.props;
-      return /^\w+_[A-Za-z0-9]{59,60}$/.test(account);
+      return validateAddress(account);
     }
 
     async componentDidMount() {

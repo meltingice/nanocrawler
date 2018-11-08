@@ -9,6 +9,8 @@ import Loading from "./views/Loading";
 import NotFound from "./views/errors/NotFound";
 import ServerError from "./views/errors/ServerError";
 
+import { validateAddress, validateBlockHash } from "lib/util";
+
 const NodeStatus = React.lazy(() => import("./views/NodeStatus"));
 const NetworkStatus = React.lazy(() => import("./views/NetworkStatus"));
 const ExplorerAccount = React.lazy(() => import("./views/explorer/Account"));
@@ -31,9 +33,9 @@ class Content extends React.Component {
   }
 
   determineQueryDestination(search) {
-    if (/^\w+_[A-Za-z0-9]{59,60}$/.test(search)) {
+    if (validateAddress(search)) {
       return `/explorer/account/${search}`;
-    } else if (/[A-F0-9]{64}/.test(search)) {
+    } else if (validateBlockHash(search)) {
       return `/explorer/block/${search}`;
     } else {
       return "/not_found";
