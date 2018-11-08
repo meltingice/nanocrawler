@@ -1,6 +1,6 @@
 import _ from "lodash";
 import redisFetch from "../../helpers/redisFetch";
-import officialRepresentatives from "../../helpers/officialRepresentatives";
+import config from "../../../../server-config.json";
 
 export default function(app, nano) {
   app.get("/representatives_online", async (req, res) => {
@@ -36,7 +36,7 @@ export default function(app, nano) {
         async () => {
           const reps = (await nano.rpc("representatives")).representatives;
           return _.fromPairs(
-            officialRepresentatives.map(addr => [
+            config.officialRepresentatives.map(addr => [
               addr,
               nano.convert.fromRaw(reps[addr], "mrai")
             ])

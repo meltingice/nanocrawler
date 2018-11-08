@@ -1,6 +1,6 @@
 import _ from "lodash";
 import redisFetch from "../../helpers/redisFetch";
-import officialRepresentatives from "../../helpers/officialRepresentatives";
+import config from "../../../../server-config.json";
 
 export default function(app, nano) {
   /*
@@ -44,7 +44,7 @@ export default function(app, nano) {
         async () => {
           const reps = (await nano.rpc("representatives")).representatives;
           return _.fromPairs(
-            officialRepresentatives.map(addr => [addr, reps[addr]])
+            config.officialRepresentatives.map(addr => [addr, reps[addr]])
           );
         }
       );
