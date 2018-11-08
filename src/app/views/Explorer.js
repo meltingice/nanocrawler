@@ -4,9 +4,10 @@ import { withRouter, Link } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import ValidatedSearch from "app/partials/ValidatedSearch";
-import RandomVerifiedAccounts from "app/partials/explorer/RandomVerifiedAccounts";
+import KnownAccounts from "app/partials/explorer/KnownAccounts";
 import ExplorerTopAccounts from "app/partials/explorer/ExplorerTopAccounts";
 import RecentBlockStream from "app/partials/explorer/RecentBlockStream";
+import AccountLink from "app/partials/AccountLink";
 
 class Explorer extends React.PureComponent {
   state = {
@@ -67,7 +68,16 @@ class Explorer extends React.PureComponent {
             </div>
           </form>
 
-          <RandomVerifiedAccounts count={5} />
+          <h3 className="mb-0">Known Accounts</h3>
+          <p className="text-muted">
+            Some places to start your safari through the jungle
+          </p>
+
+          <hr />
+
+          {KnownAccounts.map(account => (
+            <KnownAccount key={account.account} account={account} />
+          ))}
 
           <div className="mt-5">
             <ExplorerTopAccounts count={5} />
@@ -83,3 +93,25 @@ class Explorer extends React.PureComponent {
 }
 
 export default withRouter(Explorer);
+
+const KnownAccount = ({ account }) => {
+  return (
+    <div className="row">
+      <div className="col">
+        <h5 className="mb-0">
+          <AccountLink
+            account={account.account}
+            name={account.alias}
+            className="text-dark break-word"
+          />
+        </h5>
+        <p>
+          <AccountLink
+            account={account.account}
+            className="text-muted break-word"
+          />
+        </p>
+      </div>
+    </div>
+  );
+};
