@@ -9,6 +9,7 @@ export default function apiV1(nano) {
   require("./v1/peers").default(app, nano);
   require("./v1/representatives").default(app, nano);
   require("./v1/system").default(app, nano);
+  require("./v1/ticker").default(app, nano);
 
   return app;
 }

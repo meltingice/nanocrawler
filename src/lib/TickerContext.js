@@ -1,18 +1,23 @@
 import React from "react";
+import config from "client-config.json";
 
 const TickerContext = React.createContext({
-  price_usd: 0,
-  price_btc: 0,
-  percent_change_1h: 0,
-  percent_change_24h: 0
+  BTC: {
+    price: "0"
+  },
+  NANO: {
+    price: "0"
+  },
+  USD: {
+    price: "0"
+  }
 });
 
 class TickerProvider extends React.Component {
   state = {
-    price_usd: 0,
-    price_btc: 0,
-    percent_change_1h: 0,
-    percent_change_24h: 0
+    BTC: { price: "0" },
+    NANO: { price: "0" },
+    USD: { price: "0" }
   };
 
   componentDidMount() {
@@ -27,11 +32,12 @@ class TickerProvider extends React.Component {
   }
 
   async fetchTicker() {
-    const resp = await fetch("https://api.coinmarketcap.com/v1/ticker/nano/", {
+    const resp = await fetch(`${config.server}/ticker`, {
       mode: "cors"
     });
 
-    return (await resp.json())[0];
+    const data = (await resp.json()).data;
+    return data.quotes;
   }
 
   render() {
