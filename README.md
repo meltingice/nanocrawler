@@ -16,15 +16,13 @@ Once the project is cloned, there are 2 config files you need to update.
 
 The server is responsible for proxying requests between the site and your Nano node. You should never expose your Nano node RPC to the public, which is why we have a server that exposes only certain endpoints. It also does a little processing on the raw response from the Nano RPC and caches responses with Redis.
 
-There is a full default config available in the project root. Copy `server-config.sample.json` to `server-config.json`. Update all of the values to fit your environment.
+There is a full default config available in the examples folder. Copy `server-config.json` to the project root. Update all of the values to fit your environment.
 
 Redis support is optional, but recommended. If you wish to skip it, you can safely delete the config entry.
 
-`networkUpdatesEnabled` toggles whether or not the server will attempt to discover [nanoNodeMonitor](https://github.com/NanoTools/nanoNodeMonitor) compatible monitor APIs via the list of peers connected to the Nano node (and any hardcoded via the `knownMonitors` config setting). This will generate a bunch of extra traffic, so if you're hosting on a site with limited bandwidth, I'd recommend leaving this off. It also requires Redis to be connected.
-
 ### Client Config
 
-The web front-end needs to know where the API server can be reached. Copy `src/client-config.sample.json` to `src/client-config.json` and update the config file to fit your environment.
+The web front-end needs to know where the API server can be reached. Copy `client-config.json` from the examples into the `src` folder and update the config file to fit your environment.
 
 The [websocket server](https://github.com/meltingice/nanovault-ws) is optional, but you're welcome to use the hosted websocket server that's set as the default in the config. Depending on the sync status of your node, you may receive blocks from the websocket server before your node confirms them, which is why hosting one yourself is ideal. Remove the config entry to disable the websocket altogether.
 

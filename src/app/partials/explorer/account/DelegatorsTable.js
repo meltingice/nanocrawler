@@ -1,4 +1,5 @@
 import React from "react";
+import BigNumber from "bignumber.js";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
 
@@ -6,12 +7,11 @@ import DelegatorEntry from "./DelegatorEntry";
 
 export default function DelegatorsTable({ delegators }) {
   const sortedDelegators = _.toPairs(delegators)
-    .filter(d => parseFloat(d[1], 10) >= 1)
+    .map(d => [d[0], BigNumber(d[1])])
+    .filter(d => d[1].gte(1))
     .sort((a, b) => {
-      const aBalance = parseFloat(a[1], 10);
-      const bBalance = parseFloat(b[1], 10);
-      if (aBalance < bBalance) return 1;
-      if (aBalance > bBalance) return -1;
+      if (a[1].lt(b[1])) return 1;
+      if (a[1].gt(b[1])) return -1;
       return 0;
     });
 
@@ -31,7 +31,11 @@ export default function DelegatorsTable({ delegators }) {
 
         <tbody>
           {_.map(sortedDelegators, d => (
-            <DelegatorEntry key={d[0]} account={d[0]} balance={d[1]} />
+            <DelegatorEntry
+              key={d[0]}
+              account={d[0]}
+              balance={d[1].toString()}
+            />
           ))}
         </tbody>
       </table>

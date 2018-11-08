@@ -5,9 +5,10 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import HistoryEntry from "./HistoryEntry";
 import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
-import { keyToPublicAccountId, formatTimestamp } from "lib/util";
+import { formatTimestamp } from "lib/util";
 import OptionalField from "../../../OptionalField";
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 export default class HistoryStateBlock extends React.PureComponent {
@@ -16,9 +17,8 @@ export default class HistoryStateBlock extends React.PureComponent {
     switch (block.subtype) {
       case "receive":
       case "open":
-        return block.account;
       case "send":
-        return keyToPublicAccountId(block.link);
+        return block.account;
       case "change":
         return block.representative;
     }
@@ -90,12 +90,18 @@ export default class HistoryStateBlock extends React.PureComponent {
         amount={
           <span className={this.statusClass()}>
             {this.transactionSymbol()}
-            <FormattedNumber
-              value={parseFloat(block.amount || 0, 10)}
-              minimumFractionDigits={2}
-              maximumFractionDigits={6}
-            />{" "}
-            {config.currency}
+            {block.amount ? (
+              <Fragment>
+                <FormattedNumber
+                  value={Currency.fromRaw(block.amount)}
+                  minimumFractionDigits={2}
+                  maximumFractionDigits={6}
+                />{" "}
+                {config.currency.shortName}
+              </Fragment>
+            ) : (
+              "N/A"
+            )}
           </span>
         }
         date={<OptionalField value={formatTimestamp(block.timestamp)} />}

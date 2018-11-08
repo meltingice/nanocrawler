@@ -4,6 +4,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import AccountLink from "app/partials/AccountLink";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 
 class Account extends React.PureComponent {
   state = {
@@ -21,7 +22,7 @@ class Account extends React.PureComponent {
   loadWeight() {
     this.setState({ loading: true }, async () => {
       const weight = await apiClient.weight(this.props.account);
-      this.setState({ weight: parseFloat(weight, 10), loading: false });
+      this.setState({ weight: Currency.fromRaw(weight), loading: false });
     });
   }
 

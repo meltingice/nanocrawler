@@ -1,6 +1,6 @@
 import _ from "lodash";
-import redisFetch from "../helpers/redisFetch";
-import officialRepresentatives from "../helpers/officialRepresentatives";
+import redisFetch from "../../helpers/redisFetch";
+import officialRepresentatives from "../../helpers/officialRepresentatives";
 
 export default function(app, nano) {
   app.get("/representatives_online", async (req, res) => {
