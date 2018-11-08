@@ -8,17 +8,19 @@ import ValidatedSearch from "./ValidatedSearch";
 class GlobalSearch extends React.PureComponent {
   state = {
     search: "",
-    valid: false
+    valid: false,
+    type: null
   };
 
   onSubmit(e) {
-    const { search, valid } = this.state;
+    e.preventDefault();
+
+    const { search, valid, type } = this.state;
     const { history } = this.props;
 
     if (!valid) return;
 
-    e.preventDefault();
-    history.push(`/explorer/auto/${search}`);
+    history.push(`/explorer/${type}/${search}`);
     this.setState({ search: "", valid: false });
   }
 
@@ -27,10 +29,12 @@ class GlobalSearch extends React.PureComponent {
     return (
       <form className="ml-2" onSubmit={this.onSubmit.bind(this)}>
         <ValidatedSearch
+          clearOnEnter
           className="form-control"
           placeholder={formatMessage(withDefault({ id: "search" }))}
-          onChange={({ search, valid }) => this.setState({ search, valid })}
-          value={this.state.search}
+          onChange={({ search, valid, type }) =>
+            this.setState({ search, valid, type })
+          }
         />
       </form>
     );

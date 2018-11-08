@@ -5,7 +5,8 @@ import { validateAddress, validateBlockHash } from "lib/util";
 export default class ValidatedSearch extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
+    clearOnEnter: PropTypes.bool
   };
 
   static defaultProps = {
@@ -40,14 +41,23 @@ export default class ValidatedSearch extends React.Component {
     });
   }
 
+  onKeyDown(e) {
+    if (!this.props.clearOnEnter) return;
+    if (!this.state.valid) return;
+    if (e.keyCode === 13) {
+      this.setState({ search: "", valid: false });
+    }
+  }
+
   render() {
-    const { className, onChange, ...otherProps } = this.props;
+    const { className, onChange, clearOnEnter, ...otherProps } = this.props;
 
     return (
       <input
         type="text"
         className={this.classes}
         onChange={this.onChange.bind(this)}
+        onKeyDown={this.onKeyDown.bind(this)}
         value={this.state.search}
         {...otherProps}
       />
