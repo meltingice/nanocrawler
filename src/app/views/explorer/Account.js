@@ -142,7 +142,7 @@ class Account extends React.Component {
           <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
-              {account}
+              <span className="text-monospace">{account}</span>
 
               <span
                 className="tooltipped tooltipped-e ml-1"
