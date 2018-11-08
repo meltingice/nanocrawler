@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import config from "client-config.json";
 
 import ValidatedSearch from "app/partials/ValidatedSearch";
 import RandomVerifiedAccounts from "app/partials/explorer/RandomVerifiedAccounts";
@@ -47,7 +48,10 @@ class Explorer extends React.PureComponent {
 
           <form className="my-5" onSubmit={this.handleSubmit.bind(this)}>
             <label>
-              <TranslatedMessage id="explorer.form.help" />
+              <TranslatedMessage
+                id="explorer.form.help"
+                values={{ currency: config.currency.name }}
+              />
             </label>
 
             <div className="form-row">

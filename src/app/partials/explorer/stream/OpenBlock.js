@@ -3,6 +3,7 @@ import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
+import config from "client-config.json";
 
 export default function OpenBlock({ event }) {
   const { block } = event;
@@ -20,6 +21,7 @@ export default function OpenBlock({ event }) {
             <TranslatedMessage
               id="stream.open"
               values={{
+                currencyShortName: config.currency.shortName,
                 amount: (
                   <FormattedNumber
                     value={block.amount}

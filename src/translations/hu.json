@@ -3,21 +3,28 @@
     "nav.network": "Hálózat Állapota",
     "nav.status": "Node Állapota",
     "explorer.title": "Hálózat Böngésző",
-    "explorer.form.help": "Írj be egy Nano címet vagy blokk hash-t a kezdéshez.",
+    "explorer.form.help":
+        "Írj be egy {currency} címet vagy blokk hash-t a kezdéshez.",
     "network.title": "Hálózat Állapota",
     "network.reps_online": "{count} online képviselő",
-    "network.reps_online_desc": "Számlák, amiknek van legalább 1 képviselője, függetlenül a szavazati súlyozástól",
+    "network.reps_online_desc":
+        "Számlák, amiknek van legalább 1 képviselője, függetlenül a szavazati súlyozástól",
     "network.online_voting_power": "{count} szavazóképesség van online",
     "network.total_voting_power": "{percent}-a a teljes szavazóképességnek",
-    "network.official_reps": "{count} van hivatalos képviselőknek reprezentálva",
-    "network.official_reps_stat": "a teljes szavazóképesség {totalPower}-a és az online szavazóképesség {onlinePower}-a",
+    "network.official_reps":
+        "{count} van hivatalos képviselőknek reprezentálva",
+    "network.official_reps_stat":
+        "a teljes szavazóképesség {totalPower}-a és az online szavazóképesség {onlinePower}-a",
     "network.online_rebroadcasting": "{count} online továbbító képviselő",
-    "network.online_rebroadcasting_desc": "Egy képviselő akkor továbbíthat szavazatokat, ha a teljes NANO készletnek ({amount} NANO) több, mint 0.1%-a van rá delegálva.",
+    "network.online_rebroadcasting_desc":
+        "Egy képviselő akkor továbbíthat szavazatokat, ha a teljes {currencyShortName} készletnek ({amount} {currencyShortName}) több, mint 0.1%-a van rá delegálva.",
     "network.rebroadcast_amt": "{count} van továbbító képviselőkre delegálva",
-    "network.rebroadcast_stat": "{totalPower} a teljes szavazati súlyból és {onlinePower} az online szavazati súlyból",
+    "network.rebroadcast_stat":
+        "{totalPower} a teljes szavazati súlyból és {onlinePower} az online szavazati súlyból",
     "network.peer_versions": "Protokol Verziók",
     "network.aggregate.title": "Teljes Hálózati Állapot",
-    "network.aggregate.desc": "Az adatok a felfedezett {link}-ből származnak, és csak a szavazati súllyal rendelkező node-okra szűrtek.",
+    "network.aggregate.desc":
+        "Az adatok a felfedezett {link}-ből származnak, és csak a szavazati súllyal rendelkező node-okra szűrtek.",
     "network.tracking_nodes": "{count} node követve",
     "network.avg_sync_status": "Átlag Szinkronizációs Státusz",
     "network.avg_block_count": "Átlag Blokk Szám",
@@ -29,13 +36,15 @@
     "network.median_unchecked": "Medián Ellenőrizetlen Blokk",
     "network.min_unchecked": "Minimum Ellenőrizetlen Blokk",
     "network.max_unchecked": "Maximum Ellenőrizetlen Blokk",
-    "network.nano_services": "Nano Szolgáltatások",
-    "network.nano_services_desc": "A Nano szolgáltatások, mint tárcák, tip botok, kereskedelmi adatok jelenlegi állapota.",
+    "network.nano_services": "{currency} Szolgáltatások",
+    "network.nano_services_desc":
+        "A {currency} szolgáltatások, mint tárcák, tip botok, kereskedelmi adatok jelenlegi állapota.",
     "network.synced_within": "Szinkronizáció történt:",
     "network.synced_blocks": "{count} blokkok",
     "network.synced_greater_than": "több, mint {count} blokk",
     "network.discovered_peers": "Felfedezett Társak",
-    "network.discovered_peers_desc": "Minden felfedezett társ, ami nanoNodeMonitor-t futtat, név alapján szortírozva.",
+    "network.discovered_peers_desc":
+        "Minden felfedezett társ, ami nanoNodeMonitor-t futtat, név alapján szortírozva.",
     "network.monitor_count": "{count} felfedezett szűrő",
     "network.peers.filter": "Szűrés verzió alapján",
     "network.peers.rebroadcast_only": "Csak a továbbító képviselők",
@@ -55,18 +64,25 @@
     "account.title.normal": "Számla",
     "account.rep.online": "Online képviselő",
     "account.rep.offline": "Offline képviselő",
-    "account.rep_offline_warning": "Ennek a képviselőnek {uptime} a működési ideje. Esetleg megfontolhatnád, hogy helyette rá delegáld a szavazóképességed: {link}.",
-    "account.rep_offline.warning_link": "ellenőrzött, legalább 95%-os működési idővel.",
-    "account.rep_offline.desc": "Az offline képviselő azt jelenti, hogy ez a felhasználó már nem vesz részt a szavazásban. Ez a tranzakciókat semmilyen formában nem érinti.",
+    "account.rep_offline_warning":
+        "Ennek a képviselőnek {uptime} a működési ideje. Esetleg megfontolhatnád, hogy helyette rá delegáld a szavazóképességed: {link}.",
+    "account.rep_offline.warning_link":
+        "ellenőrzött, legalább 95%-os működési idővel.",
+    "account.rep_offline.desc":
+        "Az offline képviselő azt jelenti, hogy ez a felhasználó már nem vesz részt a szavazásban. Ez a tranzakciókat semmilyen formában nem érinti.",
     "account.history": "Számlatörténet",
     "account.delegators": "Meghatalmazók",
     "account.represented_by": "{account} által képviselve",
-    "account.delegators.empty_state.title": "Ennek a számlának nincsenek meghatalmazói",
-    "account.delegators.empty_state.desc": "Ez a számla ugyan érvényes, de senki nem delegál rá szavazóképességet. Ha a felhasználó általában nem elérhető, ez jól van így.",
+    "account.delegators.empty_state.title":
+        "Ennek a számlának nincsenek meghatalmazói",
+    "account.delegators.empty_state.desc":
+        "Ez a számla ugyan érvényes, de senki nem delegál rá szavazóképességet. Ha a felhasználó általában nem elérhető, ez jól van így.",
     "account.delegators.loading": "Meghatalmazók betöltése...",
     "account.delegators.title": "Meghatalmazók",
-    "account.delegators.desc": "{count} meghatalmazó, szavazati súly alapján szortírozva",
-    "account.delegators.filter": "Csak olyan számlák, amiken legalább 1 NANO van",
+    "account.delegators.desc":
+        "{count} meghatalmazó, szavazati súly alapján szortírozva",
+    "account.delegators.filter":
+        "Csak olyan számlák, amiken legalább 1 {currencyShortName} van",
     "account.delegators.weight": "Delegált Súly",
     "account.pending.title": "Folyamatban Lévő Tranzakciók",
     "account.pending.limit": "Csak az előző 20 folyamatban lévő letét",
@@ -75,7 +91,8 @@
     "account.transactions.total": "teljes tranzakciók száma",
     "account.transactions.load_more": "Több Tranzakció Betöltése",
     "account.unopened.title": "Ez a számla még soha nem volt aktív",
-    "account.unopened.desc": "A számla címe ugyan érvényes, de érvényes blokkot még nem hozott létre a saját láncán. Ha NANO érkezik a számlára, a számlának létre kell hoznia egy ahhoz tartozó blokkot, hogy a tőke elérhető legyen.",
+    "account.unopened.desc":
+        "A számla címe ugyan érvényes, de érvényes blokkot még nem hozott létre a saját láncán. Ha {currencyShortName} érkezik a számlára, a számlának létre kell hoznia egy ahhoz tartozó blokkot, hogy a tőke elérhető legyen.",
     "block.state": "Állapot",
     "block.subtype.open": "megnyit",
     "block.subtype.change": "változtat",
@@ -89,7 +106,8 @@
     "block.signature": "Aláírás",
     "block.link": "Link",
     "block.balance.desc": "Számlaegyenleg a tranzakció után",
-    "block.timestamp.desc": "Az idő, amikor felfedezték ezt a blokkot (átkonvertálva a helyi időre)",
+    "block.timestamp.desc":
+        "Az idő, amikor felfedezték ezt a blokkot (átkonvertálva a helyi időre)",
     "block.source.desc": "A tranzakcióhoz tartozó küldő blokk",
     "block.sender": "Küldő",
     "block.sender.desc": "A számla, ahonnan a tranzakció indult",
@@ -99,22 +117,30 @@
     "block.change.rep": "A számla új képviselője",
     "block.unknown": "Ismeretlen Blokk",
     "block.unknown.title": "Ez a blokk még nem érkezett meg",
-    "block.unknown.desc": "A Nano egy teljesen aszinkron kriptovaluta. Ebből adódóan előfordulhat, hogy egy tranzakció hozzácsatolása a teljes hálózathoz plusz néhány másodpercet vesz igénybe.",
-    "block.unknown.desc2": "Ha biztos vagy benne, hogy helyes a blokk hash, várj egy kicsit és frissítsd az oldalt.",
+    "block.unknown.desc":
+        "A {currency} egy teljesen aszinkron kriptovaluta. Ebből adódóan előfordulhat, hogy egy tranzakció hozzácsatolása a teljes hálózathoz plusz néhány másodpercet vesz igénybe.",
+    "block.unknown.desc2":
+        "Ha biztos vagy benne, hogy helyes a blokk hash, várj egy kicsit és frissítsd az oldalt.",
     "block.unknown.return": "Vissza a Böngészőhöz",
     "block.open.desc": "A számla, amit ez a blokk hozott létre",
     "block.open.opened_by": "Megnyitva",
-    "block.open.opened_by.desc": "A számla, aminek egy tranzakciója megnyitotta ezt a számlát",
+    "block.open.opened_by.desc":
+        "A számla, aminek egy tranzakciója megnyitotta ezt a számlát",
     "block.open.rep": "Az ehhez a számlához hozzárendelt képviselő",
-    "block.open.amount_desc": "A küldött NANO mennyisége, ami megnyitotta ezt a számlát. Ez a mennyiség lehet 0.",
-    "block.send.amount_desc": "Az ebben a tranzakcióban küldött NANO mennyisége",
+    "block.open.amount_desc":
+        "A küldött {currencyShortName} mennyisége, ami megnyitotta ezt a számlát. Ez a mennyiség lehet 0.",
+    "block.send.amount_desc":
+        "Az ebben a tranzakcióban küldött {currencyShortName} mennyisége",
     "block.state.subtype": "Blokk altípus",
-    "block.state.subtype.desc": "A tranzakció típusa, ami létrehozta ezt a state blokkot",
+    "block.state.subtype.desc":
+        "A tranzakció típusa, ami létrehozta ezt a state blokkot",
     "block.state.account": "A számla, amit ez a state blokk reprezentál",
     "block.state.rep.desc": "A számla képviselője",
     "block.state.previous.none": "Üres (ez a blokk hozta létre a számlát)",
-    "block.state.link.open": "A hozzá tartozó blokk, ami elindította ezt a tranzakciót",
-    "block.state.link.change": "0-kra állítva, ami a burn számla hexadecimális formátuma",
+    "block.state.link.open":
+        "A hozzá tartozó blokk, ami elindította ezt a tranzakciót",
+    "block.state.link.change":
+        "0-kra állítva, ami a burn számla hexadecimális formátuma",
     "block.state.link.send": "A cél számla címe hexadecimális formátumban",
     "block.state.link.receive": "A blokk, ami elindította a tranzakciót",
     "ninja.verified_by": "Ellenőrizve {link} által",
@@ -125,16 +151,19 @@
     "ninja.block_count": "Blokkszám {count}",
     "ninja.node_version": "Node verzió {version}",
     "ninja.verified_accounts": "Ellenőrzött Számlák",
-    "ninja.verified_accounts.desc": "Véletlenszerűen kiválasztott számlák ellenőrizve {link} által",
+    "ninja.verified_accounts.desc":
+        "Véletlenszerűen kiválasztott számlák ellenőrizve {link} által",
     "stream.title": "Legutóbbi Tranzakciók",
-    "stream.desc": "Egy valós idejű folyam a Nano hálózaton futó tranzakciókról",
+    "stream.desc":
+        "Egy valós idejű folyam a {currency} hálózaton futó tranzakciókról",
     "stream.waiting": "Várakozás a tranzakciókra...",
     "stream.change": "megváltoztatta a képviselőjét erre",
-    "stream.open": "{amount} NANO-val létrehozva",
-    "stream.receive": "megkapott {amount} NANO-t",
-    "stream.send": "elküldött {amount} NANO-t",
+    "stream.open": "{amount} {currencyShortName}-val létrehozva",
+    "stream.receive": "megkapott {amount} {currencyShortName}-t",
+    "stream.send": "elküldött {amount} {currencyShortName}-t",
     "error.not_found": "Ez az oldal nem létezik.",
-    "error.server_error": "A szerver hibába ütközött, vagy nem tudja teljesíteni a kívánt műveletet.",
+    "error.server_error":
+        "A szerver hibába ütközött, vagy nem tudja teljesíteni a kívánt műveletet.",
     "search": "Keresés",
     "pending": "folyamatban lévő",
     "weight": "szavazati súly",
@@ -149,12 +178,16 @@
     "name": "név",
     "version": "verzió",
     "block.subtype.epoch": "korszak",
-    "block.state.link.epoch": "Az összes korszakblokk ugyanazt az értéket használja ebben a mezőben, ami az \"epoch v1 block\" hexadecimális formátuma.",
-    "explorer.top_accounts": "Legtöbb NANO-val Rendelkező {count} Számla ",
-    "explorer.top_accounts_desc": "A legnagyobb egyenleggel rendelkező számlák, beleértve a folyamatban lévő tranzakciókat is",
+    "block.state.link.epoch":
+        "Az összes korszakblokk ugyanazt az értéket használja ebben a mezőben, ami az \"epoch v1 block\" hexadecimális formátuma.",
+    "explorer.top_accounts":
+        "Legtöbb {currencyShortName}-val Rendelkező {count} Számla ",
+    "explorer.top_accounts_desc":
+        "A legnagyobb egyenleggel rendelkező számlák, beleértve a folyamatban lévő tranzakciókat is",
     "explorer.top_accounts_link": "Számlák és Eloszlás",
-    "accounts.nano_distribution": "NANO Eloszlás",
+    "accounts.nano_distribution": "{currencyShortName} Eloszlás",
     "accounts.all_accounts": "Összes Számla",
-    "accounts.desc1": "Csak a számlák, amiken több, mint 0.000001 NANO van, egyenleg alapján szortírozva",
+    "accounts.desc1":
+        "Csak a számlák, amiken több, mint 0.000001 {currencyShortName} van, egyenleg alapján szortírozva",
     "accounts.desc2": "Egyenleg tartalmazza a folyamatban lévő tranzakciókat"
 }

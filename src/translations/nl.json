@@ -3,21 +3,30 @@
     "nav.network": "Netwerk status",
     "nav.status": "Node status",
     "explorer.title": "Netwerk verkenner",
-    "explorer.form.help": "Voer een Nano adres of blok hash in om te beginnen.",
+    "explorer.form.help":
+        "Voer een {currency} adres of blok hash in om te beginnen.",
     "network.title": "Netwerk status",
     "network.reps_online": "{count} vertegenwoordigers online",
-    "network.reps_online_desc": "Accounts met ten minste één delegatiegever, ongeacht het stemgewicht",
+    "network.reps_online_desc":
+        "Accounts met ten minste één delegatiegever, ongeacht het stemgewicht",
     "network.online_voting_power": "{count} stemvermogen is online",
     "network.total_voting_power": "{percent} van het totaal stemvermogen",
-    "network.official_reps": "{count} wordt gedelegeerd aan officiële vertegenwoordigers",
-    "network.official_reps_stat": "{totalPower} van het totaal stemvermogen en {onlinePower} van het online stemvermogen",
-    "network.online_rebroadcasting": "{count} online heruitzendende vertegenwoordigers",
-    "network.online_rebroadcasting_desc": "Een vertegenwoordiger zal enkel stemmen heruitzenden als deze minimaal >0,1% van het totale aanbod ({amount} NANO) vertegenwoordigd",
-    "network.rebroadcast_amt": "{count} is toegewezen aan heruitzendende vertegenwoordigers",
-    "network.rebroadcast_stat": "{totalPower} van het totaal stemvermogen en {onlinePower} van het online stemvermogen",
+    "network.official_reps":
+        "{count} wordt gedelegeerd aan officiële vertegenwoordigers",
+    "network.official_reps_stat":
+        "{totalPower} van het totaal stemvermogen en {onlinePower} van het online stemvermogen",
+    "network.online_rebroadcasting":
+        "{count} online heruitzendende vertegenwoordigers",
+    "network.online_rebroadcasting_desc":
+        "Een vertegenwoordiger zal enkel stemmen heruitzenden als deze minimaal >0,1% van het totale aanbod ({amount} {currencyShortName}) vertegenwoordigd",
+    "network.rebroadcast_amt":
+        "{count} is toegewezen aan heruitzendende vertegenwoordigers",
+    "network.rebroadcast_stat":
+        "{totalPower} van het totaal stemvermogen en {onlinePower} van het online stemvermogen",
     "network.peer_versions": "Protocol versies",
     "network.aggregate.title": "Verzamelde netwerkstatistieken",
-    "network.aggregate.desc": "Statistieken worden verzameld uit gevonden {link} en gefilterd op nodes met stemgewicht",
+    "network.aggregate.desc":
+        "Statistieken worden verzameld uit gevonden {link} en gefilterd op nodes met stemgewicht",
     "network.tracking_nodes": "{count} nodes volgend",
     "network.avg_sync_status": "Gemiddelde synchronisatiestatus",
     "network.avg_block_count": "Gemiddeld aantal blokken",
@@ -26,21 +35,25 @@
     "network.maximum_block_count": "Maximum aantal blokken",
     "network.avg_percent_unchecked": "Gemiddeld percentage ongecontroleerd",
     "network.avg_unchecked": "Gemiddeld aantal ongecontroleerde blokken",
-    "network.median_unchecked": "Mediaan van het aantal ongecontroleerde blokken",
+    "network.median_unchecked":
+        "Mediaan van het aantal ongecontroleerde blokken",
     "network.min_unchecked": "Minimum aantal ongecontroleerde blokken",
     "network.max_unchecked": "Maximum aantal ongecontroleerde blokken",
-    "network.nano_services": "Nano diensten",
-    "network.nano_services_desc": "De huidige status van bekende Nano diensten. Portefeuilles, tip bots, handelaarshulpmiddelen, enz.",
+    "network.nano_services": "{currency} diensten",
+    "network.nano_services_desc":
+        "De huidige status van bekende {currency} diensten. Portefeuilles, tip bots, handelaarshulpmiddelen, enz.",
     "network.synced_within": "Gesynchroniseerd binnen:",
     "network.synced_blocks": "{count} blokken",
     "network.synced_greater_than": "meer dan {count} blokken",
     "network.discovered_peers": "Ontdekte peers",
-    "network.discovered_peers_desc": "Alle ontdekte peers die nanoNodeMonitor gebruiken, gesorteerd op naam.",
+    "network.discovered_peers_desc":
+        "Alle ontdekte peers die nanoNodeMonitor gebruiken, gesorteerd op naam.",
     "network.monitor_count": "{count} monitors ontdekt",
     "network.peers.filter": "Filteren op versie",
     "network.peers.rebroadcast_only": "Enkel heruitzendende vertegenwoordigers",
     "network.tps.title": "Netwerkdoorvoer",
-    "network.tps.desc": "Gemiddeld aantal gecontroleerde blokken/sec over de gegeven periode",
+    "network.tps.desc":
+        "Gemiddeld aantal gecontroleerde blokken/sec over de gegeven periode",
     "status.checked_blocks": "Gecontroleerde blokken",
     "status.unchecked_blocks": "Ongecontroleerde blokken",
     "status.voting_weight": "Stemgewicht",
@@ -55,18 +68,24 @@
     "account.title.normal": "Account",
     "account.rep.online": "Vertegenwoordiger online",
     "account.rep.offline": "Vertegenwoordiger offline",
-    "account.rep_offline_warning": "Dit vertegenwoordigend account is {uptime} online. Als u uw stemgewicht hieraan delegeert, kunt u overwegen over te schakelen naar een {link}",
-    "account.rep_offline.warning_link": "een geverifieerde met een minimale online tijd van 95%.",
-    "account.rep_offline.desc": "Een offline vertegenwoordiger betekent dat dit account niet langer stemt. Dit heeft op geen enkele manier invloed op transacties.",
+    "account.rep_offline_warning":
+        "Dit vertegenwoordigend account is {uptime} online. Als u uw stemgewicht hieraan delegeert, kunt u overwegen over te schakelen naar een {link}",
+    "account.rep_offline.warning_link":
+        "een geverifieerde met een minimale online tijd van 95%.",
+    "account.rep_offline.desc":
+        "Een offline vertegenwoordiger betekent dat dit account niet langer stemt. Dit heeft op geen enkele manier invloed op transacties.",
     "account.history": "Geschiedenis",
     "account.delegators": "Delegatiegevers",
     "account.represented_by": "Vertegenwoordigd door {account}",
-    "account.delegators.empty_state.title": "Dit account heeft geen delegatiegevers",
-    "account.delegators.empty_state.desc": "Hoewel dit account geldig is, leent niemand er momenteel zijn stemgewicht aan. Als het account meestal offline is, is dit een goede zaak.",
+    "account.delegators.empty_state.title":
+        "Dit account heeft geen delegatiegevers",
+    "account.delegators.empty_state.desc":
+        "Hoewel dit account geldig is, leent niemand er momenteel zijn stemgewicht aan. Als het account meestal offline is, is dit een goede zaak.",
     "account.delegators.loading": "Bezig met laden van delegatiegevers...",
     "account.delegators.title": "Delegatiegevers",
     "account.delegators.desc": "{count} delegatiegevers, gesorteerd op gewicht",
-    "account.delegators.filter": "Alleen accounts tonen met ten minste 1 NANO",
+    "account.delegators.filter":
+        "Alleen accounts tonen met ten minste 1 {currencyShortName}",
     "account.delegators.weight": "Gedelegeerd gewicht",
     "account.pending.title": "Wachtende Transacties",
     "account.pending.limit": "Tot 20 openstaande stortingen worden getoond",
@@ -75,7 +94,8 @@
     "account.transactions.total": "transacties totaal",
     "account.transactions.load_more": "Laad meer transacties",
     "account.unopened.title": "Dit account is nog niet geopend",
-    "account.unopened.desc": "Hoewel het accountadres geldig is, zijn er nog geen blokken in de keten gepubliceerd. Als er NANO naar dit account is verzonden, moet het nog steeds een bijbehorend blok publiceren om het bedrag te storten.",
+    "account.unopened.desc":
+        "Hoewel het accountadres geldig is, zijn er nog geen blokken in de keten gepubliceerd. Als er {currency} naar dit account is verzonden, moet het nog steeds een bijbehorend blok publiceren om het bedrag te storten.",
     "block.state": "Status",
     "block.subtype.open": "open",
     "block.subtype.change": "wijzig",
@@ -89,34 +109,46 @@
     "block.signature": "Handtekening",
     "block.link": "Link",
     "block.balance.desc": "Het saldo van dit account na deze transactie",
-    "block.timestamp.desc": "De datum en tijd waarop dit blok is ontdekt (geconverteerd naar uw lokale tijd)",
+    "block.timestamp.desc":
+        "De datum en tijd waarop dit blok is ontdekt (geconverteerd naar uw lokale tijd)",
     "block.source.desc": "Het bijbehorende verzendblok voor deze transactie",
     "block.sender": "Verzender",
     "block.sender.desc": "Het account dat de transactie heeft gestart",
     "block.recipient": "Ontvanger",
     "block.recipient.desc": "Het account dat de transactie ontvangt",
-    "block.change.account": "Het account dat hun vertegenwoordiger heeft gewijzigd",
+    "block.change.account":
+        "Het account dat hun vertegenwoordiger heeft gewijzigd",
     "block.change.rep": "De nieuwe vertegenwoordiger van het account",
     "block.unknown": "Onbekend blok",
     "block.unknown.title": "Dit blok is nog niet ontvangen",
-    "block.unknown.desc": "Nano is een volledig asynchrone cryptomunt. Daarom kunnen transacties soms enkele seconden langer duren aangezien deze door het hele netwerk verzonden moeten worden.",
-    "block.unknown.desc2": "Als je zeker weet dat de blok hash correct is, wacht dan even en vernieuw vervolgens de pagina.",
+    "block.unknown.desc":
+        "{currency} is een volledig asynchrone cryptomunt. Daarom kunnen transacties soms enkele seconden langer duren aangezien deze door het hele netwerk verzonden moeten worden.",
+    "block.unknown.desc2":
+        "Als je zeker weet dat de blok hash correct is, wacht dan even en vernieuw vervolgens de pagina.",
     "block.unknown.return": "Terugkeren naar de navigator",
     "block.open.desc": "Het account dat door dit blok gecreëerd is",
     "block.open.opened_by": "Geopend door",
-    "block.open.opened_by.desc": "Het account welke met deze transactie dit account heeft geopend",
+    "block.open.opened_by.desc":
+        "Het account welke met deze transactie dit account heeft geopend",
     "block.open.rep": "De vertegenwoordiger die is toegewezen aan dit account",
-    "block.open.amount_desc": "De hoeveelheid NANO die is verzonden om dit account te openen, wat ook 0 kan zijn",
-    "block.send.amount_desc": "Het aantal NANO dat in deze transactie is verzonden",
+    "block.open.amount_desc":
+        "De hoeveelheid {currencyShortName} die is verzonden om dit account te openen, wat ook 0 kan zijn",
+    "block.send.amount_desc":
+        "Het aantal {currencyShortName} dat in deze transactie is verzonden",
     "block.state.subtype": "Blok subtype",
-    "block.state.subtype.desc": "Het type transactie dat dit statusblok heeft gemaakt",
-    "block.state.account": "Het account dat wordt vertegenwoordigd door dit statusblok",
+    "block.state.subtype.desc":
+        "Het type transactie dat dit statusblok heeft gemaakt",
+    "block.state.account":
+        "Het account dat wordt vertegenwoordigd door dit statusblok",
     "block.state.rep.desc": "De vertegenwoordiger van het account",
     "block.state.previous.none": "Geen (dit blok heeft het account geopend)",
-    "block.state.link.open": "Het bijbehorende blok waarmee deze transactie is gestart",
-    "block.state.link.change": "Stel dit in op allemaal nullen, wat toevallig het burn adres is, dat is gecodeerd in hex-formaat",
+    "block.state.link.open":
+        "Het bijbehorende blok waarmee deze transactie is gestart",
+    "block.state.link.change":
+        "Stel dit in op allemaal nullen, wat toevallig het burn adres is, dat is gecodeerd in hex-formaat",
     "block.state.link.send": "Het bestemmingsadres gecodeerd in hex-formaat",
-    "block.state.link.receive": "Het bijbehorende blok dat deze transactie startte gecodeerd in hex-formaat",
+    "block.state.link.receive":
+        "Het bijbehorende blok dat deze transactie startte gecodeerd in hex-formaat",
     "ninja.verified_by": "Geverifieerd door {link}",
     "ninja.uptime": "Tijd online {percent}",
     "ninja.last_voted": "Laatst gestemd {date}",
@@ -125,16 +157,19 @@
     "ninja.block_count": "Aantal blokken {count}",
     "ninja.node_version": "Node versie {version}",
     "ninja.verified_accounts": "Geverifieerde accounts",
-    "ninja.verified_accounts.desc": "Een willekeurige greep uit accounts geverifieerd met {link}",
+    "ninja.verified_accounts.desc":
+        "Een willekeurige greep uit accounts geverifieerd met {link}",
     "stream.title": "Recente transacties",
-    "stream.desc": "Een real-time stroom van transacties op het Nano-netwerk",
+    "stream.desc":
+        "Een real-time stroom van transacties op het {currency}-netwerk",
     "stream.waiting": "Wachten op transacties ...",
     "stream.change": "veranderde hun vertegenwoordiger in",
-    "stream.open": "is gecreëerd met {amount} NANO",
-    "stream.receive": "heeft {amount} NANO ontvangen",
-    "stream.send": "heeft {amount} NANO verstuurd",
+    "stream.open": "is gecreëerd met {amount} {currencyShortName}",
+    "stream.receive": "heeft {amount} {currencyShortName} ontvangen",
+    "stream.send": "heeft {amount} {currencyShortName} verstuurd",
     "error.not_found": "Deze pagina lijkt niet te bestaan",
-    "error.server_error": "De server heeft een fout aangetroffen, of kan uw opdracht niet uitvoeren",
+    "error.server_error":
+        "De server heeft een fout aangetroffen, of kan uw opdracht niet uitvoeren",
     "search": "Zoeken",
     "pending": "in afwachting",
     "weight": "gewicht",
@@ -149,12 +184,15 @@
     "name": "naam",
     "version": "versie",
     "block.subtype.epoch": "epoch",
-    "block.state.link.epoch": "Alle epoch-blokken gebruiken dezelfde waarde voor dit veld, te weten \"epoch v1-blok\" gecodeerd in hex-formaat.",
+    "block.state.link.epoch":
+        "Alle epoch-blokken gebruiken dezelfde waarde voor dit veld, te weten \"epoch v1-blok\" gecodeerd in hex-formaat.",
     "explorer.top_accounts": "Top {count} Accounts",
-    "explorer.top_accounts_desc": "Accounts met het hoogste saldo, inclusief openstaande transacties",
+    "explorer.top_accounts_desc":
+        "Accounts met het hoogste saldo, inclusief openstaande transacties",
     "explorer.top_accounts_link": "Accounts en distributie",
-    "accounts.nano_distribution": "NANO distributie",
+    "accounts.nano_distribution": "{currencyShortName} distributie",
     "accounts.all_accounts": "Alle accounts",
-    "accounts.desc1": "Alleen accounts met ten minimaal 0,000001 NANO, gesorteerd op saldo",
+    "accounts.desc1":
+        "Alleen accounts met ten minimaal 0,000001 {currencyShortName}, gesorteerd op saldo",
     "accounts.desc2": "Saldo omvat alle openstaande transacties"
 }
