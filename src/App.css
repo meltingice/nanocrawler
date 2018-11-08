@@ -2,6 +2,11 @@
   --nano-blue: #43a842;
 }
 
+.text-monospace {
+  font-family: "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace !important;
+}
+
 .btn-nano-primary {
   background-color: var(--nano-blue);
   border-color: var(--nano-blue);

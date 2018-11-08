@@ -203,7 +203,7 @@ export default function withAccountData(WrappedComponent) {
           representative = event.block.representative;
           if (event.is_send === "true") {
             balance = Currency.subtractRaw(balance, event.block.amount);
-
+            event.block.account = event.block.link_as_account;
             event.block.subtype = "send";
           } else {
             balance = Currency.addRaw(balance, event.block.amount);
