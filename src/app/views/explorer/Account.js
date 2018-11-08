@@ -139,36 +139,56 @@ class Account extends React.Component {
           </title>
         </Helmet>
 
-        <div className="row align-items-center" style={{ overflow: "auto" }}>
-          <div className="col col-lg-auto px-0 text-center">
-            <MonKey account={account} style={{ width: "128px" }} />
+        <div className="row align-items-center">
+          <div className="col">
+            <div className="row flex-nowrap">
+              <div className="col-auto d-none d-md-block px-0 text-center">
+                <MonKey
+                  account={account}
+                  style={{ width: "128px", height: "128px" }}
+                />
+              </div>
+
+              <div className="col mb-2 pl-md-0">
+                <h1 className="mb-0">{this.accountTitle()}</h1>
+
+                <div className="row flex-nowrap align-items-center mw-100">
+                  <div className="col-auto d-block d-md-none pr-0">
+                    <MonKey
+                      account={account}
+                      style={{ width: "80px", height: "80px" }}
+                    />
+                  </div>
+                  <div className="col pl-0 pl-md-3" style={{ width: "80%" }}>
+                    <p className="text-muted mb-0 break-word">
+                      <span className="text-monospace">{account}</span>
+
+                      <span
+                        className="tooltipped tooltipped-e ml-1"
+                        aria-label="Copy to clipboard"
+                      >
+                        <Clipboard
+                          component="span"
+                          style={{ cursor: "pointer" }}
+                          data-clipboard-text={account}
+                        >
+                          <i className="fa fa-clipboard" />
+                        </Clipboard>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                {this.getRepresentative()}
+
+                <p className="mb-0">
+                  {this.representativeOnlineStatus()}
+                  {this.accountVersionBadge()}
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="col-lg mb-2 pl-lg-0">
-            <h1 className="mb-0">{this.accountTitle()}</h1>
-            <p className="text-muted mb-0 break-word">
-              <span className="text-monospace">{account}</span>
 
-              <span
-                className="tooltipped tooltipped-e ml-1"
-                aria-label="Copy to clipboard"
-              >
-                <Clipboard
-                  component="span"
-                  style={{ cursor: "pointer" }}
-                  data-clipboard-text={account}
-                >
-                  <i className="fa fa-clipboard" />
-                </Clipboard>
-              </span>
-            </p>
-
-            {this.getRepresentative()}
-
-            <p className="mb-0">
-              {this.representativeOnlineStatus()}
-              {this.accountVersionBadge()}
-            </p>
-          </div>
           <div className="col-auto">
             <div className="row">
               <div className="col-auto pr-0">
