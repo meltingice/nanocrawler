@@ -7,6 +7,7 @@ import { withNetworkData } from "lib/NetworkContext";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
+import NetworkConfirmationQuorum from "../partials/network/NetworkConfirmationQuorum";
 import PeerVersions from "../partials/PeerVersions";
 
 import { apiClient } from "lib/Client";
@@ -326,6 +327,7 @@ class NetworkStatus extends React.Component {
         <div className="row mt-5">
           <div className="col-md">
             <NetworkThroughput />
+            <NetworkConfirmationQuorum />
           </div>
           <div className="col-md mt-3 mt-md-0">
             <PeerVersions peers={this.state.peers} />
