@@ -16,7 +16,7 @@ export default function NotFoundBlock({ block }) {
           <h1 className="mb-0">
             <TranslatedMessage id="block.unknown" />{" "}
           </h1>
-          <p className="text-muted">{block}</p>
+          <p className="text-muted text-monospace break-word">{block}</p>
         </div>
       </div>
 
