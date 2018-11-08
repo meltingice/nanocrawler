@@ -8,6 +8,7 @@
     "precision": 29,
     "maxSupply": 3402823669.2,
     "prefixes": ["ban"],
+    "qrPrefix": "ban",
     "supportsMyNanoNinja": false
   },
   "features": {
