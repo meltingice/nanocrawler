@@ -4,6 +4,7 @@
   "donationAddress":
     "ban_1dpe11rjii8r4k448gbgfpbg18p8444edayaq4to3hsquha4qhy65cjbtk8b",
   "currency": {
+    "name": "Banano",
     "shortName": "BAN",
     "precision": 29,
     "maxSupply": 3402823669.2,
