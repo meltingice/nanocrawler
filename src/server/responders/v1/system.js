@@ -1,7 +1,7 @@
 import os from "os";
-import raiNodeInfo from "../helpers/raiNodeInfo";
-import dbSize from "../helpers/dbSize";
-import redisFetch from "../helpers/redisFetch";
+import raiNodeInfo from "../../helpers/raiNodeInfo";
+import dbSize from "../../helpers/dbSize";
+import redisFetch from "../../helpers/redisFetch";
 
 export default function(app, nano) {
   app.get("/version", async (req, res) => {

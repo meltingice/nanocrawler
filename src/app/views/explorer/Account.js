@@ -6,6 +6,7 @@ import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
 import { TranslatedMessage, withDefault } from "lib/TranslatedMessage";
 import { withNetworkData } from "lib/NetworkContext";
+import Currency from "lib/Currency";
 
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
@@ -44,7 +45,7 @@ class Account extends React.Component {
     const { formatMessage } = this.props.intl;
     const { weight, unopened } = this.props;
 
-    if (weight >= config.maxCoinSupply * 0.001)
+    if (weight >= config.currency.maxSupply * 0.001)
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (weight > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));
@@ -171,24 +172,26 @@ class Account extends React.Component {
               </div>
               <div className="col">
                 <PriceWithConversions
+                  raw
                   amount={balance}
-                  currencies={["nano", "usd", "btc"]}
+                  currencies={["base", "usd", "btc"]}
                 >
-                  {(nano, usd, btc) => {
+                  {(base, usd, btc) => {
                     return (
                       <Fragment>
-                        <h3 className="mb-0">{nano}</h3>
+                        <h3 className="mb-0">{base}</h3>
 
                         <p className="text-muted mb-0">
                           {usd} / {btc}
                         </p>
                         <p className="text-muted mb-0">
                           <FormattedNumber
-                            value={pending}
+                            value={Currency.fromRaw(pending)}
                             minimumFractionDigits={2}
                             maximumFractionDigits={6}
                           />{" "}
-                          {config.currency} <TranslatedMessage id="pending" />
+                          {config.currency.shortName}{" "}
+                          <TranslatedMessage id="pending" />
                         </p>
                       </Fragment>
                     );

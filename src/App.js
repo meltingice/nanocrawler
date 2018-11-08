@@ -4,6 +4,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
 
+import config from "client-config.json";
 import { withTranslations } from "./lib/TranslationContext";
 import Content from "./app/Content";
 

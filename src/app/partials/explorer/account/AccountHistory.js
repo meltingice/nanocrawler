@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, memo } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import _ from "lodash";
@@ -32,7 +32,7 @@ export default function AccountHistory({
   );
 }
 
-function PendingTransactions({ pendingTransactions }) {
+const PendingTransactions = ({ pendingTransactions }) => {
   if (!pendingTransactions || pendingTransactions.total === 0) return null;
 
   return (
@@ -59,9 +59,9 @@ function PendingTransactions({ pendingTransactions }) {
       <TransactionHistory history={pendingTransactions.blocks} />
     </Fragment>
   );
-}
+};
 
-function ReceivedTransactions({ history, blockCount }) {
+const ReceivedTransactions = ({ history, blockCount }) => {
   if (history.length === 0) return null;
 
   return (
@@ -85,9 +85,9 @@ function ReceivedTransactions({ history, blockCount }) {
       <TransactionHistory history={history} />
     </Fragment>
   );
-}
+};
 
-function LoadMore({ hasMore, loadMore }) {
+const LoadMore = memo(({ hasMore, loadMore }) => {
   if (!hasMore) return null;
 
   return (
@@ -97,4 +97,4 @@ function LoadMore({ hasMore, loadMore }) {
       </button>
     </div>
   );
-}
+});

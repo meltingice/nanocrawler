@@ -3,28 +3,31 @@ import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
+import ValidatedSearch from "app/partials/ValidatedSearch";
+
 class Explorer extends React.PureComponent {
   state = {
     search: "",
-    error: false
+    type: null,
+    valid: false
   };
 
   handleSubmit(e) {
     e.preventDefault();
     const { history } = this.props;
-    const { search } = this.state;
+    const { search, type, valid } = this.state;
 
-    if (/^(xrb_|nano_)\w+/.test(search)) {
-      history.push(`/account/${search}`);
-    } else if (/[A-F0-9]{64}/.test(search)) {
-      history.push(`/block/${search}`);
-    } else {
-      this.setState({ error: true });
+    if (!valid) return;
+
+    if (type === "account") {
+      history.push(`/explorer/account/${search}`);
+    } else if (type === "block") {
+      history.push(`/explorer/block/${search}`);
     }
   }
 
   render() {
-    const { search, error } = this.state;
+    const { search } = this.state;
 
     return (
       <div className="row justify-content-center my-5 mx-0">
@@ -46,13 +49,11 @@ class Explorer extends React.PureComponent {
 
             <div className="form-row">
               <div className="col-md">
-                <input
-                  type="text"
-                  className={`form-control form-control-lg ${
-                    error ? "is-invalid" : ""
-                  }`}
-                  value={search}
-                  onChange={e => this.setState({ search: e.target.value })}
+                <ValidatedSearch
+                  className="form-control form-control-lg"
+                  onChange={({ search, type, valid }) =>
+                    this.setState({ search, type, valid })
+                  }
                 />
               </div>
               <div className="col-auto mt-2 mt-md-0">

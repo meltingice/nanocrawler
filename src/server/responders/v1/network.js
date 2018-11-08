@@ -1,6 +1,6 @@
 import _ from "lodash";
-import redisFetch from "../helpers/redisFetch";
-import tpsCalculator from "../helpers/tpsCalculator";
+import redisFetch from "../../helpers/redisFetch";
+import tpsCalculator from "../../helpers/tpsCalculator";
 
 export default function(app, nano) {
   // nanoNodeMonitor network data

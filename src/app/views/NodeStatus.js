@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import moment from "moment";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import Currency from "lib/Currency";
 
 import AccountLink from "../partials/AccountLink";
 
@@ -28,7 +29,7 @@ export default class NodeStatus extends React.PureComponent {
     this.setState(
       {
         version: await apiClient.version(),
-        account: await apiClient.account()
+        account: await apiClient.nodeAccount()
       },
       () => this.updateStats()
     );
@@ -111,8 +112,11 @@ export default class NodeStatus extends React.PureComponent {
               <TranslatedMessage id="status.voting_weight" />
             </p>
             <h2>
-              <FormattedNumber value={weight} maximumFractionDigits={0} />{" "}
-              {config.currency}
+              <FormattedNumber
+                value={Currency.fromRaw(weight)}
+                maximumFractionDigits={0}
+              />{" "}
+              {config.currency.shortName}
             </h2>
           </div>
           <div className="col-sm text-sm-center">

@@ -7,6 +7,7 @@ import AccountLink from "../../../AccountLink";
 import BlockLink from "../../../BlockLink";
 import OptionalField from "../../../OptionalField";
 import { formatTimestamp } from "lib/util";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 export default function HistoryOpenBlock({ block, intl }) {
@@ -32,11 +33,11 @@ export default function HistoryOpenBlock({ block, intl }) {
       amount={
         <span className="text-success">
           +<FormattedNumber
-            value={parseFloat(block.amount, 10)}
+            value={Currency.fromRaw(block.amount)}
             maximumFractionDigits={6}
             minimumFractionDigits={2}
           />{" "}
-          {config.currency}
+          {config.currency.shortName}
         </span>
       }
       date={<OptionalField value={formatTimestamp(block.timestamp)} />}

@@ -1,8 +1,8 @@
 import _ from "lodash";
-import config from "../../../server-config.json";
-import redisFetch from "../helpers/redisFetch";
-import { accountIsValid, getTimestampForHash } from "../helpers/util";
-import { frontiers, wealthDistribution } from "../helpers/frontiers";
+import config from "../../../../server-config.json";
+import redisFetch from "../../helpers/redisFetch";
+import { accountIsValid, getTimestampForHash } from "../../helpers/util";
+import { frontiers, wealthDistribution } from "../../helpers/frontiers";
 
 export default function(app, nano) {
   app.get("/account", async (req, res) => {

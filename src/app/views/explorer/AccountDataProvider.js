@@ -5,6 +5,8 @@ import _ from "lodash";
 
 import config from "client-config.json";
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
+import { validateAddress } from "lib/util";
 
 import AccountWebsocket from "lib/AccountWebsocket";
 
@@ -37,7 +39,7 @@ export default function withAccountData(WrappedComponent) {
 
     accountIsValid() {
       const { account } = this.props;
-      return /^(xrb|nano)_[A-Za-z0-9]{59,60}$/.test(account);
+      return validateAddress(account);
     }
 
     async componentDidMount() {
@@ -59,10 +61,10 @@ export default function withAccountData(WrappedComponent) {
         const data = await apiClient.account(account);
         this.setState(
           {
-            balance: parseFloat(data.balance, 10),
-            pending: parseFloat(data.pending, 10),
+            balance: data.balance,
+            pending: data.pending,
             representative: data.representative,
-            weight: parseFloat(data.weight, 10),
+            weight: data.weight,
             blockCount: parseFloat(data.block_count, 10),
             version: data.account_version,
             unopened: false
@@ -171,9 +173,11 @@ export default function withAccountData(WrappedComponent) {
 
       event.block.hash = event.hash;
       event.block.timestamp = event.timestamp;
+      event.block.amount = Currency.toRaw(event.block.amount);
+
       switch (event.block.type) {
         case "receive":
-          balance += parseFloat(event.block.amount, 10);
+          balance = Currency.addRaw(balance, event.block.amount);
 
           // Need to fetch the source block to get the sender
           const sendBlock = await apiClient.block(event.block.source);
@@ -184,7 +188,8 @@ export default function withAccountData(WrappedComponent) {
           break;
         case "send":
           event.block.account = event.block.destination;
-          balance -= parseFloat(event.block.amount, 10);
+          balance = Currency.subtractRaw(balance, event.block.amount);
+
           break;
         case "change":
           representative = event.block.representative;
@@ -192,10 +197,12 @@ export default function withAccountData(WrappedComponent) {
         case "state":
           representative = event.block.representative;
           if (event.is_send === "true") {
-            balance -= parseFloat(event.block.amount, 10);
+            balance = Currency.subtractRaw(balance, event.block.amount);
+
             event.block.subtype = "send";
           } else {
-            balance += parseFloat(event.block.amount, 10);
+            balance = Currency.addRaw(balance, event.block.amount);
+
             if (parseInt(event.block.previous, 16) === 0) {
               event.block.subtype = "open";
               removeBlockFromPending();

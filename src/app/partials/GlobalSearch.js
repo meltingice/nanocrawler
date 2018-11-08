@@ -3,30 +3,38 @@ import { injectIntl } from "react-intl";
 import { withRouter } from "react-router-dom";
 import { withDefault } from "lib/TranslatedMessage";
 
+import ValidatedSearch from "./ValidatedSearch";
+
 class GlobalSearch extends React.PureComponent {
   state = {
-    search: ""
+    search: "",
+    valid: false,
+    type: null
   };
 
   onSubmit(e) {
-    const { search } = this.state;
+    e.preventDefault();
+
+    const { search, valid, type } = this.state;
     const { history } = this.props;
 
-    e.preventDefault();
-    history.push(`/explorer/auto/${search}`);
-    this.setState({ search: "" });
+    if (!valid) return;
+
+    history.push(`/explorer/${type}/${search}`);
+    this.setState({ search: "", valid: false });
   }
 
   render() {
     const { formatMessage } = this.props.intl;
     return (
       <form className="ml-2" onSubmit={this.onSubmit.bind(this)}>
-        <input
-          type="text"
+        <ValidatedSearch
+          clearOnEnter
           className="form-control"
           placeholder={formatMessage(withDefault({ id: "search" }))}
-          value={this.state.search}
-          onChange={e => this.setState({ search: e.target.value })}
+          onChange={({ search, valid, type }) =>
+            this.setState({ search, valid, type })
+          }
         />
       </form>
     );
