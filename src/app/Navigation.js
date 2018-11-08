@@ -22,7 +22,7 @@ const Navigation = () => {
         </div>
       </div>
 
-      <div className="col-md px-0 px-md-2 ml-md-4">
+      <div className="col-md px-0 px-md-2 ml-md-5">
         <ul className="NavigationList nav">
           <li className="nav-item">
             <NavLink
