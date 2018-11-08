@@ -69,6 +69,7 @@ export default class HistoryStateBlock extends React.PureComponent {
     const { block } = this.props;
     return (
       <HistoryEntry
+        transactionAccount={this.transactionAccount()}
         type={
           <Fragment>
             <TranslatedMessage id="block.state" />{" "}

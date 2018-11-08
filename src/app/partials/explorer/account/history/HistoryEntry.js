@@ -1,14 +1,32 @@
 import React, { Fragment } from "react";
+import MonKey from "app/partials/MonKey";
 
-export default function HistoryEntry({ type, account, amount, date, block }) {
+export default function HistoryEntry({
+  type,
+  transactionAccount,
+  account,
+  amount,
+  date,
+  block
+}) {
   return (
     <Fragment>
       <div className="row align-items-center">
         <div className="col-12 col-lg-1">
-          <b className="d-lg-none">{type}</b>
-          <span className="d-none d-lg-inline">{type}</span>
+          <div className="row align-items-center">
+            <div className="col">
+              <b className="d-lg-none">{type}</b>
+              <span className="d-none d-lg-inline">{type}</span>
+            </div>
+            <div className="col-auto d-block d-lg-none">
+              <MonKey account={transactionAccount} style={{ width: "50px" }} />
+            </div>
+          </div>
         </div>
-        <div className="col-12 col-lg-7 mt-1 mt-lg-0">
+        <div className="d-none d-lg-block col-lg-1 px-0 text-center">
+          <MonKey account={transactionAccount} style={{ maxWidth: "100%" }} />
+        </div>
+        <div className="col-12 col-lg-6 mt-1 mt-lg-0">
           {account}
           <br />
           {block}

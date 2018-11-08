@@ -35,7 +35,8 @@ export default function TransactionHistory({ history }) {
             <TranslatedMessage id="type" />
           </h6>
         </div>
-        <div className="col-7">
+        <div className="col-1" />
+        <div className="col-6">
           <h6 className="text-capitalize mb-0">
             <TranslatedMessage id="account" /> /{" "}
             <TranslatedMessage id="block" />
