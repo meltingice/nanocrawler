@@ -13,12 +13,16 @@
   width: 40px;
 }
 
-#Navigation .LogoWrap svg {
+/*#Navigation .LogoWrap svg {
   width: 75%;
-}
+}*/
 
 #Navigation .LogoWrap svg .st1 {
   fill: #fff;
+}
+
+.NavigationList {
+  margin-left: -1rem;
 }
 
 .NavigationList li a {
