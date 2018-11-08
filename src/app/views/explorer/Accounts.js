@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import { apiClient } from "lib/Client";
+import config from "client-config.json";
 
 import DistributionGraph from "app/partials/explorer/frontiers/DistributionGraph";
 import DistributionStats from "app/partials/explorer/frontiers/DistributionStats";
@@ -55,7 +56,10 @@ export default class Accounts extends React.Component {
         <div className="row">
           <div className="col">
             <h1>
-              <TranslatedMessage id="accounts.nano_distribution" />
+              <TranslatedMessage
+                id="accounts.nano_distribution"
+                values={{ currencyShortName: config.currency.shortName }}
+              />
             </h1>
             <hr />
 
@@ -70,7 +74,10 @@ export default class Accounts extends React.Component {
               <TranslatedMessage id="accounts.all_accounts" />
             </h1>
             <p className="text-muted mb-0">
-              <TranslatedMessage id="accounts.desc1" />
+              <TranslatedMessage
+                id="accounts.desc1"
+                values={{ currencyShortName: config.currency.shortName }}
+              />
             </p>
             <p className="text-muted mb-0">
               <TranslatedMessage id="accounts.desc2" />

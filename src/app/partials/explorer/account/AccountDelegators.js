@@ -67,7 +67,10 @@ export default class AccountDelegators extends React.Component {
               />
             </p>
             <p className="text-muted">
-              <TranslatedMessage id="account.delegators.filter" />
+              <TranslatedMessage
+                id="account.delegators.filter"
+                values={{ currencyShortName: config.currency.shortName }}
+              />
             </p>
           </div>
           <div className="col-auto">

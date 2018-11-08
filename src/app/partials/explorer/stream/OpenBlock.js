@@ -4,6 +4,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import MonKey from "../../MonKey";
+import config from "client-config.json";
 
 export default function SendBlock({ event }) {
   const { block } = event;
@@ -26,6 +27,7 @@ export default function SendBlock({ event }) {
                 <TranslatedMessage
                   id="stream.open"
                   values={{
+                    currencyShortName: config.currency.shortName,
                     amount: (
                       <FormattedNumber
                         value={block.amount}

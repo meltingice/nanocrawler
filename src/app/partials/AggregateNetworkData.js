@@ -233,10 +233,16 @@ export default class AggregateNetworkData extends React.Component {
         <div className="row mt-5 align-items-center">
           <div className="col-sm">
             <h3 className="mb-0">
-              <TranslatedMessage id="network.nano_services" />
+              <TranslatedMessage
+                id="network.nano_services"
+                values={{ currency: config.currency.name }}
+              />
             </h3>
             <p className="text-muted mb-0">
-              <TranslatedMessage id="network.nano_services_desc" />
+              <TranslatedMessage
+                id="network.nano_services_desc"
+                values={{ currency: config.currency.name }}
+              />
             </p>
             <SyncThresholds />
           </div>

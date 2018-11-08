@@ -3,21 +3,30 @@
     "nav.network": "Nätverksstatus",
     "nav.status": "Nodstatus",
     "explorer.title": "Nätverksutforskare",
-    "explorer.form.help": "Ange en Nano-address eller blockhash för att börja.",
+    "explorer.form.help":
+        "Ange en {currency}-address eller blockhash för att börja.",
     "network.title": "Nätverksstatus",
     "network.reps_online": "{count} representanter uppkopplade",
-    "network.reps_online_desc": "Konton som har minst en delegator, oavsett röstvikt",
+    "network.reps_online_desc":
+        "Konton som har minst en delegator, oavsett röstvikt",
     "network.online_voting_power": "{count} röstvikt är uppkopplad",
     "network.total_voting_power": "{percent} av den totala röstvikten",
-    "network.official_reps": "{count} är delegerat till officiella representanter",
-    "network.official_reps_stat": "{totalPower} av den totala röstvikten och {onlinePower} av den röstvikt som är uppkopplad",
-    "network.online_rebroadcasting": "{count} uppkopplade omsändande representanter",
-    "network.online_rebroadcasting_desc": "En representants röster kommer att omsändas om dens röstvikt är >0.1% av den totala mängden ({amount} NANO)",
-    "network.rebroadcast_amt": "{count} är tilldelat till omsändande representanter",
-    "network.rebroadcast_stat": "{totalPower} av den totala röstvikten och {onlinePower} av den uppkopplade röstvikten",
+    "network.official_reps":
+        "{count} är delegerat till officiella representanter",
+    "network.official_reps_stat":
+        "{totalPower} av den totala röstvikten och {onlinePower} av den röstvikt som är uppkopplad",
+    "network.online_rebroadcasting":
+        "{count} uppkopplade omsändande representanter",
+    "network.online_rebroadcasting_desc":
+        "En representants röster kommer att omsändas om dens röstvikt är >0.1% av den totala mängden ({amount} {currencyShortName})",
+    "network.rebroadcast_amt":
+        "{count} är tilldelat till omsändande representanter",
+    "network.rebroadcast_stat":
+        "{totalPower} av den totala röstvikten och {onlinePower} av den uppkopplade röstvikten",
     "network.peer_versions": "Protokollversion",
     "network.aggregate.title": "Aggregerad nätverksstatistik",
-    "network.aggregate.desc": "Statistiken är samlad från {link} och inkluderar enbart noder med röstvikt",
+    "network.aggregate.desc":
+        "Statistiken är samlad från {link} och inkluderar enbart noder med röstvikt",
     "network.tracking_nodes": "Följer {count} noder",
     "network.avg_sync_status": "Genomsnittlig synkstatus",
     "network.avg_block_count": "Genomsnittlig antal block",
@@ -29,18 +38,21 @@
     "network.median_unchecked": "Median okontrollerade block",
     "network.min_unchecked": "Minimum okontrollerade block",
     "network.max_unchecked": "Maximum okontrollerade block",
-    "network.nano_services": "Nanotjänster",
-    "network.nano_services_desc": "Nuvarande status för kända Nanotjänster. Plånböcker, tip bots, handelsverktyg, etc.",
+    "network.nano_services": "{currency}tjänster",
+    "network.nano_services_desc":
+        "Nuvarande status för kända {currency}tjänster. Plånböcker, tip bots, handelsverktyg, etc.",
     "network.synced_within": "Synkade inom:",
     "network.synced_blocks": "{count} block",
     "network.synced_greater_than": "fler än {count} block",
     "network.discovered_peers": "Hittade noder",
-    "network.discovered_peers_desc": "Alla hittade noder som kör nanoNodeMonitor, sorterade efter namn.",
+    "network.discovered_peers_desc":
+        "Alla hittade noder som kör nanoNodeMonitor, sorterade efter namn.",
     "network.monitor_count": "{count} monitorer hittade",
     "network.peers.filter": "Filtrera efter version",
     "network.peers.rebroadcast_only": "Endast omsändande representanter",
     "network.tps.title": "Nätverksgenomströmning",
-    "network.tps.desc": "Genomsnittligt antal kontrollerade block/sek för en given period",
+    "network.tps.desc":
+        "Genomsnittligt antal kontrollerade block/sek för en given period",
     "status.checked_blocks": "Kontrollerade block",
     "status.unchecked_blocks": "Okontrollerade block",
     "status.voting_weight": "Röstvikt",
@@ -55,18 +67,22 @@
     "account.title.normal": "Konto",
     "account.rep.online": "Representant uppkopplad",
     "account.rep.offline": "Representant nedkopplad",
-    "account.rep_offline_warning": "Detta representantkonto har en upptid på {uptime}. Om du delegerar din röstvikt till det, så kanske du ska byta till en {link}",
+    "account.rep_offline_warning":
+        "Detta representantkonto har en upptid på {uptime}. Om du delegerar din röstvikt till det, så kanske du ska byta till en {link}",
     "account.rep_offline.warning_link": "verifierad med åtminstone 95% upptid",
-    "account.rep_offline.desc": "En nedkopplad representant innebär att detta konto inte röstar. Det påverkar inte transaktioner på något sätt.",
+    "account.rep_offline.desc":
+        "En nedkopplad representant innebär att detta konto inte röstar. Det påverkar inte transaktioner på något sätt.",
     "account.history": "Historik",
     "account.delegators": "Delegatorer",
     "account.represented_by": "Representerad av {account}",
     "account.delegators.empty_state.title": "Detta konto har ingen delegator",
-    "account.delegators.empty_state.desc": "Även om kontot är giltigt, finns det ingen som delegerar dess röstvikt till det. Om kontot vanligtvis är nedkopplat, är det en bra sak.",
+    "account.delegators.empty_state.desc":
+        "Även om kontot är giltigt, finns det ingen som delegerar dess röstvikt till det. Om kontot vanligtvis är nedkopplat, är det en bra sak.",
     "account.delegators.loading": "Laddar delegatorer...",
     "account.delegators.title": "Delegatorer",
     "account.delegators.desc": "{count} delegatorer, sorterat efter vikt",
-    "account.delegators.filter": "Visar endast konton med åtminstone 1 NANO",
+    "account.delegators.filter":
+        "Visar endast konton med åtminstone 1 {currencyShortName}",
     "account.delegators.weight": "Delegerad vikt",
     "account.pending.title": "Väntande transaktioner",
     "account.pending.limit": "Visar endast upp till 20 väntande transaktioner",
@@ -75,7 +91,8 @@
     "account.transactions.total": "transaktioner totalt",
     "account.transactions.load_more": "Ladda flera transaktioner",
     "account.unopened.title": "Detta kontot har inte öppnats än",
-    "account.unopened.desc": "Kontoadressen är giltig, men inga block har publiceras på kontots blockkedja än. Om NANO har skickats till kontot behöver motsvarande block publiceras på nätverket för tillgång till dem.",
+    "account.unopened.desc":
+        "Kontoadressen är giltig, men inga block har publiceras på kontots blockkedja än. Om {currency} har skickats till kontot behöver motsvarande block publiceras på nätverket för tillgång till dem.",
     "block.state": "Tillstånd",
     "block.subtype.open": "öppna",
     "block.subtype.change": "ändra",
@@ -89,7 +106,8 @@
     "block.signature": "Signatur",
     "block.link": "Länk",
     "block.balance.desc": "Saldot på detta konto efter denna transaktion",
-    "block.timestamp.desc": "Datum och tid då detta block upptäcktes (omräknad till din lokala tid)",
+    "block.timestamp.desc":
+        "Datum och tid då detta block upptäcktes (omräknad till din lokala tid)",
     "block.source.desc": "Motsvarande sändblock för denna transaktion",
     "block.sender": "Sändaren",
     "block.sender.desc": "Kontot som initierade transaktionen",
@@ -99,24 +117,31 @@
     "block.change.rep": "Kontots nya representant",
     "block.unknown": "Okänt block",
     "block.unknown.title": "Detta block har inte blivit mottagit ännu",
-    "block.unknown.desc": "Nano är en asynkron kryptovaluta. Detta kan medföra att transaktioner kan ta några extra sekunder innan de når hela nätverket.",
-    "block.unknown.desc2": "Om du är säker på att blockhashen är korrekt, vänta en stund och uppdatera sidan.",
+    "block.unknown.desc":
+        "{currency} är en asynkron kryptovaluta. Detta kan medföra att transaktioner kan ta några extra sekunder innan de når hela nätverket.",
+    "block.unknown.desc2":
+        "Om du är säker på att blockhashen är korrekt, vänta en stund och uppdatera sidan.",
     "block.unknown.return": "Återvänd till utforskaren",
     "block.open.desc": "Kontot det här blocket skapade",
     "block.open.opened_by": "Öppnat av",
     "block.open.opened_by.desc": "Kontot vars transaktion öppnade detta kontot",
     "block.open.rep": "Representaten tilldelad till detta kontot",
-    "block.open.amount_desc": "Antal NANO skickat för att öppna detta konto, som kan vara 0",
-    "block.send.amount_desc": "Antal NANO skickat i denna transaktion",
+    "block.open.amount_desc":
+        "Antal {currencyShortName} skickat för att öppna detta konto, som kan vara 0",
+    "block.send.amount_desc":
+        "Antal {currencyShortName} skickat i denna transaktion",
     "block.state.subtype": "Block subtyp",
-    "block.state.subtype.desc": "Transaktionstyp som skapade detta tillståndsblock",
+    "block.state.subtype.desc":
+        "Transaktionstyp som skapade detta tillståndsblock",
     "block.state.account": "Kontot representerat av detta tillståndsblock",
     "block.state.rep.desc": "Kontots representant",
     "block.state.previous.none": "Inga (blocket öppnade kontot)",
     "block.state.link.open": "Motsvarande block som startade transaktionen",
-    "block.state.link.change": "Ändra till bara nollor, vilket motsvarar spillkontot i det hexadecimal talformatet",
+    "block.state.link.change":
+        "Ändra till bara nollor, vilket motsvarar spillkontot i det hexadecimal talformatet",
     "block.state.link.send": "Destinationsadress kodad i hexformat",
-    "block.state.link.receive": "Motsvarande block som startade denna transaktion",
+    "block.state.link.receive":
+        "Motsvarande block som startade denna transaktion",
     "ninja.verified_by": "Verifierad av {link}",
     "ninja.uptime": "Upptid {percent}",
     "ninja.last_voted": "Röstade senast {date}",
@@ -125,16 +150,18 @@
     "ninja.block_count": "Antal block {count}",
     "ninja.node_version": "Nodversion {version}",
     "ninja.verified_accounts": "Verifierade konton",
-    "ninja.verified_accounts.desc": "Ett slumpmässigt urval av konton verifierade av {link}",
+    "ninja.verified_accounts.desc":
+        "Ett slumpmässigt urval av konton verifierade av {link}",
     "stream.title": "Senaste transaktionerna",
-    "stream.desc": "En realtidsström av transaktioner på Nano-nätverket",
+    "stream.desc": "En realtidsström av transaktioner på {currency}-nätverket",
     "stream.waiting": "Väntar på transaktioner...",
     "stream.change": "ändrade sin representant till",
-    "stream.open": "skapades med {amount} NANO",
-    "stream.receive": "mottog {amount} NANO",
-    "stream.send": "skickat {amount} NANO",
+    "stream.open": "skapades med {amount} {currencyShortName}",
+    "stream.receive": "mottog {amount} {currencyShortName}",
+    "stream.send": "skickat {amount} {currencyShortName}",
     "error.not_found": "Denna sida verkar inte existera",
-    "error.server_error": "Servern upptäckte antingen ett fel eller kunde inte svara på din fråga ",
+    "error.server_error":
+        "Servern upptäckte antingen ett fel eller kunde inte svara på din fråga ",
     "search": "Sök",
     "pending": "väntar",
     "weight": "vikt",
@@ -149,12 +176,15 @@
     "name": "namn",
     "version": "version",
     "block.subtype.epoch": "Epok",
-    "block.state.link.epoch": "Alla epokblock använder samma värde för detta fält, vilket är \"epoch v1 block\" kodat i hexformat",
+    "block.state.link.epoch":
+        "Alla epokblock använder samma värde för detta fält, vilket är \"epoch v1 block\" kodat i hexformat",
     "explorer.top_accounts": "Topp {count} konton",
-    "explorer.top_accounts_desc": "Konton med högst saldo, inkluderar väntande transaktioner",
+    "explorer.top_accounts_desc":
+        "Konton med högst saldo, inkluderar väntande transaktioner",
     "explorer.top_accounts_link": "Konton och fördelning",
-    "accounts.nano_distribution": "NANO-fördelning",
+    "accounts.nano_distribution": "{currencyShortName}-fördelning",
     "accounts.all_accounts": "Alla konton",
-    "accounts.desc1": "Konton med åtminstone 0.000001 NANO, sorterat efter saldo",
+    "accounts.desc1":
+        "Konton med åtminstone 0.000001 {currencyShortName}, sorterat efter saldo",
     "accounts.desc2": "Saldo inkluderar alla väntande transaktioner"
 }

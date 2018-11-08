@@ -70,7 +70,10 @@ export default class RecentBlockStream extends React.Component {
               <TranslatedMessage id="stream.title" />
             </h3>
             <p className="text-muted mb-0">
-              <TranslatedMessage id="stream.desc" />
+              <TranslatedMessage
+                id="stream.desc"
+                values={{ currency: config.currency.name }}
+              />
             </p>
           </div>
           <div className="col-auto">

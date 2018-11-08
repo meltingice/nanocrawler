@@ -3,21 +3,30 @@
     "nav.network": "Statut du réseau",
     "nav.status": "Statut du noeud",
     "explorer.title": "Navigateur du réseau",
-    "explorer.form.help": "Entrez une clé publique ou un hash de bloc pour débuter",
+    "explorer.form.help":
+        "Entrez une clé publique ou un hash de bloc pour débuter",
     "network.title": "Statut du réseau",
     "network.reps_online": "{count} représentants en ligne",
-    "network.reps_online_desc": "Comptes ayant au moins 1 délégateur, peu importe la force de vote",
+    "network.reps_online_desc":
+        "Comptes ayant au moins 1 délégateur, peu importe la force de vote",
     "network.online_voting_power": "{count} force de vote en ligne",
     "network.total_voting_power": "{percent} de la force de vote totale",
-    "network.official_reps": "{count} est délégué à des représentants officiels",
-    "network.official_reps_stat": "{totalPower} parmis la force de vote totale et {onlinePower} parmis la force de ventre en ligne",
-    "network.online_rebroadcasting": "{count} représentants rediffuseurs actuellement en ligne",
-    "network.online_rebroadcasting_desc": "Un représentant va rediffuser ses votes uniquement lorsqu'il a été délégué >0.1% de la quantité totale",
-    "network.rebroadcast_amt": "{count} est assigné à des représentants rediffuseur",
-    "network.rebroadcast_stat": "{totalPower} parmi la force de vote totale et {onlinePower} parmi la force de vote en ligne",
+    "network.official_reps":
+        "{count} est délégué à des représentants officiels",
+    "network.official_reps_stat":
+        "{totalPower} parmis la force de vote totale et {onlinePower} parmis la force de ventre en ligne",
+    "network.online_rebroadcasting":
+        "{count} représentants rediffuseurs actuellement en ligne",
+    "network.online_rebroadcasting_desc":
+        "Un représentant va rediffuser ses votes uniquement lorsqu'il a été délégué >0.1% de la quantité totale",
+    "network.rebroadcast_amt":
+        "{count} est assigné à des représentants rediffuseur",
+    "network.rebroadcast_stat":
+        "{totalPower} parmi la force de vote totale et {onlinePower} parmi la force de vote en ligne",
     "network.peer_versions": "Versions du protocole",
     "network.aggregate.title": "Statistiques agrégées du réseau",
-    "network.aggregate.desc": "Les statistiques sont collectées à partir des {link} découverts et filtrées de manière à n'inclure que les noeuds avec force de vote",
+    "network.aggregate.desc":
+        "Les statistiques sont collectées à partir des {link} découverts et filtrées de manière à n'inclure que les noeuds avec force de vote",
     "network.tracking_nodes": "{count} noeuds suivi",
     "network.avg_sync_status": "Statut de synchronisation moyen",
     "network.avg_block_count": "Quantité moyenne de blocs",
@@ -29,18 +38,21 @@
     "network.median_unchecked": "Quantité médiane de blocs non-vérifiés",
     "network.min_unchecked": "Blocs non-vérifié minimum",
     "network.max_unchecked": "Blocs non-vérifié maximum",
-    "network.nano_services": "Services liés à Nano",
-    "network.nano_services_desc": "Le statut actuel des services liés à Nano. Portefeuilles, robots de pourboires, accessoires de commerçants, etc...",
+    "network.nano_services": "Services liés à {currency}",
+    "network.nano_services_desc":
+        "Le statut actuel des services liés à {currency}. Portefeuilles, robots de pourboires, accessoires de commerçants, etc...",
     "network.synced_within": "Synchronisé parmi:",
     "network.synced_blocks": "{count} blocs",
     "network.synced_greater_than": "plus de {count} blocs",
     "network.discovered_peers": "Homologues découverts",
-    "network.discovered_peers_desc": "Tous les homologues découverts exécutant NanoNodeMonitor, triés par leur nom.",
+    "network.discovered_peers_desc":
+        "Tous les homologues découverts exécutant nanoNodeMonitor, triés par leur nom.",
     "network.monitor_count": "{count} observateurs découverts",
     "network.peers.filter": "Filtrer par version",
     "network.peers.rebroadcast_only": "Représentants rediffuseurs uniquement",
     "network.tps.title": "Débit du réseau",
-    "network.tps.desc": "Moyenne des blocs vérifiés/secondes durant la période déterminée",
+    "network.tps.desc":
+        "Moyenne des blocs vérifiés/secondes durant la période déterminée",
     "status.checked_blocks": "Blocs vérifiés",
     "status.unchecked_blocks": "Blocs non-vérifiés",
     "status.voting_weight": "Force de vote",
@@ -55,18 +67,24 @@
     "account.title.normal": "Compte",
     "account.rep.online": "Représentant en ligne",
     "account.rep.offline": "Représentant hors ligne",
-    "account.rep_offline_warning": "Ce compte représentant à été disponible {uptime}. Si vous attribuez votre force de vote à ce compte, vous pourriez considérer changer à {link}",
-    "account.rep_offline.warning_link": "a été vérifié avec au moins 95% de disponibilité.",
-    "account.rep_offline.desc": "Un représentant hors ligne signifie que ce compte ne peut plus voter. Cela n'affecte d'aucune manière les transactions. ",
+    "account.rep_offline_warning":
+        "Ce compte représentant à été disponible {uptime}. Si vous attribuez votre force de vote à ce compte, vous pourriez considérer changer à {link}",
+    "account.rep_offline.warning_link":
+        "a été vérifié avec au moins 95% de disponibilité.",
+    "account.rep_offline.desc":
+        "Un représentant hors ligne signifie que ce compte ne peut plus voter. Cela n'affecte d'aucune manière les transactions. ",
     "account.history": "Historique",
     "account.delegators": "Délégateurs",
     "account.represented_by": "Représenté par {account}",
     "account.delegators.empty_state.title": "Ce compte n'a pas de délégateur",
-    "account.delegators.empty_state.desc": "Même si ce compte est valide, personne ne lui accorde leur force de vote. Si ce compte est souvent hors-ligne, c'est quelque chose de positif.",
+    "account.delegators.empty_state.desc":
+        "Même si ce compte est valide, personne ne lui accorde leur force de vote. Si ce compte est souvent hors-ligne, c'est quelque chose de positif.",
     "account.delegators.loading": "Chargement des délégateurs...",
     "account.delegators.title": "Délégateurs",
-    "account.delegators.desc": "{count} délégateurs, trié par leur force de vote",
-    "account.delegators.filter": "N'affiche que les comptes ayant au moins 1 NANO",
+    "account.delegators.desc":
+        "{count} délégateurs, trié par leur force de vote",
+    "account.delegators.filter":
+        "N'affiche que les comptes ayant au moins 1 {currencyShortName}",
     "account.delegators.weight": "Force de vote déléguée",
     "account.pending.title": "Transactions en suspens",
     "account.pending.limit": "Affiche au maximum 20 dépots en suspens",
@@ -75,7 +93,8 @@
     "account.transactions.total": "total des transactions",
     "account.transactions.load_more": "Charger plus de transactions",
     "account.unopened.title": "Ce compte n'a pas été activé",
-    "account.unopened.desc": "Bien que l'adresse de ce compte soit valide, aucun bloc n'a été publié sur sa chaine pour l'instant. Si des NANO ont étés envoyés à ce compte, il lui reste à émettre le bloc correspondant afin d'encaisser les fonds. ",
+    "account.unopened.desc":
+        "Bien que l'adresse de ce compte soit valide, aucun bloc n'a été publié sur sa chaine pour l'instant. Si des {currencyShortName} ont étés envoyés à ce compte, il lui reste à émettre le bloc correspondant afin d'encaisser les fonds. ",
     "block.state": "Etat",
     "block.subtype.open": "ouvrir",
     "block.subtype.change": "changer",
@@ -89,7 +108,8 @@
     "block.signature": "Signature",
     "block.link": "Lien",
     "block.balance.desc": "La balance de ce compte suite à la transaction",
-    "block.timestamp.desc": "La date et heure de la découverte de ce bloc (converti à votre fuseau horaire)",
+    "block.timestamp.desc":
+        "La date et heure de la découverte de ce bloc (converti à votre fuseau horaire)",
     "block.source.desc": "Le bloc d'envoi correspondant pour cette transaction",
     "block.sender": "Émetteur",
     "block.sender.desc": "Le compte qui a débuté la transaction",
@@ -99,24 +119,34 @@
     "block.change.rep": "Le nouveau représentant du compte",
     "block.unknown": "Bloc inconnu",
     "block.unknown.title": "Ce bloc n'a pas encore été reçu",
-    "block.unknown.desc": "Nano est une crypto-monnaie entièrement asynchrone. Pour cette raison, il se peut que les transactions prennent quelques secondes en plus afin d'être émise sur le réseau.",
-    "block.unknown.desc2": "Si vous êtes confiant que le hash de ce block est bon, patientez un peu et actualisez la page.",
+    "block.unknown.desc":
+        "{currency} est une crypto-monnaie entièrement asynchrone. Pour cette raison, il se peut que les transactions prennent quelques secondes en plus afin d'être émise sur le réseau.",
+    "block.unknown.desc2":
+        "Si vous êtes confiant que le hash de ce block est bon, patientez un peu et actualisez la page.",
     "block.unknown.return": "Retourner au navigateur",
     "block.open.desc": "Le compte créé par ce bloc",
     "block.open.opened_by": "Ouvert par",
-    "block.open.opened_by.desc": "Le compte duquel la transaction à ouvert ce compte.",
+    "block.open.opened_by.desc":
+        "Le compte duquel la transaction à ouvert ce compte.",
     "block.open.rep": "Le représentant assigné à ce compte",
-    "block.open.amount_desc": "La quantité de NANO envoyé pour ouvrir ce compte, qui peut être 0",
-    "block.send.amount_desc": "La quantité de NANO envoyé dans cette transaction",
+    "block.open.amount_desc":
+        "La quantité de {currencyShortName} envoyé pour ouvrir ce compte, qui peut être 0",
+    "block.send.amount_desc":
+        "La quantité de {currencyShortName} envoyé dans cette transaction",
     "block.state.subtype": "Sous-type de ce bloc",
-    "block.state.subtype.desc": "Le type de transaction à l'origine de ce bloc universel",
+    "block.state.subtype.desc":
+        "Le type de transaction à l'origine de ce bloc universel",
     "block.state.account": "Le compte représenté par ce bloc universel",
     "block.state.rep.desc": "Le représentant de ce compte",
     "block.state.previous.none": "Aucun (ce bloc à ouvert ce compte)",
-    "block.state.link.open": "Le bloc correspondant qui a initié cette transaction",
-    "block.state.link.change": "Entièrement mis à 0, ce qui se trouve être l'adresse de gravure",
-    "block.state.link.send": "L'adresse du destinataire codé en format hexadecimal",
-    "block.state.link.receive": "Le bloc correspondant qui a initié cette transaction",
+    "block.state.link.open":
+        "Le bloc correspondant qui a initié cette transaction",
+    "block.state.link.change":
+        "Entièrement mis à 0, ce qui se trouve être l'adresse de gravure",
+    "block.state.link.send":
+        "L'adresse du destinataire codé en format hexadecimal",
+    "block.state.link.receive":
+        "Le bloc correspondant qui a initié cette transaction",
     "ninja.verified_by": "Vérifié par {link}",
     "ninja.uptime": "{percent} de disponibilité",
     "ninja.last_voted": "Dernier vote le {date}",
@@ -125,16 +155,19 @@
     "ninja.block_count": "Quantité de blocs {count}",
     "ninja.node_version": "Version {version} du noeud",
     "ninja.verified_accounts": "Comptes vérifiés",
-    "ninja.verified_accounts.desc": "Un échantillon aléatoire de comptes vérifiés avec {link}",
+    "ninja.verified_accounts.desc":
+        "Un échantillon aléatoire de comptes vérifiés avec {link}",
     "stream.title": "Transactions récentes",
-    "stream.desc": "Une diffusion en temps réel des transactions sur le réseau de Nano",
+    "stream.desc":
+        "Une diffusion en temps réel des transactions sur le réseau de {currency}",
     "stream.waiting": "En attente de transactions...",
     "stream.change": "ont changé leur représentant à",
-    "stream.open": "à été créé avec {amount} NANO",
-    "stream.receive": "à reçu {amount} NANO",
-    "stream.send": "à envoyé {amount} NANO",
+    "stream.open": "à été créé avec {amount} {currencyShortName}",
+    "stream.receive": "à reçu {amount} {currencyShortName}",
+    "stream.send": "à envoyé {amount} {currencyShortName}",
     "error.not_found": "Cette page n'existe pas",
-    "error.server_error": "Le serveur ne peut accomplir votre requête en ce moment",
+    "error.server_error":
+        "Le serveur ne peut accomplir votre requête en ce moment",
     "search": "Chercher",
     "pending": "en suspens",
     "weight": "force de vote",
@@ -149,12 +182,15 @@
     "name": "nom",
     "version": "version",
     "block.subtype.epoch": "Epoch",
-    "block.state.link.epoch": "Tous les blocs Epoch utilisent la même valeur \"epoch V1 block\" pour ce champ, encodée en format hex",
+    "block.state.link.epoch":
+        "Tous les blocs Epoch utilisent la même valeur \"epoch V1 block\" pour ce champ, encodée en format hex",
     "explorer.top_accounts": "Top {count} comptes",
-    "explorer.top_accounts_desc": "Compte avec le solde le plus élevé, incluant les transactions en attente",
+    "explorer.top_accounts_desc":
+        "Compte avec le solde le plus élevé, incluant les transactions en attente",
     "explorer.top_accounts_link": "Comptes et Distribution",
-    "accounts.nano_distribution": "NANO distribution",
+    "accounts.nano_distribution": "{currencyShortName} distribution",
     "accounts.all_accounts": "Tous les comptes",
-    "accounts.desc1": "Tous les comptes avec au moins 0.000001 NANO, triés par solde",
+    "accounts.desc1":
+        "Tous les comptes avec au moins 0.000001 {currencyShortName}, triés par solde",
     "accounts.desc2": "Le solde inclus toutes les transactions en attente "
 }

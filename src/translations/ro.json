@@ -3,21 +3,29 @@
     "nav.network": "Starea rețelei",
     "nav.status": "Starea serverului",
     "explorer.title": "Exploratorul rețelei",
-    "explorer.form.help": "Introdu o adresă de Nano sau seria unui block pentru a începe",
+    "explorer.form.help":
+        "Introdu o adresă de {currency} sau seria unui block pentru a începe",
     "network.title": "Starea rețelei",
     "network.reps_online": "{count} reprezentanți online",
-    "network.reps_online_desc": "Conturi cu cel putin un sponsor, indiferent de puterea de vot",
+    "network.reps_online_desc":
+        "Conturi cu cel putin un sponsor, indiferent de puterea de vot",
     "network.online_voting_power": "{count} cu putere de vot este online",
     "network.total_voting_power": "{percent} din totalul puterii de vot",
     "network.official_reps": "{count} este alocat reprezentanților oficiali",
-    "network.official_reps_stat": "{totalPower} din totalul puterii de vot si {onlinePower} din puterea de vot online",
-    "network.online_rebroadcasting": "{count} reprezentanți transmițători online",
-    "network.online_rebroadcasting_desc": "Un reprezentant va transmite mai departe voturile în rețea dacă îi sunt atribuite >0.1% fonduri din cantitatea totală",
-    "network.rebroadcast_amt": "{count} este atribuit reprezentanților transmițători",
-    "network.rebroadcast_stat": "{totalPower} din totalul puterii de vot și {onlinePower} din puterea de vot online",
+    "network.official_reps_stat":
+        "{totalPower} din totalul puterii de vot si {onlinePower} din puterea de vot online",
+    "network.online_rebroadcasting":
+        "{count} reprezentanți transmițători online",
+    "network.online_rebroadcasting_desc":
+        "Un reprezentant va transmite mai departe voturile în rețea dacă îi sunt atribuite >0.1% fonduri din cantitatea totală",
+    "network.rebroadcast_amt":
+        "{count} este atribuit reprezentanților transmițători",
+    "network.rebroadcast_stat":
+        "{totalPower} din totalul puterii de vot și {onlinePower} din puterea de vot online",
     "network.peer_versions": "Versiunea Protocolului",
     "network.aggregate.title": "Statistici rețea per ansamblu",
-    "network.aggregate.desc": "Statisticile sunt preluate de la {link} și selectate pentru a afișa doar serverele cu putere de vot",
+    "network.aggregate.desc":
+        "Statisticile sunt preluate de la {link} și selectate pentru a afișa doar serverele cu putere de vot",
     "network.tracking_nodes": "Monitorizăm {count} servere",
     "network.avg_sync_status": "Media sincronizării",
     "network.avg_block_count": "Nr. block-urilor în medie",
@@ -29,18 +37,21 @@
     "network.median_unchecked": "Nr. median block-uri neverificate",
     "network.min_unchecked": "Nr. minim block-uri neverificate",
     "network.max_unchecked": "Nr. maxim block-uri neverificate",
-    "network.nano_services": "Servicii oferite de Nano",
-    "network.nano_services_desc": "Starea actuală a serviciilor Nano cunoscute. Portofele, tip bots, instrumente de comerț, etc.",
+    "network.nano_services": "Servicii oferite de {currency}",
+    "network.nano_services_desc":
+        "Starea actuală a serviciilor {currency} cunoscute. Portofele, tip bots, instrumente de comerț, etc.",
     "network.synced_within": "Sincronizat în termen de:",
     "network.synced_blocks": "{count} block-uri",
     "network.synced_greater_than": "mai mult de {count} block-uri",
     "network.discovered_peers": "Colegi descoperiți",
-    "network.discovered_peers_desc": "Toți colegii descoperiți ce folosesc nanoNodeMonitor, sortati după nume.",
+    "network.discovered_peers_desc":
+        "Toți colegii descoperiți ce folosesc nanoNodeMonitor, sortati după nume.",
     "network.monitor_count": "{count} supraveghetori descoperiți",
     "network.peers.filter": "Filtrează după versiune",
     "network.peers.rebroadcast_only": "Doar reprezentanți transmițători",
     "network.tps.title": "Rata de transfer a rețelei",
-    "network.tps.desc": "Numărul în medie de block-uri verificate /sec într-un interval de timp",
+    "network.tps.desc":
+        "Numărul în medie de block-uri verificate /sec într-un interval de timp",
     "status.checked_blocks": "Block-uri verificate",
     "status.unchecked_blocks": "Block-uri neverificate",
     "status.voting_weight": "Puterea de vot",
@@ -55,18 +66,23 @@
     "account.title.normal": "Cont",
     "account.rep.online": "Reprezentant online",
     "account.rep.offline": "Reprezentant offline",
-    "account.rep_offline_warning": "Acest reprezentant a fost online {uptime} din timp. Dacă va delegați puterea de vot acestuia, puteți considera să alegeți în schimb un {link}",
-    "account.rep_offline.warning_link": "reprezentant verificat cu cel puțin 95% timp de funcționare.",
-    "account.rep_offline.desc": "Un reprezentant offline nu mai poate vota. Acest lucru nu afectează tranzacțiile.",
+    "account.rep_offline_warning":
+        "Acest reprezentant a fost online {uptime} din timp. Dacă va delegați puterea de vot acestuia, puteți considera să alegeți în schimb un {link}",
+    "account.rep_offline.warning_link":
+        "reprezentant verificat cu cel puțin 95% timp de funcționare.",
+    "account.rep_offline.desc":
+        "Un reprezentant offline nu mai poate vota. Acest lucru nu afectează tranzacțiile.",
     "account.history": "Istoric",
     "account.delegators": "Sponsori",
     "account.represented_by": "Reprezentat de {account}",
     "account.delegators.empty_state.title": "Acest cont nu are sponsori",
-    "account.delegators.empty_state.desc": "Deși contul este valid, nimeni nu a acordat momentan puterea de vot acestuia. Este un lucru bun dacă acest cont este de obicei offline.",
+    "account.delegators.empty_state.desc":
+        "Deși contul este valid, nimeni nu a acordat momentan puterea de vot acestuia. Este un lucru bun dacă acest cont este de obicei offline.",
     "account.delegators.loading": "Încarc sponsorii...",
     "account.delegators.title": "Sponsori",
     "account.delegators.desc": "{count} sponsori, sortați după puterea de vot",
-    "account.delegators.filter": "Se afișează conturile cu cel puțin 1 NANO",
+    "account.delegators.filter":
+        "Se afișează conturile cu cel puțin 1 {currencyShortName}",
     "account.delegators.weight": "Putere de vot atribuită",
     "account.pending.title": "Tranzacții în așteptare",
     "account.pending.limit": "Se afișează până la 20 tranzacții în așteptare",
@@ -75,7 +91,8 @@
     "account.transactions.total": "tranzacții în total",
     "account.transactions.load_more": "Afișează mai multe tranzacții",
     "account.unopened.title": "Acest cont nu a fost deschis încă",
-    "account.unopened.desc": "Deși adresa contului este validă, nu au fost publicate block-uri în chain momentan. Dacă a fost trimis NANO către acest cont, trebuie să fie publicat mai întâi un block corespunzător.",
+    "account.unopened.desc":
+        "Deși adresa contului este validă, nu au fost publicate block-uri în chain momentan. Dacă a fost trimis {currency} către acest cont, trebuie să fie publicat mai întâi un block corespunzător.",
     "block.state": "Block universal",
     "block.subtype.open": "deschis",
     "block.subtype.change": "de schimb",
@@ -89,8 +106,10 @@
     "block.signature": "Semnătură",
     "block.link": "Link",
     "block.balance.desc": "Soldul contului după această tranzacție",
-    "block.timestamp.desc": "Ora și data la care acest block a fost descoperit (în fusul dvs. orar)",
-    "block.source.desc": "Block-ul corespunzător de trimitere pentru tranzacție",
+    "block.timestamp.desc":
+        "Ora și data la care acest block a fost descoperit (în fusul dvs. orar)",
+    "block.source.desc":
+        "Block-ul corespunzător de trimitere pentru tranzacție",
     "block.sender": "Expeditor",
     "block.sender.desc": "Contul care a inițiat tranzacția",
     "block.recipient": "Destinatar",
@@ -99,24 +118,32 @@
     "block.change.rep": "Noul reprezentant al contului",
     "block.unknown": "Block necunoscut",
     "block.unknown.title": "Acest block nu a fost primit încă",
-    "block.unknown.desc": "Nano este o criptomonedă complet asincronă. De aceea, uneori tranzacțiile pot dura câteva secunde în plus pentru a fi transmise în întreaga rețea.",
-    "block.unknown.desc2": "Dacă sunteți sigur/ă că seria block-ului este corectă, așteptați un moment și reîmprospătați pagina.",
+    "block.unknown.desc":
+        "{currency} este o criptomonedă complet asincronă. De aceea, uneori tranzacțiile pot dura câteva secunde în plus pentru a fi transmise în întreaga rețea.",
+    "block.unknown.desc2":
+        "Dacă sunteți sigur/ă că seria block-ului este corectă, așteptați un moment și reîmprospătați pagina.",
     "block.unknown.return": "Reveniți la Navigator",
     "block.open.desc": "Contul creat de către acest block",
     "block.open.opened_by": "Deschis de",
-    "block.open.opened_by.desc": "Contul a cărei tranzacții a deschis acest cont",
+    "block.open.opened_by.desc":
+        "Contul a cărei tranzacții a deschis acest cont",
     "block.open.rep": "Reprezentantul alocat acestui cont",
-    "block.open.amount_desc": "Suma de NANO trimisă către acest cont, care poate fi 0",
-    "block.send.amount_desc": "Suma de NANO ce a fost trimisă în tranzacție",
+    "block.open.amount_desc":
+        "Suma de {currencyShortName} trimisă către acest cont, care poate fi 0",
+    "block.send.amount_desc":
+        "Suma de {currencyShortName} ce a fost trimisă în tranzacție",
     "block.state.subtype": "Subtipul block-ului",
-    "block.state.subtype.desc": "Tipul tranzacției care a creat acest block universal",
+    "block.state.subtype.desc":
+        "Tipul tranzacției care a creat acest block universal",
     "block.state.account": "Contul reprezentat de acest block universal",
     "block.state.rep.desc": "Reprezentantul contului",
     "block.state.previous.none": "Niciunul (acest block a deschis contul)",
     "block.state.link.open": "Block-ul corespunzător care a început tranzacția",
-    "block.state.link.change": "Setat în întregime la valoarea 0, fiind o adresă de distrugere a fondurilor codificată în format hex",
+    "block.state.link.change":
+        "Setat în întregime la valoarea 0, fiind o adresă de distrugere a fondurilor codificată în format hex",
     "block.state.link.send": "Adresa destinatarului codificată în format hex",
-    "block.state.link.receive": "Block-ul corespunzător care a început tranzacția",
+    "block.state.link.receive":
+        "Block-ul corespunzător care a început tranzacția",
     "ninja.verified_by": "Verificat de {link}",
     "ninja.uptime": "Timp de funcționare {percent}",
     "ninja.last_voted": "Ultimul vot {date}",
@@ -125,16 +152,18 @@
     "ninja.block_count": "Block-uri verificate",
     "ninja.node_version": "Versiunea serverului {version}",
     "ninja.verified_accounts": "Conturi verificate",
-    "ninja.verified_accounts.desc": "O listă aleatorie de conturi verificate de {link}",
+    "ninja.verified_accounts.desc":
+        "O listă aleatorie de conturi verificate de {link}",
     "stream.title": "Tranzacții recente",
-    "stream.desc": "Tranzacții în rețeaua Nano în timp real",
+    "stream.desc": "Tranzacții în rețeaua {currency} în timp real",
     "stream.waiting": "Aștept tranzacții...",
     "stream.change": "și-a schimbat reprezentantul în:",
-    "stream.open": "a fost creat cu {amount} NANO",
-    "stream.receive": "a primit {amount} NANO",
-    "stream.send": "a trimis {amount} NANO",
+    "stream.open": "a fost creat cu {amount} {currencyShortName}",
+    "stream.receive": "a primit {amount} {currencyShortName}",
+    "stream.send": "a trimis {amount} {currencyShortName}",
     "error.not_found": "Această pagină nu există",
-    "error.server_error": "Serverul a întâmpinat o eroare sau nu funcționează corespunzător",
+    "error.server_error":
+        "Serverul a întâmpinat o eroare sau nu funcționează corespunzător",
     "search": "Căutare",
     "pending": "în așteptare",
     "weight": "putere de vot",
@@ -149,12 +178,15 @@
     "name": "denumire",
     "version": "versiune",
     "block.subtype.epoch": "epoch",
-    "block.state.link.epoch": "Toate block-urile epoch folosesc aceeași valoare pentru acest domeniu, și anume \"block epoch v1\" codificată în format hex.",
+    "block.state.link.epoch":
+        "Toate block-urile epoch folosesc aceeași valoare pentru acest domeniu, și anume \"block epoch v1\" codificată în format hex.",
     "explorer.top_accounts": "Top {count} conturi",
-    "explorer.top_accounts_desc": "Conturile cu cel mai mare sold, incluzând tranzacțiile în așteptare",
+    "explorer.top_accounts_desc":
+        "Conturile cu cel mai mare sold, incluzând tranzacțiile în așteptare",
     "explorer.top_accounts_link": "Conturi și distribuire",
-    "accounts.nano_distribution": "Distribuirea NANO",
+    "accounts.nano_distribution": "Distribuirea {currencyShortName}",
     "accounts.all_accounts": "Toate conturile",
-    "accounts.desc1": "Doar conturile cu minim 0.000001 NANO, sortate după sold",
+    "accounts.desc1":
+        "Doar conturile cu minim 0.000001 {currencyShortName}, sortate după sold",
     "accounts.desc2": "Soldul include toate tranzacțiile în așteptare"
 }

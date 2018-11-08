@@ -2,6 +2,7 @@ import React from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import config from "client-config.json";
 
 export default function NotFoundBlock({ block }) {
   return (
@@ -27,7 +28,10 @@ export default function NotFoundBlock({ block }) {
             <TranslatedMessage id="block.unknown.title" />
           </h2>
           <p>
-            <TranslatedMessage id="block.unknown.desc" />
+            <TranslatedMessage
+              id="block.unknown.desc"
+              values={{ currency: config.currency.name }}
+            />
           </p>
 
           <p>
