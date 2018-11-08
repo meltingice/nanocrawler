@@ -7,16 +7,22 @@ import "./MonKey.css";
 
 export default class MonKey extends React.PureComponent {
   state = {
-    loaded: false
+    loaded: false,
+    mounted: true
   };
 
   componentDidMount() {
     const img = document.createElement("img");
     img.onload = () => {
+      if (!this.state.mounted) return;
       this.setState({ loaded: true });
     };
 
     img.src = this.imageUrl;
+  }
+
+  componentWillUnmount() {
+    this.setState({ mounted: false });
   }
 
   get imageUrl() {
