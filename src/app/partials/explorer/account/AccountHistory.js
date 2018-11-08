@@ -37,7 +37,7 @@ const PendingTransactions = ({ pendingTransactions }) => {
 
   return (
     <Fragment>
-      <div className="row align-items-center">
+      <div className="row mb-5 align-items-center">
         <div className="col">
           <h2 className="mb-0">
             <TranslatedMessage id="account.pending.title" />
@@ -66,7 +66,7 @@ const ReceivedTransactions = ({ history, blockCount }) => {
 
   return (
     <Fragment>
-      <div className="row mt-5 mb-2 align-items-center">
+      <div className="row mb-2 align-items-center">
         <div className="col">
           <h2>
             <TranslatedMessage id="account.transactions.title" />

@@ -11,6 +11,7 @@ import ServerError from "./views/errors/ServerError";
 
 import { validateAddress, validateBlockHash } from "lib/util";
 
+const ExchangeRates = React.lazy(() => import("./views/ExchangeRates"));
 const NodeStatus = React.lazy(() => import("./views/NodeStatus"));
 const NetworkStatus = React.lazy(() => import("./views/NetworkStatus"));
 const ExplorerAccount = React.lazy(() => import("./views/explorer/Account"));
@@ -120,6 +121,13 @@ class Content extends React.Component {
               path="/explorer/block/:block"
               render={props => <ExplorerBlock {...props} />}
             />
+
+            <Route
+              exact
+              path="/explorer/exchange_rates"
+              render={props => <ExchangeRates {...props} />}
+            />
+
             <Route component={NotFound} />
           </Switch>
         </Suspense>

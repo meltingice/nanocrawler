@@ -230,7 +230,10 @@ class Account extends React.Component {
 
         {this.representativeOfflineWarning()}
 
-        <AccountMonKey account={account} size={250} />
+        <div className="mt-3">
+          <AccountMonKey account={account} size={250} />
+        </div>
+
         <NodeNinjaAccount account={account} />
 
         {this.getAccountContent()}
