@@ -57,8 +57,13 @@ export default function withAccountData(WrappedComponent) {
 
     async fetchAccount() {
       const { account } = this.props;
+
+      const error = () => this.setState({ unopened: true, loading: false });
+
       try {
         const data = await apiClient.account(account);
+        if (data.error) return error();
+
         this.setState(
           {
             balance: data.balance,
@@ -77,7 +82,7 @@ export default function withAccountData(WrappedComponent) {
           }
         );
       } catch (e) {
-        this.setState({ unopened: true, loading: false });
+        error();
       }
     }
 
