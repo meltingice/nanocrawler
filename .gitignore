@@ -21,9 +21,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-server-config.json
-server-config.nano.json
-server-config.beta.nano.json
-server-config.banano.json
-src/client-config.json
+/server-config.json
+/server-config.nano.json
+/server-config.beta.nano.json
+/server-config.banano.json
+/src/client-config.json
 deploy.sh
