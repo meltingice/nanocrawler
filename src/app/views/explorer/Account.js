@@ -30,11 +30,13 @@ class Account extends React.Component {
   }
 
   async fetchUptime() {
-    return;
     const { account } = this.props;
     const ninja = new NanoNodeNinja(account);
     await ninja.fetch();
-    this.setState({ uptime: ninja.data.uptime });
+
+    if (ninja.hasAccount()) {
+      this.setState({ uptime: ninja.data.uptime });
+    }
   }
 
   hasDelegatedWeight() {
