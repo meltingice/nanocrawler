@@ -44,7 +44,7 @@ export default function withAccountData(WrappedComponent) {
 
     async componentDidMount() {
       await this.fetchAccount();
-      this.fetchHistory();
+      await this.fetchHistory();
       this.fetchPending();
       this.connectWebsocket();
     }
