@@ -135,11 +135,10 @@ class Account extends React.Component {
 
     return (
       <div className="p-4">
-        <Helmet key={window.location.href}>
-          <title>
-            {this.accountTitle()} - {account}
-          </title>
-        </Helmet>
+        <Helmet
+          key={window.location.href}
+          title={`${this.accountTitle()} - ${account}`}
+        />
 
         <div className="row align-items-center">
           <div className="col">

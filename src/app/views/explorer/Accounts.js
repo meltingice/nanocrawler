@@ -49,9 +49,7 @@ export default class Accounts extends React.Component {
   render() {
     return (
       <div id="FrontierList" className="p-4">
-        <Helmet>
-          <title>All Accounts</title>
-        </Helmet>
+        <Helmet title="All Accounts" />
 
         <div className="row">
           <div className="col">

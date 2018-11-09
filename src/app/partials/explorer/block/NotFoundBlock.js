@@ -7,9 +7,7 @@ import config from "client-config.json";
 export default function NotFoundBlock({ block }) {
   return (
     <div className="p-4">
-      <Helmet>
-        <title>Block - Not Found</title>
-      </Helmet>
+      <Helmet title="Block - Not Found" />
 
       <div className="row">
         <div className="col">
