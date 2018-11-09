@@ -1,0 +1,18 @@
+{
+  "nodeName": "creeper.banano.cc",
+  "account": "ban_1creepi89mp48wkyg5fktgap9j6165d8yz6g1fbe5pneinz3by9o54fuq63m",
+  "clientUrl": "https://creeper.banano.cc",
+  "raiblocksDir": "/home/ryanlefevre/Banano",
+  "nodeHost": "http://10.0.1.61:7072",
+  "redis": "redis://127.0.0.1:6379",
+  "redisNamespace": "banano_development",
+  "openExchangeRatesAppId": "",
+  "coinMarketCapApiKey": "",
+  "serverPort": 3001,
+  "knownMonitors": [],
+  "blacklistedPeers": [],
+  "officialRepresentatives": [
+    "ban_1fomoz167m7o38gw4rzt7hz67oq6itejpt4yocrfywujbpatd711cjew8gjj",
+    "ban_1cake36ua5aqcq1c5i3dg7k8xtosw7r9r7qbbf5j15sk75csp9okesz87nfn"
+  ]
+}
