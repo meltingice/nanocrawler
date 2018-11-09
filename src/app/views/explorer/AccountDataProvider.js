@@ -162,8 +162,6 @@ export default function withAccountData(WrappedComponent) {
         representative
       } = this.state;
 
-      if (this.pendingTimeout) clearTimeout(this.pendingTimeout);
-
       const removeBlockFromPending = () => {
         // Remove the transaction from pending transactions
         const pendingIndex = pendingTransactions.blocks.findIndex(
@@ -229,22 +227,14 @@ export default function withAccountData(WrappedComponent) {
 
       history.unshift(event.block);
 
-      this.setState(
-        {
-          history,
-          blockCount: blockCount + 1,
-          unopened: false,
-          representative,
-          pendingTransactions,
-          balance
-        },
-        () => {
-          this.pendingTimeout = setTimeout(
-            this.fetchPending.bind(this),
-            PENDING_INTERVAL
-          );
-        }
-      );
+      this.setState({
+        history,
+        blockCount: blockCount + 1,
+        unopened: false,
+        representative,
+        pendingTransactions,
+        balance
+      });
     }
 
     render() {
