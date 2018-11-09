@@ -61,9 +61,7 @@ export default class Block extends React.PureComponent {
 
     return (
       <div className="p-4">
-        <Helmet>
-          <title>Block - {match.params.block}</title>
-        </Helmet>
+        <Helmet title={`Block - ${match.params.block}`} />
 
         <div className="row align-items-center">
           <div className="col">
