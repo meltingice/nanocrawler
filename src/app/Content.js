@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { Helmet } from "react-helmet";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 import "./Content.css";
@@ -49,15 +48,6 @@ class Content extends React.Component {
 
     return (
       <div id="Content">
-        <Helmet>
-          <meta charSet="utf-9" />
-          <meta
-            name="description"
-            content="Network data tracking and browsing for the NANO cryptocurrency"
-          />
-          <title>Nano Crawler</title>
-        </Helmet>
-
         <Suspense fallback={<Loading />}>
           <Switch>
             <Route exact path="/" render={props => <Explorer {...props} />} />

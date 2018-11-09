@@ -170,9 +170,7 @@ class NetworkStatus extends React.Component {
 
     return (
       <div className="p-4">
-        <Helmet>
-          <title>Network Status</title>
-        </Helmet>
+        <Helmet title="Network Status" />
 
         <div className="row align-items-center">
           <div className="col-md">
