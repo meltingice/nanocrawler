@@ -20,9 +20,10 @@ export default function(app, nano) {
     try {
       const data = await redisFetch("systemInfo", 10, async () => {
         const stats = await raiNodeInfo();
+        const decimals = 3;
         return {
           uptime: os.uptime(),
-          loadAvg: os.loadavg(),
+          loadAvg: os.loadavg.toFixed(decimals),
           memory: {
             free: os.freemem(),
             total: os.totalmem()
