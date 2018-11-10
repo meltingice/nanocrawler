@@ -24,6 +24,28 @@ Redis support is optional, but recommended. If you wish to skip it, you can safe
 
 The web front-end needs to know where the API server can be reached. Copy `client-config.json` from the examples into the `src` folder and update the config file to fit your environment.
 
+To enable communication between front-end and API in production, you can setup a [reverse proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) to serve the API at api.yourdomain.com for example. 
+
+**Example Nginx reverse proxy**
+
+```nginx
+
+server {
+  root /var/www/html;
+
+  index index.html index.htm index.nginx-debian.html;
+  server_name api.yourdomain.com;
+
+  location / {
+    # First attempt to serve request as file, then
+    # as directory, then fall back to displaying a 404.
+    proxy_pass http://127.0.0.1:3001;
+  }
+}
+```
+now change the "server" line in `client-config.json` to:
+`"server": "https://api.yourdomain.com",`.
+
 The [websocket server](https://github.com/meltingice/nanovault-ws) is optional, but you're welcome to use the hosted websocket server that's set as the default in the config. Depending on the sync status of your node, you may receive blocks from the websocket server before your node confirms them, which is why hosting one yourself is ideal. Remove the config entry to disable the websocket altogether.
 
 ### Building and Hosting the Front-End
