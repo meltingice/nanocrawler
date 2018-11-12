@@ -10,12 +10,8 @@ import "react-bootstrap-typeahead/css/Typeahead-bs4.css";
 export default class ValidatedSearch extends React.Component {
   static propTypes = {
     onChange: PropTypes.func,
-    className: PropTypes.string,
-    clearOnEnter: PropTypes.bool
-  };
-
-  static defaultProps = {
-    className: ""
+    placeholder: PropTypes.string,
+    onSubmit: PropTypes.func
   };
 
   state = {
@@ -24,15 +20,6 @@ export default class ValidatedSearch extends React.Component {
     valid: null,
     searchOptions: []
   };
-
-  get classes() {
-    const { className } = this.props;
-    const { search, valid } = this.state;
-
-    if (search.length === 0) return className;
-    if (valid) return `is-valid ${className}`;
-    return `is-invalid ${className}`;
-  }
 
   onChange(search) {
     let type = null;

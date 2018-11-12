@@ -31,7 +31,6 @@ class GlobalSearch extends React.PureComponent {
     return (
       <form onSubmit={this.onSubmit.bind(this)}>
         <ValidatedSearch
-          className="form-control"
           placeholder={formatMessage(withDefault({ id: "search" }))}
           onChange={({ search, type, valid }) =>
             this.setState({ search, type, valid })
