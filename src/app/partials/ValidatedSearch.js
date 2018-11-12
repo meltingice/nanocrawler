@@ -62,7 +62,7 @@ export default class ValidatedSearch extends React.Component {
       <AsyncTypeahead
         bsSize={this.props.size}
         onKeyDown={this.onKeyDown.bind(this)}
-        submitFormOnEnter={true}
+        placeholder={this.props.placeholder}
         promptText="Type to search for accounts"
         searchText="Searching for accounts..."
         isLoading={this.state.loading}
