@@ -41,16 +41,18 @@ class Account extends React.Component {
 
   hasDelegatedWeight() {
     const { weight } = this.props;
-    return weight > 0;
+    return Currency.fromRaw(weight) > 0;
   }
 
   accountTitle() {
     const { formatMessage } = this.props.intl;
     const { weight, unopened } = this.props;
 
-    if (weight >= config.currency.maxSupply * 0.001)
+    const mnano = Currency.fromRaw(weight);
+
+    if (mnano >= config.currency.maxSupply * 0.001)
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
-    if (weight > 0)
+    if (mnano > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));
     if (unopened)
       return formatMessage(withDefault({ id: "account.title.unopened" }));
