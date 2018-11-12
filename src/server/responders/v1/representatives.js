@@ -7,7 +7,7 @@ export default function(app, nano) {
   app.get("/representatives_online", async (req, res) => {
     try {
       const representatives = await redisFetch(
-        "representatives_online",
+        "representatives_online/v2",
         300,
         async () => {
           const reps = (await nano.rpc("representatives")).representatives;
@@ -32,7 +32,7 @@ export default function(app, nano) {
   app.get("/official_representatives", async (req, res) => {
     try {
       const representatives = await redisFetch(
-        "official_representatives",
+        "official_representatives/v2",
         60,
         async () => {
           const reps = (await nano.rpc("representatives")).representatives;
