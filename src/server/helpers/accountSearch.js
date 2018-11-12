@@ -37,7 +37,7 @@ const accountSearch = async query => {
 
     cursor = resp[0];
 
-    const accounts = resp[1]; //.filter((r, i) => i % 2 === 0);
+    const accounts = resp[1];
     results = results.concat(accounts);
   } while (cursor !== "0");
 
