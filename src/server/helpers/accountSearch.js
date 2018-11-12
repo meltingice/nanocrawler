@@ -54,7 +54,7 @@ const formatQuery = query => {
   );
 
   const match = query.match(addressRegex);
-  if (match) return `*_[13]${match[1]}*`;
+  if (match) return `*_[13]*${match[1]}*`;
   return null;
 };
 
