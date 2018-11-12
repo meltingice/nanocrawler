@@ -1,6 +1,7 @@
 import _ from "lodash";
 import redisFetch from "../../helpers/redisFetch";
 import tpsCalculator from "../../helpers/tpsCalculator";
+import circulatingSupply from "../../helpers/circulatingSupply";
 
 export default function(app, nano) {
   // nanoNodeMonitor network data
@@ -44,6 +45,18 @@ export default function(app, nano) {
         data.peers_stake_total,
         "mrai"
       );
+
+      res.json(data);
+    } catch (e) {
+      res.status(500).send({ error: e.message });
+    }
+  });
+
+  app.get("/circulating_supply", async (req, res) => {
+    try {
+      const data = await redisFetch("circulating_supply", 300, async () => {
+        return await circulatingSupply();
+      });
 
       res.json(data);
     } catch (e) {
