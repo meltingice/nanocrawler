@@ -3,6 +3,7 @@ import config from "../../../../server-config.json";
 import redisFetch from "../../helpers/redisFetch";
 import { accountIsValid, getTimestampForHash } from "../../helpers/util";
 import { frontiers, wealthDistribution } from "../../helpers/frontiers";
+import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   /*
@@ -144,7 +145,7 @@ export default function(app, nano) {
           const resp = await nano.rpc("accounts_pending", {
             accounts: [req.params.account],
             source: true,
-            threshold: nano.convert.toRaw(0.000001, "mrai")
+            threshold: Currency.toRaw(0.000001)
           });
 
           const blocks = _.toPairs(resp.blocks[req.params.account])

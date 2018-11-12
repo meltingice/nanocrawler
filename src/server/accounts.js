@@ -2,6 +2,7 @@ import _ from "lodash";
 import { Nano } from "nanode";
 import redis from "redis";
 import config from "../../server-config.json";
+import Currency from "../lib/Currency";
 
 const redisClient = redis.createClient(config.redis);
 const nano = new Nano({ url: config.nodeHost });
@@ -25,8 +26,8 @@ async function calculateAccountList() {
     const resp = await nano.accounts.balances(accountChunks[i]);
     _.forEach(resp.balances, (balances, account) => {
       const balance =
-        parseFloat(nano.convert.fromRaw(balances.balance, "mrai"), 10) +
-        parseFloat(nano.convert.fromRaw(balances.pending, "mrai"), 10);
+        parseFloat(Currency.fromRaw(balances.balance), 10) +
+        parseFloat(Currency.fromRaw(balances.pending), 10);
 
       if (parseFloat(balance, 10) < 0.000001) {
         accountsToRemove.push(account);
