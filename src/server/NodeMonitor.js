@@ -33,8 +33,12 @@ export default class NodeMonitor {
         .then(resp => {
           const data = JSON.parse(resp);
           if (data.nanoNodeAccount) {
-            console.log("OK", `(${this.source})`, this.apiUrl);
-            resolve({ url: this.apiUrl, data: this.formatData(data) });
+            if (/^ban_/.test(data.nanoNodeAccount)) {
+              console.log("OK", `(${this.source})`, this.apiUrl);
+              resolve({ url: this.apiUrl, data: this.formatData(data) });
+            } else {
+              reject(`${data.nanoNodeAccount} is not a Banano address`);
+            }
           } else {
             reject("Missing nanoNodeAccount data");
           }
