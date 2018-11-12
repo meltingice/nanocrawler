@@ -2,6 +2,7 @@ import _ from "lodash";
 import { Nano } from "nanode";
 import redis from "redis";
 import config from "../../server-config.json";
+import clientConfig from "../client-config.json";
 import Currency from "../lib/Currency";
 
 const redisClient = redis.createClient(config.redis);
@@ -12,7 +13,9 @@ async function calculateAccountList() {
 
   const frontierCount = (await nano.rpc("frontier_count")).count;
   const data = (await nano.rpc("frontiers", {
-    account: "xrb_1111111111111111111111111111111111111111111111111111hifc8npp",
+    account: `${
+      clientConfig.currency.prefixes[0]
+    }_1111111111111111111111111111111111111111111111111111hifc8npp`,
     count: frontierCount
   })).frontiers;
 
