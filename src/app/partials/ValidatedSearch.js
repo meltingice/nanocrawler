@@ -69,6 +69,13 @@ export default class ValidatedSearch extends React.Component {
         isValid={this.state.valid}
         options={this.state.searchOptions}
         onSearch={query => {
+          if (validateBlockHash(query)) {
+            return this.setState({
+              loading: false,
+              searchOptions: [query]
+            });
+          }
+
           this.setState({ loading: true }, async () => {
             const accounts = await apiClient.search(query);
             this.setState({ loading: false, searchOptions: accounts });
