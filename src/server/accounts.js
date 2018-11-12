@@ -2,6 +2,7 @@ import _ from "lodash";
 import { Nano } from "nanode";
 import redis from "redis";
 import config from "../../server-config.json";
+import clientConfig from "../client-config.json";
 import Currency from "../lib/Currency";
 
 const redisClient = redis.createClient(config.redis);
@@ -12,7 +13,9 @@ async function calculateAccountList() {
 
   const frontierCount = (await nano.rpc("frontier_count")).count;
   const data = (await nano.rpc("frontiers", {
-    account: "xrb_1111111111111111111111111111111111111111111111111111hifc8npp",
+    account: `${
+      clientConfig.currency.prefixes[0]
+    }_1111111111111111111111111111111111111111111111111111hifc8npp`,
     count: frontierCount
   })).frontiers;
 
@@ -48,19 +51,32 @@ async function calculateAccountList() {
     return 0;
   });
 
-  updateAccountList(_.flatten(sortedAccounts), accountsToRemove);
+  updateSortedAccounts(_.flatten(sortedAccounts), accountsToRemove);
+  updateAllAccounts(sortedAccounts, accountsToRemove);
   setTimeout(calculateAccountList, 900000); // every 15 minutes
 }
 
-function updateAccountList(accountsWithBalance, accountsToRemove) {
-  const redisKey = `nano-control-panel/${config.redisNamespace ||
+function updateSortedAccounts(accountsWithBalance, accountsToRemove) {
+  const sortedKey = `nano-control-panel/${config.redisNamespace ||
     "default"}/sortedAccounts`;
-  accountsWithBalance.unshift(redisKey);
-  accountsToRemove.unshift(redisKey);
+
+  accountsWithBalance.unshift(sortedKey);
+  accountsToRemove.unshift(sortedKey);
   redisClient.zrem(accountsToRemove, (err, resp) => {
     redisClient.zadd(accountsWithBalance, (err, resp) => {
       console.log("Rich list update complete");
     });
+  });
+}
+
+function updateAllAccounts(accountsWithBalance, accountsToRemove) {
+  const unsortedKey = `nano-control-panel/${config.redisNamespace ||
+    "default"}/allAccounts`;
+
+  const data = accountsWithBalance.map(a => a[1]).concat(accountsToRemove);
+
+  redisClient.sadd(unsortedKey, data, (err, resp) => {
+    console.log("List of all accounts updated");
   });
 }
 

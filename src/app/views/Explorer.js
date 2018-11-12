@@ -55,7 +55,7 @@ class Explorer extends React.PureComponent {
             <div className="form-row">
               <div className="col-md">
                 <ValidatedSearch
-                  className="form-control form-control-lg"
+                  size="lg"
                   onChange={({ search, type, valid }) =>
                     this.setState({ search, type, valid })
                   }

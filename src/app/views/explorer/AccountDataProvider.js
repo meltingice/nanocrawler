@@ -24,7 +24,7 @@ export default function withAccountData(WrappedComponent) {
       representative: null,
       weight: 0,
       blockCount: 0,
-      version: "1",
+      version: "0",
       unopened: false,
       loading: true,
 

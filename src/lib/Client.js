@@ -107,6 +107,12 @@ class Client {
     return await resp.json();
   }
 
+  async search(query) {
+    if (query.trim().length < 2) return [];
+    const resp = await this.fetch(`v2/search?q=${query}`);
+    return (await resp.json()).accounts;
+  }
+
   async fetch(endpoint) {
     const resp = await fetch(`${this.host}/${endpoint}`);
     if (resp.ok) return resp;
