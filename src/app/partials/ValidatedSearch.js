@@ -21,6 +21,20 @@ export default class ValidatedSearch extends React.Component {
     searchOptions: []
   };
 
+  onSearch(query) {
+    if (validateBlockHash(query)) {
+      return this.setState({
+        loading: false,
+        searchOptions: [query]
+      });
+    }
+
+    this.setState({ loading: true }, async () => {
+      const accounts = await apiClient.search(query);
+      this.setState({ loading: false, searchOptions: accounts });
+    });
+  }
+
   onChange(search) {
     let type = null;
     if (validateAddress(search)) type = "account";
@@ -55,19 +69,7 @@ export default class ValidatedSearch extends React.Component {
         isLoading={this.state.loading}
         isValid={this.state.valid}
         options={this.state.searchOptions}
-        onSearch={query => {
-          if (validateBlockHash(query)) {
-            return this.setState({
-              loading: false,
-              searchOptions: [query]
-            });
-          }
-
-          this.setState({ loading: true }, async () => {
-            const accounts = await apiClient.search(query);
-            this.setState({ loading: false, searchOptions: accounts });
-          });
-        }}
+        onSearch={this.onSearch.bind(this)}
         onInputChange={this.onChange.bind(this)}
         onChange={selections => this.onChange(selections[0])}
       />
