@@ -1,6 +1,7 @@
 import _ from "lodash";
 import redisFetch from "../../helpers/redisFetch";
 import config from "../../../../server-config.json";
+import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   app.get("/representatives_online", async (req, res) => {
@@ -16,7 +17,7 @@ export default function(app, nano) {
           return _.fromPairs(
             _.map(repsOnline, (s, account) => [
               account,
-              reps[account] ? nano.convert.fromRaw(reps[account], "mrai") : 0
+              reps[account] ? Currency.fromRaw(reps[account]) : 0
             ])
           );
         }
@@ -38,7 +39,7 @@ export default function(app, nano) {
           return _.fromPairs(
             config.officialRepresentatives.map(addr => [
               addr,
-              nano.convert.fromRaw(reps[addr], "mrai")
+              Currency.fromRaw(reps[addr])
             ])
           );
         }

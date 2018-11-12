@@ -3,6 +3,7 @@ import config from "../../../../server-config.json";
 import redisFetch from "../../helpers/redisFetch";
 import { accountIsValid, getTimestampForHash } from "../../helpers/util";
 import { frontiers, wealthDistribution } from "../../helpers/frontiers";
+import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   app.get("/account", async (req, res) => {
@@ -26,9 +27,9 @@ export default function(app, nano) {
             pending: true
           });
 
-          account.balance = nano.convert.fromRaw(account.balance, "mrai");
-          account.pending = nano.convert.fromRaw(account.pending, "mrai");
-          account.weight = nano.convert.fromRaw(account.weight, "mrai");
+          account.balance = Currency.fromRaw(account.balance);
+          account.pending = Currency.fromRaw(account.pending);
+          account.weight = Currency.fromRaw(account.weight);
 
           return account;
         }
@@ -50,9 +51,8 @@ export default function(app, nano) {
         `weight/${req.params.account}`,
         300,
         async () => {
-          return nano.convert.fromRaw(
-            await nano.accounts.weight(req.params.account),
-            "mrai"
+          return Currency.fromRaw(
+            await nano.accounts.weight(req.params.account)
           );
         }
       );
@@ -78,7 +78,7 @@ export default function(app, nano) {
           });
           return _.fromPairs(
             _.map(resp.delegators, (balance, account) => {
-              return [account, nano.convert.fromRaw(balance, "mrai")];
+              return [account, Currency.fromRaw(balance)];
             })
           );
         }
@@ -117,7 +117,7 @@ export default function(app, nano) {
           for (let i = 0; i < resp.length; i++) {
             resp[i].timestamp = await getTimestampForHash(resp[i].hash);
             if (resp[i].amount) {
-              resp[i].amount = nano.convert.fromRaw(resp[i].amount, "mrai");
+              resp[i].amount = Currency.fromRaw(resp[i].amount);
             }
           }
 
@@ -144,7 +144,7 @@ export default function(app, nano) {
           const resp = await nano.rpc("accounts_pending", {
             accounts: [req.params.account],
             source: true,
-            threshold: nano.convert.toRaw(0.000001, "mrai")
+            threshold: Currency.toRaw(0.000001)
           });
 
           const blocks = _.toPairs(resp.blocks[req.params.account])
@@ -152,7 +152,7 @@ export default function(app, nano) {
             .map(data => {
               return {
                 type: "pending",
-                amount: nano.convert.fromRaw(data[1].amount, "mrai"),
+                amount: Currency.fromRaw(data[1].amount),
                 hash: data[0],
                 source: data[1].source
               };
