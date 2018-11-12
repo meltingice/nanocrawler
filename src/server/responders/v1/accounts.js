@@ -17,7 +17,7 @@ export default function(app, nano) {
 
     try {
       const account = await redisFetch(
-        `account/${req.params.account}`,
+        `account/v2/${req.params.account}`,
         10,
         async () => {
           const account = await nano.rpc("account_info", {
@@ -48,7 +48,7 @@ export default function(app, nano) {
 
     try {
       const weight = await redisFetch(
-        `weight/${req.params.account}`,
+        `weight/v2/${req.params.account}`,
         300,
         async () => {
           return Currency.fromRaw(
@@ -70,7 +70,7 @@ export default function(app, nano) {
 
     try {
       const delegators = await redisFetch(
-        `delegators/${req.params.account}`,
+        `delegators/v2/${req.params.account}`,
         300,
         async () => {
           const resp = await nano.rpc("delegators", {
@@ -103,7 +103,7 @@ export default function(app, nano) {
 
     try {
       const history = await redisFetch(
-        `history/${req.params.account}/${req.query.head}`,
+        `history/v2/${req.params.account}/${req.query.head}`,
         10,
         async () => {
           // const resp = await nano.accounts.history(req.params.account, 20);
@@ -138,7 +138,7 @@ export default function(app, nano) {
 
     try {
       const data = await redisFetch(
-        `pending/${req.params.account}`,
+        `pending/v2/${req.params.account}`,
         10,
         async () => {
           const resp = await nano.rpc("accounts_pending", {
