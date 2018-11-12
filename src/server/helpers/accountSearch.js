@@ -32,7 +32,7 @@ const accountSearch = async query => {
       "MATCH",
       search,
       "COUNT",
-      10000
+      20000
     );
 
     cursor = resp[0];
