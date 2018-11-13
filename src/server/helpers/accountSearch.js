@@ -41,7 +41,7 @@ const accountSearch = async query => {
     results = results.concat(accounts);
   } while (cursor !== "0");
 
-  return results;
+  return results.sort(sortResults(query));
 };
 
 const formatQuery = query => {
@@ -56,6 +56,10 @@ const formatQuery = query => {
   const match = query.match(addressRegex);
   if (match) return `*_[13]*${match[1]}*`;
   return null;
+};
+
+const sortResults = query => {
+  return (a, b) => a.indexOf(query) - b.indexOf(query);
 };
 
 export default accountSearch;
