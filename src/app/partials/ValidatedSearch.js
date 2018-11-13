@@ -6,6 +6,7 @@ import { apiClient } from "lib/Client";
 
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead-bs4.css";
+import "./ValidatedSearch.css";
 
 export default class ValidatedSearch extends React.Component {
   static propTypes = {
@@ -61,6 +62,7 @@ export default class ValidatedSearch extends React.Component {
   render() {
     return (
       <AsyncTypeahead
+        className="ValidatedSearch"
         bsSize={this.props.size}
         onKeyDown={this.onKeyDown.bind(this)}
         placeholder={this.props.placeholder}
