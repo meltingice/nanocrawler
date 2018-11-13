@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "lodash";
 import { addLocaleData } from "react-intl";
 import moment from "moment";
 import Cookies from "js-cookie";
@@ -13,15 +14,12 @@ const TranslationContext = React.createContext({
 });
 
 class TranslationProvider extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    language: "en",
+    messages: en
+  };
 
-    this.state = {
-      language: "en",
-      messages: en,
-      setLanguage: this.setLanguage.bind(this)
-    };
-
+  componentDidMount() {
     const language =
       Cookies.get("nanocrawler.locale") ||
       (navigator.languages && navigator.languages[0]) ||
@@ -59,8 +57,12 @@ class TranslationProvider extends React.Component {
   }
 
   render() {
+    const data = _.assign({}, this.state, {
+      setLanguage: this.setLanguage.bind(this)
+    });
+
     return (
-      <TranslationContext.Provider value={this.state}>
+      <TranslationContext.Provider value={data}>
         {this.props.children}
       </TranslationContext.Provider>
     );

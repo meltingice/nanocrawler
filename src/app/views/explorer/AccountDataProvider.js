@@ -24,7 +24,7 @@ export default function withAccountData(WrappedComponent) {
       representative: null,
       weight: 0,
       blockCount: 0,
-      version: "1",
+      version: "0",
       unopened: false,
       loading: true,
 
@@ -44,7 +44,7 @@ export default function withAccountData(WrappedComponent) {
 
     async componentDidMount() {
       await this.fetchAccount();
-      this.fetchHistory();
+      await this.fetchHistory();
       this.fetchPending();
       this.connectWebsocket();
     }
@@ -57,8 +57,13 @@ export default function withAccountData(WrappedComponent) {
 
     async fetchAccount() {
       const { account } = this.props;
+
+      const error = () => this.setState({ unopened: true, loading: false });
+
       try {
         const data = await apiClient.account(account);
+        if (data.error) return error();
+
         this.setState(
           {
             balance: data.balance,
@@ -77,7 +82,7 @@ export default function withAccountData(WrappedComponent) {
           }
         );
       } catch (e) {
-        this.setState({ unopened: true, loading: false });
+        error();
       }
     }
 
@@ -157,8 +162,6 @@ export default function withAccountData(WrappedComponent) {
         representative
       } = this.state;
 
-      if (this.pendingTimeout) clearTimeout(this.pendingTimeout);
-
       const removeBlockFromPending = () => {
         // Remove the transaction from pending transactions
         const pendingIndex = pendingTransactions.blocks.findIndex(
@@ -198,7 +201,7 @@ export default function withAccountData(WrappedComponent) {
           representative = event.block.representative;
           if (event.is_send === "true") {
             balance = Currency.subtractRaw(balance, event.block.amount);
-
+            event.block.account = event.block.link_as_account;
             event.block.subtype = "send";
           } else {
             balance = Currency.addRaw(balance, event.block.amount);
@@ -210,6 +213,11 @@ export default function withAccountData(WrappedComponent) {
               event.block.subtype = "change";
             } else {
               event.block.subtype = "receive";
+
+              // Need to fetch the source block to get the sender
+              const sendBlock = await apiClient.block(event.block.link);
+              event.block.account = sendBlock.block_account;
+
               removeBlockFromPending();
             }
           }
@@ -219,22 +227,14 @@ export default function withAccountData(WrappedComponent) {
 
       history.unshift(event.block);
 
-      this.setState(
-        {
-          history,
-          blockCount: blockCount + 1,
-          unopened: false,
-          representative,
-          pendingTransactions,
-          balance
-        },
-        () => {
-          this.pendingTimeout = setTimeout(
-            this.fetchPending.bind(this),
-            PENDING_INTERVAL
-          );
-        }
-      );
+      this.setState({
+        history,
+        blockCount: blockCount + 1,
+        unopened: false,
+        representative,
+        pendingTransactions,
+        balance
+      });
     }
 
     render() {

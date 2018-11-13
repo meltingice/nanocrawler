@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { withRouter, Link } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import config from "client-config.json";
 
 import ValidatedSearch from "app/partials/ValidatedSearch";
 
@@ -31,9 +32,7 @@ class Explorer extends React.PureComponent {
 
     return (
       <div className="row justify-content-center my-5 mx-0">
-        <Helmet>
-          <title>Network Explorer</title>
-        </Helmet>
+        <Helmet title="Network Explorer" />
 
         <div className="col col-md-8">
           <h1>
@@ -44,13 +43,16 @@ class Explorer extends React.PureComponent {
 
           <form className="my-5" onSubmit={this.handleSubmit.bind(this)}>
             <label>
-              <TranslatedMessage id="explorer.form.help" />
+              <TranslatedMessage
+                id="explorer.form.help"
+                values={{ currency: config.currency.name }}
+              />
             </label>
 
             <div className="form-row">
               <div className="col-md">
                 <ValidatedSearch
-                  className="form-control form-control-lg"
+                  size="lg"
                   onChange={({ search, type, valid }) =>
                     this.setState({ search, type, valid })
                   }

@@ -7,7 +7,7 @@ const TIMEOUT = 5;
 
 export default class NodeMonitor {
   static fromPeerAddress(peer) {
-    const match = peer.match(/\[(.+)\]:\d+/);
+    const match = peer.match(/\[(?:\:\:ffff\:)?(.+)\]:\d+/);
     if (match)
       return new NodeMonitor(`http://${match[1]}/api.php`, "discovered");
     return null;

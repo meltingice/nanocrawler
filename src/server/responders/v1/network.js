@@ -1,6 +1,7 @@
 import _ from "lodash";
 import redisFetch from "../../helpers/redisFetch";
 import tpsCalculator from "../../helpers/tpsCalculator";
+import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   // nanoNodeMonitor network data
@@ -31,19 +32,12 @@ export default function(app, nano) {
         return await nano.rpc("confirmation_quorum");
       });
 
-      data.quorum_delta_mnano = nano.convert.fromRaw(data.quorum_delta, "mrai");
-      data.online_weight_minimum_mnano = nano.convert.fromRaw(
-        data.online_weight_minimum,
-        "mrai"
+      data.quorum_delta_mnano = Currency.fromRaw(data.quorum_delta);
+      data.online_weight_minimum_mnano = Currency.fromRaw(
+        data.online_weight_minimum
       );
-      data.online_stake_total_mnano = nano.convert.fromRaw(
-        data.online_stake_total,
-        "mrai"
-      );
-      data.peers_stake_total_mnano = nano.convert.fromRaw(
-        data.peers_stake_total,
-        "mrai"
-      );
+      data.online_stake_total_mnano = Currency.fromRaw(data.online_stake_total);
+      data.peers_stake_total_mnano = Currency.fromRaw(data.peers_stake_total);
 
       res.json(data);
     } catch (e) {

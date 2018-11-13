@@ -1,6 +1,7 @@
 import { Nano } from "nanode";
 import { redisGet } from "./redisFetch";
 import config from "../../../server-config.json";
+import Currency from "../../lib/Currency";
 
 const nano = new Nano({ url: config.nodeHost });
 
@@ -21,7 +22,7 @@ export async function getTimestampForHash(hash) {
 
 export async function processBlock(hash, block, convert = false) {
   if (convert) {
-    block.amount = nano.convert.fromRaw(block.amount, "mrai");
+    block.amount = Currency.fromRaw(block.amount);
   }
 
   block.contents = JSON.parse(block.contents);
@@ -42,16 +43,12 @@ export async function processBlock(hash, block, convert = false) {
   if (convert) {
     switch (block.contents.type) {
       case "send":
-        block.contents.balance = nano.convert.fromRaw(
-          parseInt(block.contents.balance, 16).toString(),
-          "mrai"
+        block.contents.balance = Currency.fromRaw(
+          parseInt(block.contents.balance, 16).toString()
         );
         break;
       case "state":
-        block.contents.balance = nano.convert.fromRaw(
-          block.contents.balance,
-          "mrai"
-        );
+        block.contents.balance = Currency.fromRaw(block.contents.balance);
         break;
     }
   }

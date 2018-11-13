@@ -4,6 +4,7 @@
   "donationAddress":
     "xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh",
   "currency": {
+    "name": "Nano",
     "shortName": "NANO",
     "precision": 30,
     "maxSupply": 133248289,
@@ -32,5 +33,6 @@
       "zh-CN": "汉语",
       "zh-TW": "漢語"
     }
-  }
+  },
+  "serviceMonitors": []
 }

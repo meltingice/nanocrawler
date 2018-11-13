@@ -3,6 +3,7 @@ import config from "../../../../server-config.json";
 import redisFetch from "../../helpers/redisFetch";
 import { accountIsValid, getTimestampForHash } from "../../helpers/util";
 import { frontiers, wealthDistribution } from "../../helpers/frontiers";
+import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   app.get("/account", async (req, res) => {
@@ -16,7 +17,7 @@ export default function(app, nano) {
 
     try {
       const account = await redisFetch(
-        `account/${req.params.account}`,
+        `account/v2/${req.params.account}`,
         10,
         async () => {
           const account = await nano.rpc("account_info", {
@@ -26,9 +27,9 @@ export default function(app, nano) {
             pending: true
           });
 
-          account.balance = nano.convert.fromRaw(account.balance, "mrai");
-          account.pending = nano.convert.fromRaw(account.pending, "mrai");
-          account.weight = nano.convert.fromRaw(account.weight, "mrai");
+          account.balance = Currency.fromRaw(account.balance);
+          account.pending = Currency.fromRaw(account.pending);
+          account.weight = Currency.fromRaw(account.weight);
 
           return account;
         }
@@ -47,12 +48,11 @@ export default function(app, nano) {
 
     try {
       const weight = await redisFetch(
-        `weight/${req.params.account}`,
+        `weight/v2/${req.params.account}`,
         300,
         async () => {
-          return nano.convert.fromRaw(
-            await nano.accounts.weight(req.params.account),
-            "mrai"
+          return Currency.fromRaw(
+            await nano.accounts.weight(req.params.account)
           );
         }
       );
@@ -70,7 +70,7 @@ export default function(app, nano) {
 
     try {
       const delegators = await redisFetch(
-        `delegators/${req.params.account}`,
+        `delegators/v2/${req.params.account}`,
         300,
         async () => {
           const resp = await nano.rpc("delegators", {
@@ -78,7 +78,7 @@ export default function(app, nano) {
           });
           return _.fromPairs(
             _.map(resp.delegators, (balance, account) => {
-              return [account, nano.convert.fromRaw(balance, "mrai")];
+              return [account, Currency.fromRaw(balance)];
             })
           );
         }
@@ -103,7 +103,7 @@ export default function(app, nano) {
 
     try {
       const history = await redisFetch(
-        `history/${req.params.account}/${req.query.head}`,
+        `history/v2/${req.params.account}/${req.query.head}`,
         10,
         async () => {
           // const resp = await nano.accounts.history(req.params.account, 20);
@@ -117,7 +117,7 @@ export default function(app, nano) {
           for (let i = 0; i < resp.length; i++) {
             resp[i].timestamp = await getTimestampForHash(resp[i].hash);
             if (resp[i].amount) {
-              resp[i].amount = nano.convert.fromRaw(resp[i].amount, "mrai");
+              resp[i].amount = Currency.fromRaw(resp[i].amount);
             }
           }
 
@@ -138,13 +138,13 @@ export default function(app, nano) {
 
     try {
       const data = await redisFetch(
-        `pending/${req.params.account}`,
+        `pending/v2/${req.params.account}`,
         10,
         async () => {
           const resp = await nano.rpc("accounts_pending", {
             accounts: [req.params.account],
             source: true,
-            threshold: nano.convert.toRaw(0.000001, "mrai")
+            threshold: Currency.toRaw(0.000001)
           });
 
           const blocks = _.toPairs(resp.blocks[req.params.account])
@@ -152,7 +152,7 @@ export default function(app, nano) {
             .map(data => {
               return {
                 type: "pending",
-                amount: nano.convert.fromRaw(data[1].amount, "mrai"),
+                amount: Currency.fromRaw(data[1].amount),
                 hash: data[0],
                 source: data[1].source
               };

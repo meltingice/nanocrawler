@@ -5,6 +5,7 @@ import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
 import { formatTimestamp } from "lib/util";
+import config from "client-config.json";
 
 export default function OpenBlock({ block }) {
   return (
@@ -61,7 +62,10 @@ export default function OpenBlock({ block }) {
       </p>
       <p>
         <small>
-          <TranslatedMessage id="block.open.amount_desc" />
+          <TranslatedMessage
+            id="block.open.amount_desc"
+            values={{ currencyShortName: config.currency.shortName }}
+          />
         </small>
       </p>
 
