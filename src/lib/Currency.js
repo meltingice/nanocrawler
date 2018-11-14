@@ -9,7 +9,7 @@ export default {
 
   toRaw: mvalue => {
     const value = BigNumber(mvalue.toString());
-    return value.shiftedBy(config.currency.precision || 30).toString();
+    return value.shiftedBy(config.currency.precision || 30).toString(10);
   },
 
   addRaw: (...values) => {
