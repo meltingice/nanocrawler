@@ -21,9 +21,9 @@ class Explorer extends React.PureComponent {
     if (!valid) return;
 
     if (type === "account") {
-      history.push(`/explorer/account/${search}`);
+      history.push(`/account/${search}`);
     } else if (type === "block") {
-      history.push(`/explorer/block/${search}`);
+      history.push(`/block/${search}`);
     }
   }
 
@@ -52,7 +52,7 @@ class Explorer extends React.PureComponent {
             <div className="form-row">
               <div className="col-md">
                 <ValidatedSearch
-                  size="lg"
+                  className="form-control form-control-lg"
                   onChange={({ search, type, valid }) =>
                     this.setState({ search, type, valid })
                   }
