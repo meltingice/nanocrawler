@@ -1,12 +1,16 @@
 import _ from "lodash";
-import redisFetch from "../helpers/redisFetch";
-import officialRepresentatives from "../helpers/officialRepresentatives";
+import redisFetch from "../../helpers/redisFetch";
+import config from "../../../../server-config.json";
 
 export default function(app, nano) {
-  app.get("/representatives_online", async (req, res) => {
+  /*
+   * representatives_online
+   * Returns hash of online representatives, including their voting weight
+   */
+  app.get("/representatives/online", async (req, res) => {
     try {
       const representatives = await redisFetch(
-        "representatives_online",
+        "v2/representatives_online",
         300,
         async () => {
           const reps = (await nano.rpc("representatives")).representatives;
@@ -16,7 +20,7 @@ export default function(app, nano) {
           return _.fromPairs(
             _.map(repsOnline, (s, account) => [
               account,
-              reps[account] ? nano.convert.fromRaw(reps[account], "mrai") : 0
+              reps[account] ? reps[account] : "0"
             ])
           );
         }
@@ -28,18 +32,19 @@ export default function(app, nano) {
     }
   });
 
-  app.get("/official_representatives", async (req, res) => {
+  /*
+   * representatives
+   * Returns list of official representatives only, with their voting weight
+   */
+  app.get("/representatives/official", async (req, res) => {
     try {
       const representatives = await redisFetch(
-        "official_representatives",
+        "v2/official_representatives",
         60,
         async () => {
           const reps = (await nano.rpc("representatives")).representatives;
           return _.fromPairs(
-            officialRepresentatives.map(addr => [
-              addr,
-              nano.convert.fromRaw(reps[addr], "mrai")
-            ])
+            config.officialRepresentatives.map(addr => [addr, reps[addr]])
           );
         }
       );

@@ -6,6 +6,7 @@ import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
 import { TranslatedMessage, withDefault } from "lib/TranslatedMessage";
 import { withNetworkData } from "lib/NetworkContext";
+import Currency from "lib/Currency";
 
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
@@ -28,25 +29,29 @@ class Account extends React.Component {
   }
 
   async fetchUptime() {
-    return;
     const { account } = this.props;
     const ninja = new NanoNodeNinja(account);
     await ninja.fetch();
-    this.setState({ uptime: ninja.data.uptime });
+
+    if (ninja.hasAccount()) {
+      this.setState({ uptime: ninja.data.uptime });
+    }
   }
 
   hasDelegatedWeight() {
     const { weight } = this.props;
-    return weight > 0;
+    return Currency.fromRaw(weight) > 0;
   }
 
   accountTitle() {
     const { formatMessage } = this.props.intl;
     const { weight, unopened } = this.props;
 
-    if (weight >= config.maxCoinSupply * 0.001)
+    const mnano = Currency.fromRaw(weight);
+
+    if (mnano >= config.currency.maxSupply * 0.001)
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
-    if (weight > 0)
+    if (mnano > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));
     if (unopened)
       return formatMessage(withDefault({ id: "account.title.unopened" }));
@@ -131,17 +136,16 @@ class Account extends React.Component {
 
     return (
       <div className="p-4">
-        <Helmet key={window.location.href}>
-          <title>
-            {this.accountTitle()} - {account}
-          </title>
-        </Helmet>
+        <Helmet
+          key={window.location.href}
+          title={`${this.accountTitle()} - ${account}`}
+        />
 
         <div className="row align-items-center" style={{ overflow: "auto" }}>
           <div className="col-lg mb-2">
             <h1 className="mb-0">{this.accountTitle()}</h1>
             <p className="text-muted mb-0 break-word">
-              {account}
+              <span className="text-monospace">{account}</span>
 
               <span
                 className="tooltipped tooltipped-e ml-1"
@@ -171,24 +175,29 @@ class Account extends React.Component {
               </div>
               <div className="col">
                 <PriceWithConversions
+                  raw
                   amount={balance}
-                  currencies={["nano", "usd", "btc"]}
+                  currencies={["base", "usd", "btc"]}
                 >
-                  {(nano, usd, btc) => {
+                  {(base, usd, btc) => {
                     return (
                       <Fragment>
-                        <h3 className="mb-0">{nano}</h3>
+                        <ScaledAccountBalance
+                          balance={balance}
+                          displayValue={base}
+                        />
 
                         <p className="text-muted mb-0">
                           {usd} / {btc}
                         </p>
                         <p className="text-muted mb-0">
                           <FormattedNumber
-                            value={pending}
+                            value={Currency.fromRaw(pending)}
                             minimumFractionDigits={2}
                             maximumFractionDigits={6}
                           />{" "}
-                          {config.currency} <TranslatedMessage id="pending" />
+                          {config.currency.shortName}{" "}
+                          <TranslatedMessage id="pending" />
                         </p>
                       </Fragment>
                     );
@@ -288,6 +297,12 @@ class Account extends React.Component {
     }
   }
 }
+
+const ScaledAccountBalance = ({ balance, displayValue }) => {
+  const mbalance = Currency.fromRaw(balance).toString();
+  if (mbalance.length > 12) return <h5 className="mb-0">{displayValue}</h5>;
+  return <h3 className="mb-0">{displayValue}</h3>;
+};
 
 const Loading = () => (
   <div className="my-5 text-center">

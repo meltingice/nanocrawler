@@ -1,13 +1,13 @@
 import _ from "lodash";
-import redisFetch from "../helpers/redisFetch";
-import { processBlock, getTimestampForHash } from "../helpers/util";
+import redisFetch from "../../helpers/redisFetch";
+import { processBlock, getTimestampForHash } from "../../helpers/util";
 
 export default function(app, nano) {
   app.get("/block/:hash", async (req, res) => {
     try {
       const block = await redisFetch(
-        `block/v4/${req.params.hash}`,
-        2592000,
+        `block/v5/${req.params.hash}`,
+        604800,
         async () => {
           const blocks = (await nano.rpc("blocks_info", {
             hashes: [req.params.hash],
@@ -17,7 +17,7 @@ export default function(app, nano) {
 
           let block = blocks[req.params.hash];
           block.timestamp = await getTimestampForHash(req.params.hash);
-          return await processBlock(req.params.hash, block);
+          return await processBlock(req.params.hash, block, true);
         }
       );
 

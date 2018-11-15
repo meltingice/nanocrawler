@@ -3,21 +3,28 @@
     "nav.network": "Статус сети",
     "nav.status": "Статус ноды",
     "explorer.title": "Блокэксплорер Сети",
-    "explorer.form.help": "Для начала введите адрес Nano или хэш блока.",
+    "explorer.form.help": "Для начала введите адрес {currency} или хэш блока.",
     "network.title": "Статус сети",
     "network.reps_online": "{count} представителей онлайн",
-    "network.reps_online_desc": "Аккаунты, которые имеют как минимум 1 делегата, независимо от веса голосов",
+    "network.reps_online_desc":
+        "Аккаунты, которые имеют как минимум 1 делегата, независимо от веса голосов",
     "network.online_voting_power": "{count} силы голосов онлайн",
     "network.total_voting_power": "{percent} от общего числа голосов",
     "network.official_reps": "{count} делегируется официальным представителям",
-    "network.official_reps_stat": "{totalPower} от общей мощности голосования и {onlinePower} от мощности онлайн-голосования",
-    "network.online_rebroadcasting": "{count} ретранслирующих представителей онлайн",
-    "network.online_rebroadcasting_desc": "Представитель будет ретранслировать голоса только если ему делегировано >0.1% от общего предложения ({amount} NANO)",
-    "network.rebroadcast_amt": "{count} присвоено ретранслирующим представителям",
-    "network.rebroadcast_stat": "{totalPower} от общей силы голосов и {onlinePower} от силы голосов онлайн",
+    "network.official_reps_stat":
+        "{totalPower} от общей мощности голосования и {onlinePower} от мощности онлайн-голосования",
+    "network.online_rebroadcasting":
+        "{count} ретранслирующих представителей онлайн",
+    "network.online_rebroadcasting_desc":
+        "Представитель будет ретранслировать голоса только если ему делегировано >0.1% от общего предложения ({amount} {currencyShortName})",
+    "network.rebroadcast_amt":
+        "{count} присвоено ретранслирующим представителям",
+    "network.rebroadcast_stat":
+        "{totalPower} от общей силы голосов и {onlinePower} от силы голосов онлайн",
     "network.peer_versions": "Версия Протокола",
     "network.aggregate.title": "Общая Статистика Сети",
-    "network.aggregate.desc": "Статистика собирается из обнаруженных {link} и фильтруется, чтобы включить только ноды имеющие вес для голосования",
+    "network.aggregate.desc":
+        "Статистика собирается из обнаруженных {link} и фильтруется, чтобы включить только ноды имеющие вес для голосования",
     "network.tracking_nodes": "Мониторинг {count} узлов",
     "network.avg_sync_status": "Средний Статус Синхронизации",
     "network.avg_block_count": "Среднее Количество Блоков",
@@ -29,18 +36,21 @@
     "network.median_unchecked": "Медианное количество непроверенных блоков",
     "network.min_unchecked": "Минимальное количество непроверенных блоков",
     "network.max_unchecked": "Максимальное количество непроверенных блоков",
-    "network.nano_services": "Nano Сервисы",
-    "network.nano_services_desc": "Текущий статус известных Nano сервисов. Кошельки, tip-боты, торговые инструменты и т.д.",
+    "network.nano_services": "{currency} Сервисы",
+    "network.nano_services_desc":
+        "Текущий статус известных {currency} сервисов. Кошельки, tip-боты, торговые инструменты и т.д.",
     "network.synced_within": "Статус синхронизации:",
     "network.synced_blocks": "{count} блоков",
     "network.synced_greater_than": "больше чем {count} блоков",
     "network.discovered_peers": "Обнаруженные Узлы",
-    "network.discovered_peers_desc": "Все обнаруженные узлы использующие nanoNodeMonitor, отсортированные по имени.",
+    "network.discovered_peers_desc":
+        "Все обнаруженные узлы использующие nanoNodeMonitor, отсортированные по имени.",
     "network.monitor_count": "{count} обнаруженных узлов",
     "network.peers.filter": "Фильтровать по версии",
     "network.peers.rebroadcast_only": "Только ретранслирующие представители",
     "network.tps.title": "Пропускная Способность Сети",
-    "network.tps.desc": "Среднее количество проверенных блоков/сек за данный период",
+    "network.tps.desc":
+        "Среднее количество проверенных блоков/сек за данный период",
     "status.checked_blocks": "Проверенные блоки",
     "status.unchecked_blocks": "Непроверенные Блоки",
     "status.voting_weight": "Вес голосования",
@@ -55,27 +65,33 @@
     "account.title.normal": "Аккаунт",
     "account.rep.online": "Представитель Онлайн",
     "account.rep.offline": "Представитель Оффлайн",
-    "account.rep_offline_warning": "У этого аккаунта-представителя аптайм {uptime}. Если ваш голос делегирован ему, возможно вы захотите изменить его на {link}",
+    "account.rep_offline_warning":
+        "У этого аккаунта-представителя аптайм {uptime}. Если ваш голос делегирован ему, возможно вы захотите изменить его на {link}",
     "account.rep_offline.warning_link": "подтвержденные с минимум 95%  аптайма",
-    "account.rep_offline.desc": "Оффлайн представитель означает, что этот аккаунт больше не участвует в голосовании. Это никак не влияет на транзакции.",
+    "account.rep_offline.desc":
+        "Оффлайн представитель означает, что этот аккаунт больше не участвует в голосовании. Это никак не влияет на транзакции.",
     "account.history": "История",
     "account.delegators": "Делегаты",
     "account.represented_by": "Представленный  {account}",
     "account.delegators.empty_state.title": "Этот аккаунт не имеет делегатов",
-    "account.delegators.empty_state.desc": "Этот аккаунт действующий, в настоящее время никто не предоставляет ему свой голос. Если аккаунт находится в оффлайне, это нормально.",
+    "account.delegators.empty_state.desc":
+        "Этот аккаунт действующий, в настоящее время никто не предоставляет ему свой голос. Если аккаунт находится в оффлайне, это нормально.",
     "account.delegators.loading": "Загрузка делегатов...",
     "account.delegators.title": "Делегаты",
     "account.delegators.desc": "{count} делегата, отсортированные по весу",
-    "account.delegators.filter": "Показаны аккаунты с хотя бы 1 NANO",
+    "account.delegators.filter":
+        "Показаны аккаунты с хотя бы 1 {currencyShortName}",
     "account.delegators.weight": "Делегированный Вес",
     "account.pending.title": "Транзакции В Ожидании",
-    "account.pending.limit": "Отображается не более 20 депозитов находящихся в ожидании",
+    "account.pending.limit":
+        "Отображается не более 20 депозитов находящихся в ожидании",
     "account.pending.count": "ожидающие транзакции",
     "account.transactions.title": "Транзакции",
     "account.transactions.total": "транзакций всего",
     "account.transactions.load_more": "Загрузить Больше Транзакций",
     "account.unopened.title": "Этот аккаунт ещё не открыт",
-    "account.unopened.desc": "Адрес аккаунта корректный, но ни одного блока не было создано в его блокчейне. Если NANO было отправлено этому аккаунту, он должен создать соответствующий блок, чтобы получить деньги.",
+    "account.unopened.desc":
+        "Адрес аккаунта корректный, но ни одного блока не было создано в его блокчейне. Если {currency} было отправлено этому аккаунту, он должен создать соответствующий блок, чтобы получить деньги.",
     "block.state": "Универсальный",
     "block.subtype.open": "открыть",
     "block.subtype.change": "замена",
@@ -89,7 +105,8 @@
     "block.signature": "Подпись",
     "block.link": "Ссылка",
     "block.balance.desc": "Баланс аккаунта после этой транзакции",
-    "block.timestamp.desc": "Дата и время, обнаружения этого блока (преобразовано в местное время)",
+    "block.timestamp.desc":
+        "Дата и время, обнаружения этого блока (преобразовано в местное время)",
     "block.source.desc": "Соответствующий блок отправки для этой транзакции",
     "block.sender": "Отправитель",
     "block.sender.desc": "Аккаунт начавший транзакцию",
@@ -99,24 +116,32 @@
     "block.change.rep": "Новый представитель аккаунта",
     "block.unknown": "Неизвестный Блок",
     "block.unknown.title": "Этот блок ещё не получен",
-    "block.unknown.desc": "Nano - полностью асинхронная криптовалюта. Из-за этого иногда транзакции могут занять несколько дополнительных секунд, чтобы транслировать во всю сеть.",
-    "block.unknown.desc2": "Если вы уверены, что хэш блока правильный, подождите немного и обновите страницу.",
+    "block.unknown.desc":
+        "{currency} - полностью асинхронная криптовалюта. Из-за этого иногда транзакции могут занять несколько дополнительных секунд, чтобы транслировать во всю сеть.",
+    "block.unknown.desc2":
+        "Если вы уверены, что хэш блока правильный, подождите немного и обновите страницу.",
     "block.unknown.return": "Вернуться в Эксплорер",
     "block.open.desc": "Аккаунт который создал этот блок",
     "block.open.opened_by": "Открыт",
     "block.open.opened_by.desc": "Аккаунт чья транзакция открыла это аккаунт.",
     "block.open.rep": "Представитель назначенный для этого аккаунта",
-    "block.open.amount_desc": "Сумма NANO отправленная ​​для открытия этого аккаунта, которая может быть 0",
-    "block.send.amount_desc": "Сумма NANO, отправленная в этой транзакции",
+    "block.open.amount_desc":
+        "Сумма {currencyShortName} отправленная ​​для открытия этого аккаунта, которая может быть 0",
+    "block.send.amount_desc":
+        "Сумма {currencyShortName}, отправленная в этой транзакции",
     "block.state.subtype": "Подтип блока",
-    "block.state.subtype.desc": "Тип транзакции создавший этот универсальный блок",
+    "block.state.subtype.desc":
+        "Тип транзакции создавший этот универсальный блок",
     "block.state.account": "Аккаунт представленный этим универсальным блоком",
     "block.state.rep.desc": "Представитель аккаунта",
     "block.state.previous.none": "Нет (этот блок открыл аккаунт)",
-    "block.state.link.open": "Соответствующий блок, который начал эту транзакцию",
-    "block.state.link.change": "Установленное нулями, является адресом сжигания закодированным в шестнадцатеричном формате",
+    "block.state.link.open":
+        "Соответствующий блок, который начал эту транзакцию",
+    "block.state.link.change":
+        "Установленное нулями, является адресом сжигания закодированным в шестнадцатеричном формате",
     "block.state.link.send": "Адрес назначения, закодированный в hex формате.",
-    "block.state.link.receive": "Соответствующий блок, запустивший эту транзакцию",
+    "block.state.link.receive":
+        "Соответствующий блок, запустивший эту транзакцию",
     "ninja.verified_by": "Проверено {link}",
     "ninja.uptime": "Аптайм {percent}",
     "ninja.last_voted": "Последнее голосование {date}",
@@ -125,16 +150,18 @@
     "ninja.block_count": "Количество блоков {count}",
     "ninja.node_version": "Версия ноды {version}",
     "ninja.verified_accounts": "Подтвержденные аккаунты",
-    "ninja.verified_accounts.desc": "Случайная выборка аккаунтов, проверенных с помощью {link}",
+    "ninja.verified_accounts.desc":
+        "Случайная выборка аккаунтов, проверенных с помощью {link}",
     "stream.title": "Недавние Транзакции",
-    "stream.desc": "Трансляция в реальном времени транзакций в Nano сети",
+    "stream.desc": "Трансляция в реальном времени транзакций в {currency} сети",
     "stream.waiting": "Ожидание транзакций",
     "stream.change": "сменил своего представителя на",
-    "stream.open": "был создан с помощью {amount} NANO",
-    "stream.receive": "получено {amount} NANO",
-    "stream.send": "отправлено {amount} NANO",
+    "stream.open": "был создан с помощью {amount} {currencyShortName}",
+    "stream.receive": "получено {amount} {currencyShortName}",
+    "stream.send": "отправлено {amount} {currencyShortName}",
     "error.not_found": "Эта страница не существует",
-    "error.server_error": "Сервер обнаружил ошибку или не может выполнить запрос",
+    "error.server_error":
+        "Сервер обнаружил ошибку или не может выполнить запрос",
     "search": "Поиск",
     "pending": "в ожидании",
     "weight": "вес",
@@ -149,12 +176,15 @@
     "name": "имя",
     "version": "версия",
     "block.subtype.epoch": "epoch",
-    "block.state.link.epoch": "Все блоки epoch используют одно и то же значение для этого поля, которое является \"блоком epoch v1\", закодированным в шестнадцатеричном формате.",
+    "block.state.link.epoch":
+        "Все блоки epoch используют одно и то же значение для этого поля, которое является \"блоком epoch v1\", закодированным в шестнадцатеричном формате.",
     "explorer.top_accounts": "Топ {count} Аккаунтов",
-    "explorer.top_accounts_desc": "Аккаунты с наибольшим балансом, включая отложенные транзакции",
+    "explorer.top_accounts_desc":
+        "Аккаунты с наибольшим балансом, включая отложенные транзакции",
     "explorer.top_accounts_link": "Аккаунты и распределение",
-    "accounts.nano_distribution": "NANO распределение",
+    "accounts.nano_distribution": "{currencyShortName} распределение",
     "accounts.all_accounts": "Все аккаунты",
-    "accounts.desc1": "Только аккаунты с не менее 0.000001 NANO, отсортированные по балансу",
+    "accounts.desc1":
+        "Только аккаунты с не менее 0.000001 {currencyShortName}, отсортированные по балансу",
     "accounts.desc2": "Баланс включающий все в ожидании транзакции"
 }

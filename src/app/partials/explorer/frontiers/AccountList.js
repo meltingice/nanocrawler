@@ -4,6 +4,7 @@ import VisibilitySensor from "react-visibility-sensor";
 import AccountLink from "app/partials/AccountLink";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 
 class Account extends React.PureComponent {
   state = {
@@ -21,7 +22,7 @@ class Account extends React.PureComponent {
   loadWeight() {
     this.setState({ loading: true }, async () => {
       const weight = await apiClient.weight(this.props.account);
-      this.setState({ weight: parseFloat(weight, 10), loading: false });
+      this.setState({ weight: Currency.fromRaw(weight), loading: false });
     });
   }
 
@@ -72,11 +73,11 @@ class Account extends React.PureComponent {
           <div className="col text-left text-md-right">
             <PriceWithConversions
               amount={balance}
-              currencies={["nano", "btc", "usd"]}
+              currencies={["base", "btc", "usd"]}
             >
-              {(nano, btc, usd) => (
+              {(base, btc, usd) => (
                 <Fragment>
-                  <h5 className="mb-0">{nano}</h5>
+                  <h5 className="mb-0">{base}</h5>
                   <p className="text-muted mb-0">
                     {btc} / {usd}
                   </p>

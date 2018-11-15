@@ -12,6 +12,7 @@ import PeerVersions from "../partials/PeerVersions";
 import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 
 import { apiClient } from "lib/Client";
+import Currency from "lib/Currency";
 import config from "client-config.json";
 
 class NetworkStatus extends React.Component {
@@ -46,14 +47,14 @@ class NetworkStatus extends React.Component {
   }
 
   rebroadcastThreshold() {
-    return config.maxCoinSupply * 0.001;
+    return config.currency.maxSupply * 0.001;
   }
 
   rebroadcastableReps() {
     const { representativesOnline } = this.props.network;
     return _.fromPairs(
       _.toPairs(representativesOnline).filter(rep => {
-        return parseFloat(rep[1], 10) >= this.rebroadcastThreshold();
+        return Currency.fromRaw(rep[1]) >= this.rebroadcastThreshold();
       })
     );
   }
@@ -61,7 +62,7 @@ class NetworkStatus extends React.Component {
   onlineWeight() {
     const { representativesOnline } = this.props.network;
     return _.sum(
-      _.values(representativesOnline).map(amt => parseFloat(amt, 10))
+      _.values(representativesOnline).map(amt => Currency.fromRaw(amt))
     );
   }
 
@@ -69,7 +70,7 @@ class NetworkStatus extends React.Component {
     const { representativesOnline } = this.props.network;
     return _.sum(
       _.values(representativesOnline)
-        .map(amt => parseFloat(amt, 10))
+        .map(amt => Currency.fromRaw(amt))
         .filter(amt => amt >= this.rebroadcastThreshold())
     );
   }
@@ -78,7 +79,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         {(
-          (this.onlineRebroadcastWeight() / config.maxCoinSupply) *
+          (this.onlineRebroadcastWeight() / config.currency.maxSupply) *
           100.0
         ).toFixed(2)}%
       </Fragment>
@@ -99,7 +100,7 @@ class NetworkStatus extends React.Component {
   officialWeight() {
     const { officialRepresentatives } = this.state;
     return _.sum(
-      _.values(officialRepresentatives).map(amt => parseFloat(amt, 10))
+      _.values(officialRepresentatives).map(amt => Currency.fromRaw(amt))
     );
   }
 
@@ -110,7 +111,7 @@ class NetworkStatus extends React.Component {
           value={this.onlineWeight()}
           maximumFractionDigits={0}
         />{" "}
-        {config.currency}
+        {config.currency.shortName}
       </Fragment>
     );
   }
@@ -119,7 +120,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         <FormattedNumber
-          value={(this.onlineWeight() / config.maxCoinSupply) * 100.0}
+          value={(this.onlineWeight() / config.currency.maxSupply) * 100.0}
           maximumFractionDigits={2}
         />%
       </Fragment>
@@ -133,7 +134,7 @@ class NetworkStatus extends React.Component {
           value={this.officialWeight()}
           maximumFractionDigits={0}
         />{" "}
-        {config.currency}
+        {config.currency.shortName}
       </Fragment>
     );
   }
@@ -142,7 +143,7 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         <FormattedNumber
-          value={(this.officialWeight() / config.maxCoinSupply) * 100}
+          value={(this.officialWeight() / config.currency.maxSupply) * 100}
           maximumFractionDigits={2}
         />%
       </Fragment>
@@ -179,9 +180,7 @@ class NetworkStatus extends React.Component {
 
     return (
       <div className="p-4">
-        <Helmet>
-          <title>Network Status</title>
-        </Helmet>
+        <Helmet title="Network Status" />
 
         <div className="row align-items-center">
           <div className="col-md">
@@ -286,6 +285,7 @@ class NetworkStatus extends React.Component {
               <TranslatedMessage
                 id="network.online_rebroadcasting_desc"
                 values={{
+                  currencyShortName: config.currency.shortName,
                   amount: (
                     <FormattedNumber
                       value={this.rebroadcastThreshold()}
@@ -306,7 +306,7 @@ class NetworkStatus extends React.Component {
                         value={this.onlineRebroadcastWeight()}
                         maximumFractionDigits={0}
                       />{" "}
-                      {config.currency}
+                      {config.currency.shortName}
                     </span>
                   )
                 }}

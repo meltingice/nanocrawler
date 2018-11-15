@@ -4,7 +4,8 @@
   "nav.status": "Status Node",
 
   "explorer.title": "Penjelajah Jaringan Beta",
-  "explorer.form.help": "Masukkan alamat Nano atau blok hash untuk memulai.",
+  "explorer.form.help":
+    "Masukkan alamat {currency} atau blok hash untuk memulai.",
 
   "network.title": "Status jaringan",
   "network.reps_online": "{count} representative online",
@@ -18,7 +19,7 @@
   "network.online_rebroadcasting":
     "{count} online rebroadcasting representative",
   "network.online_rebroadcasting_desc":
-    "Seorang representative hanya akan rebroadcast votes jika didelegasikan> 0,1% dari total pasokan ({amount} NANO)",
+    "Seorang representative hanya akan rebroadcast votes jika didelegasikan> 0,1% dari total pasokan ({amount} {currencyShortName})",
   "network.rebroadcast_amt":
     "{count} ditugaskan untuk rebroadcasting representatives",
   "network.rebroadcast_stat":
@@ -38,9 +39,9 @@
   "network.median_unchecked": "Blok Median Tidak Dicentang",
   "network.min_unchecked": "Blok Minimum Tidak Dicentang",
   "network.max_unchecked": "Blok Maksimal Tidak Dicentang",
-  "network.nano_services": "Layanan NANO",
+  "network.nano_services": "Layanan {currencyShortName}",
   "network.nano_services_desc":
-    "Status layanan NANO yang diketahui saat ini. Wallet, tip bot, alat merchant, dll.",
+    "Status layanan {currencyShortName} yang diketahui saat ini. Wallet, tip bot, alat merchant, dll.",
   "network.synced_within": "Disinkronkan dalam:",
   "network.synced_blocks": "{count} blok",
   "network.synced_greater_than": "lebih besar dari {count} blok",
@@ -86,7 +87,7 @@
   "account.delegators.title": "Delegator",
   "account.delegators.desc": "{count} delegator, diurutkan berdasarkan weight",
   "account.delegators.filter":
-    "Hanya menampilkan akun dengan setidaknya 1 NANO",
+    "Hanya menampilkan akun dengan setidaknya 1 {currencyShortName}",
   "account.delegators.weight": "Delegated Weight",
 
   "account.pending.title": "Transaksi Pending",
@@ -99,7 +100,7 @@
 
   "account.unopened.title": "Akun ini belum dibuka",
   "account.unopened.desc":
-    "Ketika alamat akun valid, belum ada blok yang dipublikasikan ke chainnya. Jika NANO telah dikirim ke akun ini, masih perlu mempublikasikan blok yang sesuai untuk mengantongi dana.",
+    "Ketika alamat akun valid, belum ada blok yang dipublikasikan ke chainnya. Jika {currency} telah dikirim ke akun ini, masih perlu mempublikasikan blok yang sesuai untuk mengantongi dana.",
 
   "block.state": "State",
   "block.subtype.open": "membuka",
@@ -128,7 +129,7 @@
   "block.unknown": "Blok Tidak Dikenal",
   "block.unknown.title": "Blok ini belum diterima",
   "block.unknown.desc":
-    "NANO adalah cryptocurrency sepenuhnya asynchronous. Karena ini, terkadang transaksi dapat membutuhkan beberapa detik tambahan untuk broadcast througout ke seluruh jaringan.",
+    "{currencyShortName} adalah cryptocurrency sepenuhnya asynchronous. Karena ini, terkadang transaksi dapat membutuhkan beberapa detik tambahan untuk broadcast througout ke seluruh jaringan.",
   "block.unknown.desc2":
     "Jika anda yakin blok hash benar, tunggu sebentar dan refresh halamannya.",
   "block.unknown.return": "Kembali ke Penjelajah",
@@ -138,9 +139,10 @@
   "block.open.opened_by.desc": "Akun yang transaksinya membuka akun ini",
   "block.open.rep": "Representative yang ditugaskan untuk akun ini",
   "block.open.amount_desc":
-    "Jumlah NANO yang dikirim untuk membuka akun ini, yang bias 0",
+    "Jumlah {currencyShortName} yang dikirim untuk membuka akun ini, yang bias 0",
 
-  "block.send.amount_desc": "Jumlah NANO yang dikirim dalam transaksi ini",
+  "block.send.amount_desc":
+    "Jumlah {currencyShortName} yang dikirim dalam transaksi ini",
 
   "block.state.subtype": "Blok subtipe",
   "block.state.subtype.desc": "Jenis transaksi yang membuat state blok ini",
@@ -165,12 +167,12 @@
     "Sampel acak dari akun yang diverifikasi dengan {link}",
 
   "stream.title": "Transaksi Terkini",
-  "stream.desc": "Aliran transaksi real-time di jaringan Nano",
+  "stream.desc": "Aliran transaksi real-time di jaringan {currency}",
   "stream.waiting": "Menunggu transaksi...",
   "stream.change": "mengubah representativenya menjadi",
-  "stream.open": "dibuat dengan {amount} NANO",
-  "stream.receive": "menerima {amount} NANO",
-  "stream.send": "mengirim {amount} NANO",
+  "stream.open": "dibuat dengan {amount} {currencyShortName}",
+  "stream.receive": "menerima {amount} {currencyShortName}",
+  "stream.send": "mengirim {amount} {currencyShortName}",
 
   "error.not_found": "Halaman ini sepertinya tidak ada",
   "error.server_error":

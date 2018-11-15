@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedNumber } from "react-intl";
 import AccountLink from "../../AccountLink";
 import config from "client-config.json";
+import Currency from "lib/Currency";
 
 export default function DelegatorEntry({ account, balance }) {
   return (
@@ -11,11 +12,10 @@ export default function DelegatorEntry({ account, balance }) {
       </td>
       <td>
         <FormattedNumber
-          value={balance}
+          value={Currency.fromRaw(balance)}
           maximumFractionDigits={6}
-          minimumFractionDigits={6}
         />{" "}
-        {config.currency}
+        {config.currency.shortName}
       </td>
     </tr>
   );

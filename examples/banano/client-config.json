@@ -1,0 +1,38 @@
+{
+  "server": "http://localhost:3001",
+  "websocketServer": "ws.creeper.banano.cc",
+  "donationAddress":
+    "ban_1dpe11rjii8r4k448gbgfpbg18p8444edayaq4to3hsquha4qhy65cjbtk8b",
+  "currency": {
+    "name": "Banano",
+    "shortName": "BAN",
+    "precision": 29,
+    "maxSupply": 3402823669.2,
+    "prefixes": ["ban"],
+    "qrPrefix": "ban",
+    "supportsMyNanoNinja": false
+  },
+  "features": {
+    "nodeStatus": true,
+    "supportedLanguages": {
+      "en": "English",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "es": "Español",
+      "fr": "Français",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "nl": "Nederlands",
+      "pt-BR": "Português Brasileiro",
+      "el": "Ελληνικά",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "zh-CN": "汉语",
+      "zh-TW": "漢語"
+    }
+  },
+  "serviceMonitors": []
+}

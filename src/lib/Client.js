@@ -5,14 +5,19 @@ class Client {
     this.host = config.server;
   }
 
-  async account(account = "") {
-    const resp = await this.fetch(`account/${account}`);
+  async nodeAccount() {
+    const resp = await this.fetch("account");
+    return (await resp.json()).account;
+  }
+
+  async account(account) {
+    const resp = await this.fetch(`v2/accounts/${account}`);
     return (await resp.json()).account;
   }
 
   async weight(account) {
-    const resp = await this.fetch(`account/${account}/weight`);
-    return parseFloat((await resp.json()).weight, 10);
+    const resp = await this.fetch(`v2/accounts/${account}/weight`);
+    return (await resp.json()).weight;
   }
 
   async blockCount() {
@@ -51,34 +56,34 @@ class Client {
   }
 
   async history(account, head = null) {
-    let url = `account/${account}/history`;
+    let url = `v2/accounts/${account}/history`;
     if (head) url += `?head=${head}`;
     const resp = await this.fetch(url);
     return await resp.json();
   }
 
   async pendingTransactions(account) {
-    const resp = await this.fetch(`account/${account}/pending`);
+    const resp = await this.fetch(`v2/accounts/${account}/pending`);
     return await resp.json();
   }
 
   async block(hash) {
-    const resp = await this.fetch(`block/${hash}`);
+    const resp = await this.fetch(`v2/blocks/${hash}`);
     return await resp.json();
   }
 
   async delegators(account) {
-    const resp = await this.fetch(`account/${account}/delegators`);
-    return await resp.json();
+    const resp = await this.fetch(`v2/accounts/${account}/delegators`);
+    return (await resp.json()).delegators;
   }
 
   async representativesOnline() {
-    const resp = await this.fetch("representatives_online");
+    const resp = await this.fetch("v2/representatives/online");
     return (await resp.json()).representatives;
   }
 
   async officialRepresentatives() {
-    const resp = await this.fetch("official_representatives");
+    const resp = await this.fetch("v2/representatives/official");
     return (await resp.json()).representatives;
   }
 
@@ -100,6 +105,12 @@ class Client {
   async confirmationQuorum() {
     const resp = await this.fetch("confirmation_quorum");
     return await resp.json();
+  }
+
+  async search(query) {
+    if (query.trim().length < 2) return [];
+    const resp = await this.fetch(`v2/search?q=${query}`);
+    return (await resp.json()).accounts;
   }
 
   async fetch(endpoint) {

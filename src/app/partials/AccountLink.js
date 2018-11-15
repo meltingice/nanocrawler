@@ -32,6 +32,10 @@ export default class AccountLink extends React.PureComponent {
       accountName = `${account.substr(0, 9)}...${account.substr(-5)}`;
     }
 
+    if (!name) {
+      accountName = <span className="text-monospace">{accountName}</span>;
+    }
+
     if (ninja && ninjaData && ninjaData.alias) {
       accountName = (
         <Fragment>

@@ -3,7 +3,11 @@
     "nav.network": "Network Status",
     "nav.status": "Node Status",
     "explorer.title": "Network Explorer",
-    "explorer.form.help": "Enter a Nano address or block hash to get started.",
+    "explorer.form.help":
+        "Enter a {currency} address or block hash to get started.",
+    "explorer.known_accounts": "Known Accounts",
+    "explorer.known_accounts.desc":
+        "Some places to start your safari through the jungle",
     "explorer.top_accounts": "Top {count} Accounts",
     "explorer.top_accounts_desc":
         "Accounts with the highest balance, including pending transactions",
@@ -20,7 +24,7 @@
     "network.online_rebroadcasting":
         "{count} online rebroadcasting representatives",
     "network.online_rebroadcasting_desc":
-        "A representative will only rebroadcast votes if it's delegated at least 0.1% of the total supply ({amount} NANO)",
+        "A representative will only rebroadcast votes if it's delegated at least 0.1% of the total supply ({amount} {currencyShortName})",
     "network.rebroadcast_amt":
         "{count} is assigned to rebroadcasting representatives",
     "network.rebroadcast_stat":
@@ -40,9 +44,9 @@
     "network.median_unchecked": "Median Unchecked Blocks",
     "network.min_unchecked": "Minimum Unchecked Blocks",
     "network.max_unchecked": "Maximum Unchecked Blocks",
-    "network.nano_services": "Nano Services",
+    "network.nano_services": "{currency} Services",
     "network.nano_services_desc":
-        "The current status of known Nano services. Wallets, tip bots, merchant tools, etc.",
+        "The current status of known {currency} services. Wallets, tip bots, merchant tools, etc.",
     "network.synced_within": "Synced within:",
     "network.synced_blocks": "{count} blocks",
     "network.synced_greater_than": "greater than {count} blocks",
@@ -61,7 +65,7 @@
     "network.quorum.peers_total_weight_desc":
         "The total voting weight of the peers this node is directly connected to. This must remain above the minimum configured quorum.",
     "network.quorum.peers_total_weight_danger":
-        "The voting weight of our peers is below the currently configured minimum. Blocks will not confirm until it rises above {weight} NANO.",
+        "The voting weight of our peers is below the currently configured minimum. Blocks will not confirm until it rises above {weight} {currencyShortName}.",
     "network.quorum.delta": "quorum delta",
     "network.quorum.delta_desc":
         "The vote tally required for a block to be rolled back. This is directly related to the total online voting weight.",
@@ -98,7 +102,8 @@
     "account.delegators.loading": "Loading delegators...",
     "account.delegators.title": "Delegators",
     "account.delegators.desc": "{count} delegators, sorted by weight",
-    "account.delegators.filter": "Only showing accounts with at least 1 NANO",
+    "account.delegators.filter":
+        "Only showing accounts with at least 1 {currencyShortName}",
     "account.delegators.weight": "Delegated Weight",
     "account.pending.title": "Pending Transactions",
     "account.pending.limit": "Only showing up to 20 pending deposits",
@@ -108,7 +113,7 @@
     "account.transactions.load_more": "Load More Transactions",
     "account.unopened.title": "This account hasn't been opened yet",
     "account.unopened.desc":
-        "While the account address is valid, no blocks have been published to its chain yet. If NANO has been sent to this account, it still needs to publish a corresponding block to pocket the funds.",
+        "While the account address is valid, no blocks have been published to its chain yet. If {currencyShortName} has been sent to this account, it still needs to publish a corresponding block to pocket the funds.",
     "block.state": "State",
     "block.subtype.open": "open",
     "block.subtype.change": "change",
@@ -135,7 +140,7 @@
     "block.unknown": "Unknown Block",
     "block.unknown.title": "This block hasn't been received yet",
     "block.unknown.desc":
-        "Nano is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast throughout the entire network.",
+        "{currency} is a completely asynchronous cryptocurrency. Because of this, sometimes transactions can take a few extra seconds to broadcast throughout the entire network.",
     "block.unknown.desc2":
         "If you're sure the block hash is correct, wait a little bit and refresh the page.",
     "block.unknown.return": "Return to the Explorer",
@@ -145,9 +150,9 @@
         "The account whose transaction opened this account",
     "block.open.rep": "The representative assigned to this account",
     "block.open.amount_desc":
-        "The amount of NANO sent to open this account, which can be 0",
+        "The amount of {currencyShortName} sent to open this account, which can be 0",
     "block.send.amount_desc":
-        "The amount of NANO that was sent in this transaction",
+        "The amount of {currencyShortName} that was sent in this transaction",
     "block.state.subtype": "Block subtype",
     "block.state.subtype.desc":
         "The type of transaction that created this state block",
@@ -174,16 +179,17 @@
     "ninja.verified_accounts.desc":
         "A random sampling of accounts verified with {link}",
     "stream.title": "Recent Transactions",
-    "stream.desc": "A real-time stream of transactions on the Nano network",
+    "stream.desc":
+        "A real-time stream of transactions on the {currency} network",
     "stream.waiting": "Waiting for transactions...",
     "stream.change": "changed their representative to",
-    "stream.open": "was created with {amount} NANO",
-    "stream.receive": "received {amount} NANO",
-    "stream.send": "sent {amount} NANO",
-    "accounts.nano_distribution": "NANO Distribution",
+    "stream.open": "was created with {amount} {currencyShortName}",
+    "stream.receive": "received {amount} {currencyShortName}",
+    "stream.send": "sent {amount} {currencyShortName}",
+    "accounts.nano_distribution": "{currencyShortName} Distribution",
     "accounts.all_accounts": "All Accounts",
     "accounts.desc1":
-        "Only accounts with at least 0.000001 NANO, sorted by balance",
+        "Only accounts with at least 0.000001 {currencyShortName}, sorted by balance",
     "accounts.desc2": "Balance includes all pending transactions",
     "error.not_found": "This page doesn't seem to exist",
     "error.server_error":

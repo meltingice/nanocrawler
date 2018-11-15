@@ -1,7 +1,8 @@
 import React from "react";
+import _ from "lodash";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import _ from "lodash";
+import Currency from "lib/Currency";
 import DelegatorsTable from "./DelegatorsTable";
 import { apiClient } from "lib/Client";
 import config from "client-config.json";
@@ -12,7 +13,7 @@ import EmptyState from "./delegators/EmptyState";
 export default class AccountDelegators extends React.Component {
   state = {
     delegators: [],
-    weight: 0,
+    weight: "0",
     loading: true
   };
 
@@ -66,14 +67,17 @@ export default class AccountDelegators extends React.Component {
               />
             </p>
             <p className="text-muted">
-              <TranslatedMessage id="account.delegators.filter" />
+              <TranslatedMessage
+                id="account.delegators.filter"
+                values={{ currencyShortName: config.currency.shortName }}
+              />
             </p>
           </div>
           <div className="col-auto">
             <h3 className="mb-0">
-              <FormattedNumber value={weight} />{" "}
+              <FormattedNumber value={Currency.fromRaw(weight)} />{" "}
               <span className="text-muted">
-                {config.currency} <TranslatedMessage id="weight" />
+                {config.currency.shortName} <TranslatedMessage id="weight" />
               </span>
             </h3>
           </div>

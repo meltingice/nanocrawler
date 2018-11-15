@@ -1,10 +1,11 @@
 import os from "os";
 import _ from "lodash";
-import config from "../../../server-config.json";
-import redisFetch from "../helpers/redisFetch";
-import raiNodeInfo from "../helpers/raiNodeInfo";
-import { getNinjaData } from "../helpers/myNanoNinja";
-import networkStats from "../helpers/networkStats";
+import config from "../../../../server-config.json";
+import redisFetch from "../../helpers/redisFetch";
+import raiNodeInfo from "../../helpers/raiNodeInfo";
+import { getNinjaData } from "../../helpers/myNanoNinja";
+import networkStats from "../../helpers/networkStats";
+import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   // nanoNodeMonitor support
@@ -19,10 +20,7 @@ export default function(app, nano) {
         );
         const stats = await raiNodeInfo();
         const weight = parseFloat(
-          nano.convert.fromRaw(
-            await nano.accounts.weight(config.account),
-            "mrai"
-          ),
+          Currency.fromRaw(await nano.accounts.weight(config.account)),
           10
         );
 

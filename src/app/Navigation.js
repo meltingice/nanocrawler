@@ -15,19 +15,19 @@ const Navigation = () => {
   };
 
   return (
-    <div id="Navigation" className="row align-items-center">
-      <div className="col-auto my-3">
+    <div id="Navigation" className="row align-items-center pl-3">
+      <div className="col-auto mt-3 mb-0 mb-md-3 px-0 px-md-2">
         <div className="LogoWrap">
           <ReactSVG path={Logo} className="Logo" /> Beta Explorer
         </div>
       </div>
 
-      <div className="col-md">
-        <ul className="NavigationList nav ml-2">
+      <div className="col-md px-0 px-md-2 ml-md-5">
+        <ul className="NavigationList nav">
           <li className="nav-item">
             <NavLink
               to="/"
-              className="nav-link"
+              className="nav-link pr-1 pr-md-3"
               activeClassName="active"
               isActive={explorerActive}
             >
@@ -38,7 +38,7 @@ const Navigation = () => {
             <NavLink
               exact
               to="/network"
-              className="nav-link"
+              className="nav-link  pr-1 pr-md-3"
               activeClassName="active"
             >
               <TranslatedMessage id="nav.network" />
@@ -49,7 +49,7 @@ const Navigation = () => {
               <NavLink
                 exact
                 to="/status"
-                className="nav-link"
+                className="nav-link  pr-1 pr-md-3"
                 activeClassName="active"
               >
                 <TranslatedMessage id="nav.status" />
@@ -59,7 +59,7 @@ const Navigation = () => {
         </ul>
       </div>
 
-      <div className="col-lg-4 mb-3 mb-lg-0">
+      <div className="col-lg-4 mb-3 mb-lg-0 px-0 px-md-2 mt-1 mt-lg-0">
         <div className="row">
           <div className="col pr-1">
             <GlobalSearch />

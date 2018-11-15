@@ -2,20 +2,19 @@ import React from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import config from "client-config.json";
 
 export default function NotFoundBlock({ block }) {
   return (
     <div className="p-4">
-      <Helmet>
-        <title>Block - Not Found</title>
-      </Helmet>
+      <Helmet title="Block - Not Found" />
 
       <div className="row">
         <div className="col">
           <h1 className="mb-0">
             <TranslatedMessage id="block.unknown" />{" "}
           </h1>
-          <p className="text-muted">{block}</p>
+          <p className="text-muted text-monospace break-word">{block}</p>
         </div>
       </div>
 
@@ -27,7 +26,10 @@ export default function NotFoundBlock({ block }) {
             <TranslatedMessage id="block.unknown.title" />
           </h2>
           <p>
-            <TranslatedMessage id="block.unknown.desc" />
+            <TranslatedMessage
+              id="block.unknown.desc"
+              values={{ currency: config.currency.name }}
+            />
           </p>
 
           <p>

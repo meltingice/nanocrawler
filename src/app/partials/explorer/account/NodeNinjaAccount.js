@@ -5,33 +5,11 @@ import moment from "moment";
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
 export default class NodeNinjaAccount extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (prevState.data && prevState.data.account !== nextProps.account) {
-      return { data: null };
-    }
-
-    return null;
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: null
-    };
-
-    this.timeout = null;
-  }
+  state = { data: null };
+  timeout = null;
 
   componentDidMount() {
     this.fetchNinja();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.account !== this.props.account) {
-      this.clearTimeout();
-      this.fetchNinja();
-    }
   }
 
   componentWillUnmount() {
