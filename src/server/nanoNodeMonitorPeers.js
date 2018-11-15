@@ -25,7 +25,7 @@ async function updateKnownMonitors() {
     )
     .map(peer => NodeMonitor.fromPeerAddress(peer));
 
-  monitors = monitors.concat(await fetchNanoNodeNinjaMonitors());
+  // monitors = monitors.concat(await fetchNanoNodeNinjaMonitors());
   monitors = monitors.concat(
     config.knownMonitors.map(url => new NodeMonitor(url))
   );
