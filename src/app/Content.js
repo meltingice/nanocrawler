@@ -34,9 +34,9 @@ class Content extends React.Component {
 
   determineQueryDestination(search) {
     if (validateAddress(search)) {
-      return `/explorer/account/${search}`;
+      return `/account/${search}`;
     } else if (validateBlockHash(search)) {
-      return `/explorer/block/${search}`;
+      return `/block/${search}`;
     } else {
       return "/not_found";
     }
