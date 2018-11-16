@@ -4,6 +4,7 @@ import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
+import RawBlockContents from "./RawBlockContents";
 import { formatTimestamp } from "lib/util";
 import config from "client-config.json";
 
@@ -129,6 +130,8 @@ export default function OpenBlock({ block }) {
           {block.contents.signature}
         </small>
       </h5>
+
+      <RawBlockContents block={block} className="mt-3" />
     </div>
   );
 }
