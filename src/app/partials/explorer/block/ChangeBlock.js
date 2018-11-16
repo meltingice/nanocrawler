@@ -4,6 +4,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import OptionalField from "../../OptionalField";
+import RawBlockContents from "./RawBlockContents";
 import { formatTimestamp } from "lib/util";
 
 export default function ChangeBlock({ block }) {
@@ -84,6 +85,8 @@ export default function ChangeBlock({ block }) {
           {block.contents.signature}
         </small>
       </h5>
+
+      <RawBlockContents block={block} className="mt-3" />
     </div>
   );
 }
