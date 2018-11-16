@@ -72,10 +72,7 @@ export default class ExplorerTopAccounts extends React.Component {
             </p>
           </div>
           <div className="col-auto mt-2 mt-md-0">
-            <Link
-              to="/explorer/accounts/1"
-              className="btn btn-sm btn-nano-primary"
-            >
+            <Link to="/accounts/1" className="btn btn-sm btn-nano-primary">
               <TranslatedMessage id="explorer.top_accounts_link" />
             </Link>
           </div>

@@ -42,7 +42,7 @@ export default class Accounts extends React.Component {
   async setPage(page) {
     const { total, accounts } = await this.loadAccounts(page);
     this.setState({ page, accounts, totalAccounts: total }, () => {
-      this.props.history.push(`/explorer/accounts/${page}`);
+      this.props.history.push(`/accounts/${page}`);
     });
   }
 
