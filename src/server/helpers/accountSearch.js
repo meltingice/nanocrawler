@@ -53,7 +53,7 @@ const formatQuery = query => {
     `^(?:${prefixes})?[13]?([13456789abcdefghijkmnopqrstuwxyz]+)$`
   );
 
-  const match = query.match(addressRegex);
+  const match = query.toLowerCase().match(addressRegex);
   if (match) return `*_[13]*${match[1]}*`;
   return null;
 };
