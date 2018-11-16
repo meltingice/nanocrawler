@@ -4,6 +4,7 @@ import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import PriceWithConversions from "../../PriceWithConversions";
 import OptionalField from "../../OptionalField";
+import RawBlockContents from "./RawBlockContents";
 import { formatTimestamp } from "lib/util";
 import config from "client-config.json";
 
@@ -12,7 +13,7 @@ export default class StateBlock extends React.Component {
     const { block } = this.props;
 
     return (
-      <div className="Block">
+      <div>
         <h4 className="mb-0">
           <TranslatedMessage id="block.state.subtype" />{" "}
           <small className="text-muted">{block.contents.subtype}</small>
@@ -143,6 +144,8 @@ export default class StateBlock extends React.Component {
             {block.contents.signature}
           </small>
         </h5>
+
+        <RawBlockContents block={block} className="mt-3" />
       </div>
     );
   }
