@@ -170,7 +170,7 @@
         "All epoch blocks use the same value for this field, which is \"epoch v1 block\" encoded in hex format.",
     "block.original.title": "Original Block Content",
     "block.original.desc":
-        "The RPC response from the {rpcCmd} call. The timestamp field is added by NanoCrawler, and the block contents are JSON decoded.",
+        "The RPC response from the {rpcCmd} call. The timestamp field is added by Creeper, and the block contents are JSON decoded.",
     "ninja.verified_by": "Verified by {link}",
     "ninja.uptime": "Uptime {percent}",
     "ninja.last_voted": "Last voted {date}",
