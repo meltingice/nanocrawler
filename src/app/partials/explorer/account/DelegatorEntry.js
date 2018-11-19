@@ -12,7 +12,7 @@ export default function DelegatorEntry({ account, balance }) {
       </td>
       <td>
         <FormattedNumber
-          value={Currency.fromRaw(balance)}
+          value={Currency.fromCents(balance)}
           maximumFractionDigits={6}
         />{" "}
         {config.currency.shortName}
