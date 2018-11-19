@@ -7,11 +7,11 @@ export default function(app, nano) {
   app.get("/network/supply", async (req, res) => {
     try {
       const balances = await nano.rpc("accounts_balances", {
-        accounts: [config.genesisAccount, config.emissionAccount]
+        accounts: [clientConfig.genesisAccount, clientConfig.emissionAccount]
       });
 
-      const genesisBalance = balances[config.genesisAccount].balance;
-      const emissionBalance = balances[config.emissionAccount].balance;
+      const genesisBalance = balances[clientConfig.genesisAccount].balance;
+      const emissionBalance = balances[clientConfig.emissionAccount].balance;
 
       const availableSupply = Currency.subtractRaw(
         MAX_SUPPLY_RAW,
