@@ -28,12 +28,7 @@ function App({ locale }) {
         <div className="row mr-0 align-items-center">
           <div className="col-md">
             <div className="py-2 px-4">
-              <p className="mb-0">
-                Created by Ryan LeFevre, Sr. Software Engineer at{" "}
-                <a href="https://www.hodinkee.com" target="_blank">
-                  HODINKEE
-                </a>
-              </p>
+              <p className="mb-0">Created by Ryan LeFevre (@meltingice)</p>
               <p>
                 Donations: <AccountLink account={config.donationAddress} />
               </p>
@@ -50,7 +45,7 @@ function App({ locale }) {
               </a>{" "}
               &bull;{" "}
               <a
-                href="https://github.com/meltingice/nano-node-dashboard"
+                href="https://github.com/meltingice/nanocrawler"
                 target="_blank"
               >
                 Source code
