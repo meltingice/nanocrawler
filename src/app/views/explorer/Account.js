@@ -38,6 +38,10 @@ class Account extends React.Component {
     }
   }
 
+  isGenesis() {
+    return this.props.account === config.currency.genesisAccount;
+  }
+
   hasDelegatedWeight() {
     const { weight } = this.props;
     return Currency.fromRaw(weight) > 0;
@@ -171,44 +175,46 @@ class Account extends React.Component {
               {this.accountVersionBadge()}
             </p>
           </div>
-          <div className="col-auto">
-            <div className="row">
-              <div className="col-auto pr-0">
-                <AccountQR account={account} style={{ width: "80px" }} />
-              </div>
-              <div className="col">
-                <PriceWithConversions
-                  cents
-                  amount={balance}
-                  currencies={["base", "usd", "btc"]}
-                >
-                  {(base, usd, btc) => {
-                    return (
-                      <Fragment>
-                        <ScaledAccountBalance
-                          balance={balance}
-                          displayValue={base}
-                        />
+          {!this.isGenesis && (
+            <div className="col-auto">
+              <div className="row">
+                <div className="col-auto pr-0">
+                  <AccountQR account={account} style={{ width: "80px" }} />
+                </div>
+                <div className="col">
+                  <PriceWithConversions
+                    cents
+                    amount={balance}
+                    currencies={["base", "usd", "btc"]}
+                  >
+                    {(base, usd, btc) => {
+                      return (
+                        <Fragment>
+                          <ScaledAccountBalance
+                            balance={balance}
+                            displayValue={base}
+                          />
 
-                        <p className="text-muted mb-0">
-                          {usd} / {btc}
-                        </p>
-                        <p className="text-muted mb-0">
-                          <FormattedNumber
-                            value={Currency.fromRaw(pending)}
-                            minimumFractionDigits={2}
-                            maximumFractionDigits={6}
-                          />{" "}
-                          {config.currency.shortName}{" "}
-                          <TranslatedMessage id="pending" />
-                        </p>
-                      </Fragment>
-                    );
-                  }}
-                </PriceWithConversions>
+                          <p className="text-muted mb-0">
+                            {usd} / {btc}
+                          </p>
+                          <p className="text-muted mb-0">
+                            <FormattedNumber
+                              value={Currency.fromRaw(pending)}
+                              minimumFractionDigits={2}
+                              maximumFractionDigits={6}
+                            />{" "}
+                            {config.currency.shortName}{" "}
+                            <TranslatedMessage id="pending" />
+                          </p>
+                        </Fragment>
+                      );
+                    }}
+                  </PriceWithConversions>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <hr />
