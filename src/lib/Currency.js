@@ -7,6 +7,10 @@ export default {
     return value.shiftedBy((config.currency.precision || 30) * -1).toNumber();
   },
 
+  fromCents: raw => {
+    return parseFloat(raw, 10) / 100.0;
+  },
+
   toRaw: mvalue => {
     const value = BigNumber(mvalue.toString());
     return value.shiftedBy(config.currency.precision || 30).toString(10);

@@ -49,7 +49,7 @@ export default function SendBlock({ block }) {
         </span>{" "}
         <small className="text-muted">
           <PriceWithConversions
-            raw
+            cents
             amount={block.amount}
             currencies={["base", "usd", "btc"]}
             precision={{ base: 20, btc: 6, usd: 4 }}

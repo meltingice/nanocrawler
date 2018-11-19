@@ -27,7 +27,7 @@ class TickerProvider extends React.Component {
   }
 
   async fetchTicker() {
-    const resp = await fetch("https://api.coinmarketcap.com/v1/ticker/nano/", {
+    const resp = await fetch("https://api.coinmarketcap.com/v1/ticker/btc/", {
       mode: "cors"
     });
 

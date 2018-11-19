@@ -19,6 +19,10 @@ class PriceWithConversions extends React.PureComponent {
       return Currency.fromRaw(this.props.amount);
     }
 
+    if (this.props.cents) {
+      return parseFloat(this.props.amount, 10) / 100.0;
+    }
+
     return parseFloat(this.props.amount, 10);
   }
 

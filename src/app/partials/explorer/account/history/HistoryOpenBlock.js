@@ -33,7 +33,7 @@ export default function HistoryOpenBlock({ block, intl }) {
       amount={
         <span className="text-success">
           +<FormattedNumber
-            value={Currency.fromRaw(block.amount)}
+            value={Currency.fromCents(block.amount)}
             maximumFractionDigits={6}
             minimumFractionDigits={2}
           />{" "}

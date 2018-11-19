@@ -69,12 +69,6 @@ class Explorer extends React.PureComponent {
             </div>
           </form>
 
-          <RandomVerifiedAccounts count={5} />
-
-          <div className="mt-5">
-            <ExplorerTopAccounts count={5} />
-          </div>
-
           <div className="mt-5">
             <RecentBlockStream count={10} />
           </div>

@@ -45,7 +45,10 @@ class Account extends React.Component {
 
   accountTitle() {
     const { formatMessage } = this.props.intl;
-    const { weight, unopened } = this.props;
+    const { account, weight, unopened } = this.props;
+
+    if (account === config.currency.genesisAccount) return "Genesis Account";
+    if (account === config.currency.emissionAccount) return "Emission Account";
 
     const mnano = Currency.fromRaw(weight);
 
@@ -175,7 +178,7 @@ class Account extends React.Component {
               </div>
               <div className="col">
                 <PriceWithConversions
-                  raw
+                  cents
                   amount={balance}
                   currencies={["base", "usd", "btc"]}
                 >
