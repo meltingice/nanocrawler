@@ -38,7 +38,7 @@ class Account extends React.Component {
     }
   }
 
-  isGenesis() {
+  get isGenesis() {
     return this.props.account === config.currency.genesisAccount;
   }
 
