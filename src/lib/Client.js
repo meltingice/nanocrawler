@@ -113,6 +113,11 @@ class Client {
     return (await resp.json()).accounts;
   }
 
+  async supply() {
+    const resp = await this.fetch("v2/network/supply");
+    return await resp.json();
+  }
+
   async fetch(endpoint) {
     const resp = await fetch(`${this.host}/${endpoint}`);
     if (resp.ok) return resp;

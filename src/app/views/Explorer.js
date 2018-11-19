@@ -5,8 +5,7 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import config from "client-config.json";
 
 import ValidatedSearch from "app/partials/ValidatedSearch";
-import RandomVerifiedAccounts from "app/partials/explorer/RandomVerifiedAccounts";
-import ExplorerTopAccounts from "app/partials/explorer/ExplorerTopAccounts";
+import SupplyStats from "app/partials/explorer/SupplyStats";
 import RecentBlockStream from "app/partials/explorer/RecentBlockStream";
 
 class Explorer extends React.PureComponent {
@@ -68,6 +67,8 @@ class Explorer extends React.PureComponent {
               </div>
             </div>
           </form>
+
+          <SupplyStats />
 
           <div className="mt-5">
             <RecentBlockStream count={10} />
