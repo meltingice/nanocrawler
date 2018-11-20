@@ -9,7 +9,7 @@ const TOTAL_SUPPLY = 3402823669.2;
 const AVERAGED_TRADES = 10;
 
 export default function(app, nano) {
-  app.get("/ticker", async (req, res) => {
+  app.get("/ticker", async (req, res, next) => {
     try {
       const fiatRates = req.query.cur
         ? req.query.cur.split(",").map(cur => cur.toUpperCase())
@@ -21,7 +21,7 @@ export default function(app, nano) {
 
       res.json({ data });
     } catch (e) {
-      res.status(500).send({ error: e.message, stack: e.stack });
+      next(e);
     }
   });
 }
