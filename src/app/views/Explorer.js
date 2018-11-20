@@ -6,6 +6,7 @@ import config from "client-config.json";
 
 import ValidatedSearch from "app/partials/ValidatedSearch";
 import SupplyStats from "app/partials/explorer/SupplyStats";
+import ExplorerTopAccounts from "app/partials/explorer/ExplorerTopAccounts";
 import RecentBlockStream from "app/partials/explorer/RecentBlockStream";
 
 class Explorer extends React.PureComponent {
@@ -69,6 +70,10 @@ class Explorer extends React.PureComponent {
           </form>
 
           <SupplyStats />
+
+          <div className="mt-5">
+            <ExplorerTopAccounts count={5} />
+          </div>
 
           <div className="mt-5">
             <RecentBlockStream count={10} />

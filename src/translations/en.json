@@ -192,7 +192,7 @@
     "accounts.nano_distribution": "{currencyShortName} Distribution",
     "accounts.all_accounts": "All Accounts",
     "accounts.desc1":
-        "Only accounts with at least 0.000001 {currencyShortName}, sorted by balance",
+        "Only accounts with at least 0.01 {currencyShortName}, sorted by balance",
     "accounts.desc2": "Balance includes all pending transactions",
     "error.not_found": "This page doesn't seem to exist",
     "error.server_error":

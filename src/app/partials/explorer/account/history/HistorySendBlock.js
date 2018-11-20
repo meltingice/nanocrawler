@@ -33,7 +33,7 @@ export default function HistorySendBlock({ block }) {
       amount={
         <span className="text-danger">
           -<FormattedNumber
-            value={Currency.fromRaw(block.amount)}
+            value={Currency.fromCents(block.amount)}
             maximumFractionDigits={6}
             minimumFractionDigits={2}
           />{" "}

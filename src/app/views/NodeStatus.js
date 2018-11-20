@@ -111,7 +111,7 @@ export default class NodeStatus extends React.PureComponent {
             </p>
             <h2>
               <FormattedNumber
-                value={Currency.fromRaw(weight)}
+                value={Currency.fromCents(weight)}
                 maximumFractionDigits={0}
               />{" "}
               {config.currency.shortName}

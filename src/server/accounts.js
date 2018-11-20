@@ -19,7 +19,10 @@ async function calculateAccountList() {
     count: frontierCount
   })).frontiers;
 
-  const accounts = _.keys(data);
+  const accounts = _.keys(data).filter(
+    acct => acct !== config.currency.genesisAccount
+  );
+
   console.log(accounts.length, "accounts");
 
   const accountChunks = _.chunk(accounts, 5000);
@@ -29,10 +32,10 @@ async function calculateAccountList() {
     const resp = await nano.accounts.balances(accountChunks[i]);
     _.forEach(resp.balances, (balances, account) => {
       const balance =
-        parseFloat(Currency.fromRaw(balances.balance), 10) +
-        parseFloat(Currency.fromRaw(balances.pending), 10);
+        Currency.fromCents(balances.balance) +
+        Currency.fromCents(balances.pending);
 
-      if (parseFloat(balance, 10) < 0.000001) {
+      if (parseFloat(balance, 10) === 0.0) {
         accountsToRemove.push(account);
       } else {
         accountsWithBalance.push([balance, account]);

@@ -20,7 +20,7 @@ export default function(app, nano) {
         );
         const stats = await raiNodeInfo();
         const weight = parseFloat(
-          Currency.fromRaw(await nano.accounts.weight(config.account)),
+          Currency.fromCents(await nano.accounts.weight(config.account)),
           10
         );
 

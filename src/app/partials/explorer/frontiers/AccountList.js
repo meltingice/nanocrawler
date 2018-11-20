@@ -22,7 +22,7 @@ class Account extends React.PureComponent {
   loadWeight() {
     this.setState({ loading: true }, async () => {
       const weight = await apiClient.weight(this.props.account);
-      this.setState({ weight: Currency.fromRaw(weight), loading: false });
+      this.setState({ weight: Currency.fromCents(weight), loading: false });
     });
   }
 
@@ -51,14 +51,14 @@ class Account extends React.PureComponent {
       <VisibilitySensor onChange={this.visibilityChanged.bind(this)}>
         <div className="row align-items-center">
           <div className="col-md-8 mb-2 mb-lg-0">
-            <div className="row">
+            <div className="row align-items-center">
               <div className="col-auto">
-                <h4>
+                <h4 className="mb-0">
                   #<FormattedNumber value={rank} />
                 </h4>
               </div>
               <div className="col-lg">
-                <p className="mb-1">
+                <p className="mb-0">
                   <AccountLink
                     account={account}
                     ninja
@@ -71,16 +71,10 @@ class Account extends React.PureComponent {
             </div>
           </div>
           <div className="col text-left text-md-right">
-            <PriceWithConversions
-              amount={balance}
-              currencies={["base", "btc", "usd"]}
-            >
-              {(base, btc, usd) => (
+            <PriceWithConversions cents amount={balance}>
+              {base => (
                 <Fragment>
                   <h5 className="mb-0">{base}</h5>
-                  <p className="text-muted mb-0">
-                    {btc} / {usd}
-                  </p>
                 </Fragment>
               )}
             </PriceWithConversions>

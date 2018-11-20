@@ -193,7 +193,7 @@ class Account extends React.Component {
 
                           <p className="text-muted mb-0">
                             <FormattedNumber
-                              value={Currency.fromRaw(pending)}
+                              value={Currency.fromCents(pending)}
                               minimumFractionDigits={2}
                               maximumFractionDigits={6}
                             />{" "}

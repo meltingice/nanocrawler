@@ -23,15 +23,8 @@ const Account = ({ account, balance, rank }) => {
                 />
               </p>
 
-              <PriceWithConversions
-                amount={balance}
-                currencies={["base", "btc", "usd"]}
-              >
-                {(base, btc, usd) => (
-                  <h6 className="mb-0">
-                    {base} / {btc} / {usd}
-                  </h6>
-                )}
+              <PriceWithConversions cents amount={balance}>
+                {base => <h6 className="mb-0">{base}</h6>}
               </PriceWithConversions>
             </div>
           </div>

@@ -75,7 +75,7 @@ export default class AccountDelegators extends React.Component {
           </div>
           <div className="col-auto">
             <h3 className="mb-0">
-              <FormattedNumber value={Currency.fromRaw(weight)} />{" "}
+              <FormattedNumber value={Currency.fromCents(weight)} />{" "}
               <span className="text-muted">
                 {config.currency.shortName} <TranslatedMessage id="weight" />
               </span>
