@@ -50,13 +50,13 @@ export default class SupplyStats extends React.Component {
           <p>
             <Link
               to={`/explorer/account/${config.currency.emissionAccount}`}
-              className="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm mb-1"
             >
               View Emission Account
             </Link>{" "}
             <Link
               to={`/explorer/account/${config.currency.genesisAccount}`}
-              className="btn btn-secondary btn-sm"
+              className="btn btn-secondary btn-sm mb-1"
             >
               View Genesis Account
             </Link>
