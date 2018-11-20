@@ -34,7 +34,7 @@ export default class RecentBlockStream extends React.Component {
       this.calculateThroughput();
       this.tpsInterval = setInterval(
         this.calculateThroughput.bind(this),
-        10000
+        60000
       );
     } catch (e) {
       console.log(e.message);
@@ -53,8 +53,8 @@ export default class RecentBlockStream extends React.Component {
   }
 
   async calculateThroughput() {
-    const tps = await apiClient.networkTps("1m");
-    this.setState({ throughput: tps });
+    const tps = await apiClient.networkTps("1d");
+    this.setState({ throughput: tps * 60 * 60 * 24 });
   }
 
   render() {
@@ -79,7 +79,7 @@ export default class RecentBlockStream extends React.Component {
           <div className="col-auto">
             <h5 className="mb-0">
               <FormattedNumber value={throughput} maximumFractionDigits={2} />{" "}
-              <span className="text-muted">tx / sec</span>
+              <span className="text-muted">tx / day</span>
             </h5>
           </div>
         </div>
