@@ -5,14 +5,16 @@ import { accountIsValid, getTimestampForHash } from "../../helpers/util";
 import { frontiers, wealthDistribution } from "../../helpers/frontiers";
 import Currency from "../../../lib/Currency";
 
+import { BadRequest, NotFound } from "../../errors";
+
 export default function(app, nano) {
   /*
    * account_info
    * General account information
    */
-  app.get("/accounts/:account", async (req, res) => {
+  app.get("/accounts/:account", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -20,18 +22,31 @@ export default function(app, nano) {
         `v2/account/${req.params.account}`,
         10,
         async () => {
-          return await nano.rpc("account_info", {
+          const data = await nano.rpc("account_info", {
             account: req.params.account,
             representative: true,
             weight: true,
             pending: true
           });
+
+          if (data.error) {
+            switch (data.error) {
+              case "Bad account number":
+                throw new BadRequest(data.error);
+              case "Account not found":
+                throw new NotFound(data.error);
+              default:
+                throw new Error(data.error);
+            }
+          }
+
+          return data;
         }
       );
 
       res.json({ account });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
@@ -39,9 +54,9 @@ export default function(app, nano) {
    * account_weight
    * Fetches only account weight
    */
-  app.get("/accounts/:account/weight", async (req, res) => {
+  app.get("/accounts/:account/weight", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -55,7 +70,7 @@ export default function(app, nano) {
 
       res.json({ weight });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
@@ -63,9 +78,9 @@ export default function(app, nano) {
    * delegators
    * Fetches all account delegators
    */
-  app.get("/accounts/:account/delegators", async (req, res) => {
+  app.get("/accounts/:account/delegators", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -81,7 +96,7 @@ export default function(app, nano) {
 
       res.json(delegators);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
@@ -89,14 +104,14 @@ export default function(app, nano) {
    * account_history
    * Paginated fetch of account history
    */
-  app.get("/accounts/:account/history", async (req, res) => {
+  app.get("/accounts/:account/history", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     if (req.query.head) {
       if (req.query.head.length !== 64 || /[^A-F0-9]+/.test(req.query.head)) {
-        return res.status(400).send({ error: "Invalid head block" });
+        return next(new BadRequest("Invalid head block"));
       }
     }
 
@@ -105,24 +120,39 @@ export default function(app, nano) {
         `v2/history/${req.params.account}/${req.query.head}`,
         10,
         async () => {
-          const resp = (await nano.rpc("account_history", {
+          const resp = await nano.rpc("account_history", {
             account: req.params.account,
             count: 50,
             raw: "true",
             head: req.query.head
-          })).history;
+          });
 
-          for (let i = 0; i < resp.length; i++) {
-            resp[i].timestamp = await getTimestampForHash(resp[i].hash);
+          if (resp.error) {
+            switch (resp.error) {
+              case "Bad account number":
+                throw new BadRequest(resp.error);
+              default:
+                throw new Error(resp.error);
+            }
           }
 
-          return resp;
+          if (resp.history === "") {
+            throw new NotFound("Account not found");
+          }
+
+          const { history } = resp;
+
+          for (let i = 0; i < history.length; i++) {
+            history[i].timestamp = await getTimestampForHash(history[i].hash);
+          }
+
+          return history;
         }
       );
 
       res.json(history);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
@@ -132,9 +162,9 @@ export default function(app, nano) {
    * Does some extra processing on the response to make it easier for the frontend
    * to utilize.
    */
-  app.get("/accounts/:account/pending", async (req, res) => {
+  app.get("/accounts/:account/pending", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -147,6 +177,8 @@ export default function(app, nano) {
             source: true,
             threshold: Currency.toRaw(0.000001)
           });
+
+          if (resp.error) throw new BadRequest(resp.error);
 
           const blocks = _.toPairs(resp.blocks[req.params.account])
             .slice(0, 20)
@@ -172,7 +204,7 @@ export default function(app, nano) {
 
       res.json(data);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 }

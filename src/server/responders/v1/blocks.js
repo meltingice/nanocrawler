@@ -3,7 +3,7 @@ import redisFetch from "../../helpers/redisFetch";
 import { processBlock, getTimestampForHash } from "../../helpers/util";
 
 export default function(app, nano) {
-  app.get("/block/:hash", async (req, res) => {
+  app.get("/block/:hash", async (req, res, next) => {
     try {
       const block = await redisFetch(
         `block/v5/${req.params.hash}`,
@@ -23,11 +23,11 @@ export default function(app, nano) {
 
       res.json(block);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/blocks/active", async (req, res) => {
+  app.get("/blocks/active", async (req, res, next) => {
     try {
       const data = await redisFetch("confirmation_active", 5, async () => {
         const hashes = (await nano.rpc("confirmation_active")).confirmations;
@@ -48,11 +48,11 @@ export default function(app, nano) {
 
       res.json({ blocks: data });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/block/:hash/confirmation", async (req, res) => {
+  app.get("/block/:hash/confirmation", async (req, res, next) => {
     try {
       const data = nano.rpc("confirmation_info", {
         root: req.params.hash,
@@ -62,11 +62,11 @@ export default function(app, nano) {
 
       res.json(data);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/block_count", async (req, res) => {
+  app.get("/block_count", async (req, res, next) => {
     try {
       const blockCount = await redisFetch("blockCount", 10, async () => {
         return await nano.blocks.count();
@@ -74,11 +74,11 @@ export default function(app, nano) {
 
       res.json({ blockCount });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/block_count_by_type", async (req, res) => {
+  app.get("/block_count_by_type", async (req, res, next) => {
     try {
       const blockCount = await redisFetch("blockCountByType", 10, async () => {
         return await nano.blocks.count(true);
@@ -86,7 +86,7 @@ export default function(app, nano) {
 
       res.json(blockCount);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 }

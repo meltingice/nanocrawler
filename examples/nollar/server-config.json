@@ -1,0 +1,17 @@
+{
+  "nodeName": "scan.nollar.org",
+  "account": "usd_1scanyhpy9xashjf58ro6pupu779pytgwzmuozipgnidig4jh9fbsujbiing",
+  "clientUrl": "https://scan.nollar.org",
+  "raiblocksDir": "/home/ryanlefevre/NOLLARData",
+  "nodeHost": "http://[::1]:7131",
+  "redis": "redis://127.0.0.1:6379",
+  "redisNamespace": "nollar",
+  "serverPort": 3001,
+  "knownMonitors": [],
+  "blacklistedPeers": [],
+  "officialRepresentatives": [
+    "usd_38sc7r7x8y3o3mte4aaeegwdhpjiczugbyfgtsj868bqa5pkmiohad1utd7b",
+    "usd_17ud5axjpcmsefzpfz6wpdsztnsuspqimdw9wrinny86tggnz6kcywmfpygq",
+    "usd_3qban7e1knwkidmtikpssfhjr8ggh549c5qyg8qm36jdereyhihwatrysb75"
+  ]
+}
