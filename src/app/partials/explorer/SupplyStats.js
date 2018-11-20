@@ -30,43 +30,22 @@ export default class SupplyStats extends React.Component {
   }
 
   get stats() {
-    const { circulating, available } = this.state;
+    const { circulating } = this.state;
 
     return (
       <div className="row">
         <div className="col-lg">
-          <h4 className="mb-0">
-            <FormattedNumber
-              value={Currency.fromCents(available)}
-              maximumFractionDigits={2}
-              minimumFractionDigits={2}
-            />{" "}
-            USD <span className="text-muted">available supply</span>
-          </h4>
-          <p className="text-muted">
-            The total amount of NOLLAR that is backed 1:1 to US Dollars
-          </p>
-          <p>
-            <Link
-              to={`/explorer/account/${config.currency.genesisAccount}`}
-              className="btn btn-secondary btn-sm"
-            >
-              View Genesis Account
-            </Link>
-          </p>
-        </div>
-        <div className="col-lg">
-          <h4 className="mb-0">
+          <h3 className="mb-0">
             <FormattedNumber
               value={Currency.fromCents(circulating)}
               maximumFractionDigits={2}
               minimumFractionDigits={2}
             />{" "}
-            USD <span className="text-muted">circulating supply</span>
-          </h4>
+            USD <span className="text-muted">in circulation</span>
+          </h3>
           <p className="text-muted">
-            The amount of NOLLAR that is publicly circulating and has left the
-            emission account
+            The amount of NOLLAR that is backed 1:1 with US Dollars and has left
+            the emission account
           </p>
           <p>
             <Link
@@ -74,6 +53,12 @@ export default class SupplyStats extends React.Component {
               className="btn btn-secondary btn-sm"
             >
               View Emission Account
+            </Link>{" "}
+            <Link
+              to={`/explorer/account/${config.currency.genesisAccount}`}
+              className="btn btn-secondary btn-sm"
+            >
+              View Genesis Account
             </Link>
           </p>
         </div>
@@ -84,17 +69,6 @@ export default class SupplyStats extends React.Component {
   render() {
     const { loading } = this.state;
 
-    return (
-      <Fragment>
-        <h3 className="mb-0">NOLLAR Circulation</h3>
-        <p className="text-muted">
-          The amount of NOLLAR currently in circulation, updated in realtime
-        </p>
-
-        <hr />
-
-        {!loading && this.stats}
-      </Fragment>
-    );
+    return <Fragment>{!loading && this.stats}</Fragment>;
   }
 }
