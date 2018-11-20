@@ -53,12 +53,16 @@ export default class Accounts extends React.Component {
 
         <div className="row">
           <div className="col">
-            <h1>
+            <h1 className="mb-0">
               <TranslatedMessage
                 id="accounts.nano_distribution"
                 values={{ currencyShortName: config.currency.shortName }}
               />
             </h1>
+            <p className="text-muted">
+              List and calculations do not include the genesis account
+            </p>
+
             <hr />
 
             <DistributionGraph distribution={this.state.distribution} />

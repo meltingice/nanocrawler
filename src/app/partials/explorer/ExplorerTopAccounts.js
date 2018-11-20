@@ -23,7 +23,7 @@ const Account = ({ account, balance, rank }) => {
                 />
               </p>
 
-              <PriceWithConversions cents amount={balance}>
+              <PriceWithConversions amount={balance}>
                 {base => <h6 className="mb-0">{base}</h6>}
               </PriceWithConversions>
             </div>

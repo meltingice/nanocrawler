@@ -5,6 +5,7 @@ import AccountLink from "app/partials/AccountLink";
 import PriceWithConversions from "app/partials/PriceWithConversions";
 import { apiClient } from "lib/Client";
 import Currency from "lib/Currency";
+import config from "client-config.json";
 
 class Account extends React.PureComponent {
   state = {
@@ -34,8 +35,8 @@ class Account extends React.PureComponent {
         <p className="mb-0">
           <span className="badge badge-info">Representative</span>{" "}
           <span className="text-muted">
-            <FormattedNumber value={weight} maximumFractionDigits={6} /> NANO
-            weight
+            <FormattedNumber value={weight} maximumFractionDigits={6} />{" "}
+            {config.currency.shortName} weight
           </span>
         </p>
       );
@@ -71,7 +72,7 @@ class Account extends React.PureComponent {
             </div>
           </div>
           <div className="col text-left text-md-right">
-            <PriceWithConversions cents amount={balance}>
+            <PriceWithConversions amount={balance}>
               {base => (
                 <Fragment>
                   <h5 className="mb-0">{base}</h5>
