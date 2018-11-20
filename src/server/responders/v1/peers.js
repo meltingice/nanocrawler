@@ -2,7 +2,7 @@ import _ from "lodash";
 import redisFetch from "../../helpers/redisFetch";
 
 export default function(app, nano) {
-  app.get("/peer_count", async (req, res) => {
+  app.get("/peer_count", async (req, res, next) => {
     try {
       const peerCount = await redisFetch("peerCount", 60, async () => {
         return _.keys((await nano.rpc("peers")).peers).length;
@@ -10,7 +10,7 @@ export default function(app, nano) {
 
       res.json({ peerCount: peerCount });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
@@ -22,7 +22,7 @@ export default function(app, nano) {
 
       res.json(peers);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 }

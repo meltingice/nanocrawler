@@ -9,6 +9,10 @@ export function accountIsValid(account) {
   return /^\w+_[A-Za-z0-9]{59,60}$/.test(account);
 }
 
+export function blockIsValid(hash) {
+  return /^[A-F0-9]{64}$/.test(hash);
+}
+
 export async function getTimestampForHash(hash) {
   try {
     const timestamp = await redisGet(`block_timestamp/${hash}`);
