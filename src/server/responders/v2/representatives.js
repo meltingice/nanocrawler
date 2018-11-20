@@ -7,7 +7,7 @@ export default function(app, nano) {
    * representatives_online
    * Returns hash of online representatives, including their voting weight
    */
-  app.get("/representatives/online", async (req, res) => {
+  app.get("/representatives/online", async (req, res, next) => {
     try {
       const representatives = await redisFetch(
         "v2/representatives_online",
@@ -28,7 +28,7 @@ export default function(app, nano) {
 
       res.json({ representatives });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
@@ -36,7 +36,7 @@ export default function(app, nano) {
    * representatives
    * Returns list of official representatives only, with their voting weight
    */
-  app.get("/representatives/official", async (req, res) => {
+  app.get("/representatives/official", async (req, res, next) => {
     try {
       const representatives = await redisFetch(
         "v2/official_representatives",
@@ -51,7 +51,7 @@ export default function(app, nano) {
 
       res.json({ representatives });
     } catch (e) {
-      res.status(500).send({ error: e.message.message });
+      next(e);
     }
   });
 }
