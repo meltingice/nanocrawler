@@ -125,7 +125,7 @@ export default function ReceiveBlock({ block }) {
         </small>
       </h5>
 
-      <RawBlockContents block={block} className="mt-3" />
+      <RawBlockContents block={block} className="mt-5" />
     </div>
   );
 }
