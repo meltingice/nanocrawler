@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import "./Navigation.css";
-import Logo from "./images/white_logo_transparent.png";
+import Logo from "./images/nollar.png";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";
 import config from "client-config.json";
@@ -17,8 +17,8 @@ const Navigation = () => {
     <div id="Navigation" className="row align-items-center pl-3">
       <div className="col-auto mt-3 mb-0 mb-md-3 px-0 px-md-2">
         <div className="LogoWrap">
-          <img src={Logo} />
-          <br />NOLLAR Explorer
+          <img src={Logo} className="mb-1" />
+          <br />Network Explorer
         </div>
       </div>
 
