@@ -83,7 +83,10 @@ class Content extends React.Component {
               )}
             />
 
-            <Route path="/block/:block" component={ExplorerBlock} />
+            <Route
+              path="/block/:block"
+              render={props => <ExplorerBlock {...props} />}
+            />
             <Route component={NotFound} />
           </Switch>
         </Suspense>
