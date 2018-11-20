@@ -20,7 +20,7 @@ async function calculateAccountList() {
   })).frontiers;
 
   const accounts = _.keys(data).filter(
-    acct => acct !== config.currency.genesisAccount
+    acct => acct !== clientConfig.currency.genesisAccount
   );
 
   console.log(accounts.length, "accounts");
