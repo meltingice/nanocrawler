@@ -4,7 +4,7 @@ import config from "../../../../server-config.json";
 import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
-  app.get("/representatives_online", async (req, res) => {
+  app.get("/representatives_online", async (req, res, next) => {
     try {
       const representatives = await redisFetch(
         "representatives_online/v2",
@@ -25,11 +25,11 @@ export default function(app, nano) {
 
       res.json({ representatives });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/official_representatives", async (req, res) => {
+  app.get("/official_representatives", async (req, res, next) => {
     try {
       const representatives = await redisFetch(
         "official_representatives/v2",
@@ -47,7 +47,7 @@ export default function(app, nano) {
 
       res.json({ representatives });
     } catch (e) {
-      res.status(500).send({ error: e.message.message });
+      next(e);
     }
   });
 }
