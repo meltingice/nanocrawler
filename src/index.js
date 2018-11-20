@@ -7,13 +7,13 @@ import "./index.css";
 import { TickerProvider } from "lib/TickerContext";
 import { TranslationProvider } from "lib/TranslationContext";
 import { NetworkProvider } from "lib/NetworkContext";
-import determineBasename from "lib/determineBasename";
+import { determineBasename, languageFromUrl } from "lib/determineBasename";
 import App from "./App";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
-  <TranslationProvider>
+  <TranslationProvider initialLanguage={languageFromUrl()}>
     <TickerProvider>
       <NetworkProvider>
         <Router basename={determineBasename()}>

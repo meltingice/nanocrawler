@@ -105,11 +105,20 @@ const SUPPORTED_LANGUAGES = [
   "zu"
 ];
 
-export default function determineBasename() {
+export function determineBasename() {
   const possibleLanguage = window.location.pathname.split("/")[1];
   if (SUPPORTED_LANGUAGES.includes(possibleLanguage)) {
     return `/${possibleLanguage}/explorer`;
   }
 
   return "/explorer";
+}
+
+export function languageFromUrl() {
+  const possibleLanguage = window.location.pathname.split("/")[1];
+  if (SUPPORTED_LANGUAGES.includes(possibleLanguage)) {
+    return possibleLanguage;
+  }
+
+  return "en";
 }

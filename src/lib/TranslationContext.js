@@ -21,6 +21,7 @@ class TranslationProvider extends React.Component {
 
   componentDidMount() {
     const language =
+      this.props.initialLanguage ||
       Cookies.get("nanocrawler.locale") ||
       (navigator.languages && navigator.languages[0]) ||
       navigator.language ||
