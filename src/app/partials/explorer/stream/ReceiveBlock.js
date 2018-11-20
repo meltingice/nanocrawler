@@ -1,6 +1,7 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
+import Currency from "lib/Currency";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
 import config from "client-config.json";
@@ -24,7 +25,7 @@ export default function ReceiveBlock({ event }) {
                 currencyShortName: config.currency.shortName,
                 amount: (
                   <FormattedNumber
-                    value={block.amount}
+                    value={Currency.fromCents(block.amount)}
                     maximumFractionDigits={6}
                   />
                 )
