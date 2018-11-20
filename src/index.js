@@ -7,6 +7,7 @@ import "./index.css";
 import { TickerProvider } from "lib/TickerContext";
 import { TranslationProvider } from "lib/TranslationContext";
 import { NetworkProvider } from "lib/NetworkContext";
+import determineBasename from "lib/determineBasename";
 import App from "./App";
 
 import { BrowserRouter as Router } from "react-router-dom";
@@ -15,7 +16,7 @@ ReactDOM.render(
   <TranslationProvider>
     <TickerProvider>
       <NetworkProvider>
-        <Router basename="/ncrawl">
+        <Router basename={determineBasename()}>
           <App />
         </Router>
       </NetworkProvider>
