@@ -15,9 +15,9 @@ class TickerProvider extends React.Component {
     percent_change_24h: 0
   };
 
-  componentDidMount() {
-    this.updateTicker();
-  }
+  // componentDidMount() {
+  //   this.updateTicker();
+  // }
 
   async updateTicker() {
     const ticker = await this.fetchTicker();

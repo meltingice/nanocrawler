@@ -47,12 +47,7 @@ export default class StateBlock extends React.Component {
             <TranslatedMessage id="amount" />
           </span>{" "}
           <small className="text-muted">
-            <PriceWithConversions
-              cents
-              amount={block.amount}
-              currencies={["base", "usd", "btc"]}
-              precision={{ base: 20, btc: 6, usd: 4 }}
-            />
+            <PriceWithConversions cents amount={block.amount} />
           </small>
         </h4>
         <p className="text-muted mb-0">
@@ -72,11 +67,7 @@ export default class StateBlock extends React.Component {
             <TranslatedMessage id="balance" />
           </span>{" "}
           <small className="text-muted">
-            <PriceWithConversions
-              cents
-              amount={block.contents.balance}
-              currencies={["base", "usd", "btc"]}
-            />
+            <PriceWithConversions cents amount={block.contents.balance} />
           </small>
         </h4>
         <p className="text-muted mb-0">

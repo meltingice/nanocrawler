@@ -50,12 +50,7 @@ export default function OpenBlock({ block }) {
           <TranslatedMessage id="amount" />
         </span>{" "}
         <small className="text-muted">
-          <PriceWithConversions
-            cents
-            amount={block.amount}
-            currencies={["base", "usd", "btc"]}
-            precision={{ base: 20, btc: 6, usd: 4 }}
-          />
+          <PriceWithConversions cents amount={block.amount} />
         </small>
       </h4>
       <p className="text-muted mb-0">

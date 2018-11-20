@@ -177,17 +177,13 @@ class Account extends React.Component {
           </div>
           {!this.isGenesis && (
             <div className="col-auto">
-              <div className="row">
+              <div className="row align-items-center">
                 <div className="col-auto pr-0">
                   <AccountQR account={account} style={{ width: "80px" }} />
                 </div>
                 <div className="col">
-                  <PriceWithConversions
-                    cents
-                    amount={balance}
-                    currencies={["base", "usd", "btc"]}
-                  >
-                    {(base, usd, btc) => {
+                  <PriceWithConversions cents amount={balance}>
+                    {base => {
                       return (
                         <Fragment>
                           <ScaledAccountBalance
@@ -195,9 +191,6 @@ class Account extends React.Component {
                             displayValue={base}
                           />
 
-                          <p className="text-muted mb-0">
-                            {usd} / {btc}
-                          </p>
                           <p className="text-muted mb-0">
                             <FormattedNumber
                               value={Currency.fromRaw(pending)}
@@ -308,7 +301,7 @@ class Account extends React.Component {
 }
 
 const ScaledAccountBalance = ({ balance, displayValue }) => {
-  const mbalance = Currency.fromRaw(balance).toString();
+  const mbalance = Currency.fromCents(balance).toString();
   if (mbalance.length > 12) return <h5 className="mb-0">{displayValue}</h5>;
   return <h3 className="mb-0">{displayValue}</h3>;
 };
