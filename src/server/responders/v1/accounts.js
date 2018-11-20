@@ -5,14 +5,16 @@ import { accountIsValid, getTimestampForHash } from "../../helpers/util";
 import { frontiers, wealthDistribution } from "../../helpers/frontiers";
 import Currency from "../../../lib/Currency";
 
+import { BadRequest, NotFound } from "../../errors";
+
 export default function(app, nano) {
   app.get("/account", async (req, res) => {
     res.json({ account: config.account });
   });
 
-  app.get("/account/:account", async (req, res) => {
+  app.get("/account/:account", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -37,13 +39,13 @@ export default function(app, nano) {
 
       res.json({ account });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/account/:account/weight", async (req, res) => {
+  app.get("/account/:account/weight", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -59,13 +61,13 @@ export default function(app, nano) {
 
       res.json({ weight });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/account/:account/delegators", async (req, res) => {
+  app.get("/account/:account/delegators", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -86,18 +88,18 @@ export default function(app, nano) {
 
       res.json(delegators);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/account/:account/history", async (req, res) => {
+  app.get("/account/:account/history", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     if (req.query.head) {
       if (req.query.head.length !== 64 || /[^A-F0-9]+/.test(req.query.head)) {
-        return res.status(400).send({ error: "Invalid head block" });
+        return next(new BadRequest("Invalid head block"));
       }
     }
 
@@ -127,13 +129,13 @@ export default function(app, nano) {
 
       res.json(history);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/account/:account/pending", async (req, res) => {
+  app.get("/account/:account/pending", async (req, res, next) => {
     if (!accountIsValid(req.params.account)) {
-      return res.status(400).send({ error: "Invalid account" });
+      return next(new BadRequest("Invalid account"));
     }
 
     try {
@@ -171,20 +173,20 @@ export default function(app, nano) {
 
       res.json(data);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/accounts/:page(\\d+)", async (req, res) => {
+  app.get("/accounts/:page(\\d+)", async (req, res, next) => {
     try {
       const data = await frontiers(req.params.page);
       res.json(data);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/accounts/distribution", async (req, res) => {
+  app.get("/accounts/distribution", async (req, res, next) => {
     try {
       const distribution = {
         1: await wealthDistribution(0, 1),
@@ -202,7 +204,7 @@ export default function(app, nano) {
 
       res.json({ distribution });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 }

@@ -14,16 +14,20 @@ const nano = new Nano({ url: config.nodeHost });
 app.use(morgan("combined"));
 app.use(cors());
 
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send({ error: err.message });
-});
-
 app.use(apiV1(nano));
 app.use("/v2", apiV2(nano));
 
 app.get("/", (req, res) => {
   res.redirect(config.clientUrl);
+});
+
+app.use(function(err, req, res, next) {
+  if (err.status) {
+    res.status(err.status).send({ error: err.message });
+  } else {
+    console.error(err.stack);
+    res.status(500).send({ error: err.message });
+  }
 });
 
 app.listen(config.serverPort || 3001);

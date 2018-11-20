@@ -1,7 +1,8 @@
 import accountSearch from "../../helpers/accountSearch";
+import { BadRequest } from "../../errors";
 
 export default function(app, nano) {
-  app.get("/search", async (req, res) => {
+  app.get("/search", async (req, res, next) => {
     if (!req.query.q) {
       return res.json({ accounts: [] });
     }
@@ -12,14 +13,14 @@ export default function(app, nano) {
     }
 
     if (req.query.q.trim().length > 64) {
-      return res.status(400).send({ error: "Search too long" });
+      return next(new BadRequest("Search too long"));
     }
 
     try {
       const accounts = await accountSearch(req.query.q);
       res.json({ accounts });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 }

@@ -6,7 +6,7 @@ import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   // nanoNodeMonitor network data
-  app.get("/network_data", async (req, res) => {
+  app.get("/network_data", async (req, res, next) => {
     try {
       const data = await redisFetch("nanoNodeMonitorPeerData", 10, async () => {
         return [];
@@ -14,20 +14,20 @@ export default function(app, nano) {
 
       res.json({ network: data });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/tps/:period", async (req, res) => {
+  app.get("/tps/:period", async (req, res, next) => {
     try {
       const calc = await tpsCalculator(req.params.period);
       res.json({ tps: calc || 0.0 });
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/confirmation_quorum", async (req, res) => {
+  app.get("/confirmation_quorum", async (req, res, next) => {
     try {
       const data = await redisFetch("confirmation_quorum", 10, async () => {
         return await nano.rpc("confirmation_quorum");
@@ -42,7 +42,7 @@ export default function(app, nano) {
 
       res.json(data);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
