@@ -9,7 +9,7 @@ import Currency from "../../../lib/Currency";
 
 export default function(app, nano) {
   // nanoNodeMonitor support
-  app.get("/api.php", async (req, res) => {
+  app.get("/api.php", async (req, res, next) => {
     try {
       const data = await redisFetch("api.php", 10, async () => {
         const blockCount = await nano.blocks.count();
@@ -51,11 +51,11 @@ export default function(app, nano) {
 
       res.json(data);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      next(e);
     }
   });
 
-  app.get("/operations", async (req, res) => {
+  app.get("/operations", async (req, res, next) => {
     try {
       const data = await redisFetch("operations", 60, async () => {
         return await nano.blocks.count();
@@ -63,7 +63,7 @@ export default function(app, nano) {
 
       res.send(data.count);
     } catch (e) {
-      res.status(500).send("Error");
+      next(e);
     }
   });
 }

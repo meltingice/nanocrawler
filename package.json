@@ -32,6 +32,7 @@
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.4.0",
+    "express": "^4.16.4",
     "extract-text-webpack-plugin": "3.0.2",
     "fetch-timeout": "^0.0.2",
     "file-loader": "1.1.5",
@@ -65,7 +66,6 @@
     "react-router-dom": "^4.2.2",
     "react-svg": "^2.2.15",
     "react-visibility-sensor": "^4.1.2",
-    "reactstrap": "^6.4.0",
     "redis": "^2.8.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
@@ -86,7 +86,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "webpack-bundle-analyzer": "^3.0.3"
   },
   "jest": {
     "collectCoverageFrom": [

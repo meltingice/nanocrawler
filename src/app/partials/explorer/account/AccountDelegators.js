@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+import keys from "lodash/keys";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import Currency from "lib/Currency";
@@ -34,7 +34,7 @@ export default class AccountDelegators extends React.Component {
 
     const delegators = await apiClient.delegators(account);
 
-    if (_.keys(delegators).length > 0) {
+    if (keys(delegators).length > 0) {
       weight = await apiClient.weight(account);
     }
 
@@ -42,7 +42,7 @@ export default class AccountDelegators extends React.Component {
   }
 
   get delegatorsCount() {
-    return _.keys(this.state.delegators).length;
+    return keys(this.state.delegators).length;
   }
 
   render() {
