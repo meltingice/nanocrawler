@@ -2,7 +2,8 @@ import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import _ from "lodash";
+import uniq from "lodash/uniq";
+import compact from "lodash/compact";
 import AccountLink from "../AccountLink";
 import OptionalField from "../OptionalField";
 import config from "client-config.json";
@@ -58,8 +59,8 @@ export default class DiscoveredPeers extends React.Component {
   }
 
   versions() {
-    return _.uniq(
-      _.compact(
+    return uniq(
+      compact(
         this.props.peers.map(peer => {
           if (!peer.data.version) return null;
           const match = peer.data.version.match(/(\d+\.\d+)/);
