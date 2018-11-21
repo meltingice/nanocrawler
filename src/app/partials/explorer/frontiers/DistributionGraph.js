@@ -72,7 +72,8 @@ const graphData = distribution => {
     100000: "100k",
     1000000: "1M",
     10000000: "10M",
-    100000000: "100M"
+    100000000: "100M",
+    1000000000: "1B"
   };
 
   const shortName = value => nameSub[value] || value;

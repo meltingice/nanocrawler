@@ -1,5 +1,6 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
+import config from "client-config.json";
 
 export default function DistributionStats({ distribution }) {
   return (
@@ -12,13 +13,16 @@ export default function DistributionStats({ distribution }) {
       <DistributionRange range="100k - 1M" value={distribution["1000000"]} />
       <DistributionRange range="1M - 10M" value={distribution["10000000"]} />
       <DistributionRange range="10M - 100M" value={distribution["100000000"]} />
+      <DistributionRange range="100M - 1B" value={distribution["1000000000"]} />
     </div>
   );
 }
 
 const DistributionRange = ({ range, value }) => (
   <div className="col-md col-6 text-center mb-1">
-    <p className="text-muted mb-1">{range} NANO</p>
+    <p className="text-muted mb-1">
+      {range} {config.currency.shortName}
+    </p>
     <h4>
       <FormattedNumber value={value || 0} />
     </h4>
