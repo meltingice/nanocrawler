@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 import ReactSVG from "react-svg";
 import LoadingMonKey from "app/images/loading-monkey.svg";
 

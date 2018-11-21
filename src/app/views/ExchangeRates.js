@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
-import _ from "lodash";
+import fromPairs from "lodash/fromPairs";
+import toPairs from "lodash/toPairs";
+import map from "lodash/map";
 import { Helmet } from "react-helmet";
 import { FormattedNumber } from "react-intl";
 import { withTicker } from "lib/TickerContext";
@@ -54,14 +56,13 @@ class ExchangeRates extends React.PureComponent {
     const { ticker } = this.props;
     const { value } = this.state;
 
-    const otherCurrencies = _.fromPairs(
-      _.filter(
-        _.toPairs(ticker),
+    const otherCurrencies = fromPairs(
+      toPairs(ticker).filter(
         d => !fiatCurrencies.includes(d[0]) && !cryptoCurrencies.includes(d[0])
       )
     );
 
-    return _.map(otherCurrencies, (data, cur) => (
+    return map(otherCurrencies, (data, cur) => (
       <h3 key={cur}>
         <FormattedNumber
           value={parseFloat(ticker[cur].price, 10) * value}
