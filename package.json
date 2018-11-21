@@ -2,7 +2,7 @@
   "name": "nano-node-dashboard",
   "version": "0.1.0",
   "license": "MIT",
-  "homepage": "/ncrawl/",
+  "homepage": "/explorer/",
   "dependencies": {
     "@nivo/bar": "^0.49.1",
     "async": "^2.6.0",
