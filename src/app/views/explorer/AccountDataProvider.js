@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
-import _ from "lodash";
+import last from "lodash/last";
 
 import config from "client-config.json";
 import { apiClient } from "lib/Client";
@@ -103,7 +103,7 @@ export default function withAccountData(WrappedComponent) {
         this.setState({
           loading: false,
           history: updatedHistory,
-          nextPageHead: _.last(updatedHistory).hash
+          nextPageHead: last(updatedHistory).hash
         });
       } catch (e) {
         this.setState({ loading: false });

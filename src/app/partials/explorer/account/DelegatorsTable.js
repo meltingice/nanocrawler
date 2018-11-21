@@ -1,12 +1,12 @@
 import React from "react";
 import BigNumber from "bignumber.js";
+import toPairs from "lodash/toPairs";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import _ from "lodash";
 
 import DelegatorEntry from "./DelegatorEntry";
 
 export default function DelegatorsTable({ delegators }) {
-  const sortedDelegators = _.toPairs(delegators)
+  const sortedDelegators = toPairs(delegators)
     .map(d => [d[0], BigNumber(d[1])])
     .filter(d => d[1].gte(1))
     .sort((a, b) => {
@@ -30,7 +30,7 @@ export default function DelegatorsTable({ delegators }) {
         </thead>
 
         <tbody>
-          {_.map(sortedDelegators, d => (
+          {sortedDelegators.map(d => (
             <DelegatorEntry
               key={d[0]}
               account={d[0]}

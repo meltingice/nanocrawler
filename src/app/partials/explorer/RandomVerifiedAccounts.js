@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import _ from "lodash";
+import sampleSize from "lodash/sampleSize";
 
 import AccountLink from "../AccountLink";
 
@@ -13,7 +13,7 @@ export default class RandomVerifiedAccounts extends React.Component {
     });
     const accounts = await data.json();
 
-    this.setState({ accounts: _.sampleSize(accounts, this.props.count) });
+    this.setState({ accounts: sampleSize(accounts, this.props.count) });
   }
 
   render() {

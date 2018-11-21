@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
-import _ from "lodash";
+import keys from "lodash/keys";
+import isEmpty from "lodash/isEmpty";
 import { NavLink } from "react-router-dom";
 import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
@@ -61,7 +62,7 @@ class Account extends React.Component {
 
   representativeOnline() {
     const { representative, network } = this.props;
-    return _.keys(network.representativesOnline).includes(representative);
+    return keys(network.representativesOnline).includes(representative);
   }
 
   representativeOnlineStatus() {
@@ -102,7 +103,7 @@ class Account extends React.Component {
 
   representativeOfflineWarning() {
     const { representativesOnline } = this.props.network;
-    if (_.isEmpty(representativesOnline)) return;
+    if (isEmpty(representativesOnline)) return;
     if (!this.hasDelegatedWeight()) return;
     if (!this.state.uptime || this.state.uptime > 95) return;
 
