@@ -1,6 +1,8 @@
 import React, { Fragment } from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import _ from "lodash";
+import keys from "lodash/keys";
+import toPairs from "lodash/toPairs";
+import values from "lodash/values";
 
 import "./PeerVersions.css";
 
@@ -22,14 +24,14 @@ const Version = ({ version, count, total }) => {
 };
 
 export default function PeerVersions({ peers }) {
-  const totalPeers = _.keys(peers).length;
+  const totalPeers = keys(peers).length;
   let versions = {};
-  _.values(peers).forEach(version => {
+  values(peers).forEach(version => {
     if (!versions[version]) versions[version] = 0;
     versions[version]++;
   });
 
-  const sortedVersions = _.toPairs(versions).sort((a, b) => {
+  const sortedVersions = toPairs(versions).sort((a, b) => {
     const aVersion = parseInt(a[0], 10);
     const bVersion = parseInt(b[0], 10);
 
@@ -45,7 +47,7 @@ export default function PeerVersions({ peers }) {
       </h2>
 
       <dl className="PeerVersions">
-        {_.map(sortedVersions, data => (
+        {sortedVersions.map(data => (
           <Version
             key={data[0]}
             version={data[0]}

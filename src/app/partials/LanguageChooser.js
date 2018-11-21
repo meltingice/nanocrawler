@@ -1,6 +1,6 @@
 import React from "react";
 import { injectIntl } from "react-intl";
-import _ from "lodash";
+import map from "lodash/map";
 import {
   Dropdown,
   DropdownToggle,
@@ -49,7 +49,7 @@ class LanguageChooser extends React.PureComponent {
           <i className="fa fa-globe" /> {this.languageToName(locale.language)}
         </DropdownToggle>
         <DropdownMenu right>
-          {_.map(supportedLanguages, (name, code) => (
+          {map(supportedLanguages, (name, code) => (
             <DropdownItem key={code} onClick={() => locale.setLanguage(code)}>
               {name}
             </DropdownItem>
