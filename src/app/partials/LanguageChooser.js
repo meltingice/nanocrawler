@@ -69,25 +69,6 @@ class LanguageChooser extends React.PureComponent {
         </div>
       </div>
     );
-
-    // return (
-    //   <Dropdown
-    //     isOpen={this.state.menuOpen}
-    //     toggle={this.toggle.bind(this)}
-    //     inNavbar
-    //   >
-    //     <DropdownToggle caret>
-    //       <i className="fa fa-globe" /> {this.languageToName(locale.language)}
-    //     </DropdownToggle>
-    //     <DropdownMenu right>
-    //       {map(supportedLanguages, (name, code) => (
-    //         <DropdownItem key={code} onClick={() => locale.setLanguage(code)}>
-    //           {name}
-    //         </DropdownItem>
-    //       ))}
-    //     </DropdownMenu>
-    //   </Dropdown>
-    // );
   }
 }
 
