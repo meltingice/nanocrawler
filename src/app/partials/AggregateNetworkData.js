@@ -1,5 +1,8 @@
 import React, { Fragment } from "react";
-import _ from "lodash";
+import compact from "lodash/compact";
+import min from "lodash/min";
+import max from "lodash/max";
+import mean from "lodash/mean";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import config from "client-config.json";
@@ -33,12 +36,12 @@ export default class AggregateNetworkData extends React.Component {
   }
 
   blockStats() {
-    const currentBlocks = _.compact(
+    const currentBlocks = compact(
       this.representativePeers().map(peer =>
         parseInt(peer.data.currentBlock, 10)
       )
     );
-    const uncheckedBlocks = _.compact(
+    const uncheckedBlocks = compact(
       this.representativePeers().map(peer =>
         parseInt(peer.data.uncheckedBlocks, 10)
       )
@@ -46,16 +49,16 @@ export default class AggregateNetworkData extends React.Component {
 
     return {
       currentBlocks: {
-        mean: Math.round(_.mean(currentBlocks)),
+        mean: Math.round(mean(currentBlocks)),
         median: this._median(currentBlocks),
-        min: _.min(currentBlocks),
-        max: _.max(currentBlocks)
+        min: min(currentBlocks),
+        max: max(currentBlocks)
       },
       uncheckedBlocks: {
-        mean: Math.round(_.mean(uncheckedBlocks)),
+        mean: Math.round(mean(uncheckedBlocks)),
         median: this._median(uncheckedBlocks),
-        min: _.min(uncheckedBlocks),
-        max: _.max(uncheckedBlocks)
+        min: min(uncheckedBlocks),
+        max: max(uncheckedBlocks)
       }
     };
   }
