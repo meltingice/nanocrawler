@@ -1,7 +1,6 @@
 import React from "react";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import { Helmet } from "react-helmet";
-import _ from "lodash";
 
 import OpenBlock from "../../partials/explorer/block/OpenBlock";
 import SendBlock from "../../partials/explorer/block/SendBlock";

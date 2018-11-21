@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+import assign from "lodash/assign";
 import { addLocaleData } from "react-intl";
 import moment from "moment";
 import Cookies from "js-cookie";
@@ -58,7 +58,7 @@ class TranslationProvider extends React.Component {
   }
 
   render() {
-    const data = _.assign({}, this.state, {
+    const data = assign({}, this.state, {
       setLanguage: this.setLanguage.bind(this)
     });
 
