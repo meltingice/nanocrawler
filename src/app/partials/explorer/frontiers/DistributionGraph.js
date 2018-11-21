@@ -1,6 +1,6 @@
 import React from "react";
 import ReactResizeDetector from "react-resize-detector";
-import _ from "lodash";
+import toPairs from "lodash/toPairs";
 import { Bar } from "@nivo/bar";
 import config from "client-config.json";
 
@@ -80,7 +80,7 @@ const graphData = distribution => {
 
   let lowerLimit = 1;
 
-  return _.toPairs(distribution)
+  return toPairs(distribution)
     .filter(d => d[0] > 1)
     .sort((a, b) => parseFloat(a[0], 10) > parseFloat(b[0], 10))
     .map(d => {
