@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
+import pickBy from "lodash/pickBy";
 import fromPairs from "lodash/fromPairs";
 import toPairs from "lodash/toPairs";
 import keys from "lodash/keys";
@@ -12,6 +13,7 @@ import { withNetworkData } from "lib/NetworkContext";
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
 import PeerVersions from "../partials/PeerVersions";
+import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 
 import { apiClient } from "lib/Client";
 import Currency from "lib/Currency";
@@ -164,6 +166,14 @@ class NetworkStatus extends React.Component {
   totalBlocks() {
     const { blocksByType } = this.state;
     return sum(values(blocksByType).map(amt => parseInt(amt, 10)));
+  }
+
+  filteredOnlineReps() {
+    const { representativesOnline } = this.props.network;
+    return pickBy(
+      representativesOnline,
+      (weight, addr) => Currency.fromRaw(weight) > 100000
+    );
   }
 
   render() {
@@ -333,6 +343,14 @@ class NetworkStatus extends React.Component {
         </div>
 
         <AggregateNetworkData />
+
+        <div className="mt-5">
+          <h2 className="mb-0">Representatives Online</h2>
+          <p className="text-muted">
+            Only showing representatives with at least 100k weight
+          </p>
+          <DelegatorsTable delegators={this.filteredOnlineReps()} />
+        </div>
       </div>
     );
   }
