@@ -46,7 +46,7 @@ export default function(app, nano) {
     }
   });
 
-  app.get("/circulating_supply", async (req, res) => {
+  app.get("/supply", async (req, res) => {
     try {
       const data = await redisFetch("circulating_supply", 300, async () => {
         return await circulatingSupply();
