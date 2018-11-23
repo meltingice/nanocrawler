@@ -30,26 +30,29 @@ class ExchangeRates extends React.PureComponent {
     const { ticker } = this.props;
     const { value } = this.state;
 
-    return cryptoCurrencies.concat(fiatCurrencies).map(cur => (
-      <h1 key={cur}>
-        {cur === "NANO" ? (
-          <Fragment>
-            NANO{" "}
-            <FormattedNumber
-              value={parseFloat(ticker[cur].price, 10) * value}
-              maximumFractionDigits={precisionFor("NANO")}
-            />
-          </Fragment>
-        ) : (
-          <FormattedNumber
-            value={parseFloat(ticker[cur].price, 10) * value}
-            style="currency"
-            currency={cur}
-            maximumFractionDigits={precisionFor(cur)}
-          />
-        )}
-      </h1>
-    ));
+    return cryptoCurrencies.concat(fiatCurrencies).map(
+      cur =>
+        ticker[cur] && (
+          <h1 key={cur}>
+            {cur === "NANO" ? (
+              <Fragment>
+                NANO{" "}
+                <FormattedNumber
+                  value={parseFloat(ticker[cur].price, 10) * value}
+                  maximumFractionDigits={precisionFor("NANO")}
+                />
+              </Fragment>
+            ) : (
+              <FormattedNumber
+                value={parseFloat(ticker[cur].price, 10) * value}
+                style="currency"
+                currency={cur}
+                maximumFractionDigits={precisionFor(cur)}
+              />
+            )}
+          </h1>
+        )
+    );
   }
 
   getOtherCurrencies() {
