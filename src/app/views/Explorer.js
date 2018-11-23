@@ -8,6 +8,7 @@ import ValidatedSearch from "app/partials/ValidatedSearch";
 import KnownAccounts from "app/partials/explorer/KnownAccounts";
 import ExplorerTopAccounts from "app/partials/explorer/ExplorerTopAccounts";
 import RecentBlockStream from "app/partials/explorer/RecentBlockStream";
+import SupplyStats from "app/partials/explorer/SupplyStats";
 import AccountLink from "app/partials/AccountLink";
 
 class Explorer extends React.PureComponent {
@@ -75,7 +76,9 @@ class Explorer extends React.PureComponent {
             </div>
           </form>
 
-          <h3 className="mb-0">
+          <SupplyStats />
+
+          <h3 className="mt-5 mb-0">
             <TranslatedMessage id="explorer.known_accounts" />
           </h3>
           <p className="text-muted">
