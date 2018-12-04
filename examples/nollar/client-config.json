@@ -1,10 +1,10 @@
 {
-  "server": "http://localhost:3001",
-  "websocketServer": "ws.nollar.nanocrawler.cc",
+  "server": "https://api.scan.nollar.org",
+  "websocketServer": "ws.scan.nollar.org",
   "donationAddress":
     "usd_1scanyhpy9xashjf58ro6pupu779pytgwzmuozipgnidig4jh9fbsujbiing",
   "currency": {
-    "name": "NOLLAR",
+    "name": "Nollar",
     "shortName": "USD",
     "precision": 30,
     "maxSupply": 340282366.92,

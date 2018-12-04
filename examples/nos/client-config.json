@@ -1,13 +1,13 @@
 {
-  "server": "http://localhost:3001",
-  "websocketServer": "ws.explore.nos.cash",
+  "server": "https://api.nos.nanocrawler.cc",
+  "websocketServer": "ws.nos.nanocrawler.cc",
   "donationAddress":
-    "xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh",
+    "nos_1obactwuwtgbatjsxcq91wiaokh63agkhptk3chgrsiw3b7kr615joffzsit",
   "currency": {
     "name": "NOS",
     "shortName": "NOS",
-    "precision": 30,
-    "maxSupply": 340282366.92,
+    "precision": 10,
+    "maxSupply": 1000000000,
     "prefixes": ["nos"],
     "qrPrefix": "nos",
     "supportsMyNanoNinja": false

@@ -1,7 +1,7 @@
 {
-  "nodeName": "explore.nos.cash",
+  "nodeName": "scan.nos.cash",
   "account": "usd_1scanyhpy9xashjf58ro6pupu779pytgwzmuozipgnidig4jh9fbsujbiing",
-  "clientUrl": "https://explore.nos.cash",
+  "clientUrl": "https://scan.nos.cash",
   "raiblocksDir": "/home/ryanlefevre/NOSData",
   "nodeHost": "http://[::1]:7031",
   "redis": "redis://127.0.0.1:6379",
