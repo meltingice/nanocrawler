@@ -1,0 +1,38 @@
+{
+  "server": "https://api.nos.nanocrawler.cc",
+  "websocketServer": "ws.nos.nanocrawler.cc",
+  "donationAddress":
+    "nos_1obactwuwtgbatjsxcq91wiaokh63agkhptk3chgrsiw3b7kr615joffzsit",
+  "currency": {
+    "name": "NOS",
+    "shortName": "NOS",
+    "precision": 10,
+    "maxSupply": 1000000000,
+    "prefixes": ["nos"],
+    "qrPrefix": "nos",
+    "supportsMyNanoNinja": false
+  },
+  "features": {
+    "nodeStatus": true,
+    "supportedLanguages": {
+      "en": "English",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "es": "Español",
+      "fr": "Français",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "nl": "Nederlands",
+      "pt-BR": "Português Brasileiro",
+      "el": "Ελληνικά",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "zh-CN": "汉语",
+      "zh-TW": "漢語"
+    }
+  },
+  "serviceMonitors": []
+}

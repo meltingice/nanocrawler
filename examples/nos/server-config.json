@@ -1,0 +1,17 @@
+{
+  "nodeName": "scan.nos.cash",
+  "account": "usd_1scanyhpy9xashjf58ro6pupu779pytgwzmuozipgnidig4jh9fbsujbiing",
+  "clientUrl": "https://scan.nos.cash",
+  "raiblocksDir": "/home/ryanlefevre/NOSData",
+  "nodeHost": "http://[::1]:7031",
+  "redis": "redis://127.0.0.1:6379",
+  "redisNamespace": "nos",
+  "serverPort": 3001,
+  "knownMonitors": [],
+  "blacklistedPeers": [],
+  "officialRepresentatives": [
+    "nos_11z6biqiug5k31448uy38f48q9qgm714153k7spyfpb9qnwrobd6udirkbwe",
+    "nos_3xa89jscojiw3ukxowiduantpi3tscqhwg9tgbn9etua96854zt65rbhc1i9",
+    "nos_1oddukrxwpaqmxjqmk3owbp4gh7ichsio5gaiostgm1skztuwsq51osqqfmy"
+  ]
+}
