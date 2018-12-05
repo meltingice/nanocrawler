@@ -20,7 +20,7 @@ class TickerProvider extends React.Component {
     const ticker = await this.fetchTicker();
     this.setState({ ...ticker });
 
-    setTimeout(this.updateTicker.bind(this), 310000);
+    setTimeout(this.updateTicker.bind(this), 900000);
   }
 
   async fetchTicker() {
