@@ -10,6 +10,11 @@ class Client {
     return (await resp.json()).account;
   }
 
+  async ticker() {
+    const resp = await this.fetch("v2/ticker");
+    return await resp.json();
+  }
+
   async account(account) {
     const resp = await this.fetch(`v2/accounts/${account}`);
     return (await resp.json()).account;
