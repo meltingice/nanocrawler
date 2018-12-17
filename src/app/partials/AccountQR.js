@@ -29,17 +29,13 @@ export default class AccountQR extends React.PureComponent {
     return `${config.currency.qrPrefix}:${account}`;
   }
 
-  get href() {
-    return `${config.currency.qrPrefix}://${this.encodedData}`;
-  }
-
   render() {
     const { dataUrl } = this.state;
     const { account, ...otherProps } = this.props;
     if (!dataUrl) return null;
 
     return (
-      <a className="d-block" href={this.href}>
+      <a className="d-block" href={this.encodedData}>
         <img src={dataUrl} {...otherProps} />
       </a>
     );
