@@ -19,11 +19,18 @@ export default class AccountQR extends React.PureComponent {
 
   async generateDataUrl() {
     const { account } = this.props;
-    const dataUrl = await QRCode.toDataURL(
-      `${config.currency.qrPrefix}:${account}`
-    );
+    const dataUrl = await QRCode.toDataURL(this.encodedData);
 
     this.setState({ dataUrl });
+  }
+
+  get encodedData() {
+    const { account } = this.props;
+    return `${config.currency.qrPrefix}:${account}`;
+  }
+
+  get href() {
+    return `${config.currency.qrPrefix}://${this.encodedData}`;
   }
 
   render() {
@@ -31,6 +38,10 @@ export default class AccountQR extends React.PureComponent {
     const { account, ...otherProps } = this.props;
     if (!dataUrl) return null;
 
-    return <img src={dataUrl} {...otherProps} />;
+    return (
+      <a className="d-block" href={this.href}>
+        <img src={dataUrl} {...otherProps} />
+      </a>
+    );
   }
 }
