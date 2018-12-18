@@ -1,0 +1,44 @@
+{
+  "server": "https://api.scan.nollar.org",
+  "websocketServer": "ws.scan.nollar.org",
+  "donationAddress":
+    "usd_1scanyhpy9xashjf58ro6pupu779pytgwzmuozipgnidig4jh9fbsujbiing",
+  "currency": {
+    "name": "Nollar",
+    "shortName": "USD",
+    "precision": 30,
+    "maxSupply": 340282366.92,
+    "prefixes": ["usd"],
+    "qrPrefix": "usd",
+    "supportsMyNanoNinja": false,
+    "genesisAccount":
+      "usd_3gg3b8pxz93334i71y8rwnq355amdsuj881wys517jy4egkbuzm6ajbwhd13",
+    "genesisHash":
+      "5E32EE38E419BC688E370D1142ED35E915FA446CE1C53033C325EA05F6AABE69",
+    "emissionAccount":
+      "usd_38ny4athhjstj49w8eg1ob1h5wuea8eubwyresrrx7aibpj11z546bajubrp"
+  },
+  "features": {
+    "nodeStatus": true,
+    "supportedLanguages": {
+      "en": "English",
+      "cs": "Čeština",
+      "da": "Dansk",
+      "de": "Deutsch",
+      "es": "Español",
+      "fr": "Français",
+      "hr": "Hrvatski",
+      "hu": "Magyar",
+      "id": "Bahasa Indonesia",
+      "nl": "Nederlands",
+      "pt-BR": "Português Brasileiro",
+      "el": "Ελληνικά",
+      "ro": "Română",
+      "ru": "Русский",
+      "sv": "Svenska",
+      "zh-CN": "汉语",
+      "zh-TW": "漢語"
+    }
+  },
+  "serviceMonitors": []
+}

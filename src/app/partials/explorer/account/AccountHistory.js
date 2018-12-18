@@ -1,7 +1,6 @@
 import React, { Fragment, memo } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import _ from "lodash";
 import TransactionHistory from "./TransactionHistory";
 import UnopenedAccount from "./UnopenedAccount";
 
@@ -18,10 +17,6 @@ export default function AccountHistory({
   loadMore,
   hasMore
 }) {
-  if (history.length === 0 && !pendingTransactions) {
-    return null;
-  }
-
   return (
     <Fragment>
       <PendingTransactions pendingTransactions={pendingTransactions} />

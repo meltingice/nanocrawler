@@ -1,7 +1,8 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
 import PropTypes from "prop-types";
-import _ from "lodash";
+import range from "lodash/range";
+import last from "lodash/last";
 
 export default class Pagination extends React.PureComponent {
   static propTypes = {
@@ -24,7 +25,7 @@ export default class Pagination extends React.PureComponent {
     const firstPage = Math.max(this.props.page - 2, 1);
     const lastPage = Math.min(firstPage + 5, this.totalPages() + 1);
 
-    return _.range(firstPage, lastPage);
+    return range(firstPage, lastPage);
   }
 
   getFirstLink() {
@@ -39,7 +40,7 @@ export default class Pagination extends React.PureComponent {
   }
 
   getLastLink() {
-    if (_.last(this.visiblePageRange()) === this.totalPages()) return;
+    if (last(this.visiblePageRange()) === this.totalPages()) return;
     return (
       <li key={this.totalPages()} className="page-item">
         <a

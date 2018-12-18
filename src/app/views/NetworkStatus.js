@@ -1,6 +1,10 @@
 import React, { Fragment } from "react";
 import { Helmet } from "react-helmet";
-import _ from "lodash";
+import fromPairs from "lodash/fromPairs";
+import toPairs from "lodash/toPairs";
+import keys from "lodash/keys";
+import sum from "lodash/sum";
+import values from "lodash/values";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import { withNetworkData } from "lib/NetworkContext";
@@ -52,8 +56,8 @@ class NetworkStatus extends React.Component {
 
   rebroadcastableReps() {
     const { representativesOnline } = this.props.network;
-    return _.fromPairs(
-      _.toPairs(representativesOnline).filter(rep => {
+    return fromPairs(
+      toPairs(representativesOnline).filter(rep => {
         return Currency.fromRaw(rep[1]) >= this.rebroadcastThreshold();
       })
     );
@@ -61,15 +65,13 @@ class NetworkStatus extends React.Component {
 
   onlineWeight() {
     const { representativesOnline } = this.props.network;
-    return _.sum(
-      _.values(representativesOnline).map(amt => Currency.fromRaw(amt))
-    );
+    return sum(values(representativesOnline).map(amt => Currency.fromRaw(amt)));
   }
 
   onlineRebroadcastWeight() {
     const { representativesOnline } = this.props.network;
-    return _.sum(
-      _.values(representativesOnline)
+    return sum(
+      values(representativesOnline)
         .map(amt => Currency.fromRaw(amt))
         .filter(amt => amt >= this.rebroadcastThreshold())
     );
@@ -99,8 +101,8 @@ class NetworkStatus extends React.Component {
 
   officialWeight() {
     const { officialRepresentatives } = this.state;
-    return _.sum(
-      _.values(officialRepresentatives).map(amt => Currency.fromRaw(amt))
+    return sum(
+      values(officialRepresentatives).map(amt => Currency.fromRaw(amt))
     );
   }
 
@@ -163,7 +165,7 @@ class NetworkStatus extends React.Component {
 
   totalBlocks() {
     const { blocksByType } = this.state;
-    return _.sum(_.values(blocksByType).map(amt => parseInt(amt, 10)));
+    return sum(values(blocksByType).map(amt => parseInt(amt, 10)));
   }
 
   filteredRepresentatives() {
@@ -201,7 +203,7 @@ class NetworkStatus extends React.Component {
                   count: (
                     <span className="text-body">
                       <FormattedNumber
-                        value={_.keys(representativesOnline).length}
+                        value={keys(representativesOnline).length}
                       />
                     </span>
                   )
@@ -273,7 +275,7 @@ class NetworkStatus extends React.Component {
                   count: (
                     <span className="text-body">
                       <FormattedNumber
-                        value={_.keys(this.rebroadcastableReps()).length}
+                        value={keys(this.rebroadcastableReps()).length}
                         maximumFractionDigits={0}
                       />
                     </span>
