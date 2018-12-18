@@ -170,8 +170,8 @@ class NetworkStatus extends React.Component {
 
   filteredRepresentatives() {
     const { representativesOnline } = this.props.network;
-    return _.fromPairs(
-      _.toPairs(representativesOnline).filter(
+    return fromPairs(
+      toPairs(representativesOnline).filter(
         rep => parseInt(rep[1], 10) >= this.rebroadcastThreshold()
       )
     );
