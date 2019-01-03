@@ -34,12 +34,8 @@ function App({ locale }) {
               </p>
             </div>
           </div>
-          <div className="col-auto text-md-right">
+          <div className="col-auto">
             <div className="py-2 px-4">
-              <a href="https://www.nanospeed.live/" target="_blank">
-                ⏰ Speed Test Nano
-              </a>
-              <br />
               <a href="https://twitter.com/meltingice" target="_blank">
                 Twitter
               </a>{" "}
