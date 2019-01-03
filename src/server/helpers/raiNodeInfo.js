@@ -20,8 +20,8 @@ export default async function getStats() {
 
 async function discoverPid() {
   try {
-    RAI_PID = await pExec("pgrep beta_rai_node");
-    console.log("beta_rai_node:", RAI_PID);
+    RAI_PID = await pExec("pgrep beta_nano_node");
+    console.log("beta_nano_node:", RAI_PID);
   } catch (e) {
     console.log(e.message);
   }
