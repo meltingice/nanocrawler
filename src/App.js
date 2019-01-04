@@ -36,7 +36,11 @@ function App({ locale }) {
           </div>
           <div className="col-auto text-md-right">
             <div className="py-2 px-4">
-              <a href="https://www.nanospeed.live/" target="_blank">
+              <a
+                href="https://www.nanospeed.live/"
+                target="_blank"
+                className="btn btn-sm btn-nano-primary mb-1"
+              >
                 ⏰ Speed Test Nano
               </a>
               <br />
