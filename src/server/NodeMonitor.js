@@ -33,9 +33,13 @@ export default class NodeMonitor {
       })
         .then(resp => {
           const data = JSON.parse(resp);
-          if (data.nanoNodeAccount && this.currencyOk(data)) {
-            console.log("OK", `(${this.source})`, this.apiUrl);
-            resolve({ url: this.apiUrl, data: this.formatData(data) });
+          if (data.nanoNodeAccount) {
+            if (this.currencyOk(data)) {
+              console.log("OK", `(${this.source})`, this.apiUrl);
+              resolve({ url: this.apiUrl, data: this.formatData(data) });
+            } else {
+              reject("Currency does not match");
+            }
           } else {
             reject("Missing nanoNodeAccount data");
           }
