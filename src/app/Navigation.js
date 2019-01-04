@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import "./Navigation.css";
-import Logo from "./images/Horiz Logo.svg";
+import HorizLogo from "./images/Horiz Logo.svg";
+import VertLogo from "./images/Vert Logo.svg";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";
 import config from "client-config.json";
@@ -15,14 +16,15 @@ const Navigation = () => {
   };
 
   return (
-    <div id="Navigation" className="row align-items-center pl-3 py-2">
+    <div id="Navigation" className="row align-items-center pl-3">
       <div className="col-auto mt-3 mb-0 mb-md-3 px-0 px-md-2">
         <div className="LogoWrap">
-          <ReactSVG path={Logo} className="Logo" />
+          <ReactSVG path={VertLogo} className="VertLogo d-none d-md-block" />
+          <ReactSVG path={HorizLogo} className="HorizLogo d-block d-md-none" />
         </div>
       </div>
 
-      <div className="col-md px-0 px-md-2 ml-md-4">
+      <div className="col-md px-0 px-md-2 ml-md-5">
         <ul className="NavigationList nav">
           <li className="nav-item">
             <NavLink

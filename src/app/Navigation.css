@@ -12,8 +12,12 @@
   width: 40px;
 }
 
-#Navigation .LogoWrap svg {
-  width: 194px;
+#Navigation .LogoWrap .VertLogo {
+  width: 130px;
+}
+
+#Navigation .LogoWrap .HorizLogo {
+  width: 220px;
 }
 
 .NavigationList {
