@@ -38,10 +38,10 @@ export default class NodeMonitor {
               console.log("OK", `(${this.source})`, this.apiUrl);
               resolve({ url: this.apiUrl, data: this.formatData(data) });
             } else {
-              reject("Currency does not match");
+              throw new Error("Currency does not match");
             }
           } else {
-            reject("Missing nanoNodeAccount data");
+            throw new Error("Missing nanoNodeAccount data");
           }
         })
         .catch(reject);
