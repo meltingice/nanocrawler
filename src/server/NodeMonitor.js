@@ -1,5 +1,6 @@
 import { promisify } from "es6-promisify";
 import curl from "curlrequest";
+import config from "../../server-config.json";
 
 const request = promisify(curl.request.bind(curl));
 
@@ -32,7 +33,7 @@ export default class NodeMonitor {
       })
         .then(resp => {
           const data = JSON.parse(resp);
-          if (data.nanoNodeAccount) {
+          if (data.nanoNodeAccount && this.currencyOk(data)) {
             console.log("OK", `(${this.source})`, this.apiUrl);
             resolve({ url: this.apiUrl, data: this.formatData(data) });
           } else {
@@ -41,6 +42,10 @@ export default class NodeMonitor {
         })
         .catch(reject);
     });
+  }
+
+  currencyOk(data) {
+    return !data.currency || data.currency === config.monitorCurrencyName;
   }
 
   formatData(data) {
