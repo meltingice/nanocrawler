@@ -7,6 +7,7 @@ import "primer-tooltips/build/build.css";
 import config from "client-config.json";
 import { withTranslations } from "./lib/TranslationContext";
 import Navigation from "./app/Navigation";
+import DonationAlert from "./app/DonationAlert";
 import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
@@ -20,6 +21,8 @@ function App({ locale }) {
             <Navigation />
           </div>
         </div>
+
+        <DonationAlert />
 
         <Content />
 
