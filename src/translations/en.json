@@ -81,6 +81,7 @@
     "account.title.representative": "Representative Account",
     "account.title.unopened": "Unopened Account",
     "account.title.normal": "Account",
+    "account.title.donation": "Donation Account",
     "account.rep.online": "Representative online",
     "account.rep.offline": "Representative offline",
     "account.rep_offline_warning":
