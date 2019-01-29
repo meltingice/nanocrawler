@@ -32,7 +32,7 @@ export default class DonationAlert extends React.Component {
             role="alert"
           >
             NanoCrawler is a free-to-use service that has a strict no-ads
-            policy, but occurs monthly server costs to run. If you find it
+            policy, but incurs monthly server costs to run. If you find it
             useful, please{" "}
             <AccountLink
               account={config.donationAddress}
