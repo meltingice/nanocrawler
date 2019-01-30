@@ -45,6 +45,9 @@ export default class NanoNodeNinja {
   }
 
   async getAlias() {
+    if (config.accountAliases[this.account])
+      return config.accountAliases[this.account];
+
     if (!config.currency.supportsMyNanoNinja) return;
     if (!this.account) return;
 

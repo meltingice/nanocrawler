@@ -1,8 +1,7 @@
 {
   "server": "https://api.nos.nanocrawler.cc",
   "websocketServer": "ws.nos.nanocrawler.cc",
-  "donationAddress":
-    "nos_1obactwuwtgbatjsxcq91wiaokh63agkhptk3chgrsiw3b7kr615joffzsit",
+  "donationAddress": "nos_1obactwuwtgbatjsxcq91wiaokh63agkhptk3chgrsiw3b7kr615joffzsit",
   "currency": {
     "name": "NOS",
     "shortName": "NOS",
@@ -34,5 +33,9 @@
       "zh-TW": "漢語"
     }
   },
-  "serviceMonitors": []
+  "serviceMonitors": [],
+  "accountAliases": {
+    "nos_1c64p4671ptprj4q38pn8ykz845snhn1hkjuhz9begeren9f6q9kwwy8tf97": "NOS Initiative",
+    "nos_3bxan6wp7ymr3miwawg5qok9a3wwi6p8nte6dhabtsh4ma9nga95xkmsw4g5": "NOS Project Reserve"
+  }
 }
