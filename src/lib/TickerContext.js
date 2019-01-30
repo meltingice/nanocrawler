@@ -8,10 +8,8 @@ const TickerContext = React.createContext({
 
 class TickerProvider extends React.Component {
   state = {
-    price_usd: 0.012,
-    price_btc: 0,
-    percent_change_1h: 0,
-    percent_change_24h: 0
+    priceUSD: 0.012,
+    priceBTC: 0
   };
 
   componentDidMount() {
@@ -21,8 +19,8 @@ class TickerProvider extends React.Component {
   async updateTicker() {
     const ticker = await this.fetchTicker();
     const { price_usd } = ticker;
-    const price_btc = this.state.price_usd / price_usd;
-    this.setState({ price_btc });
+    const priceBTC = this.state.priceUSD / price_usd;
+    this.setState({ priceBTC });
 
     setTimeout(this.updateTicker.bind(this), 900000);
   }
