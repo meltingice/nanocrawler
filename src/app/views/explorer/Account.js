@@ -52,6 +52,10 @@ class Account extends React.Component {
       return formatMessage(withDefault({ id: "account.title.donation" }));
     }
 
+    if (config.accountAliases[account]) {
+      return config.accountAliases[account];
+    }
+
     const mnano = Currency.fromRaw(weight);
 
     if (mnano >= config.currency.maxSupply * 0.001)
