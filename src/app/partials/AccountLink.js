@@ -1,31 +1,22 @@
 import React, { Fragment } from "react";
-import VisibilitySensor from "react-visibility-sensor";
 import { Link } from "react-router-dom";
 import NanoNodeNinja from "lib/NanoNodeNinja";
 
-export default class AccountLink extends React.PureComponent {
-  state = { ninjaData: null, loading: false };
+export default class AccountLink extends React.Component {
+  state = { alias: null };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.account !== this.props.account && this.props.ninja) {
-      this.setState({ ninjaData: null, loading: false });
-    }
+  componentDidMount() {
+    if (this.props.ninja) this.fetchAlias();
   }
 
-  async fetchNinjaData() {
-    this.setState({ loading: true }, async () => {
-      const ninja = new NanoNodeNinja(this.props.account);
-      await ninja.fetch();
-      this.setState({
-        loading: false,
-        ninjaData: ninja.hasAccount() ? ninja.data : false
-      });
-    });
+  async fetchAlias() {
+    const ninja = new NanoNodeNinja(this.props.account);
+    this.setState({ alias: await ninja.getAlias() });
   }
 
   accountName() {
     const { name, account, short, ninja } = this.props;
-    const { ninjaData } = this.state;
+    const { alias } = this.state;
 
     let accountName = name || account;
     if (!name && short) {
@@ -36,26 +27,15 @@ export default class AccountLink extends React.PureComponent {
       accountName = <span className="text-monospace">{accountName}</span>;
     }
 
-    if (ninja && ninjaData && ninjaData.alias) {
+    if (alias) {
       accountName = (
         <Fragment>
-          <b>{ninjaData.alias}</b> - {accountName}
+          <b>{alias}</b> - {accountName}
         </Fragment>
       );
     }
 
     return accountName;
-  }
-
-  visibilityChanged(visible) {
-    const { ninja } = this.props;
-    if (!ninja) return;
-
-    const { loading, ninjaData } = this.state;
-
-    if (visible && !loading && ninjaData === null) {
-      this.fetchNinjaData();
-    }
   }
 
   render() {
@@ -70,15 +50,13 @@ export default class AccountLink extends React.PureComponent {
     if (!account) return null;
 
     return (
-      <VisibilitySensor onChange={this.visibilityChanged.bind(this)}>
-        <Link
-          className="break-word"
-          to={`/account/${account}/${delegators ? "delegators" : "history"}`}
-          {...otherProps}
-        >
-          {this.accountName()}
-        </Link>
-      </VisibilitySensor>
+      <Link
+        className="break-word"
+        to={`/account/${account}/${delegators ? "delegators" : "history"}`}
+        {...otherProps}
+      >
+        {this.accountName()}
+      </Link>
     );
   }
 }

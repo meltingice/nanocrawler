@@ -6,19 +6,18 @@
 
 #Navigation .LogoWrap {
   text-align: center;
-  max-width: 200px;
 }
 
 #Navigation .LogoWrap img {
   width: 40px;
 }
 
-/*#Navigation .LogoWrap svg {
-  width: 75%;
-}*/
+#Navigation .LogoWrap .VertLogo {
+  width: 130px;
+}
 
-#Navigation .LogoWrap svg .st1 {
-  fill: #fff;
+#Navigation .LogoWrap .HorizLogo {
+  width: 220px;
 }
 
 .NavigationList {
