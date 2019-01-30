@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import "./Navigation.css";
+
 import Logo from "./images/white_logo_transparent.png";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";

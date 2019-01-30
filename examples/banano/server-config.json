@@ -9,6 +9,7 @@
   "openExchangeRatesAppId": "",
   "coinMarketCapApiKey": "",
   "serverPort": 3001,
+  "monitorCurrencyName": "banano",
   "knownMonitors": [],
   "blacklistedPeers": [],
   "officialRepresentatives": [
