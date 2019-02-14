@@ -27,45 +27,6 @@ export default function(app, nano) {
     }
   });
 
-  app.get("/blocks/active", async (req, res, next) => {
-    try {
-      const data = await redisFetch("confirmation_active", 5, async () => {
-        const hashes = (await nano.rpc("confirmation_active")).confirmations;
-        if (hashes === "") return [];
-
-        let hydratedData = [];
-        for (let i = 0; i < hashes.length; i++) {
-          const info = await nano.rpc("confirmation_info", {
-            root: hashes[i],
-            contents: false
-          });
-
-          if (!info.error) hydratedData.push(info);
-        }
-
-        return hydratedData;
-      });
-
-      res.json({ blocks: data });
-    } catch (e) {
-      next(e);
-    }
-  });
-
-  app.get("/block/:hash/confirmation", async (req, res, next) => {
-    try {
-      const data = nano.rpc("confirmation_info", {
-        root: req.params.hash,
-        contents: false,
-        representatives: true
-      });
-
-      res.json(data);
-    } catch (e) {
-      next(e);
-    }
-  });
-
   app.get("/block_count", async (req, res, next) => {
     try {
       const blockCount = await redisFetch("blockCount", 10, async () => {
