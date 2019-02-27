@@ -88,9 +88,9 @@ export default class ValidatedSearch extends React.Component {
       return (
         <input
           type="text"
-          className={`ValidatedSearch form-control form-control-lg ${
-            this.validClass
-          }`}
+          className={`ValidatedSearch form-control ${
+            this.props.size === "lg" ? "form-control-lg" : ""
+          } ${this.validClass}`}
           value={this.state.search}
           onChange={e => this.onChange(e.target.value)}
         />
