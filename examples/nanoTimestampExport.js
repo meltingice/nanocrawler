@@ -32,17 +32,22 @@ async function fetchNext(cursor) {
 async function getTimestamps(keys) {
   return new Promise((resolve, reject) => {
     let returnValue = [];
-    redis.multi(keys.map(key => ["get", key])).exec((err, replies) => {
-      if (err) return resolve([]);
+    redis
+      .multi(
+        keys
+          .filter(key => /^block_timestamp\/([A-F0-9]{64})/)
+          .map(key => ["get", key])
+      )
+      .exec((err, replies) => {
+        if (err) return resolve([]);
 
-      keys.forEach((key, index) => {
-        const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
-        if (hash === null) return;
-        returnValue.push([hash, replies[index]].join(","));
+        keys.forEach((key, index) => {
+          const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
+          returnValue.push([hash, replies[index]].join(","));
+        });
+
+        resolve(returnValue.join("\n"));
       });
-
-      resolve(returnValue.join("\n"));
-    });
   });
 }
 
