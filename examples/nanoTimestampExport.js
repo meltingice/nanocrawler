@@ -35,13 +35,11 @@ async function getTimestamps(keys) {
     redis.multi(keys.map(key => ["get", key])).exec((err, replies) => {
       if (err) return resolve([]);
 
-      keys.forEach((key, index) =>
-        returnValue.push(
-          [key.match(/^block_timestamp\/([A-F0-9]+)/)[1], replies[index]].join(
-            ","
-          )
-        )
-      );
+      keys.forEach((key, index) => {
+        const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
+        if (hash === null) return;
+        returnValue.push([hash, replies[index]].join(","));
+      });
 
       resolve(returnValue.join("\n"));
     });
