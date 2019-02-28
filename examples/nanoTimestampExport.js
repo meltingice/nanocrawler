@@ -36,9 +36,9 @@ async function getTimestamps(keys) {
       if (err) return resolve([]);
 
       keys.forEach((key, index) => {
-        const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
-        if (hash === null) return;
-        returnValue.push([hash, replies[index]].join(","));
+        const match = key.match(/^block_timestamp\/([A-F0-9]{64})/);
+        if (match === null) return;
+        returnValue.push([match[1], replies[index]].join(","));
       });
 
       resolve(returnValue.join("\n"));
