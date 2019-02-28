@@ -5,6 +5,7 @@ const scan = util.promisify(redis.scan).bind(redis);
 const get = util.promisify(redis.get).bind(redis);
 
 const stream = fs.createWriteStream("timestamps.csv");
+const HASH_REGEX = /^block_timestamp\/([A-F0-9]{64})$/;
 
 async function fetchNext(cursor) {
   const resp = await scan(
@@ -30,24 +31,20 @@ async function fetchNext(cursor) {
 }
 
 async function getTimestamps(keys) {
+  const filteredKeys = keys.filter(key => HASH_REGEX.test(key));
+
   return new Promise((resolve, reject) => {
     let returnValue = [];
-    redis
-      .multi(
-        keys
-          .filter(key => /^block_timestamp\/([A-F0-9]{64})/)
-          .map(key => ["get", key])
-      )
-      .exec((err, replies) => {
-        if (err) return resolve([]);
+    redis.multi(filteredKeys.map(key => ["get", key])).exec((err, replies) => {
+      if (err) return resolve([]);
 
-        keys.forEach((key, index) => {
-          const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
-          returnValue.push([hash, replies[index]].join(","));
-        });
-
-        resolve(returnValue.join("\n"));
+      filteredKeys.forEach((key, index) => {
+        const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
+        returnValue.push([hash, replies[index]].join(","));
       });
+
+      resolve(returnValue.join("\n"));
+    });
   });
 }
 
