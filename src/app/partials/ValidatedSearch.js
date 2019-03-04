@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import { validateAddress, validateBlockHash } from "lib/util";
 import { apiClient } from "lib/Client";
+import config from "../../client-config.json";
 
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import "react-bootstrap-typeahead/css/Typeahead-bs4.css";
@@ -59,22 +60,41 @@ export default class ValidatedSearch extends React.Component {
     }
   }
 
+  get validClass() {
+    const { valid } = this.state;
+    if (valid === null) return "";
+    return valid ? "is-valid" : "is-invalid";
+  }
+
   render() {
-    return (
-      <AsyncTypeahead
-        className="ValidatedSearch"
-        bsSize={this.props.size}
-        onKeyDown={this.onKeyDown.bind(this)}
-        placeholder={this.props.placeholder}
-        promptText="Type to search for accounts"
-        searchText="Searching for accounts..."
-        isLoading={this.state.loading}
-        isValid={this.state.valid}
-        options={this.state.searchOptions}
-        onSearch={this.onSearch.bind(this)}
-        onInputChange={this.onChange.bind(this)}
-        onChange={selections => this.onChange(selections[0])}
-      />
-    );
+    if (config.features.searchSuggestions) {
+      return (
+        <AsyncTypeahead
+          className="ValidatedSearch"
+          bsSize={this.props.size}
+          onKeyDown={this.onKeyDown.bind(this)}
+          placeholder={this.props.placeholder}
+          promptText="Type to search for accounts"
+          searchText="Searching for accounts..."
+          isLoading={this.state.loading}
+          isValid={this.state.valid}
+          options={this.state.searchOptions}
+          onSearch={this.onSearch.bind(this)}
+          onInputChange={this.onChange.bind(this)}
+          onChange={selections => this.onChange(selections[0])}
+        />
+      );
+    } else {
+      return (
+        <input
+          type="text"
+          className={`ValidatedSearch form-control ${
+            this.props.size === "lg" ? "form-control-lg" : ""
+          } ${this.validClass}`}
+          value={this.state.search}
+          onChange={e => this.onChange(e.target.value)}
+        />
+      );
+    }
   }
 }

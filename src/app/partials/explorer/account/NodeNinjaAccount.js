@@ -70,7 +70,8 @@ export default class NodeNinjaAccount extends React.Component {
                     <FormattedNumber
                       value={data.uptime}
                       maximumFractionDigits={2}
-                    />%
+                    />
+                    %
                   </small>
                 )
               }}
@@ -125,7 +126,8 @@ export default class NodeNinjaAccount extends React.Component {
                   <FormattedNumber
                     value={data.monitor.sync}
                     maximumFractionDigits={2}
-                  />%
+                  />
+                  %
                 </small>
               )
             }}

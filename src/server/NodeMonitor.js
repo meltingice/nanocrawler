@@ -1,5 +1,6 @@
 import { promisify } from "es6-promisify";
 import curl from "curlrequest";
+import config from "../../server-config.json";
 
 const request = promisify(curl.request.bind(curl));
 
@@ -33,18 +34,22 @@ export default class NodeMonitor {
         .then(resp => {
           const data = JSON.parse(resp);
           if (data.nanoNodeAccount) {
-            if (/^ban_/.test(data.nanoNodeAccount)) {
+            if (this.currencyOk(data)) {
               console.log("OK", `(${this.source})`, this.apiUrl);
               resolve({ url: this.apiUrl, data: this.formatData(data) });
             } else {
-              reject(`${data.nanoNodeAccount} is not a Banano address`);
+              throw new Error("Currency does not match");
             }
           } else {
-            reject("Missing nanoNodeAccount data");
+            throw new Error("Missing nanoNodeAccount data");
           }
         })
         .catch(reject);
     });
+  }
+
+  currencyOk(data) {
+    return !data.currency || data.currency === config.monitorCurrencyName;
   }
 
   formatData(data) {
