@@ -34,6 +34,7 @@ export default function(app, nano) {
           ) / 100.0;
 
         return {
+          currency: config.monitorCurrencyName,
           nanoNodeName: config.nodeName,
           nanoNodeAccount: config.account,
           version: (await nano.rpc("version")).node_vendor,
