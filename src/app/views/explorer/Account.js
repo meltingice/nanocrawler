@@ -47,7 +47,11 @@ class Account extends React.Component {
 
   accountTitle() {
     const { formatMessage } = this.props.intl;
-    const { weight, unopened } = this.props;
+    const { account, weight, unopened } = this.props;
+
+    if (account === config.donationAddress) {
+      return formatMessage(withDefault({ id: "account.title.donation" }));
+    }
 
     const mnano = Currency.fromRaw(weight);
 
@@ -113,10 +117,13 @@ class Account extends React.Component {
           id="account.rep_offline_warning"
           values={{
             uptime: (
-              <FormattedNumber
-                value={this.state.uptime}
-                maximumFractionDigits={2}
-              />
+              <Fragment>
+                <FormattedNumber
+                  value={this.state.uptime}
+                  maximumFractionDigits={2}
+                />
+                %
+              </Fragment>
             ),
             link: (
               <a

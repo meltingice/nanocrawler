@@ -112,6 +112,11 @@ class Client {
     return await resp.json();
   }
 
+  async confirmationHistory(count = 2048) {
+    const resp = await this.fetch(`v2/confirmation/history?count=${count}`);
+    return await resp.json();
+  }
+
   async search(query) {
     if (query.trim().length < 2) return [];
     const resp = await this.fetch(`v2/search?q=${query}`);
