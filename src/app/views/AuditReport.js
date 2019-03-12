@@ -72,7 +72,7 @@ export default class AuditReport extends React.Component {
                 checked={this.state.agreed}
                 onChange={e => this.setState({ agreed: e.target.checked })}
               />{" "}
-              <label className="form-check-label" for="agree-to-terms">
+              <label className="form-check-label" htmlFor="agree-to-terms">
                 I agree
               </label>
             </div>
