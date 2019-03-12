@@ -15,6 +15,7 @@ const NetworkStatus = React.lazy(() => import("./views/NetworkStatus"));
 const ExplorerAccount = React.lazy(() => import("./views/explorer/Account"));
 const ExplorerBlock = React.lazy(() => import("./views/explorer/Block"));
 const Accounts = React.lazy(() => import("./views/explorer/Accounts"));
+const AuditReport = React.lazy(() => import("./views/AuditReport"));
 
 class Content extends React.Component {
   state = {
@@ -110,6 +111,13 @@ class Content extends React.Component {
               path="/explorer/block/:block"
               render={props => <ExplorerBlock {...props} />}
             />
+
+            <Route
+              exact
+              path="/audit_report"
+              render={props => <AuditReport {...props} />}
+            />
+
             <Route component={NotFound} />
           </Switch>
         </Suspense>

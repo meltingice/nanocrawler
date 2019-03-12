@@ -1,5 +1,6 @@
 import React from "react";
 import { IntlProvider } from "react-intl";
+import { Link } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
@@ -36,6 +37,7 @@ function App({ locale }) {
           </div>
           <div className="col-auto">
             <div className="py-2 px-4">
+              <Link to="/audit_report">Audit Report</Link> &bull;{" "}
               <a href="https://twitter.com/meltingice" target="_blank">
                 Twitter
               </a>{" "}
