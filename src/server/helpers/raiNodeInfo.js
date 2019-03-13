@@ -1,5 +1,5 @@
 import { exec } from "child_process";
-import { promisify } from "es6-promisify";
+import { promisify } from "util";
 import pidusage from "pidusage";
 
 const pExec = promisify(exec);
@@ -20,8 +20,11 @@ export default async function getStats() {
 
 async function discoverPid() {
   try {
-    RAI_PID = await pExec("pgrep beta_nano_node");
-    console.log("beta_nano_node:", RAI_PID);
+    RAI_PID = (await pExec(
+      "systemctl show -p MainPID --value nano_node"
+    )).stdout.trim();
+
+    console.log("nano_node:", RAI_PID);
   } catch (e) {
     console.log(e.message);
   }
