@@ -20,7 +20,10 @@ export default async function getStats() {
 
 async function discoverPid() {
   try {
-    RAI_PID = await pExec("pgrep -f RPCNanoData");
+    RAI_PID = (await pExec(
+      "systemctl show -p MainPID --value rpc_nano_node"
+    )).stdout.trim();
+
     console.log("nano_node:", RAI_PID);
   } catch (e) {
     console.log(e.message);
