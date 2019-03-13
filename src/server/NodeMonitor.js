@@ -1,4 +1,4 @@
-import { promisify } from "es6-promisify";
+import { promisify } from "util";
 import curl from "curlrequest";
 import config from "../../server-config.json";
 
@@ -33,15 +33,15 @@ export default class NodeMonitor {
       })
         .then(resp => {
           const data = JSON.parse(resp);
-          if (data.nanoNodeAccount) {
+          if (data && data.nanoNodeAccount) {
             if (this.currencyOk(data)) {
               console.log("OK", `(${this.source})`, this.apiUrl);
               resolve({ url: this.apiUrl, data: this.formatData(data) });
             } else {
-              throw new Error("Currency does not match");
+              throw new Error(`Currency does not match for ${this.apiUrl}`);
             }
           } else {
-            throw new Error("Missing nanoNodeAccount data");
+            throw new Error(`Missing nanoNodeAccount data for ${this.apiUrl}`);
           }
         })
         .catch(reject);

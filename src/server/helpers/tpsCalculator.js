@@ -1,4 +1,4 @@
-import { promisify } from "es6-promisify";
+import { promisify } from "util";
 import redis from "redis";
 import config from "../../../server-config.json";
 
