@@ -4,7 +4,7 @@ import config from "../../server-config.json";
 
 const request = promisify(curl.request.bind(curl));
 
-const TIMEOUT = 5;
+const TIMEOUT = 30;
 
 export default class NodeMonitor {
   static fromPeerAddress(peer) {
