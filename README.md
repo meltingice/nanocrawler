@@ -18,7 +18,7 @@ The server is responsible for proxying requests between the site and your Nano n
 
 There is a full default config available in the examples folder. Copy `server-config.json` to the project root. Update all of the values to fit your environment.
 
-Redis support is optional, but recommended. If you wish to skip it, you can safely delete the config entry.
+**Redis support is optional, but recommended.** If you wish to skip it, you can safely delete the config entry.
 
 ### Client Config
 
