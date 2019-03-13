@@ -1,5 +1,5 @@
 import { exec } from "child_process";
-import { promisify } from "es6-promisify";
+import { promisify } from "util";
 import pidusage from "pidusage";
 
 const pExec = promisify(exec);
