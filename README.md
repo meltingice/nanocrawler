@@ -10,7 +10,9 @@ Nano's goal is to become "a global currency with instantaneous transactions and 
 
 First, clone this repository onto the server where you intend to host the site. It doesn't have to be the same server as the Nano node, but it certainly can be if you want to.
 
-Once the project is cloned, there are 2 config files you need to update.
+Run `yarn` to install dependencies.
+
+There are 2 config files you need to update.
 
 ### API Server Config
 
@@ -32,12 +34,7 @@ To run NanoCrawler in development mode, simply run `yarn start`. This will start
 
 ## Production Hosting
 
-Once the config has been set, you can build the project.
-
-```bash
-yarn
-yarn deploy
-```
+Once the config has been set, you can build the project with `yarn deploy`.
 
 This will compile and output all of the static site files into the `html` directory. This is preferred over using `yarn build` because the build process starts by deleting the build directory, which can cause the site to break for any visitors during the build process. Any time you change the client config or pull down any changes from git, you will need to rebuild the project. From here, you can host the static site files anywhere. It can be on a home server, [Heroku](https://github.com/mars/create-react-app-buildpack), a DigitalOcean droplet, etc. If you're not on Heroku, I highly recommend hosting the static files with Nginx.
 
