@@ -1,5 +1,5 @@
 import fs from "fs";
-import { promisify } from "es6-promisify";
+import { promisify } from "util";
 import config from "../../../server-config.json";
 
 const fsStat = promisify(fs.stat);
