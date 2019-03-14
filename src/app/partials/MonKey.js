@@ -26,7 +26,7 @@ export default class MonKey extends React.PureComponent {
 
   get imageUrl() {
     const { account } = this.props;
-    return `https://bananomonkeys.herokuapp.com/image?address=${account}`;
+    return `https://monkeys.appditto.com/?address=${account}`;
   }
 
   loadingState() {
