@@ -20,7 +20,10 @@ export default async function getStats() {
 
 async function discoverPid() {
   try {
-    RAI_PID = await pExec("pgrep bananode");
+    RAI_PID = (await pExec(
+      "systemctl show -p MainPID --value bananode"
+    )).stdout.trim();
+
     console.log("bananode:", RAI_PID);
   } catch (e) {
     console.log(e.message);
