@@ -1,6 +1,7 @@
 import { promisify } from "util";
 import redis from "redis";
 import { Nano } from "nanode";
+import BigNumber from "bignumber.js";
 import config from "../../../server-config.json";
 import Currency from "../../lib/Currency";
 
@@ -20,10 +21,13 @@ export default class HistoryScanner {
       version: 1,
       updatedTo: null,
       rawSent: "0",
-      rawReceived: "0"
+      rawReceived: "0",
+      largestTransactionAmount: "0",
+      largestTransactionHash: null
     };
 
     this.head = null;
+    this.openBlock = null;
   }
 
   async update() {
@@ -31,6 +35,13 @@ export default class HistoryScanner {
     console.log(currentStats);
     if (currentStats !== null && currentStats.version == this.stats.version) {
       this.stats = currentStats;
+    }
+
+    const account = await nano.rpc("account_info", { account: this.account });
+    if (account && account.open_block) {
+      this.openBlock = account.open_block;
+    } else {
+      return;
     }
 
     console.log("Starting update");
@@ -46,16 +57,18 @@ export default class HistoryScanner {
       i,
       args = {
         account: this.account,
-        raw: true,
-        count: 10000
+        count: 50000
       };
 
     while (continueFetching) {
       if (this.head !== null) args.head = this.head;
-      console.log("Head:", this.head);
+      console.log("Head:", this.head || "N/A");
       resp = await nano.rpc("account_history", args);
 
-      if (resp === "" || resp.error) break;
+      if (resp === "" || resp.error) {
+        console.error(resp.error);
+        break;
+      }
 
       // When using the head for pagination, it returns the block with the head hash
       // value first. Since we've already counted that block in the stats once, we want
@@ -65,7 +78,10 @@ export default class HistoryScanner {
 
         // If we've either hit an open block or we've hit the hash of the end of the
         // last update. We can stop now.
-        if (this.isOpen(block) || block.hash === this.stats.updatedTo) {
+        if (
+          block.hash === this.openBlock ||
+          block.hash === this.stats.updatedTo
+        ) {
           console.log("Finishing at", block.hash);
           continueFetching = false;
           break;
@@ -83,25 +99,19 @@ export default class HistoryScanner {
     }
   }
 
-  isOpen(block) {
-    return (
-      block.type === "open" ||
-      (block.type === "state" &&
-        block.previous ===
-          "0000000000000000000000000000000000000000000000000000000000000000")
-    );
-  }
-
   updateStatsForBlock(block) {
     if (
-      block.type === "send" ||
-      (block.type === "state" && block.subtype === "send")
+      BigNumber(block.amount).isGreaterThan(
+        BigNumber(this.stats.largestTransactionAmount)
+      )
     ) {
+      this.stats.largestTransactionAmount = block.amount;
+      this.stats.largestTransactionHash = block.hash;
+    }
+
+    if (block.type === "send") {
       this.stats.rawSent = Currency.addRaw(this.stats.rawSent, block.amount);
-    } else if (
-      block.type === "receive" ||
-      (block.type === "state" && block.subtype === "receive")
-    ) {
+    } else if (block.type === "receive") {
       this.stats.rawReceived = Currency.addRaw(
         this.stats.rawReceived,
         block.amount

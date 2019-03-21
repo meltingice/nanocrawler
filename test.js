@@ -4,7 +4,7 @@ require("babel-register")({
 
 const HistoryScanner = require("./src/server/helpers/HistoryScanner").default;
 const scanner = new HistoryScanner(
-  "xrb_1epochfo6oqad7mgn6rcikgka9bps43nedz1kpm1t35e579mregxgf6srhpd"
+  "xrb_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k"
 );
 
 scanner.update().then(() => {
