@@ -18,10 +18,10 @@ export default function(app, nano) {
             .representatives;
 
           return _.fromPairs(
-            _.map(repsOnline, (s, account) => [
-              account,
-              reps[account] ? reps[account] : "0"
-            ])
+            _.map(
+              Array.isArray(repsOnline) ? repsOnline : _.keys(repsOnline),
+              account => [account, reps[account] ? reps[account] : "0"]
+            )
           );
         }
       );

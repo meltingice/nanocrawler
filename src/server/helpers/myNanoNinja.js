@@ -1,4 +1,4 @@
-import { promisify } from "es6-promisify";
+import { promisify } from "util";
 import curl from "curlrequest";
 
 const request = promisify(curl.request.bind(curl));
