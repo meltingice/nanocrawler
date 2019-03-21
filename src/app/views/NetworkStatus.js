@@ -10,6 +10,8 @@ import { TranslatedMessage } from "lib/TranslatedMessage";
 import { withNetworkData } from "lib/NetworkContext";
 
 import NetworkThroughput from "../partials/network/NetworkThroughput";
+import NetworkConfirmationQuorum from "../partials/network/NetworkConfirmationQuorum";
+
 import PeerVersions from "../partials/PeerVersions";
 import DelegatorsTable from "../partials/explorer/account/DelegatorsTable";
 
@@ -81,7 +83,8 @@ class NetworkStatus extends React.Component {
         {(
           (this.onlineRebroadcastWeight() / config.currency.maxSupply) *
           100.0
-        ).toFixed(2)}%
+        ).toFixed(2)}
+        %
       </Fragment>
     );
   }
@@ -92,7 +95,8 @@ class NetworkStatus extends React.Component {
         {(
           (this.onlineRebroadcastWeight() / this.onlineWeight()) *
           100.0
-        ).toFixed(2)}%
+        ).toFixed(2)}
+        %
       </Fragment>
     );
   }
@@ -122,7 +126,8 @@ class NetworkStatus extends React.Component {
         <FormattedNumber
           value={(this.onlineWeight() / config.currency.maxSupply) * 100.0}
           maximumFractionDigits={2}
-        />%
+        />
+        %
       </Fragment>
     );
   }
@@ -145,7 +150,8 @@ class NetworkStatus extends React.Component {
         <FormattedNumber
           value={(this.officialWeight() / config.currency.maxSupply) * 100}
           maximumFractionDigits={2}
-        />%
+        />
+        %
       </Fragment>
     );
   }
@@ -156,7 +162,8 @@ class NetworkStatus extends React.Component {
         <FormattedNumber
           value={(this.officialWeight() / this.onlineWeight()) * 100}
           maximumFractionDigits={2}
-        />%
+        />
+        %
       </Fragment>
     );
   }
@@ -323,13 +330,20 @@ class NetworkStatus extends React.Component {
           </div>
         </div>
 
-        <div className="row mt-5">
+        <div className="row mt-3">
           <div className="col-md">
             <NetworkThroughput />
           </div>
           <div className="col-md mt-3 mt-md-0">
             <PeerVersions peers={this.state.peers} />
           </div>
+        </div>
+
+        <div className="row mt-3">
+          <div className="col-md-6">
+            <NetworkConfirmationQuorum />
+          </div>
+          <div className="col-md-6" />
         </div>
 
         <div className="row mt-5">

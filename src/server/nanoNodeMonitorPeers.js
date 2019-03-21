@@ -50,24 +50,17 @@ async function updateKnownMonitors() {
 
 async function fetchNanoNodeNinjaMonitors() {
   let accounts = [];
-  let monitors = [];
 
   try {
     console.log("Gathering monitors from mynano.ninja");
-    const resp = await fetch("https://mynano.ninja/api/accounts/verified");
+    const resp = await fetch("https://mynano.ninja/api/accounts/monitors");
     accounts = await resp.json();
   } catch (e) {
     return [];
   }
 
-  console.log(`Checking ${accounts.length} accounts for node monitors...`);
-  for (let i = 0; i < accounts.length; i++) {
-    try {
-      const accountResp = await fetch(
-        `https://mynano.ninja/api/accounts/${accounts[i].account}`
-      );
-      const accountData = await accountResp.json();
-
+  return _.compact(
+    accounts.map(accountData => {
       if (accountData.monitor && accountData.monitor.url) {
         // Some servies, like Brainblocks, gave their monitor URL as a direct link to
         // the API response. This attempts to fix those instances.
@@ -76,12 +69,10 @@ async function fetchNanoNodeNinjaMonitors() {
           : `${accountData.monitor.url.replace(/(\/$)/, "")}/api.php`;
 
         console.log("mynano.ninja - OK", apiUrl);
-        monitors.push(new NodeMonitor(apiUrl, "mynano.ninja"));
+        return new NodeMonitor(apiUrl, "mynano.ninja");
       }
-    } catch (e) {}
-  }
-
-  return monitors;
+    })
+  );
 }
 
 async function checkKnownMonitors() {
@@ -103,7 +94,7 @@ async function checkKnownMonitors() {
     JSON.stringify(data)
   );
 
-  setTimeout(checkKnownMonitors, 30 * 1000);
+  setTimeout(checkKnownMonitors, 60 * 1000);
 }
 
 export default function startNetworkDataUpdates() {

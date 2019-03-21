@@ -10,6 +10,11 @@ class Client {
     return (await resp.json()).account;
   }
 
+  async ticker() {
+    const resp = await this.fetch("v2/ticker");
+    return await resp.json();
+  }
+
   async account(account) {
     const resp = await this.fetch(`v2/accounts/${account}`);
     return (await resp.json()).account;
@@ -104,6 +109,11 @@ class Client {
 
   async confirmationQuorum() {
     const resp = await this.fetch("confirmation_quorum");
+    return await resp.json();
+  }
+
+  async confirmationHistory(count = 2048) {
+    const resp = await this.fetch(`v2/confirmation/history?count=${count}`);
     return await resp.json();
   }
 

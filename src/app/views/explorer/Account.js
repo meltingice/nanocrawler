@@ -119,10 +119,13 @@ class Account extends React.Component {
           id="account.rep_offline_warning"
           values={{
             uptime: (
-              <FormattedNumber
-                value={this.state.uptime}
-                maximumFractionDigits={2}
-              />
+              <Fragment>
+                <FormattedNumber
+                  value={this.state.uptime}
+                  maximumFractionDigits={2}
+                />
+                %
+              </Fragment>
             ),
             link: (
               <a

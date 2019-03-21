@@ -7,6 +7,8 @@
   "redis": "redis://127.0.0.1:6379",
   "redisNamespace": "development",
   "serverPort": 3001,
+  "coinMarketCapApiKey": "",
+  "monitorCurrencyName": "nano",
   "knownMonitors": [
     "https://nano-api.meltingice.net/api.php",
     "https://nano.nifni.net/api.php",

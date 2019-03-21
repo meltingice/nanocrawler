@@ -18,7 +18,8 @@ const Navigation = () => {
       <div className="col-auto mt-3 mb-0 mb-md-3 px-0 px-md-2">
         <div className="LogoWrap">
           <img src={Logo} className="mb-1" />
-          <br />Network Explorer
+          <br />
+          Network Explorer
         </div>
       </div>
 

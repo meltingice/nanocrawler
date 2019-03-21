@@ -34,9 +34,9 @@ class PriceWithConversions extends React.PureComponent {
       case "base":
         return this.amount;
       case "usd":
-        return this.amount * parseFloat(ticker.price_usd, 10);
+        return this.amount * parseFloat(ticker.priceUSD, 10);
       case "btc":
-        return this.amount * parseFloat(ticker.price_btc, 10);
+        return this.amount * parseFloat(ticker.priceBTC, 10);
       default:
         return new Error(`${cur} is not currently supported`);
     }
