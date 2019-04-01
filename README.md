@@ -10,7 +10,9 @@ Nano's goal is to become "a global currency with instantaneous transactions and 
 
 First, clone this repository onto the server where you intend to host the site. It doesn't have to be the same server as the Nano node, but it certainly can be if you want to.
 
-Once the project is cloned, there are 2 config files you need to update.
+Run `yarn` to install dependencies.
+
+There are 2 config files you need to update.
 
 ### API Server Config
 
@@ -18,7 +20,7 @@ The server is responsible for proxying requests between the site and your Nano n
 
 There is a full default config available in the examples folder. Copy `server-config.json` to the project root. Update all of the values to fit your environment.
 
-Redis support is optional, but recommended. If you wish to skip it, you can safely delete the config entry.
+**Redis support is optional, but recommended.** If you wish to skip it, you can safely delete the config entry.
 
 ### Client Config
 
@@ -26,16 +28,15 @@ The web front-end needs to know where the API server can be reached. Copy `clien
 
 The [websocket server](https://github.com/meltingice/nanovault-ws) is optional, but you're welcome to use the hosted websocket server that's set as the default in the config. Depending on the sync status of your node, you may receive blocks from the websocket server before your node confirms them, which is why hosting one yourself is ideal. Remove the config entry to disable the websocket altogether.
 
-### Building and Hosting the Front-End
+## Development
 
-Once the config has been set, you can build the project.
+To run NanoCrawler in development mode, simply run `yarn start`. This will start both the API server and the webpack development server for the front-end. This does not start any of the reoccuring jobs, but can you run those manually if you need the data they provide (see below).
 
-```bash
-npm i
-npm run build
-```
+## Production Hosting
 
-This will compile and output all of the static site files into the `build` directory. Any time you change the client config or pull down any changes from git, you will need to rebuild the project. From here, you can host the static site files anywhere. It can be on a home server, [Heroku](https://github.com/mars/create-react-app-buildpack), a DigitalOcean droplet, etc. If you're not on Heroku, I recommend hosting the static files with Nginx or Apache.
+Once the config has been set, you can build the project with `yarn deploy`.
+
+This will compile and output all of the static site files into the `html` directory. This is preferred over using `yarn build` because the build process starts by deleting the build directory, which can cause the site to break for any visitors during the build process. Any time you change the client config or pull down any changes from git, you will need to rebuild the project. From here, you can host the static site files anywhere. It can be on a home server, [Heroku](https://github.com/mars/create-react-app-buildpack), a DigitalOcean droplet, etc. If you're not on Heroku, I highly recommend hosting the static files with Nginx.
 
 One important thing to note is that all of the site routing is done client-side. This means you need to do one of two things: either configure your web server to always serve `index.html` regardless of the URL path, or switch to hash-based routing.
 
@@ -57,7 +58,7 @@ server {
 
 **Switching to hash-based router**
 
-While I highly recommend hosting via a proper webserver, as a last resort you can switch to hash-based routing. Open up `src/index.js` and change `BrowserRouter` to `HashRouter`. Run `npm run build` to get an updated version of the site. Now instead of `/explorer` the URL will be like `/#explorer`.
+While I highly recommend hosting via a proper webserver, as a last resort you can switch to hash-based routing. Open up `src/index.js` and change `BrowserRouter` to `HashRouter`. Run `yarn build` to get an updated version of the site. Now instead of `/explorer` the URL will be `/#explorer`.
 
 ### Hosting the Server
 
@@ -70,7 +71,7 @@ The server-side components are broken up into multiple processes in order to sep
 
 There are multiple options for hosting a NodeJS server. If you have experience with one option, feel free to use it. All of the scripts can be run directly with `node` and they all use the same `server-config.json`.
 
-I use and recommend [PM2](https://www.npmjs.com/package/pm2) for managing NodeJS servers. There is an `ecosystem.config.js` file included so all you have to do is run `pm2 start ecosystem.config.js` to start all the processes. The API server will start in cluster mode with 4 processes by default. Feel free to tweak this in the `ecosystem.config.js` file.
+I use and recommend [PM2](https://www.npmjs.com/package/pm2) for managing NodeJS servers. There is an `ecosystem.config.js` file included so all you have to do is run `pm2 start ecosystem.config.js --env production` to start all the processes. The API server will start in cluster mode with 4 processes by default. Feel free to tweak this in the `ecosystem.config.js` file.
 
 ## Localization
 
@@ -82,9 +83,4 @@ All strings that are used on the site are defined in the translations files in `
 
 English is the fallback language for NanoCrawler if a particular translation is not present.
 
-To add a new translation:
-
-1.  Create a new JSON file in the `src/translations/` directory with the same name as the [language code](https://en.wikipedia.org/wiki/ISO_639-1) for the language you wish to translate.
-2.  For every ID that's present in other translation files, create the appropriate translation in your new translation file with the same ID.
-3.  If the language you're supporting needs to be manually mapped to messages and it's locale, e.g. due to regional differences that aren't important, you can override the settings in `src/translations.js`.
-4.  In `src/client-config.json`, add your newly translated language to the `supportedLanguages` object.
+To contribute to NanoCrawler's translations, please email meltingice (see Github profile) to get an invite to our [POEditor](https://poeditor.com/) project. While discouraged, we will accept pull requests with translation updates as well.
