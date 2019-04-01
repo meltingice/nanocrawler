@@ -10,18 +10,15 @@ export default function(app, nano) {
   app.get("/representatives/online", async (req, res, next) => {
     try {
       const representatives = await redisFetch(
-        "v2/representatives_online",
+        "v3/representatives_online",
         300,
         async () => {
-          const reps = (await nano.rpc("representatives")).representatives;
-          const repsOnline = (await nano.rpc("representatives_online"))
-            .representatives;
+          const repsOnline = (await nano.rpc("representatives_online", {
+            weight: true
+          })).representatives;
 
           return _.fromPairs(
-            _.map(
-              Array.isArray(repsOnline) ? repsOnline : _.keys(repsOnline),
-              account => [account, reps[account] ? reps[account] : "0"]
-            )
+            _.map(repsOnline, (data, account) => [account, data.weight])
           );
         }
       );
