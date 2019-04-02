@@ -53,7 +53,9 @@ class NetworkStatus extends React.Component {
   rebroadcastThreshold() {
     const { genesisBalance } = this.props.network;
     return (
-      (config.currency.maxSupply - Currency.fromRaw(genesisBalance)) * 0.001
+      Currency.fromCents(
+        Currency.subtractRaw(config.currency.maxSupply, genesisBalance)
+      ) * 0.001
     );
   }
 
@@ -86,7 +88,7 @@ class NetworkStatus extends React.Component {
       <Fragment>
         {(
           (this.onlineRebroadcastWeight() /
-            (config.currency.maxSupply - Currency.fromRaw(genesisBalance))) *
+            Currency.fromRaw(config.currency.maxSupply)) *
           100.0
         ).toFixed(2)}
         %

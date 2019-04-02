@@ -60,7 +60,10 @@ class Account extends React.Component {
 
     if (
       mnano >=
-      (config.currency.maxSupply - Currency.fromRaw(genesisBalance)) * 0.001
+      Currency.fromCents(
+        Currency.subtractRaw(config.currency.maxSupply, genesisBalance)
+      ) *
+        0.001
     )
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (mnano > 0)
