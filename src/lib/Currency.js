@@ -16,13 +16,13 @@ export default {
     return values
       .map(v => BigNumber(v.toString()))
       .reduce((acc, v) => acc.plus(v))
-      .toString();
+      .toString(10);
   },
 
   subtractRaw: (...values) => {
     return values
       .map(v => BigNumber(v.toString()))
       .reduce((acc, v) => acc.minus(v))
-      .toString();
+      .toString(10);
   }
 };
