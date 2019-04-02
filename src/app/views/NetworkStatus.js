@@ -63,7 +63,7 @@ class NetworkStatus extends React.Component {
     const { representativesOnline } = this.props.network;
     return fromPairs(
       toPairs(representativesOnline).filter(rep => {
-        return Currency.fromRaw(rep[1]) >= this.rebroadcastThreshold();
+        return Currency.fromCents(rep[1]) >= this.rebroadcastThreshold();
       })
     );
   }
