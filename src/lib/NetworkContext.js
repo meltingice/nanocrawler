@@ -1,5 +1,6 @@
 import React from "react";
 import { apiClient } from "./Client";
+import config from "client-config.json";
 
 const NetworkContext = React.createContext({
   representativesOnline: {}
