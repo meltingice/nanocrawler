@@ -7,7 +7,8 @@ const NetworkContext = React.createContext({
 
 class NetworkProvider extends React.Component {
   state = {
-    representativesOnline: {}
+    representativesOnline: {},
+    genesisBalance: "0"
   };
 
   componentDidMount() {
@@ -16,7 +17,11 @@ class NetworkProvider extends React.Component {
 
   async updateData() {
     const representativesOnline = await apiClient.representativesOnline();
-    this.setState({ representativesOnline }, () => {
+    const genesisBalance = (await apiClient.account(
+      config.currency.genesisAccount
+    )).balance;
+
+    this.setState({ representativesOnline, genesisBalance }, () => {
       setTimeout(this.updateData.bind(this), 300000);
     });
   }

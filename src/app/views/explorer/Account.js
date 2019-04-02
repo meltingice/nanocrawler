@@ -51,13 +51,17 @@ class Account extends React.Component {
   accountTitle() {
     const { formatMessage } = this.props.intl;
     const { account, weight, unopened } = this.props;
+    const { genesisBalance } = this.props.network;
 
     if (account === config.currency.genesisAccount) return "Genesis Account";
     if (account === config.currency.emissionAccount) return "Emission Account";
 
     const mnano = Currency.fromRaw(weight);
 
-    if (mnano >= config.currency.maxSupply * 0.001)
+    if (
+      mnano >=
+      (config.currency.maxSupply - Currency.fromRaw(genesisBalance)) * 0.001
+    )
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (mnano > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));
