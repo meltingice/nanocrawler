@@ -131,7 +131,11 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         <FormattedNumber
-          value={(this.onlineWeight() / config.currency.maxSupply) * 100.0}
+          value={
+            (this.onlineWeight() /
+              Currency.fromRaw(config.currency.maxSupply)) *
+            100.0
+          }
           maximumFractionDigits={2}
         />
         %
@@ -155,7 +159,11 @@ class NetworkStatus extends React.Component {
     return (
       <Fragment>
         <FormattedNumber
-          value={(this.officialWeight() / config.currency.maxSupply) * 100}
+          value={
+            (this.officialWeight() /
+              Currency.fromRaw(config.currency.maxSupply)) *
+            100
+          }
           maximumFractionDigits={2}
         />
         %
