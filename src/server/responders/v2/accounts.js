@@ -180,7 +180,11 @@ export default function(app, nano) {
 
           if (resp.error) throw new BadRequest(resp.error);
 
-          const blocks = _.toPairs(resp.blocks[req.params.account])
+          // Since it can be unpredictable whether the node returns a xrb_ or nano_ address,
+          // and because we know we're only fetching 1 account here, we just grab the first (and only)
+          // key in the hash.
+          const allBlocks = resp.blocks[_.keys(resp.blocks)[0]];
+          const blocks = _.toPairs(allBlocks)
             .slice(0, 20)
             .map(data => {
               return {
@@ -196,7 +200,7 @@ export default function(app, nano) {
           }
 
           return {
-            total: _.keys(resp.blocks[req.params.account]).length,
+            total: _.keys(allBlocks).length,
             blocks
           };
         }
