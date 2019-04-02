@@ -26,7 +26,8 @@ class NetworkStatus extends React.Component {
     this.state = {
       blocksByType: {},
       peers: {},
-      officialRepresentatives: {}
+      officialRepresentatives: {},
+      genesisBalance: 0
     };
 
     this.statTimer = null;
@@ -34,6 +35,7 @@ class NetworkStatus extends React.Component {
 
   componentWillMount() {
     this.updateStats();
+    this.fetchGenesisBalance();
   }
 
   componentWillUnmount() {
@@ -50,8 +52,16 @@ class NetworkStatus extends React.Component {
     this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
   }
 
+  async fetchGenesisBalance() {
+    const genesisBalance = Currency.fromRaw(
+      (await apiClient.account(config.currency.genesisAccount)).balance
+    );
+
+    this.setState({ genesisBalance });
+  }
+
   rebroadcastThreshold() {
-    return config.currency.maxSupply * 0.001;
+    return (config.currency.maxSupply - this.state.genesisBalance) * 0.001;
   }
 
   rebroadcastableReps() {
