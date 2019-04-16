@@ -7,27 +7,30 @@ const get = util.promisify(redis.get).bind(redis);
 const stream = fs.createWriteStream("timestamps.csv");
 const HASH_REGEX = /^block_timestamp\/([A-F0-9]{64})$/;
 
+let nextCursor;
 async function fetchNext(cursor) {
+  console.log(`Fetching cursor ${cursor}`);
   const resp = await scan(
     cursor,
     "MATCH",
     "block_timestamp/*",
     "COUNT",
-    "1000"
+    "5000"
   );
-  const nextCursor = resp[0];
+
+  nextCursor = resp[0];
   const keys = resp[1];
+  const done = nextCursor === "0";
 
   const outputString = await getTimestamps(keys);
-  stream.write(outputString, "utf-8");
-
-  if (resp[0] === "0") {
+  if (!stream.write(outputString, "utf-8") && !done) {
+    stream.once("drain", () => fetchNext(nextCursor));
+  } else if (!done) {
+    fetchNext(nextCursor);
+  } else {
     console.log("Done!");
     stream.end();
-    return;
   }
-
-  fetchNext(nextCursor);
 }
 
 async function getTimestamps(keys) {
@@ -43,10 +46,9 @@ async function getTimestamps(keys) {
         returnValue.push([hash, replies[index]].join(","));
       });
 
-      resolve(returnValue.join("\n"));
+      resolve(`${returnValue.join("\n")}\n`);
     });
   });
 }
 
-stream.write("hash,timestamp\n", "utf-8");
 fetchNext(0);
