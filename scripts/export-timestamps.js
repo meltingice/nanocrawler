@@ -47,7 +47,12 @@ async function getTimestamps(keys) {
 
       filteredKeys.forEach((key, index) => {
         const hash = key.match(/^block_timestamp\/([A-F0-9]{64})/)[1];
-        returnValue.push([hash, replies[index]].join(","));
+
+        // JS uses milliseconds for timestamps, but most other things don't. We drop
+        // the extra precision here.
+        returnValue.push(
+          [hash, Math.round(parseInt(replies[index], 10) / 1000)].join(",")
+        );
       });
 
       resolve(`${returnValue.join("\n")}\n`);
