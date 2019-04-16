@@ -32,7 +32,8 @@ async function fetchNext(cursor) {
     fetchNext(nextCursor);
   } else {
     console.log("Done!");
-    stream.end();
+    stream.destroy();
+    redis.end(true);
   }
 }
 
