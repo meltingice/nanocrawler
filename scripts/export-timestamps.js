@@ -1,33 +1,39 @@
+// This is used to export timestamps from NanoCrawler's own system, which
+// can then be used to import into other explorers or the Nano node itself.
+
 const fs = require("fs");
 const util = require("util");
 const redis = require("redis").createClient();
 const scan = util.promisify(redis.scan).bind(redis);
 const get = util.promisify(redis.get).bind(redis);
 
-const stream = fs.createWriteStream("timestamps.csv");
+const outputFile = process.argv[2] || "timestamps.csv";
+const stream = fs.createWriteStream(outputFile);
 const HASH_REGEX = /^block_timestamp\/([A-F0-9]{64})$/;
 
 async function fetchNext(cursor) {
+  console.log(`Fetching cursor ${cursor}`);
   const resp = await scan(
     cursor,
     "MATCH",
     "block_timestamp/*",
     "COUNT",
-    "1000"
+    "5000"
   );
+
   const nextCursor = resp[0];
   const keys = resp[1];
+  const done = nextCursor === "0";
 
   const outputString = await getTimestamps(keys);
-  stream.write(outputString, "utf-8");
-
-  if (resp[0] === "0") {
+  if (!stream.write(outputString, "utf-8") && !done) {
+    stream.once("drain", () => fetchNext(nextCursor));
+  } else if (!done) {
+    fetchNext(nextCursor);
+  } else {
     console.log("Done!");
     stream.end();
-    return;
   }
-
-  fetchNext(nextCursor);
 }
 
 async function getTimestamps(keys) {
@@ -43,10 +49,9 @@ async function getTimestamps(keys) {
         returnValue.push([hash, replies[index]].join(","));
       });
 
-      resolve(returnValue.join("\n"));
+      resolve(`${returnValue.join("\n")}\n`);
     });
   });
 }
 
-stream.write("hash,timestamp\n", "utf-8");
 fetchNext(0);
