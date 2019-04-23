@@ -8,8 +8,7 @@ const nano = new Nano({ url: serverConfig.nodeHost });
 
 const UNCIRCULATING_ACCOUNTS = [
   "ban_1fundm3d7zritekc8bdt4oto5ut8begz6jnnt7n3tdxzjq3t46aiuse1h7gj",
-  "ban_3fundbxxzrzfy3k9jbnnq8d44uhu5sug9rkh135bzqncyy9dw91dcrjg67wf",
-  "ban_1burnbabyburndiscoinferno111111111111111111111111111aj49sw3w"
+  "ban_3fundbxxzrzfy3k9jbnnq8d44uhu5sug9rkh135bzqncyy9dw91dcrjg67wf"
 ];
 
 export default async function circulatingSupply() {
