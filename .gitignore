@@ -27,3 +27,5 @@ yarn-error.log*
 /server-config.banano.json
 /src/client-config.json
 deploy.sh
+
+.idea
