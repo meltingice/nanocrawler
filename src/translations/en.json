@@ -41,12 +41,6 @@
     "network.peers.rebroadcast_only": "Rebroadcasting representatives only",
     "network.tps.title": "Network Throughput",
     "network.tps.desc": "Average checked blocks/sec over the given period",
-    "network.confirmation_history.title": "Block Confirmation History",
-    "network.confirmation_history.desc": "A historical look at the election duration for recent blocks",
-    "network.confirmation_history.confirmation_time": "{time} seconds",
-    "network.confirmation_history.sample_size": "Average amount of time it took the last {count} blocks to finish voting",
-    "network.confirmation_history.recent_elections": "Recent Elections",
-    "network.confirmation_history.avg_confirmation_time": "average confirmation time",
     "status.checked_blocks": "Checked Blocks",
     "status.unchecked_blocks": "Unchecked Blocks",
     "status.voting_weight": "Voting Weight",
@@ -175,5 +169,12 @@
     "account.version.0": "This account has not been upgraded with an epoch block yet. This only means that this account can still accept non-state blocks.",
     "account.version.1": "This account has been upgraded with an epoch v1 block and can only accept state blocks.",
     "block.original.title": "Original Block Content",
-    "block.original.desc": "The RPC response from the {rpcCmd} call. The timestamp field is added by NanoCrawler, and the block contents are JSON decoded."
+    "block.original.desc": "The RPC response from the {rpcCmd} call. The timestamp field is added by NanoCrawler, and the block contents are JSON decoded.",
+    "network.confirmation_history.confirmation_time": "{time} seconds",
+    "network.confirmation_history.avg_confirmation_time": "average confirmation time",
+    "network.confirmation_history.sample_size": "Average amount of time it took the last {count} blocks to finish voting",
+    "network.confirmation_history.recent_elections": "Recent Elections",
+    "network.confirmation_history.title": "Block Confirmation History",
+    "network.confirmation_history.desc": "A historical look at the election duration for recent blocks",
+    "account.title.donation": "Donation Account"
 }
