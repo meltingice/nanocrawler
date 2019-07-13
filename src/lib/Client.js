@@ -97,6 +97,11 @@ class Client {
     return (await resp.json()).network;
   }
 
+  async activeDifficulty() {
+    const resp = await this.fetch("v2/network/active_difficulty");
+    return await resp.json();
+  }
+
   async wealthDistribution() {
     const resp = await this.fetch("accounts/distribution");
     return (await resp.json()).distribution;
