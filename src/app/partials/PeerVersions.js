@@ -1,34 +1,58 @@
 import React, { Fragment } from "react";
-import { TranslatedMessage } from "lib/TranslatedMessage";
 import keys from "lodash/keys";
 import toPairs from "lodash/toPairs";
 import values from "lodash/values";
+import { FormattedNumber } from "react-intl";
+import { TranslatedMessage } from "lib/TranslatedMessage";
+import { withNetworkData } from "lib/NetworkContext";
+import Currency from "lib/Currency";
 
 import "./PeerVersions.css";
 
-const Version = ({ version, count, total }) => {
+const Version = ({ version, count, weight, total }) => {
   return (
-    <dd className="position-relative p-3">
+    <dd className="position-relative row py-1 align-items-center">
       <div
         className="PercentBar"
         style={{ width: `${(count / total) * 100}%` }}
       />
 
-      <div className="VersionName">Version {version} </div>
+      <div className="col position-relative PeerData pl-4">
+        Protocol version {version}
+        <br />
+        <small>
+          Voting weight:{" "}
+          <FormattedNumber
+            value={Currency.fromRaw(weight)}
+            maximumFractionDigits={2}
+          />{" "}
+          NANO
+        </small>
+      </div>
 
-      <div className="VersionStats">
+      <div className="col-auto position-relative PeerData">
         {((count / total) * 100).toFixed(2)}% / {count} peers
       </div>
     </dd>
   );
 };
 
-export default function PeerVersions({ peers }) {
-  const totalPeers = keys(peers).length;
+const PeerVersions = ({ network }) => {
+  const { peers } = network;
+  const totalPeers = peers.length;
+
   let versions = {};
-  values(peers).forEach(version => {
-    if (!versions[version]) versions[version] = 0;
-    versions[version]++;
+  peers.forEach(peer => {
+    if (!versions[peer.protocol_version])
+      versions[peer.protocol_version] = { count: 0, weight: "0" };
+    versions[peer.protocol_version].count++;
+
+    if (peer.weight) {
+      versions[peer.protocol_version].weight = Currency.addRaw(
+        versions[peer.protocol_version].weight,
+        peer.weight
+      );
+    }
   });
 
   const sortedVersions = toPairs(versions).sort((a, b) => {
@@ -40,22 +64,42 @@ export default function PeerVersions({ peers }) {
     return 0;
   });
 
+  const percentUDP =
+    (peers.filter(peer => peer.type === "udp").length / totalPeers) * 100.0;
+  const percentTCP =
+    (peers.filter(peer => peer.type === "tcp").length / totalPeers) * 100.0;
+
   return (
     <Fragment>
-      <h2>
+      <h2 className="mb-0">
         <TranslatedMessage id="network.peer_versions" />
       </h2>
 
-      <dl className="PeerVersions">
+      <p className="text-muted">
+        Information about the peers this node is connected to. This does not
+        necesasrily include the entire network.
+      </p>
+
+      <h3>
+        <FormattedNumber value={percentUDP} maximumFractionDigits={2} />%{" "}
+        <small className="text-muted">UDP</small>{" "}
+        <FormattedNumber value={percentTCP} maximumFractionDigits={2} />%{" "}
+        <small className="text-muted">TCP</small>
+      </h3>
+
+      <dl className="PeerVersions mt-3">
         {sortedVersions.map(data => (
           <Version
             key={data[0]}
             version={data[0]}
-            count={data[1]}
+            count={data[1].count}
+            weight={data[1].weight}
             total={totalPeers}
           />
         ))}
       </dl>
     </Fragment>
   );
-}
+};
+
+export default withNetworkData(PeerVersions);

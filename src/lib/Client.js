@@ -41,7 +41,7 @@ class Client {
   }
 
   async peers() {
-    const resp = await this.fetch("peers");
+    const resp = await this.fetch("v2/network/peers");
     return (await resp.json()).peers;
   }
 
