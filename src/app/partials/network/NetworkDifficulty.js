@@ -1,6 +1,7 @@
 import React from "react";
 import { FormattedNumber } from "react-intl";
 import { apiClient } from "lib/Client";
+import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import "./NetworkDifficuty.css";
 
@@ -46,25 +47,32 @@ export default class NetworkDifficult extends React.Component {
 
     return (
       <div className="network-difficulty">
-        <h2 className="mb-0">Network Difficulty</h2>
+        <h2 className="mb-0">
+          <TranslatedMessage id="network.difficulty.title" />
+        </h2>
         <p className="text-muted">
-          The current active difficulty on the network, which can be used to
-          prioritize transactions.
+          <TranslatedMessage id="network.difficulty.desc" />
         </p>
 
         <h3 className={`intensity-${this.multiplierIntensity}`}>
           <i className={`fa fa-arrow-${this.multiplierTrend}`} />{" "}
           <FormattedNumber value={multiplier} maximumFractionDigits={3} />x{" "}
-          <small className="text-muted">difficulty multiplier</small>
+          <small className="text-muted">
+            <TranslatedMessage id="network.difficulty.multiplier" />
+          </small>
         </h3>
 
         <div className="row">
           <div className="col-sm">
-            <h5 className="mb-0 text-muted">Minimum Difficulty</h5>
+            <h5 className="mb-0 text-muted">
+              <TranslatedMessage id="network.difficulty.minimum_difficulty" />
+            </h5>
             <p>0x{network_minimum}</p>
           </div>
           <div className="col-sm">
-            <h5 className="mb-0 text-muted">Current Difficulty</h5>
+            <h5 className="mb-0 text-muted">
+              <TranslatedMessage id="network.difficulty.current_difficulty" />
+            </h5>
             <p>0x{network_current}</p>
           </div>
         </div>
