@@ -11,6 +11,7 @@ import { withNetworkData } from "lib/NetworkContext";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
+import NetworkDifficulty from "../partials/network/NetworkDifficulty";
 import NetworkConfirmationQuorum from "../partials/network/NetworkConfirmationQuorum";
 import NetworkConfirmationHistory from "../partials/network/NetworkConfirmationHistory";
 import PeerVersions from "../partials/PeerVersions";
@@ -24,7 +25,6 @@ class NetworkStatus extends React.Component {
     super(props);
 
     this.state = {
-      blocksByType: {},
       peers: {},
       officialRepresentatives: {}
     };
@@ -42,12 +42,11 @@ class NetworkStatus extends React.Component {
 
   async updateStats() {
     this.setState({
-      blocksByType: await apiClient.blockCountByType(),
       peers: await apiClient.peers(),
       officialRepresentatives: await apiClient.officialRepresentatives()
     });
 
-    this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
+    this.statTimer = setTimeout(this.updateStats.bind(this), 60000);
   }
 
   rebroadcastThreshold() {
@@ -166,11 +165,6 @@ class NetworkStatus extends React.Component {
         %
       </Fragment>
     );
-  }
-
-  totalBlocks() {
-    const { blocksByType } = this.state;
-    return sum(values(blocksByType).map(amt => parseInt(amt, 10)));
   }
 
   render() {
@@ -341,6 +335,7 @@ class NetworkStatus extends React.Component {
 
         <div className="row mt-3">
           <div className="col-md-6">
+            <NetworkDifficulty />
             <NetworkConfirmationQuorum />
           </div>
           <div className="col-md-6">
