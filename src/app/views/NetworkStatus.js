@@ -25,7 +25,6 @@ class NetworkStatus extends React.Component {
     super(props);
 
     this.state = {
-      peers: {},
       officialRepresentatives: {}
     };
 
@@ -42,7 +41,6 @@ class NetworkStatus extends React.Component {
 
   async updateStats() {
     this.setState({
-      peers: await apiClient.peers(),
       officialRepresentatives: await apiClient.officialRepresentatives()
     });
 
@@ -327,15 +325,15 @@ class NetworkStatus extends React.Component {
         <div className="row mt-3">
           <div className="col-md">
             <NetworkThroughput />
+            <NetworkDifficulty />
           </div>
           <div className="col-md mt-3 mt-md-0">
-            <PeerVersions peers={this.state.peers} />
+            <PeerVersions />
           </div>
         </div>
 
         <div className="row mt-3">
           <div className="col-md-6">
-            <NetworkDifficulty />
             <NetworkConfirmationQuorum />
           </div>
           <div className="col-md-6">

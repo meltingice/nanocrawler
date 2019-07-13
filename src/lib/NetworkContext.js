@@ -2,12 +2,14 @@ import React from "react";
 import { apiClient } from "./Client";
 
 const NetworkContext = React.createContext({
-  representativesOnline: {}
+  representativesOnline: {},
+  peers: []
 });
 
 class NetworkProvider extends React.Component {
   state = {
-    representativesOnline: {}
+    representativesOnline: {},
+    peers: []
   };
 
   componentDidMount() {
@@ -16,7 +18,9 @@ class NetworkProvider extends React.Component {
 
   async updateData() {
     const representativesOnline = await apiClient.representativesOnline();
-    this.setState({ representativesOnline }, () => {
+    const peers = await apiClient.peers();
+
+    this.setState({ representativesOnline, peers }, () => {
       setTimeout(this.updateData.bind(this), 300000);
     });
   }

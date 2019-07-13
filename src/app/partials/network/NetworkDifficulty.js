@@ -46,7 +46,7 @@ export default class NetworkDifficult extends React.Component {
     if (!network_minimum) return <EmptyState />;
 
     return (
-      <div className="network-difficulty">
+      <div className="mt-3 network-difficulty">
         <h2 className="mb-0">
           <TranslatedMessage id="network.difficulty.title" />
         </h2>

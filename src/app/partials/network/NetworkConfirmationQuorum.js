@@ -44,7 +44,7 @@ export default class NetworkConfirmationQuorum extends React.Component {
     } = this.state;
 
     return (
-      <div className="mt-3">
+      <div>
         <h2 className="mb-0">
           <TranslatedMessage id="network.quorum.title" />
         </h2>
