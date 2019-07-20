@@ -77,7 +77,7 @@ const PeerVersions = ({ network }) => {
 
       <p className="text-muted">
         Information about the peers this node is connected to. This does not
-        necesasrily include the entire network.
+        necessarily include the entire network.
       </p>
 
       <h3>
