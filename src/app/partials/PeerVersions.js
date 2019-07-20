@@ -72,12 +72,11 @@ const PeerVersions = ({ network }) => {
   return (
     <Fragment>
       <h2 className="mb-0">
-        <TranslatedMessage id="network.peer_versions" />
+        <TranslatedMessage id="network.peer_versions.title" />
       </h2>
 
       <p className="text-muted">
-        Information about the peers this node is connected to. This does not
-        necesasrily include the entire network.
+        <TranslatedMessage id="network.peer_versions.desc" />
       </p>
 
       <h3>
