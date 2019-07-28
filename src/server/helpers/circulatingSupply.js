@@ -11,6 +11,10 @@ const UNCIRCULATING_ACCOUNTS = [
   "ban_3fundbxxzrzfy3k9jbnnq8d44uhu5sug9rkh135bzqncyy9dw91dcrjg67wf"
 ];
 
+const BURN_ADDRESSES = [
+  "ban_1burnbabyburndiscoinferno111111111111111111111111111aj49sw3w"
+];
+
 export default async function circulatingSupply() {
   const uncirculating = _.values(
     (await nano.accounts.balances(UNCIRCULATING_ACCOUNTS)).balances
@@ -20,10 +24,19 @@ export default async function circulatingSupply() {
     )
     .reduce((acc, val) => acc + val);
 
-  const circulating = clientConfig.currency.maxSupply - uncirculating;
+  const burned = _.values(
+    (await nano.accounts.balances(BURN_ADDRESSES)).balances
+  )
+    .map(a =>
+      parseFloat(Currency.fromRaw(Currency.addRaw(a.balance, a.pending)), 10)
+    )
+    .reduce((acc, val) => acc + val);
+
+  const circulating = clientConfig.currency.maxSupply - uncirculating - burned;
 
   return {
     circulating,
-    uncirculating
+    uncirculating,
+    burned
   };
 }
