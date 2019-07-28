@@ -169,7 +169,7 @@ export default function(app, nano) {
 
     try {
       const data = await redisFetch(
-        `v2/pending/${req.params.account}`,
+        `v3/pending/${req.params.account}`,
         10,
         async () => {
           const resp = await nano.rpc("accounts_pending", {
@@ -200,9 +200,14 @@ export default function(app, nano) {
             blocks[i].timestamp = await getTimestampForHash(blocks[i].hash);
           }
 
+          const pendingBalance = (await nano.rpc("account_balance", {
+            account: req.params.account
+          })).pending;
+
           return {
             total: _.keys(allBlocks).length,
-            blocks
+            blocks,
+            pendingBalance
           };
         }
       );
