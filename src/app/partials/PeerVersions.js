@@ -6,6 +6,7 @@ import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import { withNetworkData } from "lib/NetworkContext";
 import Currency from "lib/Currency";
+import config from "client-config.json";
 
 import "./PeerVersions.css";
 
@@ -26,7 +27,7 @@ const Version = ({ version, count, weight, total }) => {
             value={Currency.fromRaw(weight)}
             maximumFractionDigits={2}
           />{" "}
-          NANO
+          {config.currency.shortName}
         </small>
       </div>
 
