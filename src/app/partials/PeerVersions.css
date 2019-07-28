@@ -1,24 +1,15 @@
 .PeerVersions .PercentBar {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 15px;
   height: 100%;
   background-color: #f2f2f2;
   z-index: 1;
 }
 
-.PeerVersions .VersionName {
-  position: absolute;
-  top: 5px;
-  left: 10px;
-  height: 100%;
-  z-index: 2;
+.PeerVersions dd {
 }
 
-.PeerVersions .VersionStats {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  height: 100%;
+.PeerVersions .PeerData {
   z-index: 2;
 }

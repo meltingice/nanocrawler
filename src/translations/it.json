@@ -1,0 +1,210 @@
+{
+    "nav.explorer": "Explorer",
+    "nav.network": "Stato della Rete",
+    "nav.status": "Stato del Nodo",
+    "explorer.title": "Explorer della Rete",
+    "explorer.form.help": 
+        "Inserisci un indirizzo {currency} o l'hash di un blocco per iniziare.",
+    "explorer.known_accounts": "Accounts conosciuti",
+    "explorer.known_accounts.desc":
+        "Alcuni posti per iniziare il tuo safari nella giungla",
+    "explorer.top_accounts": "Top {count} Accounts",
+    "explorer.top_accounts_desc":
+        "Accounts con il saldo più alto, incluse le transazioni in sospeso",
+    "explorer.top_accounts_link": "Accounts e Distribuzione",
+    "network.title": "Stato della Rete",
+    "network.reps_online": "{count} rappresentanti online",
+    "network.reps_online_desc": 
+        "Accounts che hanno almeno 1 delegato, indipendentemente dal peso del voto",
+    "network.online_voting_power": "{count} potere di voto è online",
+    "network.total_voting_power": "{percent} del potere di voto totale",
+    "network.official_reps": "{count} sono delegati a rappresentanti ufficiali",
+    "network.official_reps_stat": 
+        "{totalPower} del potere di voto totale e {onlinePower} del potere di voto online",
+    "network.online_rebroadcasting": 
+        "{count} rappresentanti ritrasmittenti online",
+    "network.online_rebroadcasting_desc": 
+        "Un rappresentante ritrasmetterà il voto solo se gli è stato delegato almeno lo 0.1% della fornitura totale ({amount} {currencyShortName})",
+    "network.rebroadcast_amt": 
+        "{count} sono assegnati a rappresentanti ritrasmittenti",
+    "network.rebroadcast_stat": 
+        "{totalPower} del potere di voto totale e {onlinePower} del potere di voto online",
+    "network.peer_versions": "Versioni Protocollo",
+    "network.aggregate.title": "Sommario Statistiche di Rete",
+    "network.aggregate.desc": 
+        "Statistiche raccolte dai {link} e filtrate per includere solo nodi con del peso nel voto",
+    "network.tracking_nodes": "Monitorando {count} nodi",
+    "network.avg_sync_status": "Media Stato Sincronizzazione",
+    "network.avg_block_count": "Media Conteggio Blocchi",
+    "network.median_block_count": "Conteggio Blocchi Medio",
+    "network.minimum_block_count": "Conteggio Blocchi Minimo",
+    "network.maximum_block_count": "Conteggio Blocchi Massimo",
+    "network.avg_percent_unchecked": "Media Percentuale Non Controllati",
+    "network.avg_unchecked": "Media Blocchi Non Controllati",
+    "network.median_unchecked": "Blocchi Non Controllati Medio",
+    "network.min_unchecked": "Blocchi Non Controllati Minimo",
+    "network.max_unchecked": "Blocchi Non Controllati Massimo",
+    "network.nano_services": "Servizi {currency}",
+    "network.nano_services_desc": 
+        "Lo stato attuale dei servizi {currency} più conosciuti. Portafogli, tip bots, strumenti di vendita, etc.",
+    "network.synced_within": "Sincronizzato entro:",
+    "network.synced_blocks": "{count} blocchi",
+    "network.synced_greater_than": "più di {count} blocchi",
+    "network.discovered_peers": "Peers Trovati",
+    "network.discovered_peers_desc": 
+        "Tutti i peers trovati che utilizzano nanoNodeMonitor, ordinati per nome.",
+    "network.monitor_count": "{count} monitors trovati",
+    "network.peers.filter": "Filtra per versione",
+    "network.peers.rebroadcast_only": "Solo rappresentanti ritrasmittenti",
+    "network.tps.title": "Capacità della Rete",
+    "network.tps.desc": "Media blocchi/sec controllati in un dato periodo di tempo",
+        "network.quorum.title": "Quorum Rete",
+    "network.quorum.desc":
+        "Importante informazione riguardo lo stato attuale del voto della rete",
+    "network.quorum.peers_total_weight": "peso totale direct peer",
+    "network.quorum.peers_total_weight_desc":
+        "Il peso totale di voto dei peers cui questo nodo è direttamente connesso. Deve rimanere al di sopra del quorum minimo impostato.",
+    "network.quorum.peers_total_weight_danger":
+        "Il peso totale di voto dei nostri peers è al di sotto del minimo attualmente impostato. I blocchi non confermeranno finché non ritornerà sopra {weight} {currencyShortName}.",
+    "network.quorum.delta": "delta quorum",
+    "network.quorum.delta_desc":
+        "Il computo del voto richiesto per un blocco per essere retrocesso. È direttamente collegato al peso totale di voto online.",
+    "status.checked_blocks": "Blocchi Controllati",
+    "status.unchecked_blocks": "Blocchi Non Controllati",
+    "status.voting_weight": "Peso del Voto",
+    "status.peers": "Peers",
+    "status.uptime": "Operatività",
+    "status.cpu_usage": "Utilizzo CPU",
+    "status.memory": "Memoria (usata / totale)",
+    "status.database": "Dimensione Database",
+    "account.title.rebroadcasting": "Accounts Ritrasmittenti",
+    "account.title.representative": "Accounts Rappresentanti",
+    "account.title.unopened": "Accounts Non Aperti",
+    "account.title.normal": "Accounts",
+    "account.rep.online": "Rappresentanti online",
+    "account.rep.offline": "Rappresentanti offline",
+    "account.rep_offline_warning": 
+        "Questo account rappresentente ha una operatività di {uptime}. Se stai delegando il peso del tuo voto ad esso, potresti considerare di passare a {link}",
+    "account.rep_offline.warning_link": 
+        "verificato con almeno il 95% di operatività.",
+    "account.rep_offline.desc": 
+        "Un rappresentante offline indica che esso non sta più votando. Non influenzerà le transazioni in alcun modo.",
+    "account.version.0":
+        "Questo account non è stato ancora aggiornato con un blocco epoch. Ciò significa che questo account può ancora accettare blocchi non-state.",
+    "account.version.1":
+        "Questo account è stato aggiornato con un blocco epoch v1 e può accettare solo blocchi state.",
+    "account.history": "Cronologia",
+    "account.delegators": "Delegati",
+    "account.represented_by": "Rappresentato da {account}",
+    "account.delegators.empty_state.title": "Questo account non ha delegati",
+    "account.delegators.empty_state.desc": 
+        "Sebbene questo account sia valido, nessuno sta attualmente prestando il peso del suo voto ad esso. Se l'account di solito è offline, è una buona cosa.",
+    "account.delegators.loading": "Caricamento delegati...",
+    "account.delegators.title": "Delegati",
+    "account.delegators.desc": "{count} delegati, ordinati per peso",
+    "account.delegators.filter": 
+        "Solo accounts con almeno 1 {currencyShortName} mostrati",
+    "account.delegators.weight": "Peso Delegato",
+    "account.pending.title": "Transazioni in Attesa",
+    "account.pending.limit": "Solo fino a 20 depositi in attesa mostrati",
+    "account.pending.count": "transazioni in attesa",
+    "account.transactions.title": "Transazioni",
+    "account.transactions.total": "totale transazioni",
+    "account.transactions.load_more": "Carica Altre Transazioni",
+    "account.unopened.title": "Questo account non è stato ancora aperto",
+    "account.unopened.desc": 
+        "Anche se l'indirizzo dell'account è valido, nessun blocco è stato ancora pubblicato nella sua catena. Se sono stati inviati dei {currencyShortName} su questo account, dovrà pubblicare un blocco corrispondente per assicurare i fondi.",
+    "block.state": "Stato",
+    "block.subtype.open": "aperto",
+    "block.subtype.change": "cambia",
+    "block.subtype.send": "invia",
+    "block.subtype.receive": "ricevi",
+    "block.subtype.epoch": "epoch",
+    "block.to": "a",
+    "block.from": "da",
+    "block.previous": "Blocco Precedente",
+    "block.previous.desc": "Il blocco precedente nella catena di questo account",
+    "block.pow": "Proof of Work",
+    "block.signature": "Firma",
+    "block.link": "Link",
+    "block.balance.desc": "Il saldo di questo account dopo questa transazione",
+    "block.timestamp.desc": 
+        "La data e l'ora in cui questo blocco è stato trovato (convertita nella tua ora locale)",
+    "block.source.desc": "Il corrispondente blocco d'invio per questa transazione",
+    "block.sender": "Mittente",
+    "block.sender.desc": "L'account che ha iniziato la transazione",
+    "block.recipient": "Destinatario",
+    "block.recipient.desc": "L'account che sta ricevendo la transazione",
+    "block.change.account": "L'account che ha cambiato il proprio rappresentante",
+    "block.change.rep": "Il nuovo rappresentante dell'account",
+    "block.unknown": "Blocco Sconosciuto",
+    "block.unknown.title": "Questo blocco non è stato ancora ricevuto",
+    "block.unknown.desc": 
+        "{currency} è una critpovaluta completamente asincrona. Per questo motivo, a volte le transazioni possono metterci qualche secondo in più per trasmettersi attraverso la rete.",
+    "block.unknown.desc2": 
+        "Se sei sicuro che l'hash del blocco sia corretto, aspetta un po' e aggiorna la pagina.",
+    "block.unknown.return": "Ritorna all'Explorer",
+    "block.open.desc": "L'account che è stato creato da questo blocco",
+    "block.open.opened_by": "Aperto Da",
+    "block.open.opened_by.desc": 
+        "L'account la cui transazione ha aperto questo account",
+    "block.open.rep": "Il rappresentante assegnato a questo account",
+    "block.open.amount_desc": 
+        "La quantità di {currencyShortName} inviati per aprire questo account, che può essere 0",
+    "block.send.amount_desc": 
+        "La quantità di {currencyShortName} che sono stati inviati in questa transazione",
+    "block.state.subtype": "Sottotipo blocco",
+    "block.state.subtype.desc": 
+        "Il tipo di transazione che ha creato questo blocco",
+    "block.state.account": "L'account rappresentato da questo blocco di stato",
+    "block.state.rep.desc": "Il rappresentante dell'account",
+    "block.state.previous.none": "Niente (questo blocco ha aperto l'account)",
+    "block.state.link.open": 
+        "Il blocco corrispondente ha iniziato la transazione",
+    "block.state.link.change": 
+        "Impostato a tutti gli 0, risulta essere il burn address codificato in formato esadecimale",
+    "block.state.link.send": "L'indirizzo di destinazione codificato in formato esadecimale",
+    "block.state.link.receive": 
+        "Il corrispondente blocco che ha iniziato questa transazione",
+     "block.state.link.epoch":
+        "Tutti i blocchi epoch usano lo stesso valore di questo campo, che è \"epoch v1 block\" codificato in formato esadecimale.",
+    "ninja.verified_by": "Verificato da {link}",
+    "ninja.uptime": "Operatività {percent}",
+    "ninja.last_voted": "Ultimo voto {date}",
+    "ninja.monitor_link": "Open Node Monitor",
+    "ninja.sync_status": "Stato sincronizzazione {status}",
+    "ninja.block_count": "Conteggio blocchi {count}",
+    "ninja.node_version": "Versione nodo {version}",
+    "ninja.verified_accounts": "Accounts verificati",
+    "ninja.verified_accounts.desc": 
+        "Alcuni accounts casuali verificati con {link}",
+    "stream.title": "Transazioni Recenti",
+    "stream.desc": 
+        "Uno stream in tempo reale delle transazioni sulla rete {currency}",
+    "stream.waiting": "In attesa delle transazioni...",
+    "stream.change": "hanno cambiato il loro rappresentante con",
+    "stream.open": "è stato creato con {amount} {currencyShortName}",
+    "stream.receive": "ha ricevuto {amount} {currencyShortName}",
+    "stream.send": "ha inviato {amount} {currencyShortName}",
+    "accounts.nano_distribution": "Distribuzione {currencyShortName}",
+    "accounts.all_accounts": "Tutti gli Accounts",
+    "accounts.desc1":
+        "Solo account con almeno 0.000001 {currencyShortName}, ordinati per saldo",
+    "accounts.desc2": "Il saldo include tutte le transazioni in sospeso",
+    "error.not_found": "Questa pagina non sembra esistere",
+    "error.server_error": 
+        "Il server è incorso in un errore o non è in grado di soddisfare la tua richiesta",
+    "search": "Cerca",
+    "pending": "in attesa",
+    "weight": "peso",
+    "account": "account",
+    "type": "tipo",
+    "amount": "importo",
+    "date": "data",
+    "block": "blocco",
+    "representative": "rappresentante",
+    "source": "sorgente",
+    "balance": "saldo",
+    "name": "nome",
+    "version": "versione"
+}
