@@ -123,7 +123,10 @@ export default function withAccountData(WrappedComponent) {
           return block;
         });
 
-        this.setState({ pendingTransactions });
+        this.setState({
+          pendingTransactions,
+          pending: pendingTransactions.pendingBalance
+        });
       } catch (e) {
         // We don't have to fail hard if this doesn't work
       } finally {
