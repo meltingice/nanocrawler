@@ -50,6 +50,7 @@ export default function(app, nano) {
     try {
       const data = await redisFetch("confirmation_history", 10, async () => {
         const resp = await nano.rpc("confirmation_history");
+        if (!resp.confirmations) resp.confirmations = [];
         resp.confirmations.sort((a, b) => {
           const timeA = parseInt(a.time, 10);
           const timeB = parseInt(b.time, 10);
