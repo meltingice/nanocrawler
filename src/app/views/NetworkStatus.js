@@ -11,6 +11,7 @@ import { withNetworkData } from "lib/NetworkContext";
 
 import AggregateNetworkData from "../partials/AggregateNetworkData";
 import NetworkThroughput from "../partials/network/NetworkThroughput";
+import NetworkDifficulty from "../partials/network/NetworkDifficulty";
 import NetworkConfirmationQuorum from "../partials/network/NetworkConfirmationQuorum";
 import NetworkConfirmationHistory from "../partials/network/NetworkConfirmationHistory";
 import PeerVersions from "../partials/PeerVersions";
@@ -25,8 +26,6 @@ class NetworkStatus extends React.Component {
     super(props);
 
     this.state = {
-      blocksByType: {},
-      peers: {},
       officialRepresentatives: {}
     };
 
@@ -43,16 +42,15 @@ class NetworkStatus extends React.Component {
 
   async updateStats() {
     this.setState({
-      blocksByType: await apiClient.blockCountByType(),
-      peers: await apiClient.peers(),
       officialRepresentatives: await apiClient.officialRepresentatives()
     });
 
-    this.statTimer = setTimeout(this.updateStats.bind(this), 10000);
+    this.statTimer = setTimeout(this.updateStats.bind(this), 60000);
   }
 
   rebroadcastThreshold() {
-    return config.currency.maxSupply * 0.001;
+    const { onlineStake } = this.props.network;
+    return Currency.fromRaw(onlineStake) * 0.001;
   }
 
   rebroadcastableReps() {
@@ -65,8 +63,8 @@ class NetworkStatus extends React.Component {
   }
 
   onlineWeight() {
-    const { representativesOnline } = this.props.network;
-    return sum(values(representativesOnline).map(amt => Currency.fromRaw(amt)));
+    const { onlineStake } = this.props.network;
+    return Currency.fromRaw(onlineStake);
   }
 
   onlineRebroadcastWeight() {
@@ -167,11 +165,6 @@ class NetworkStatus extends React.Component {
         %
       </Fragment>
     );
-  }
-
-  totalBlocks() {
-    const { blocksByType } = this.state;
-    return sum(values(blocksByType).map(amt => parseInt(amt, 10)));
   }
 
   filteredRepresentatives() {
@@ -343,9 +336,10 @@ class NetworkStatus extends React.Component {
         <div className="row mt-3">
           <div className="col-md">
             <NetworkThroughput />
+            <NetworkDifficulty />
           </div>
           <div className="col-md mt-3 mt-md-0">
-            <PeerVersions peers={this.state.peers} />
+            <PeerVersions />
           </div>
         </div>
 

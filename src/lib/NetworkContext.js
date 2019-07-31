@@ -2,12 +2,16 @@ import React from "react";
 import { apiClient } from "./Client";
 
 const NetworkContext = React.createContext({
-  representativesOnline: {}
+  representativesOnline: {},
+  peers: [],
+  onlineStake: "0"
 });
 
 class NetworkProvider extends React.Component {
   state = {
-    representativesOnline: {}
+    representativesOnline: {},
+    peers: [],
+    onlineStake: "0"
   };
 
   componentDidMount() {
@@ -16,9 +20,19 @@ class NetworkProvider extends React.Component {
 
   async updateData() {
     const representativesOnline = await apiClient.representativesOnline();
-    this.setState({ representativesOnline }, () => {
-      setTimeout(this.updateData.bind(this), 300000);
-    });
+    const peers = await apiClient.peers();
+    const confirmationQuorum = await apiClient.confirmationQuorum();
+
+    this.setState(
+      {
+        representativesOnline,
+        peers,
+        onlineStake: confirmationQuorum.online_stake_total
+      },
+      () => {
+        setTimeout(this.updateData.bind(this), 300000);
+      }
+    );
   }
 
   render() {

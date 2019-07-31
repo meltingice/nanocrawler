@@ -41,7 +41,7 @@ class Client {
   }
 
   async peers() {
-    const resp = await this.fetch("peers");
+    const resp = await this.fetch("v2/network/peers");
     return (await resp.json()).peers;
   }
 
@@ -95,6 +95,11 @@ class Client {
   async networkData() {
     const resp = await this.fetch("network_data");
     return (await resp.json()).network;
+  }
+
+  async activeDifficulty() {
+    const resp = await this.fetch("v2/network/active_difficulty");
+    return await resp.json();
   }
 
   async wealthDistribution() {
