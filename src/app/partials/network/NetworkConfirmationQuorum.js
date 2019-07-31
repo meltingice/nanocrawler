@@ -23,7 +23,7 @@ export default class NetworkConfirmationQuorum extends React.Component {
   async fetchData() {
     const quorum = await apiClient.confirmationQuorum();
     this.setState(quorum, () => {
-      this.timer = setTimeout(this.fetchData.bind(this), 10000);
+      this.timer = setTimeout(this.fetchData.bind(this), 30000);
     });
   }
 
