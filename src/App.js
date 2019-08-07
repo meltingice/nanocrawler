@@ -9,6 +9,7 @@ import Navigation from "./app/Navigation";
 import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
+import config from "./client-config.json";
 
 function App({ locale }) {
   return (
@@ -31,10 +32,12 @@ function App({ locale }) {
               <p>
                 Donations:{" "}
                 <a
-                  href="https://nanocrawler.cc/explorer/account/xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh/history"
+                  href={`https://nanocrawler.cc/explorer/account/${
+                    config.donationAddress
+                  }/history`}
                   target="_blank"
                 >
-                  xrb_3xemzomy4atzmq5u55mzzixqw9zxykyeyeiqia7rb1xy1saufpr8wzder1xh
+                  {config.donationAddress}
                 </a>
               </p>
             </div>
