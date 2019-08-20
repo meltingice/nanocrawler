@@ -178,7 +178,7 @@ export default function withAccountData(WrappedComponent) {
       };
 
       event.block.hash = event.hash;
-      event.block.timestamp = event.timestamp;
+      event.block.timestamp = event.timestamp || event.local_timestamp;
       event.block.amount = Currency.toRaw(event.block.amount);
 
       switch (event.block.type) {
