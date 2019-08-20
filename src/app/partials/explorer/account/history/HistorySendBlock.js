@@ -43,7 +43,7 @@ export default function HistorySendBlock({ block }) {
       }
       date={
         <OptionalField
-          value={formatTimestamp(block.timestamp || block.local_timestamp)}
+          value={formatTimestamp(block.timestamp, block.local_timestamp)}
         />
       }
       block={

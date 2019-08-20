@@ -1,8 +1,9 @@
 import moment from "moment";
 import config from "client-config.json";
 
-export function formatTimestamp(timestamp) {
-  if (!timestamp) return null;
+export function formatTimestamp(timestamp, localTimestamp = null) {
+  if (!timestamp || !localTimestamp) return null;
+  if (!timestamp) timestamp = localTimestamp * 1000;
   return moment(parseInt(timestamp, 10)).format("MMM D, YYYY HH:mm:ss");
 }
 

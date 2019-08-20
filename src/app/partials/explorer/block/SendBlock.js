@@ -74,7 +74,7 @@ export default function SendBlock({ block }) {
         </span>{" "}
         <small className="text-muted">
           <OptionalField
-            value={formatTimestamp(block.timestamp || block.local_timestamp)}
+            value={formatTimestamp(block.timestamp, block.local_timestamp)}
           />
         </small>
       </h4>

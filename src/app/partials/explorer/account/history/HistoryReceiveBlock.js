@@ -43,7 +43,7 @@ export default function HistoryReceiveBlock({ block, intl }) {
       }
       date={
         <OptionalField
-          value={formatTimestamp(block.timestamp || block.local_timestamp)}
+          value={formatTimestamp(block.timestamp, block.local_timestamp)}
         />
       }
       block={

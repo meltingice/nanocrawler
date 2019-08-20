@@ -106,7 +106,7 @@ export default class HistoryStateBlock extends React.PureComponent {
         }
         date={
           <OptionalField
-            value={formatTimestamp(block.timestamp || block.local_timestamp)}
+            value={formatTimestamp(block.timestamp, block.local_timestamp)}
           />
         }
         block={
