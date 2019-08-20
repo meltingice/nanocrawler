@@ -24,7 +24,7 @@ export default function HistoryChangeBlock({ block }) {
       amount={<i className="text-muted">N/A</i>}
       date={
         <OptionalField
-          value={formatTimestamp(block.timestamp || block.local_timestamp)}
+          value={formatTimestamp(block.timestamp, block.local_timestamp)}
         />
       }
       block={
