@@ -52,7 +52,10 @@ async function calculateAccountList() {
   });
 
   updateSortedAccounts(_.flatten(sortedAccounts), accountsToRemove);
-  updateAllAccounts(sortedAccounts, accountsToRemove);
+  if (clientConfig.features.searchSuggestions) {
+    updateAllAccounts(sortedAccounts, accountsToRemove);
+  }
+
   setTimeout(calculateAccountList, 900000); // every 15 minutes
 }
 
