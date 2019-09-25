@@ -55,7 +55,7 @@ class Account extends React.Component {
 
     const mnano = Currency.fromRaw(weight);
 
-    if (mnano >= config.currency.maxSupply * 0.001)
+    if (mnano >= Currency.fromRaw(this.props.network.onlineStake) * 0.001)
       return formatMessage(withDefault({ id: "account.title.rebroadcasting" }));
     if (mnano > 0)
       return formatMessage(withDefault({ id: "account.title.representative" }));

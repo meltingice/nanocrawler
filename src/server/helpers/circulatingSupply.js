@@ -33,10 +33,12 @@ export default async function circulatingSupply() {
     .reduce((acc, val) => acc + val);
 
   const circulating = clientConfig.currency.maxSupply - uncirculating - burned;
+  const total = clientConfig.currency.maxSupply - burned;
 
   return {
     circulating,
     uncirculating,
-    burned
+    burned,
+    total
   };
 }

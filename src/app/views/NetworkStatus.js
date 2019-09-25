@@ -51,7 +51,8 @@ class NetworkStatus extends React.Component {
   }
 
   rebroadcastThreshold() {
-    return config.currency.maxSupply * 0.001;
+    const { onlineStake } = this.props.network;
+    return Currency.fromRaw(onlineStake) * 0.001;
   }
 
   rebroadcastableReps() {
@@ -64,8 +65,8 @@ class NetworkStatus extends React.Component {
   }
 
   onlineWeight() {
-    const { representativesOnline } = this.props.network;
-    return sum(values(representativesOnline).map(amt => Currency.fromRaw(amt)));
+    const { onlineStake } = this.props.network;
+    return Currency.fromRaw(onlineStake);
   }
 
   onlineRebroadcastWeight() {

@@ -33,7 +33,8 @@ export default function HistorySendBlock({ block }) {
       }
       amount={
         <span className="text-danger">
-          -<FormattedNumber
+          -
+          <FormattedNumber
             value={Currency.fromRaw(block.amount)}
             maximumFractionDigits={6}
             minimumFractionDigits={2}
@@ -41,7 +42,11 @@ export default function HistorySendBlock({ block }) {
           {config.currency.shortName}
         </span>
       }
-      date={<OptionalField value={formatTimestamp(block.timestamp)} />}
+      date={
+        <OptionalField
+          value={formatTimestamp(block.timestamp, block.local_timestamp)}
+        />
+      }
       block={
         <div className="text-truncate">
           <small>
