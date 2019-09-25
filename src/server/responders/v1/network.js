@@ -57,4 +57,16 @@ export default function(app, nano) {
       res.status(500).send({ error: e.message });
     }
   });
+
+  app.get("/supply/total", async (req, res) => {
+    try {
+      const data = await redisFetch("circulating_supply", 300, async () => {
+        return await circulatingSupply();
+      });
+
+      res.status(200).send(data.total.toString());
+    } catch (e) {
+      res.status(500).send({ error: e.message });
+    }
+  });
 }
