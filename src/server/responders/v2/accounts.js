@@ -1,4 +1,5 @@
 import _ from "lodash";
+import BigNumber from "bignumber.js";
 import config from "../../../../server-config.json";
 import redisFetch from "../../helpers/redisFetch";
 import { accountIsValid, getTimestampForHash } from "../../helpers/util";
@@ -169,7 +170,7 @@ export default function(app, nano) {
 
     try {
       const data = await redisFetch(
-        `v3/pending/${req.params.account}`,
+        `v7/pending/${req.params.account}`,
         10,
         async () => {
           const resp = await nano.rpc("accounts_pending", {
@@ -186,6 +187,13 @@ export default function(app, nano) {
           // key in the hash.
           const allBlocks = resp.blocks[_.keys(resp.blocks)[0]];
           const blocks = _.toPairs(allBlocks)
+            .sort((a, b) => {
+              const bigA = BigNumber(a[1].amount);
+              const bigB = BigNumber(b[1].amount);
+              if (bigA.lt(bigB)) return 1;
+              if (bigA.gt(bigB)) return -1;
+              return 0;
+            })
             .slice(0, 20)
             .map(data => {
               return {
