@@ -1,5 +1,5 @@
 import React from "react";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { CSSTransitionGroup } from "react-transition-group";
 import BlockLink from "../BlockLink";
 import { apiClient } from "lib/Client";
 import { FormattedNumber } from "react-intl";
@@ -83,7 +83,7 @@ export default class NetworkConfirmationHistory extends React.Component {
             <h5>
               <TranslatedMessage id="network.confirmation_history.recent_elections" />
             </h5>
-            <ReactCSSTransitionGroup
+            <CSSTransitionGroup
               transitionName="Transaction"
               transitionEnterTimeout={500}
               transitionLeave={false}
@@ -94,7 +94,7 @@ export default class NetworkConfirmationHistory extends React.Component {
                   confirmation={confirmation}
                 />
               ))}
-            </ReactCSSTransitionGroup>
+            </CSSTransitionGroup>
           </div>
         )}
       </div>
