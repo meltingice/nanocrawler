@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { CSSTransitionGroup } from "react-transition-group";
 import AccountWebsocket from "lib/AccountWebsocket";
 
