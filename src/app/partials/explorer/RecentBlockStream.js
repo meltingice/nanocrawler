@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { CSSTransitionGroup } from "react-transition-group";
 import AccountWebsocket from "lib/AccountWebsocket";
 
 import { apiClient } from "lib/Client";
@@ -95,13 +95,15 @@ export default class RecentBlockStream extends React.Component {
     const { events } = this.state;
     if (events.length === 0) return this.emptyState();
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName="Transaction"
         transitionEnterTimeout={500}
         transitionLeave={false}
       >
-        {events.map(event => <RecentBlock key={event.hash} event={event} />)}
-      </ReactCSSTransitionGroup>
+        {events.map(event => (
+          <RecentBlock key={event.hash} event={event} />
+        ))}
+      </CSSTransitionGroup>
     );
   }
 

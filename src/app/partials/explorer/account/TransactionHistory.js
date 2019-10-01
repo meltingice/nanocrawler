@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import { CSSTransitionGroup } from "react-transition-group";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 
 import HistorySendBlock from "./history/HistorySendBlock";
@@ -55,13 +55,13 @@ export default function TransactionHistory({ history }) {
 
       <hr />
 
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName="Transaction"
         transitionEnterTimeout={500}
         transitionLeaveTimeout={500}
       >
         {blocks}
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     </Fragment>
   );
 }
