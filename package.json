@@ -41,7 +41,7 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.21.0",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "nanode": "^2.2.1",
     "node-fetch": "^2.1.2",
     "object-assign": "4.1.1",
