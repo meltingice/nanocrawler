@@ -3,13 +3,17 @@ import { FormattedNumber } from "react-intl";
 import { TranslatedMessage } from "lib/TranslatedMessage";
 import AccountLink from "../../AccountLink";
 import BlockLink from "../../BlockLink";
+import Natricon from "../../Natricon";
 import config from "client-config.json";
 
 export default function SendBlock({ event }) {
   const { block } = event;
   return (
     <div className="row">
-      <div className="col">
+      <div className="col col-lg-auto text-center pr-lg-0">
+        <Natricon account={block.account} style={{ width: "75px" }} />
+      </div>
+      <div className="col pl-lg-0">
         <p className="mb-0">
           <AccountLink
             account={block.account}
