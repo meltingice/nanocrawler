@@ -129,7 +129,9 @@ class Client {
   }
 
   async fetch(endpoint) {
-    const resp = await fetch(`${this.host}/${endpoint}`);
+    // TODO change me
+    //const resp = await fetch(`${this.host}/${endpoint}`);
+    const resp = await fetch(`https://nanocrawler.cc/${endpoint}`);
     if (resp.ok) return resp;
     const data = await resp.json();
     throw new Error(data.error);

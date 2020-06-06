@@ -5,6 +5,8 @@ import map from "lodash/map";
 import config from "../../client-config.json";
 import { withTranslations } from "lib/TranslationContext";
 
+import "./SettingsChooser.css";
+
 class SettingsChooser extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -55,18 +57,30 @@ class SettingsChooser extends React.PureComponent {
             menuOpen ? "d-block" : ""
             }`}
         >
-          {map(supportedLanguages, (name, code) => (
-            <button
-              key={code}
-              className="dropdown-item"
-              onClick={() => this.setLanguage(code)}
-              style={{ cursor: "pointer" }}
-            >
-              {name}
-            </button>
-          ))}
+          <button className="dropdown-item" style={{ cursor: "pointer" }}>
+            <div className="row flex-nowrap justify-content-between px-2">
+              <span>Dark Mode</span>
+              <span className="ml-3">
+                <label className="switch my-auto">
+                  <input type="checkbox"></input>
+                  <span className="slider round"></span>
+                </label>
+              </span>
+            </div>
+          </button>
+          <button className="dropdown-item" style={{ cursor: "pointer" }}>
+            <div className="row flex-nowrap justify-content-between px-2">
+              <span>Natricon</span>
+              <span className="ml-3">
+                <label className="switch my-auto">
+                  <input type="checkbox"></input>
+                  <span className="slider round"></span>
+                </label>
+              </span>
+            </div>
+          </button>
         </div>
-      </div>
+      </div >
     );
   }
 }
