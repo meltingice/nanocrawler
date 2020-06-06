@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import Natricon from "app/partials/Natricon";
+import { withNatriconData } from "lib/NatriconContext";
 
-export default function HistoryEntry({ type, transactionAccount, account, amount, date, block }) {
+function HistoryEntry({ natricon, type, transactionAccount, account, amount, date, block }) {
   return (
     <Fragment>
       <div className="row align-items-center">
@@ -11,14 +12,16 @@ export default function HistoryEntry({ type, transactionAccount, account, amount
               <b className="d-lg-none">{type}</b>
               <span className="d-none d-lg-inline">{type}</span>
             </div>
-            <div className="col-auto d-block d-lg-none">
-              <Natricon account={transactionAccount} style={{ width: "50px" }} />
-            </div>
+            {natricon.enabled &&
+              <div className="col-auto d-block d-lg-none">
+                <Natricon account={transactionAccount} style={{ width: "50px" }} />
+              </div>
+            }
           </div>
         </div>
-        <div className="d-none d-lg-block col-lg-1 px-0 text-center">
+        {natricon.enabled && <div className="d-none d-lg-block col-lg-1 px-0 text-center">
           <Natricon account={transactionAccount} style={{ maxWidth: "75px" }} />
-        </div>
+        </div>}
         <div className="col-12 col-lg-6 mt-1 mt-lg-0">
           {account}
           <br />
@@ -38,3 +41,5 @@ export default function HistoryEntry({ type, transactionAccount, account, amount
     </Fragment>
   );
 }
+
+export default withNatriconData(HistoryEntry);

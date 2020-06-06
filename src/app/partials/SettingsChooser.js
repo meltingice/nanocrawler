@@ -1,9 +1,9 @@
 import React from "react";
+import Cookies from "js-cookie";
 import { injectIntl } from "react-intl";
-import map from "lodash/map";
-
-import config from "../../client-config.json";
-import { withTranslations } from "lib/TranslationContext";
+import { withDefault } from "lib/TranslatedMessage";
+import { withNatriconData } from "lib/NatriconContext";
+import config from "client-config.json";
 
 import "./SettingsChooser.css";
 
@@ -15,31 +15,51 @@ class SettingsChooser extends React.PureComponent {
     };
   }
 
+  isDarkTheme() {
+    let cookieVal = Cookies.get("nanocrawler.theme")
+    let enabled = cookieVal === "dark"
+    if (cookieVal === undefined) {
+      enabled = config.features.defaultDarkTheme || false
+    }
+    return enabled
+  }
+
+  darkChanged(event) {
+    if (event.target.checked) {
+      Cookies.set("nanocrawler.theme", "dark")
+      document.body.classList.add("theme-dark")
+    } else {
+      Cookies.set("nanocrawler.theme", "light")
+      document.body.classList.remove("theme-dark")
+    }
+    setTimeout(() => {
+      this.setState({ menuOpen: false });
+    }, 150);
+  }
+
+  natriconOn() {
+    const { natricon } = this.props
+    return natricon.enabled;
+  }
+
+  natriconChanged(event) {
+    const { natricon } = this.props
+    natricon.setNatricon(event.target.checked)
+    setTimeout(() => {
+      this.setState({ menuOpen: false });
+
+    }, 150);
+  }
+
   toggle() {
     this.setState(prevState => ({
       menuOpen: !prevState.menuOpen
     }));
   }
 
-  languageToName(lang) {
-    const { supportedLanguages } = config.features;
-    const languageWithoutRegionCode = lang.toLowerCase().split(/[_-]+/)[0];
-
-    return (
-      supportedLanguages[lang] || supportedLanguages[languageWithoutRegionCode]
-    );
-  }
-
-  setLanguage(code) {
-    const { locale } = this.props;
-    locale.setLanguage(code);
-    this.setState({ menuOpen: false });
-  }
-
   render() {
-    const { locale } = this.props;
     const { menuOpen } = this.state;
-    const { supportedLanguages } = config.features;
+    const { formatMessage } = this.props.intl;
 
     return (
       <div className="dropdown">
@@ -59,10 +79,12 @@ class SettingsChooser extends React.PureComponent {
         >
           <label className="dropdown-item py-2" style={{ cursor: "pointer" }}>
             <div className="row flex-nowrap justify-content-between px-2">
-              <span>Dark Mode</span>
+              <span>{formatMessage(withDefault({ id: "theme.darkmode" }))}</span>
               <span className="ml-3">
                 <label className="switch my-auto">
-                  <input type="checkbox"></input>
+                  <input type="checkbox"
+                    defaultChecked={this.isDarkTheme()}
+                    onChange={e => this.darkChanged(e)}></input>
                   <span className="slider round"></span>
                 </label>
               </span>
@@ -70,10 +92,12 @@ class SettingsChooser extends React.PureComponent {
           </label>
           <label className="dropdown-item py-2" style={{ cursor: "pointer" }}>
             <div className="row flex-nowrap justify-content-between px-2">
-              <span>Natricon</span>
+              <span>{formatMessage(withDefault({ id: "natricon" }))}</span>
               <span className="ml-3">
                 <label className="switch my-auto">
-                  <input type="checkbox"></input>
+                  <input type="checkbox"
+                    defaultChecked={this.natriconOn()}
+                    onChange={e => this.natriconChanged(e)}></input>
                   <span className="slider round"></span>
                 </label>
               </span>
@@ -85,4 +109,4 @@ class SettingsChooser extends React.PureComponent {
   }
 }
 
-export default withTranslations(SettingsChooser);
+export default withNatriconData(injectIntl(SettingsChooser));

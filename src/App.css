@@ -1,6 +1,7 @@
+@import "~bootstrap/scss/bootstrap";
+
 :root {
   --nano-blue: #2c3e50;
-  --secondary: #dc3545!important;
 }
 
 .text-monospace {

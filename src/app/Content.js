@@ -17,6 +17,14 @@ const ExplorerBlock = React.lazy(() => import("./views/explorer/Block"));
 const Accounts = React.lazy(() => import("./views/explorer/Accounts"));
 
 class Content extends React.Component {
+  constructor(props) {
+    super(props);
+ 
+    this.state = {
+      natriconOn: true
+    };
+  }
+   
   state = {
     hasError: false
   };

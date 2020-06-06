@@ -182,5 +182,7 @@
     "network.confirmation_history.recent_elections": "Recent Elections",
     "network.confirmation_history.title": "Block Confirmation History",
     "network.confirmation_history.desc": "A historical look at the election duration for recent blocks",
-    "account.title.donation": "Donation Account"
+    "account.title.donation": "Donation Account",
+    "theme.darkmode": "Dark Mode",
+    "natricon": "Natricon"
 }
