@@ -57,7 +57,7 @@ class SettingsChooser extends React.PureComponent {
             menuOpen ? "d-block" : ""
             }`}
         >
-          <button className="dropdown-item" style={{ cursor: "pointer" }}>
+          <label className="dropdown-item py-2" style={{ cursor: "pointer" }}>
             <div className="row flex-nowrap justify-content-between px-2">
               <span>Dark Mode</span>
               <span className="ml-3">
@@ -67,8 +67,8 @@ class SettingsChooser extends React.PureComponent {
                 </label>
               </span>
             </div>
-          </button>
-          <button className="dropdown-item" style={{ cursor: "pointer" }}>
+          </label>
+          <label className="dropdown-item py-2" style={{ cursor: "pointer" }}>
             <div className="row flex-nowrap justify-content-between px-2">
               <span>Natricon</span>
               <span className="ml-3">
@@ -78,7 +78,7 @@ class SettingsChooser extends React.PureComponent {
                 </label>
               </span>
             </div>
-          </button>
+          </label>
         </div>
       </div >
     );

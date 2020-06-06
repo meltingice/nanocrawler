@@ -1,4 +1,7 @@
 /* The switch - the box around the slider */
+.dropdown-menu label {
+    margin-bottom: 0px;
+}
 .switch {
     position: relative;
     display: inline-block;
@@ -22,8 +25,8 @@
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: .3s;
+    transition: .3s;
   }
   
   .slider:before {
@@ -34,8 +37,8 @@
     left: 3px;
     bottom: 3px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: .3s;
+    transition: .3s;
   }
   
   input:checked + .slider {
