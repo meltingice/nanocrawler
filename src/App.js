@@ -1,6 +1,5 @@
 import React from "react";
 import { IntlProvider } from "react-intl";
-import Cookies from "js-cookie";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
