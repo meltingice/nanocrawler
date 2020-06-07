@@ -306,18 +306,14 @@ class Account extends React.Component {
       weight
     } = this.props;
 
-    // TODO - change me
-    let tunopened = false;
-    let thistory = [{ "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "2000000000000000000000000000000000000", "local_timestamp": "1574084399", "height": "13", "hash": "707CAA0DBEB16C486EE37C03409D663ACE501D2985CC72ACD6903CECACF3189C" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "400000000000000000000000000000000000", "local_timestamp": "1573811710", "height": "12", "hash": "56569C595ED2AAD44D7F7A51160B6173B02223DFC5515673B0008F554F8B6519" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "300000000000000000000000000000000000", "local_timestamp": "1573773108", "height": "11", "hash": "3FC82DC0BBC7A49283D135C52E18244941D443DEB8C02B0A656BFB2C149EB2E5" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "400000000000007345764011035850609487", "local_timestamp": "1572962480", "height": "10", "hash": "00216358247619748B7D3D706BE90E3923A343F36BA60FD5F3BAB4B13D33B0A0" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "200000000000000000000000000000000000", "local_timestamp": "1571666716", "height": "9", "hash": "1C067C141BC3B74B02EC1549DB5CBDFEF6E160793D1FD94F43515F50EE76A601" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "400000000000000000000000000000000000", "local_timestamp": "1571376870", "height": "8", "hash": "1085C10015254C8954F92EEA5525F4D29B7441DF9B3AC68B7C692798021FC388" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "600000000000000000000000000000000000", "local_timestamp": "1569749069", "height": "7", "hash": "CC56A2B3130EA5D34156A95F9138A4C88F720871A278C9DBD805AB189E964903" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "200000000000000000000000000000000000", "local_timestamp": "1569741272", "height": "6", "hash": "DF7A4363F543C26FCAFB56D859FDA3FD23D3B3019914768F1A31F06945920564" }, { "type": "receive", "account": "nano_3xinwsdt57qo5bcysock15do87r9fuepq84erab5udm6wekymq9e9tiin8hw", "amount": "6000000000000000000000000000000", "local_timestamp": "1569741261", "height": "5", "hash": "BDE3F2036213541EB771E0CB27BC012C7F34DE29D73132B9556F6B70710E350C" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "200000000000000000000000000000000000", "local_timestamp": "1569479594", "height": "4", "hash": "1D6ADCAA350E63A38FCB12EC3B810580C22050D0FA0CB4BCDDFA62B8D3454EE9" }, { "type": "receive", "account": "nano_14cuejfpr58epnpxenirusimsrbwxbecin7a3izq1injptecc31qsjwquoe6", "amount": "5185355824306007345764011035850609487", "local_timestamp": "1568806531", "height": "3", "hash": "B42BDCE82B55BEB0602C1E374B8A14CE13A153A6E757CD832013E0A603E640F4" }, { "type": "send", "account": "nano_3jwrszth46rk1mu7rmb4rhm54us8yg1gw3ipodftqtikf5yqdyr7471nsg1k", "amount": "666000000000000000000000000000000", "local_timestamp": "1568805188", "height": "2", "hash": "AC08696267C4DB72C03AB3F4309C7C3268D79B8945C02B2BA262DE724707FB7B" }, { "type": "receive", "account": "nano_14cuejfpr58epnpxenirusimsrbwxbecin7a3izq1injptecc31qsjwquoe6", "amount": "888000000000000000000000000000000", "local_timestamp": "1568805079", "height": "1", "hash": "0EF9B910283D2D72ACA1E40C6363633E59E0405B60FD6B98F722D2FD60A9F73B" }];
-
     switch (match.params.page) {
       case "history":
         return this.props.loading ? (
           <Loading />
         ) : (
             <AccountHistory
-              unopened={tunopened}
-              history={thistory}
+              unopened={unopened}
+              history={history}
               pendingTransactions={pendingTransactions}
               blockCount={blockCount}
               loadMore={loadMore}
