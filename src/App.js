@@ -1,7 +1,8 @@
 import React from "react";
 import { IntlProvider } from "react-intl";
 import Cookies from "js-cookie";
-import "./App.scss";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "primer-tooltips/build/build.css";
 
 import config from "client-config.json";
@@ -12,10 +13,6 @@ import Content from "./app/Content";
 import AccountLink from "./app/partials/AccountLink";
 
 function App({ locale }) {  
-  if (Cookies.get("nanocrawler.theme") === "dark") {
-    document.body.classList.add("theme-dark")    
-  }
-
   return (
     <IntlProvider locale={locale.language} messages={locale.messages}>
       <div id="App" className="container-fluid p-0 h-100">

@@ -3,7 +3,7 @@ import "whatwg-fetch";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
+import "./index.css";
 import { TickerProvider } from "lib/TickerContext";
 import { TranslationProvider } from "lib/TranslationContext";
 import { NetworkProvider } from "lib/NetworkContext";

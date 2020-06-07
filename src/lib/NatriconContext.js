@@ -19,9 +19,11 @@ class NatriconProvider extends React.Component {
 
   natriconOn() {
     let cookieVal = Cookies.get("nanocrawler.natriconOn")
-    let enabled = cookieVal === "true"
+    let enabled
     if (cookieVal === undefined) {
-        enabled = config.features.defaultNatriconOn || false
+      enabled = config.features.defaultNatriconOn || false
+    } else {
+      enabled = cookieVal === "true"
     }
     return enabled
   }
