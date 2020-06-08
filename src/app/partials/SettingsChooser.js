@@ -5,7 +5,7 @@ import { withNatriconData } from "lib/NatriconContext";
 
 import "./SettingsChooser.css";
 
-class SettingsChooser extends React.PureComponent {
+class SettingsChooser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +56,7 @@ class SettingsChooser extends React.PureComponent {
                 <label className="switch my-auto">
                   <input type="checkbox"
                     defaultChecked={natricon.natriconOn()}
-                    onChange={e => this.natriconChanged(e)}></input>
+                    onChange={this.natriconChanged.bind(this)}></input>
                   <span className="slider round"></span>
                 </label>
               </span>
