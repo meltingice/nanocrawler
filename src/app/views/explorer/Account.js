@@ -7,6 +7,7 @@ import Clipboard from "react-clipboard.js";
 import { injectIntl, FormattedNumber } from "react-intl";
 import { TranslatedMessage, withDefault } from "lib/TranslatedMessage";
 import { withNetworkData } from "lib/NetworkContext";
+import { withNatriconData } from "lib/NatriconContext";
 import Currency from "lib/Currency";
 
 import NanoNodeNinja from "lib/NanoNodeNinja";
@@ -141,35 +142,32 @@ class Account extends React.Component {
   }
 
   render() {
-    const { account, match, balance, pending, representative } = this.props;
-
+    const { account, match, balance, pending, representative, natricon } = this.props;
     return (
       <div className="p-4">
         <Helmet
           key={window.location.href}
           title={`${this.accountTitle()} - ${account}`}
         />
-        <div className="row align-items-center">
+        <div className="row mt-3 align-items-center">
           <div className="col">
             <div className="row flex-nowrap align-items-center">
-              <div className="col-auto d-none d-md-block px-0 text-center">
+              {natricon.enabled && <div className="col-auto d-none d-md-block px-0 text-center" style={{ marginRight: "-10px" }}>
                 <Natricon
                   account={account}
                   style={{ width: "100px", height: "100px" }}
                 />
-              </div>
-
-              <div className="col mb-2 pl-md-0">
+              </div>}
+              <div className="col mb-2">
                 <h1 className="mb-0">{this.accountTitle()}</h1>
-
-                <div className="row flex-nowrap align-items-center mw-100">
-                  <div className="col-auto d-block d-md-none pr-0">
+                <div className="row flex-nowrap align-items-center mw-100 my-2">
+                  {natricon.enabled && <div className="col-auto d-block d-md-none pr-0" style={{ marginRight: "-15px" }}>
                     <Natricon
                       account={account}
                       style={{ width: "75px", height: "75px" }}
                     />
-                  </div>
-                  <div className="col pl-0 pl-md-3" style={{ width: "80%" }}>
+                  </div>}
+                  <div className="col pl-3" style={{ width: "80%" }}>
                     <p className="text-muted mb-0 break-word">
                       <span className="text-monospace">{account}</span>
 
@@ -340,4 +338,4 @@ const Loading = () => (
   </div>
 );
 
-export default withAccountData(withNetworkData(injectIntl(Account)));
+export default withNatriconData(withAccountData(withNetworkData(injectIntl(Account))));

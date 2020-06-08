@@ -8,6 +8,7 @@ import HorizLogo from "./images/Horiz Logo.svg";
 import VertLogo from "./images/Vert Logo.svg";
 import GlobalSearch from "./partials/GlobalSearch";
 import LanguageChooser from "./partials/LanguageChooser";
+import SettingsChooser from "./partials/SettingsChooser";
 import config from "client-config.json";
 
 const Navigation = () => {
@@ -66,8 +67,11 @@ const Navigation = () => {
           <div className="col pr-1">
             <GlobalSearch />
           </div>
-          <div className="col-auto pl-1">
+          <div className="col-auto px-1">
             <LanguageChooser />
+          </div>
+          <div className="col-auto pl-1">
+            <SettingsChooser />
           </div>
         </div>
       </div>

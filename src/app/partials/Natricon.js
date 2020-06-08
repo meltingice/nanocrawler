@@ -26,7 +26,7 @@ export default class Natricon extends React.PureComponent {
 
   get imageUrl() {
     const { account } = this.props;
-    return `https://natricon.com/api/v1/nano?address=${account}&svc=nanocrawler`;
+    return `https://natricon.com/api/v1/nano?address=${account}&outline=true&svc=nanocrawler`;
   }
 
   loadingState() {
