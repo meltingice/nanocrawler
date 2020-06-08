@@ -165,7 +165,7 @@ module.exports = {
                 options: {
                   importLoaders: 1
                 }
-              },
+              },             
               {
                 loader: require.resolve("postcss-loader"),
                 options: {

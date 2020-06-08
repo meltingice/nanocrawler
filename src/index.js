@@ -7,6 +7,7 @@ import "./index.css";
 import { TickerProvider } from "lib/TickerContext";
 import { TranslationProvider } from "lib/TranslationContext";
 import { NetworkProvider } from "lib/NetworkContext";
+import { NatriconProvider } from "lib/NatriconContext";
 import App from "./App";
 
 import { createBrowserHistory } from "history";
@@ -26,11 +27,13 @@ history.listen(location => {
 ReactDOM.render(
   <TranslationProvider>
     <TickerProvider>
-      <NetworkProvider>
-        <Router history={history}>
-          <App />
-        </Router>
-      </NetworkProvider>
+      <NatriconProvider>
+        <NetworkProvider>
+          <Router history={history}>
+            <App />
+          </Router>
+        </NetworkProvider>
+      </NatriconProvider>
     </TickerProvider>
   </TranslationProvider>,
   document.getElementById("root")

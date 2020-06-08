@@ -11,7 +11,7 @@ import Content from "./app/Content";
 
 import AccountLink from "./app/partials/AccountLink";
 
-function App({ locale }) {
+function App({ locale }) {  
   return (
     <IntlProvider locale={locale.language} messages={locale.messages}>
       <div id="App" className="container-fluid p-0 h-100">
