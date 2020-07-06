@@ -30,7 +30,7 @@ class NatriconProvider extends React.Component {
 
   async setNatricon(toOn) {
     this.setState({ enabled: toOn }, () => {
-      Cookies.set("nanocrawler.natriconOn", toOn ? "true" : "false");
+      Cookies.set("nanocrawler.natriconOn", toOn ? "true" : "false", { expires: 365 });
     });
   }
 
