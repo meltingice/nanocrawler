@@ -52,7 +52,7 @@ class TranslationProvider extends React.Component {
     moment.locale(langConfig.momentLocale);
 
     this.setState({ language, messages }, () => {
-      Cookies.set("nanocrawler.locale", language);
+      Cookies.set("nanocrawler.locale", language, { expires: 365 });
     });
   }
 
