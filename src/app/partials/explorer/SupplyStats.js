@@ -8,7 +8,7 @@ export default class SupplyStats extends React.Component {
   state = {
     circulating: null,
     available: null,
-    loading: true
+    loading: true,
   };
 
   timeout = null;
@@ -45,9 +45,10 @@ export default class SupplyStats extends React.Component {
           <p className="text-muted">
             Banano is continuously distributed via airdrops, contests, games,
             and more. Join the community in{" "}
-            <a href="http://chat.banano.co.in/" target="_blank">
+            <a href="http://chat.banano.cc/" target="_blank">
               our Discord server
-            </a>.
+            </a>
+            .
           </p>
           <p>
             <Link
