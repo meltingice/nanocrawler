@@ -26,7 +26,7 @@ export default class MonKey extends React.PureComponent {
 
   get imageUrl() {
     const { account } = this.props;
-    return `https://monkeys.appditto.com/?address=${account}`;
+    return `https://monkey.banano.cc/api/v1/monkey/${account}?svc=creeper`;
   }
 
   loadingState() {
