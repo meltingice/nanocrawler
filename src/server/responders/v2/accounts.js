@@ -176,7 +176,8 @@ export default function(app, nano) {
             accounts: [req.params.account],
             source: true,
             threshold: Currency.toRaw(0.000001),
-            sorting: true
+            sorting: true,
+            include_only_confirmed: true
           });
 
           if (resp.error) throw new BadRequest(resp.error);
