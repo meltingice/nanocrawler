@@ -4,9 +4,6 @@ import redis from "redis";
 import config from "../../../server-config.json";
 
 const redisClient = redis.createClient(config.redis);
-redisClient.on("error", err => {
-  console.error("Redis unavailable");
-});
 const zcount = promisify(redisClient.zcount.bind(redisClient));
 const zrevrange = promisify(redisClient.zrevrange.bind(redisClient));
 
