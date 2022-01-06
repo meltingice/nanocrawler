@@ -11,7 +11,7 @@ export default function(app, nano) {
     }
 
     try {
-      const data = await redisFetch("ticker/NANO", 900, async () => {
+      const data = await redisFetch("ticker/XNO", 900, async () => {
         return {
           USD: await fetchQuote("USD"),
           BTC: await fetchQuote("BTC")
@@ -27,7 +27,7 @@ export default function(app, nano) {
 
 const fetchQuote = async cur => {
   const resp = await fetch(
-    `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=NANO&convert=${cur}`,
+    `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XNO&convert=${cur}`,
     {
       headers: {
         "X-CMC_PRO_API_KEY": config.coinMarketCapApiKey
@@ -37,7 +37,7 @@ const fetchQuote = async cur => {
 
   if (resp.ok) {
     const data = await resp.json();
-    return data.data.NANO.quote[cur].price;
+    return data.data.XNO.quote[cur].price;
   } else {
     throw new Error(`CoinMarketCap error: ${resp.status} ${resp.statusText}`);
   }
